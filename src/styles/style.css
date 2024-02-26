@@ -1,0 +1,30 @@
+body {
+  background-color: #2D3E50;
+  color: white;
+}
+
+.objectpage-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.right--container {
+  width: 40%;
+  padding: 20px;
+}
+
+.left--container {
+  width: 40%;
+  padding: 20px;
+}
+
+.box--img {
+  width: 20rem;
+}
+
+.time--left {
+  font-size: 2.5rem;
+  color: red;
+}
