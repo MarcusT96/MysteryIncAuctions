@@ -13,11 +13,14 @@ body {
 .right--container {
   width: 40%;
   padding: 20px;
+  background-color: #9EA5E4;
+  border-radius: 10px;
 }
 
 .left--container {
   width: 40%;
   padding: 20px;
+  background-color: #9EA5E4;
 }
 
 .box--img {
@@ -27,4 +30,10 @@ body {
 .time--left {
   font-size: 2.5rem;
   color: red;
+
+}
+
+.time--left--left {
+  background-color: #9EA5E4;
+  border-radius: 10px;
 }
