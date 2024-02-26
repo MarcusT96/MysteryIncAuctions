@@ -1,0 +1,59 @@
+body {
+  background-color: #2D3E50;
+  color: white;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.homepage-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+
+}
+
+.homepage-slider {
+  display: flex;
+  background-color: #9EA5E4;
+  width: 100vw;
+  justify-content: center;
+  padding: 1vw;
+  margin: 2vw;
+}
+
+.homepage-slider>:first-child {
+  width: 30%;
+}
+
+.homepage-desc-and-revs {
+  display: flex;
+  width: 100vw;
+  justify-content: space-around;
+  margin: 4vw;
+}
+
+.homepage-reviews {
+  background-color: #9EA5E4;
+  padding: 1vw;
+}
+
+.homepage-reviews-title-score {
+  display: flex;
+}
+
+.homepage-reviews-title {
+  padding-right: 1vw;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.homepage-reviews-score {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.homepage-description {
+  background-color: #9EA5E4;
+  padding: 1vw;
+}
