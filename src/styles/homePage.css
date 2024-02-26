@@ -18,8 +18,10 @@ body {
   background-color: #9EA5E4;
   width: 100vw;
   justify-content: center;
-  padding: 1vw;
-  margin: 2vw;
+  padding-top: 1vw;
+  padding-bottom: 1vw;
+  margin-top: 2vw;
+  margin-bottom: 2vw;
 }
 
 .homepage-slider>:first-child {
@@ -36,6 +38,7 @@ body {
 .homepage-reviews {
   background-color: #9EA5E4;
   padding: 1vw;
+  border-radius: 0.5vw;
 }
 
 .homepage-reviews-title-score {
@@ -56,4 +59,10 @@ body {
 .homepage-description {
   background-color: #9EA5E4;
   padding: 1vw;
+  border-radius: 0.5vw;
+}
+
+.homepage-description>h1 {
+  margin-top: 0;
+  margin-bottom: 0;
 }

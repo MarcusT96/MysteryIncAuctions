@@ -8,6 +8,7 @@ function MyHomePage() {
 
       <div className="homepage-desc-and-revs">
         <div className="homepage-description">
+          <h1>Mystery Inc.</h1>
           <p>MysteryInc är en auktionssida där du budar på mystery boxes med olika teman!</p>
         </div>
         <div className="homepage-reviews">
