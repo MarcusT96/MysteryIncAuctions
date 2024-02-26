@@ -2,13 +2,27 @@
   max-width: 20vw;
 }
 
-
 .auctionpage {
   background-color: #2D3E50;
   }
 
+  .searchdiv{
+    display: flex;
+    justify-content: center;
+  }
+.Auction-list{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
 .auction-search {
+  height: 3vh;
+  width: 50vw;
   background: #9EA5E4;
+  margin: auto;
 }
 
 .auctionbutton{

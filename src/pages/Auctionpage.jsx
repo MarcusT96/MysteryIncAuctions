@@ -7,7 +7,11 @@ export default function Auctionpage(){
   
 
   return <main className="auctionpage">
-    <SearchBar />
-    <Products />
+    <div className="searchdiv">
+      <SearchBar />
+    </div>
+    <div className="auction-container">
+      <Products />
+    </div>
   </main>
 }
