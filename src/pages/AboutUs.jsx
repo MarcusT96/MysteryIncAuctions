@@ -1,28 +1,67 @@
 import '../style/AboutUs.css';
+import React, { useState } from 'react';
 
 const AboutUs = () => {
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    
+    setShowPopup(true);
+
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 3000);
+
+    setName('');
+    setEmail('');
+    setMessage('');
+  };
+
+  const [showPopup, setShowPopup] = useState(false);
+
   return (
     <div className="about-us-container">
       <h1>Mystery Inc.</h1>
       <section id="about-us">
         <h2>Om Oss</h2>
-        <h3>Välkommen till Mystery Inc. – Din ingång till det okända!</h3>
-        <p>Grundat av ett team med passion för äventyr och skattjakt. Vi erbjuder unika mysterielådor fyllda med överraskningar, från teknikprylar till exklusiva upplevelser.</p>
+        <h3>Välkommen till Mystery Inc. - Din ingång till det okända!</h3>
+        <p>Mystery Inc. föddes ur en grupp äventyrssökande vänners dröm om att dela sin passion för det okända med världen. Vi skapar unika mysterielådor som är fyllda till brädden med spännande överraskningar. Från de senaste teknikprylarna till handplockade upplevelser, varje låda är en skattjakt i sig. Vårt team, med sina breda intressen och expertis inom olika områden, är dedikerade till att förse dig med det oväntade och otänkbara, direkt till din dörr.</p>
       </section>
       <section id="our-philosophy">
         <h2>Vår Filosofi</h2>
-        <h3>Upptäckarglädje i varje låda</h3>
-        <p>Hos Mystery Inc. handlar allt om spänningen i att inte veta vad som väntar. Vår filosofi bygger på enkelheten och glädjen i överraskning. Vi tror att varje bud på en av våra mysterielådor inte bara är ett köp, utan en chans att uppleva något helt unikt. Det är detta ovisshetens element som gör varje låda speciell, oavsett om det döljer sig teknikprylar, samlarföremål eller något helt oväntat inuti.</p>
-        <p>Vi strävar efter att skapa en rolig och säker miljö för alla att utforska och bjuda. Genom att hålla spänningen vid liv, men också genom att värna om kvalitet och värde i varje låda, hoppas vi erbjuda en upplevelse som är lika givande som den är oförutsägbar. Mystery Inc. är din plattform för spännande fynd och oväntade upptäckter, där varje bud kan leda till nästa stora äventyr.</p>
+        <h3>Upptäckarglädje i varje låda!</h3>
+        <p>Vid Mystery Inc. är varje låda en odyssé. Vår kärnfilosofi kretsar kring den rena spänningen i det okända – enkelheten i överraskning som berikar våra liv. Vi ser varje låda inte bara som en produkt, utan som en biljett till en unik upplevelse. Denna känsla av äventyr och mystik är vad som gör varje paket så speciellt, vare sig det avslöjar de senaste teknikprylarna, sällsynta samlarföremål eller något helt och hållet oväntat.</p>
+        <p>Vi är engagerade i att skapa en underhållande och trygg upptäcktsmiljö för alla. Genom att upprätthålla en hög standard på spänning, kvalitet, och värde, strävar vi efter att göra varje öppning av en låda till en oförglömlig upplevelse. Mystery Inc. står för äventyr och upptäckter, där varje låda bär potentialen att vara början på ditt nästa stora äventyr.</p>
       </section>
 
       <section id="contact">
         <h2>Kontakta Oss</h2>
         <h3>Vi är här för att hjälpa till!</h3>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="name">Namn:</label>
+            <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder='Ditt namn' required />
+          </div>
+          <div className="form-group">
+            <label htmlFor="email">E-mail:</label>
+            <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Din e-mail' required />
+          </div>
+          <div className="form-group">
+            <label htmlFor="message">Meddelande:</label>
+            <textarea id="message" value={message} onChange={(e) => setMessage(e.target.value)} placeholder='Ditt meddelande' rows="5" required></textarea>
+          </div>
+          <button type="submit">Skicka Meddelande</button>
+          {showPopup && (
+            <div className="popup-message">
+              Tack för att du hör av dig, vi återkommer så snart vi kan.
+            </div>
+          )}
+        </form>
         <ul>
-          <li>E-post: support@mysteryinc.se</li>
-          <li>Telefon: 040-555 555 55</li>
-          <li>Adress: Mystery Inc., Drakborgen 1, 271 42 Ystad</li>
         </ul>
       </section>
     </div>
