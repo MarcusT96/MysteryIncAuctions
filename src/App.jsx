@@ -3,7 +3,11 @@ import AboutUs from './pages/AboutUs.jsx';
 
 function App() {
   return (
-    <AboutUs />
+    <Router>
+      <Routes>
+        <Route path="/about" element={<AboutUs />} />
+      </Routes>
+    </Router>
   );
 }
 
