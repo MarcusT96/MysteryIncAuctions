@@ -7,8 +7,7 @@
 }
 
 #about-us,
-#our-philosophy,
-#contact {
+#our-philosophy{
   background-color: #9EA5E4;
   padding: 20px;
   margin-bottom: 20px;
@@ -29,93 +28,10 @@ h1:hover {
 
 h2,
 h3 {
+  margin-top: 0px;
   color: #FFFFFF;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  margin-bottom: 10px;
-  color: #FFFFFF;
-}
 
 
-.form-group {
-  margin-bottom: 15px;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-input[type="text"],
-input[type="email"],
-textarea {
-  width: calc(100% - 20px);
-  padding: 8px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-button[type="submit"] {
-  background-color: #F4C430;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button[type="submit"]:hover {
-  background-color: #c59e28;
-}
-
-.popup-message {
-  position: fixed;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #3a5068;
-  padding: 30px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-  animation: fadeIn 0.5s ease-out;
-}
-
-.popup-close-btn {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  background: transparent;
-  border: none;
-  color: #FFFFFF;
-  font-size: 1.5em;
-  cursor: pointer;
-}
-
-
-@media (max-width: 768px) {
-  .about-us-container {
-    padding: 10px;
-  }
-
-  input[type="text"],
-  input[type="email"],
-  textarea {
-    width: calc(100% - 10px);
-  }
-
-  .popup-message {
-    width: 70%;
-    top: 10%;
-  }
-}
