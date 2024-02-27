@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 function HomePageSlider() {
 
   const [boxes, setBoxes] = useState([])
+  const [filteredBox, setFilteredBox] = useState()
 
   useEffect(() => {
     import('../assets/boxes.json')
@@ -12,9 +13,11 @@ function HomePageSlider() {
 
   return (
     <div className="homepage-slider">
+      <button class="homepage-slidebutton" onClick={""}>❮</button>
       {boxes.map((box) => (
         <img src={box.img} />
       ))}
+      <button class="homepage-slidebutton" onClick={""}>❯</button>
     </div>
   )
 }
