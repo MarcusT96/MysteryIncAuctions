@@ -1,33 +1,38 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 
+function Products({ searchQuery }) {
+  const [items, setItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
 
-function Products() {
   useEffect(() => {
     async function load() {
-      const response = await fetch('Mysteryboxes.json')
-      console.dir(response)
-      const items = await response.json()
-      setItems(items.mystery_boxes)
-      console.log(items)
-
+      const response = await fetch('Mysteryboxes.json');
+      const data = await response.json();
+      setItems(data.mystery_boxes);
     }
-    load()
-  }, [])
+    load();
+  }, []);
 
-  const [items, setItems] = useState([])
+  useEffect(() => {
+    // Filter items based on search query
+    const filtered = items.filter(item =>
+      item.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredItems(filtered);
+  }, [searchQuery, items]);
+
   return (
     <article className="Auction-list">
-
-      {items.map(item => <section key={item.id}>
-        <h2>{item.name}</h2>
-        <p>{item.description}</p>
-        <img src={item.image} alt={item.name} />
-        <button className="auctionbutton">Köp för {item.price} kr.</button>
-      </section>
-      )}
-
+      {filteredItems.map(item => (
+        <section key={item.id}>
+          <h2>{item.name}</h2>
+          <p>{item.description}</p>
+          <img src={item.image} alt={item.name} />
+          <button className="auctionbutton">Köp för {item.price} kr.</button>
+        </section>
+      ))}
     </article>
-  )
+  );
 }
 
-export default Products
+export default Products;
