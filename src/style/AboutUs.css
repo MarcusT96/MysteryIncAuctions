@@ -72,12 +72,25 @@ button[type="submit"]:hover {
   left: 50%;
   transform: translateX(-50%);
   background-color: #3a5068;
-  padding: 20px;
+  padding: 30px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   z-index: 1000;
+  animation: fadeIn 0.5s ease-out;
 }
+
+.popup-close-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: transparent;
+  border: none;
+  color: #FFFFFF;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
 
 @media (max-width: 768px) {
   .about-us-container {
