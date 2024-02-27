@@ -1,9 +1,20 @@
+import { useEffect, useState } from "react"
 
 function HomePageSlider() {
 
+  const [boxes, setBoxes] = useState([])
+
+  useEffect(() => {
+    import('../assets/boxes.json')
+      .then((data) => setBoxes(data.default))
+      .catch((error) => console.error("Error loading box data: ", error))
+  }, [])
+
   return (
     <div className="homepage-slider">
-      <img src="https://www.ikea.com/se/en/images/products/vattentrag-box-with-lid__1176294_pe895907_s5.jpg?f=s" />
+      {boxes.map((box) => (
+        <img src={box.img} />
+      ))}
     </div>
   )
 }

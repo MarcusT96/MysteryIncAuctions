@@ -16,7 +16,7 @@ function MyHomePage() {
             <h1 className="homepage-reviews-title">Väldigt najs!!</h1>
             <h1 className="homepage-reviews-score">★★★★☆</h1>
           </div>
-          <p>Budade på en djurlåda, och fick en hel häst!</p>
+          <p>Budade på en djurlåda och fick en hel häst!</p>
         </div>
       </div>
 
