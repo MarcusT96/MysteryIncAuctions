@@ -16,7 +16,8 @@ function Products({ searchQuery }) {
   useEffect(() => {
     // Filter items based on search query
     const filtered = items.filter(item =>
-      item.name.toLowerCase().includes(searchQuery.toLowerCase())
+      item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.description.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredItems(filtered);
   }, [searchQuery, items]);
