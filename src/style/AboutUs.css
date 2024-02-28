@@ -1,0 +1,37 @@
+.about-us-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  background-color: #2D3E50;
+  color: #FFFFFF;
+}
+
+#about-us,
+#our-philosophy{
+  background-color: #9EA5E4;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+h1 {
+  font-size: 5vw;
+  text-align: center;
+  color: #FFFFFF;
+  transition: text-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+h1:hover {
+  text-shadow: 0 0 10px #F4C430, 0 0 20px #F4C430, 0 0 30px #F4C430, 0 0 40px #9EA5E4, 0 0 70px #9EA5E4, 0 0 80px #9EA5E4, 0 0 100px #9EA5E4, 0 0 150px #9EA5E4;
+}
+
+h2,
+h3 {
+  margin-top: 0px;
+  color: #FFFFFF;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+
+
