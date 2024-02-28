@@ -1,11 +1,13 @@
-import { useState } from 'react'
-import Auctionpage from './pages/Auctionpage.jsx'
+import OurRouter from './components/OurRouter.jsx'
+import "./styles/style.css"
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
-  return <main>
-    <Auctionpage />
-  </main>
+  return (
+    <>
+      <OurRouter />
+    </>
+  )
 }
 export default App
