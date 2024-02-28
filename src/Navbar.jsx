@@ -39,8 +39,8 @@ function Navbar() {
               <img src={logo} alt="Mystery Inc Logo" /></a>
             </div>
             <li><a href="/">Home</a></li>
-            <li><a href="/auctions">Auktioner</a></li>
-            <li><a href="/about">Om Oss</a></li>
+            <li><a href="/Auctionpage">Auktioner</a></li>
+            <li><a href="/AboutUs">Om Oss</a></li>
             <li className='login'><a href="/login">Logga In</a></li>
           </ul>
         </nav>
