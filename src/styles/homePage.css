@@ -17,7 +17,7 @@ body {
   display: flex;
   background-color: #9EA5E4;
   width: 100vw;
-  justify-content: center;
+  justify-content: space-between;
   padding-top: 1vw;
   padding-bottom: 1vw;
   margin-top: 2vw;
@@ -26,11 +26,11 @@ body {
 
 .homepage-slider>img {
   max-width: 100%;
-  height: 10vh;
+  height: 30vh;
 }
 
-.homepage-slider>:first-child {
-  width: 30%;
+.homepage-slidebutton {
+  margin: 1vh;
 }
 
 .homepage-desc-and-revs {
