@@ -40,7 +40,8 @@ function Navbar() {
             </div>
             <li><a href="/">Home</a></li>
             <li><a href="/Auctionpage">Auktioner</a></li>
-            <li><a href="/AboutUs">Om Oss</a></li>
+            <li><a href="/about">Om Oss</a></li>
+            <li><a href="/contact">Kontakt</a></li>
             <li className='login'><a href="/login">Logga In</a></li>
           </ul>
         </nav>
