@@ -1,3 +1,4 @@
+import OurRouter from './components/OurRouter.jsx'
 import ObjectPage from './pages/ObjectPage.jsx'
 import "./styles/style.css"
 
@@ -6,7 +7,7 @@ function App() {
 
   return (
     <>
-      <ObjectPage />
+      <OurRouter />
     </>
   )
 }
