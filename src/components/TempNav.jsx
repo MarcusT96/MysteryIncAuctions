@@ -5,6 +5,7 @@ function TempNav() {
     <nav>
       <Link to="/">Home page</Link>
       <Link to="/ObjectPage">ObjectPage</Link>
+      <Link to="/Auctionpage">Auctionpage</Link>
     </nav>
   )
 }
