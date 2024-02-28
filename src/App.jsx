@@ -1,10 +1,14 @@
-import { useState } from 'react'
-import MyHomePage from "./pages/MyHomePage.jsx"
+import OurRouter from './components/OurRouter.jsx'
+import ObjectPage from './pages/ObjectPage.jsx'
+import "./styles/style.css"
+
 
 function App() {
 
   return (
-    <MyHomePage/>
+    <>
+      <OurRouter />
+    </>
   )
 }
 
