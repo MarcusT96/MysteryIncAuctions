@@ -29,6 +29,10 @@ body {
   height: 30vh;
 }
 
+.homepage-slidebutton {
+  margin: 1vh;
+}
+
 .homepage-desc-and-revs {
   display: flex;
   width: 100vw;
