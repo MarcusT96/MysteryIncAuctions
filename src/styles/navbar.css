@@ -11,6 +11,13 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
+  transition: transform 0.8s ease-in-out;
+}
+
+.navbar.hide {
+  transform: translateY(-100%);
+  /* Moves the header out of view */
+  transition: transform 0.8s ease-in-out;
 }
 
 .nav-title {
