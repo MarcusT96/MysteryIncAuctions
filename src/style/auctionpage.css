@@ -4,13 +4,14 @@
 
 .auctionpage {
   background-color: #2D3E50;
-  }
+}
 
-  .searchdiv{
-    display: flex;
-    justify-content: center;
-  }
-.Auction-list{
+.searchdiv {
+  display: flex;
+  justify-content: center;
+}
+
+.Auction-list {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -18,13 +19,15 @@
   align-items: center;
   padding: 10px;
 }
+
 .auction-search {
   height: 3vh;
   width: 50vw;
   background: #9EA5E4;
-  margin: auto;
+  margin-left: 25vw;
+  margin-right: 25vw;
 }
 
-.auctionbutton{
+.auctionbutton {
   background-color: #9EA5E4;
 }
