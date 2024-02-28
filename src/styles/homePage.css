@@ -10,7 +10,7 @@ body {
   flex-direction: column;
   align-items: center;
   width: 100vw;
-
+  padding-top: 25vh;
 }
 
 .homepage-slider {
