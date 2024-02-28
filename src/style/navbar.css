@@ -62,16 +62,8 @@ body {
   align-items: center;
   justify-content: center;
   list-style: none;
-  gap: 90px;
+  gap: 150px;
   padding: 0;
-}
-
-.nav-menu li {
-  margin: 10px 50px;
-}
-
-.nav-menu .login {
-  margin: 10px 180px;
 }
 
 .nav-menu li a {

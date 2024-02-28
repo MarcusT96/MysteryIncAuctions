@@ -4,10 +4,11 @@
   padding: 20px;
   background-color: #2D3E50;
   color: #FFFFFF;
+  padding-top: 25vh;
 }
 
 #about-us,
-#our-philosophy{
+#our-philosophy {
   background-color: #9EA5E4;
   padding: 20px;
   margin-bottom: 20px;
@@ -32,6 +33,3 @@ h3 {
   color: #FFFFFF;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
-
-
-
