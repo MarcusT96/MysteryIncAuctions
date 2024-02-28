@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import TempHome from "../pages/TempHome.jsx"
 import ObjectPage from "../pages/ObjectPage.jsx"
 import TempNav from "./TempNav.jsx"
-import Auctionpage from "../pages/auctionpage.jsx"
+import Auctionpage from "../pages/Auctionpage.jsx"
 
 function OurRouter() {
 
