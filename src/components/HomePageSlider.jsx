@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 function HomePageSlider() {
   const [boxes, setBoxes] = useState([])
   const [selectedBoxIndex, setSelectedBoxIndex] = useState(0)
+  const navigate = useNavigate()
 
   useEffect(() => {
     async function load() {
@@ -13,6 +15,10 @@ function HomePageSlider() {
     load()
   }, [])
 
+  const navigateToObjectPage = (id) => {
+    navigate(`/box/${id}`);
+  }
+
   const handlePrevButtonClick = () => {
     setSelectedBoxIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : boxes.length - 1))
   }
@@ -21,16 +27,29 @@ function HomePageSlider() {
     setSelectedBoxIndex((prevIndex) => (prevIndex < boxes.length - 1 ? prevIndex + 1 : 0))
   }
 
+  const getDisplayedBoxes = () => {
+    const endIndex = selectedBoxIndex + 3
+    const slicedBoxes = boxes.slice(selectedBoxIndex, endIndex + 1)
+
+    if (slicedBoxes.length < 4) {
+      const remainingBoxes = 4 - slicedBoxes.length
+      return slicedBoxes.concat(boxes.slice(0, remainingBoxes))
+    }
+
+    return slicedBoxes
+  }
+
   return (
     <div className="homepage-slider">
       <button className="homepage-slidebutton" onClick={handlePrevButtonClick}>
         ❮
       </button>
-      {boxes.map((box, index) => (
-        <div className="homepage-slider-display" key={index} style={{ display: index === selectedBoxIndex ? 'flex' : 'none' }} >
-          <img src={box.image} />
+      {getDisplayedBoxes().map((box, index) => (
+        <div className="homepage-slider-display" key={index}>
+          <img src={box.image} onClick={() => navigateToObjectPage(box.id)} style={{ cursor: 'pointer' }} />
           <h2>{box.name}</h2>
-        </div>))}
+        </div>
+      ))}
       <button className="homepage-slidebutton" onClick={handleNextButtonClick}>
         ❯
       </button>
