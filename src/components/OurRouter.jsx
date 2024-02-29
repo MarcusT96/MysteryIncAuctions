@@ -19,7 +19,7 @@ function OurRouter() {
       <TempNav />
       <Routes>
         <Route path="/" element={<MyHomePage />}></Route>
-        <Route path="/ObjectPage" element={<ObjectPage />}></Route>
+        <Route path="/box/:id" element={<ObjectPage />}></Route>
         <Route path="/Auctionpage" element={<Auctionpage />}></Route>
         <Route path="/about" element={<AboutUs />}></Route>
         <Route path="/contact" element={<ContactForm />}></Route>
