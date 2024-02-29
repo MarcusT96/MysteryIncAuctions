@@ -1,23 +1,39 @@
 import { useEffect, useState } from "react"
 
 function HomePageSlider() {
-
   const [boxes, setBoxes] = useState([])
-  const [filteredBox, setFilteredBox] = useState()
+  const [selectedBoxIndex, setSelectedBoxIndex] = useState(0)
 
   useEffect(() => {
-    import('../assets/boxes.json')
-      .then((data) => setBoxes(data.default))
-      .catch((error) => console.error("Error loading box data: ", error))
+    async function load() {
+      const response = await fetch('Mysteryboxes.json')
+      const data = await response.json()
+      setBoxes(data.mystery_boxes)
+    }
+    load()
   }, [])
+
+  const handlePrevButtonClick = () => {
+    setSelectedBoxIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : boxes.length - 1))
+  }
+
+  const handleNextButtonClick = () => {
+    setSelectedBoxIndex((prevIndex) => (prevIndex < boxes.length - 1 ? prevIndex + 1 : 0))
+  }
 
   return (
     <div className="homepage-slider">
-      <button class="homepage-slidebutton" onClick={""}>❮</button>
-      {boxes.map((box) => (
-        <img src={box.img} />
-      ))}
-      <button class="homepage-slidebutton" onClick={""}>❯</button>
+      <button className="homepage-slidebutton" onClick={handlePrevButtonClick}>
+        ❮
+      </button>
+      {boxes.map((box, index) => (
+        <div className="homepage-slider-display" key={index} style={{ display: index === selectedBoxIndex ? 'flex' : 'none' }} >
+          <img src={box.image} />
+          <h2>{box.name}</h2>
+        </div>))}
+      <button className="homepage-slidebutton" onClick={handleNextButtonClick}>
+        ❯
+      </button>
     </div>
   )
 }
