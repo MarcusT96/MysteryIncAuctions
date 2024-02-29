@@ -7,7 +7,7 @@ export default function ObjectPage() {
     <div className="objectpage-container">
 
       <div className="left--cointainer">
-        <img className="box--img" src="src\assets\mysterbox-exempel.png" alt="" />
+        <img className="box--img" src="src\assets\mystery-box-bachelor.png.webp" alt="" />
         <p className="time--left--left">Tid kvar av autkion: <b className="time--left">2h 40min 29s</b> </p>
       </div>
 
