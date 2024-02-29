@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 function HomePageSlider() {
   const [boxes, setBoxes] = useState([])
   const [selectedBoxIndex, setSelectedBoxIndex] = useState(0)
+  const navigate = useNavigate()
 
   useEffect(() => {
     async function load() {
@@ -12,6 +14,10 @@ function HomePageSlider() {
     }
     load()
   }, [])
+
+  const navigateToObjectPage = (id) => {
+    navigate(`/box/${id}`);
+  }
 
   const handlePrevButtonClick = () => {
     setSelectedBoxIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : boxes.length - 1))
@@ -28,7 +34,7 @@ function HomePageSlider() {
       </button>
       {boxes.map((box, index) => (
         <div className="homepage-slider-display" key={index} style={{ display: index === selectedBoxIndex ? 'flex' : 'none' }} >
-          <img src={box.image} />
+          <img src={box.image} onClick={() => navigateToObjectPage(box.id)} style={{ cursor: 'pointer' }} />
           <h2>{box.name}</h2>
         </div>))}
       <button className="homepage-slidebutton" onClick={handleNextButtonClick}>
