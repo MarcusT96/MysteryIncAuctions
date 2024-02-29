@@ -24,9 +24,14 @@ body {
   margin-bottom: 2vw;
 }
 
-.homepage-slider>img {
+.homepage-slider-display {
+  flex-direction: column;
+  align-items: center;
+}
+
+.homepage-slider-display>img {
   max-width: 100%;
-  height: 30vh;
+  height: 60vh;
 }
 
 .homepage-slidebutton {
