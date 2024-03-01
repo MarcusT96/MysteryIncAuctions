@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import '../style/login.css';
+import usersData from '../assets/users.json';
+
 
 const LogIn = () => {
   const [email, setEmail] = useState('');
@@ -7,17 +9,31 @@ const LogIn = () => {
   const [isLoggingIn, setIsLoggingIn] = useState(true);
   const [showModal, setShowModal] = useState(false); // Ny state för att visa/dölja popup
 
-  const handleLogin = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    console.log('Logga in med', email, password);
-    // Lägg till logik för att logga in här
+    const user = usersData.find(user => user.email === email && user.password === password);
+    if (user) {
+      alert('Inloggning lyckades!');
+      // Hantera en lyckad inloggning här
+    } else {
+      alert('Felaktig e-postadress eller lösenord.');
+      // Hantera fel inloggning
+    }
   };
 
-  const handleSignUp = async (e) => {
+  const handleSignUp = (e) => {
     e.preventDefault();
-    console.log('Skapa konto med', email, password);
-    // Lägg till logik för att skapa konto här
+    let users = JSON.parse(localStorage.getItem('users') || '[]');
+    if (users.some(user => user.email === email)) {
+      alert('Användaren finns redan.');
+    } else {
+      users.push({ email, password });
+      localStorage.setItem('users', JSON.stringify(users));
+      alert('Registrering lyckades!');
+      // Hantera lyckad registrering
+    }
   };
+
 
   return (
     <>
