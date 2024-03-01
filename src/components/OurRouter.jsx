@@ -11,6 +11,7 @@ import TermsPage from "../pages/TermsPage.jsx"
 import PrivacyPage from "../pages/PrivacyPage.jsx"
 import IntegrityPage from "../pages/IntegrityPage.jsx"
 import SiteMapPage from "../pages/SiteMapPage.jsx"
+import LogIn from "../pages/LogIn.jsx"
 
 function OurRouter() {
 
@@ -29,6 +30,7 @@ function OurRouter() {
         <Route path="/legal/privacy/cookies" element={<PrivacyPage />}></Route>
         <Route path="/legal/privacy" element={<IntegrityPage />}></Route>
         <Route path="/sitemap" element={<SiteMapPage />}></Route>
+        <Route path="/login" element={<LogIn />}></Route>
       </Routes>
     </BrowserRouter>
   )
