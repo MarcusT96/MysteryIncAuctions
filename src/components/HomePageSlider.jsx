@@ -15,6 +15,13 @@ function HomePageSlider() {
     load()
   }, [])
 
+  useEffect(() => {
+    const autoPlayInterval = setInterval(handleNextButtonClick, 1000)
+    return () => {
+      clearInterval(autoPlayInterval)
+    }
+  }, [])
+
   const navigateToObjectPage = (id) => {
     navigate(`/box/${id}`);
   }
