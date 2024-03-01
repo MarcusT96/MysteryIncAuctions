@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import ObjectPage from "../pages/ObjectPage.jsx"
-import TempNav from "./TempNav.jsx"
 import Auctionpage from "../pages/Auctionpage.jsx"
 import MyHomePage from "../pages/MyHomePage.jsx"
 import AboutUs from "../pages/AboutUs.jsx"
@@ -11,12 +10,13 @@ import TermsPage from "../pages/TermsPage.jsx"
 import PrivacyPage from "../pages/PrivacyPage.jsx"
 import IntegrityPage from "../pages/IntegrityPage.jsx"
 import SiteMapPage from "../pages/SiteMapPage.jsx"
+import Navbar from "../Navbar.jsx"
 
 function OurRouter() {
 
   return (
     <BrowserRouter>
-      <TempNav />
+      <Navbar />
       <Routes>
         <Route path="/" element={<MyHomePage />}></Route>
         <Route path="/box/:id" element={<ObjectPage />}></Route>
