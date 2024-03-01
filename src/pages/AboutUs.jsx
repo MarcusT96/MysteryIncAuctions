@@ -1,5 +1,4 @@
 import '../style/AboutUs.css';
-import React from 'react';
 
 function AboutUs(){
   return (
@@ -18,6 +17,6 @@ function AboutUs(){
       </section>
     </div>
   );
-};
+}
 
 export default AboutUs;

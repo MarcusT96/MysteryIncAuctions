@@ -1,6 +1,6 @@
 import logo from './assets/mysteryInc-logo.png'
 
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 function useScrollDirection() {
   useEffect(() => {

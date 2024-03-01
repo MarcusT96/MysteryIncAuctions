@@ -1,4 +1,3 @@
-import React from 'react';
 import '../style/integrity.css';
 
 function IntegrityPage() {
