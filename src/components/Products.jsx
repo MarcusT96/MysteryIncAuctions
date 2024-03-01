@@ -12,7 +12,7 @@ function Products({ searchQuery }) {
       const data = await response.json();
       setItems(data.mystery_boxes);
     }
-    load();
+    load(); 
   }, []);
 
   useEffect(() => {
