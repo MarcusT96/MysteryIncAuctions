@@ -62,7 +62,7 @@ body {
   align-items: center;
   justify-content: center;
   list-style: none;
-  gap: 150px;
+  gap: 5vh 5vw;
   padding: 0;
 }
 
