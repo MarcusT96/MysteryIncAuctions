@@ -6,6 +6,9 @@ export default function BidPopUp({ onClose, onConfirm }) {
   return (
     <div className="bid--background">
       <div className="bid--content">
+        <p className="bid-disclaimer">
+          Observera: Att lägga ett bud är juridiskt bindande. Genom att lägga ett bud förbinder du dig att köpa objektet till det budgivna priset om du vinner auktionen.
+        </p>
         <input
           className="bid--input"
           type="number"

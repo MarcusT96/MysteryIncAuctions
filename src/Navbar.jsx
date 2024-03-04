@@ -32,7 +32,6 @@ function Navbar() {
   return (<>
     <div className='navbar'>
       <header className="nav-header">
-        <h1 className="nav-title">Mysterybox Auktionen!📦</h1>
         <nav className='nav'>
           <ul className='nav-menu'>
             <div className="nav-logo"><a href="/">

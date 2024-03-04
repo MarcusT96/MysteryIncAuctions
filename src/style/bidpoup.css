@@ -65,3 +65,11 @@
 .bid--close-button:hover {
   background-color: #ffe8a4
 }
+
+.bid-disclaimer {
+  color: #555;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  font-style: italic;
+
+}
