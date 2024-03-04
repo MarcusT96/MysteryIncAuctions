@@ -11,7 +11,7 @@ export default function BidPopUp({ onClose, onConfirm }) {
           type="number"
           value={bid}
           onChange={(e) => setBid(e.target.value)}
-          placeholder="Ange ditt bud"
+          placeholder="Ange ditt bud (SEK)"
         />
         <button
           className="bid-modal-button"

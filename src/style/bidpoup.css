@@ -15,7 +15,7 @@
 
 /* Modal Content Box */
 .bid-modal-content {
-  background-color: #fff;
+  background-color: #9EA5E4;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -36,30 +36,33 @@
   /* Makes padding included in the width */
 }
 
-/* Button styles */
+
 .bid-modal-button {
-  background-color: #007bff;
-  /* Bootstrap primary blue, for example */
-  color: white;
+  background-color: #F4C430;
+
+  color: black;
   padding: 10px 20px;
   margin: 5px;
   border: none;
-  border-radius: 5px;
+  border-radius: 50px;
   cursor: pointer;
 }
 
 .bid-modal-button:hover {
-  background-color: #0056b3;
-  /* Darker shade for hover effect */
+  background-color: #ffe8a4;
+
 }
 
 .bid-modal-close-button {
-  background-color: #6c757d;
-  /* Bootstrap secondary, for example */
-  color: white;
+  background-color: #F4C430;
+  color: black;
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
 }
 
 .bid-modal-close-button:hover {
-  background-color: #545b62;
-  /* Darker shade for hover effect */
+  background-color: #ffe8a4
 }
