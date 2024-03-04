@@ -17,7 +17,7 @@ body {
 .navbar.hide {
   transform: translateY(-100%);
   /* Moves the header out of view */
-  transition: transform 0.8s ease-in-out;
+  transition: transform 0.5s ease-in-out;
 }
 
 .nav-title {
