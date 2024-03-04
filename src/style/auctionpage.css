@@ -13,6 +13,7 @@
 .searchdiv {
   display: flex;
   justify-content: center;
+  padding-top: 5vh;
 }
 
 .Auction-list {

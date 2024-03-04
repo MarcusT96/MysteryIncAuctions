@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import ObjectPage from "../pages/ObjectPage.jsx"
-import TempNav from "./TempNav.jsx"
 import Auctionpage from "../pages/Auctionpage.jsx"
 import MyHomePage from "../pages/MyHomePage.jsx"
 import AboutUs from "../pages/AboutUs.jsx"
@@ -11,12 +10,15 @@ import TermsPage from "../pages/TermsPage.jsx"
 import PrivacyPage from "../pages/PrivacyPage.jsx"
 import IntegrityPage from "../pages/IntegrityPage.jsx"
 import SiteMapPage from "../pages/SiteMapPage.jsx"
+import LogIn from "../pages/LogIn.jsx"
+import Navbar from "../Navbar.jsx"
+import Footer from "../Footer.jsx"
 
 function OurRouter() {
 
   return (
     <BrowserRouter>
-      <TempNav />
+      <Navbar />
       <Routes>
         <Route path="/" element={<MyHomePage />}></Route>
         <Route path="/box/:id" element={<ObjectPage />}></Route>
@@ -29,7 +31,9 @@ function OurRouter() {
         <Route path="/legal/privacy/cookies" element={<PrivacyPage />}></Route>
         <Route path="/legal/privacy" element={<IntegrityPage />}></Route>
         <Route path="/sitemap" element={<SiteMapPage />}></Route>
+        <Route path="/login" element={<LogIn />}></Route>
       </Routes>
+      <Footer />
     </BrowserRouter>
   )
 }
