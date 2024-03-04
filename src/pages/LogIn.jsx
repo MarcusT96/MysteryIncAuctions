@@ -67,7 +67,6 @@ const LogIn = () => {
             {isLoggedIn ? (
               <>
                 <h2>Välkommen, {firstName}!</h2>
-                <button onClick={closeModal}>Stäng</button>
               </>
             ) : (
               <>
