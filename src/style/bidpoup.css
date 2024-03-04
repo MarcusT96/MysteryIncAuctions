@@ -1,0 +1,65 @@
+/* Modal Background */
+.bid-modal-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  /* Ensure modal is above other content */
+}
+
+/* Modal Content Box */
+.bid-modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 500px;
+  /* Adjust based on your preference */
+}
+
+/* Styling for the input field */
+.bid-modal-input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  /* Makes padding included in the width */
+}
+
+/* Button styles */
+.bid-modal-button {
+  background-color: #007bff;
+  /* Bootstrap primary blue, for example */
+  color: white;
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.bid-modal-button:hover {
+  background-color: #0056b3;
+  /* Darker shade for hover effect */
+}
+
+.bid-modal-close-button {
+  background-color: #6c757d;
+  /* Bootstrap secondary, for example */
+  color: white;
+}
+
+.bid-modal-close-button:hover {
+  background-color: #545b62;
+  /* Darker shade for hover effect */
+}
