@@ -56,9 +56,6 @@ const LogIn = () => {
 
   return (
     <>
-      <div className="loginPage">
-        <h1>Logga in</h1>
-      </div>
       <button className="login-btn" onClick={() => setShowModal(true)}>Logga in / Registrera</button>
       {showModal && (
         <div className="modal" onClick={closeModal}>
