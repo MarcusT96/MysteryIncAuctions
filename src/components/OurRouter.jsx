@@ -12,6 +12,7 @@ import IntegrityPage from "../pages/IntegrityPage.jsx"
 import SiteMapPage from "../pages/SiteMapPage.jsx"
 import LogIn from "../pages/LogIn.jsx"
 import Navbar from "../Navbar.jsx"
+import Footer from "../Footer.jsx"
 
 function OurRouter() {
 
@@ -32,6 +33,7 @@ function OurRouter() {
         <Route path="/sitemap" element={<SiteMapPage />}></Route>
         <Route path="/login" element={<LogIn />}></Route>
       </Routes>
+      <Footer />
     </BrowserRouter>
   )
 }
