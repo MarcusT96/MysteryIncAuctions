@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import '../style/ContactForm.css';
 
 function ContactForm() {
@@ -51,6 +51,6 @@ function ContactForm() {
       </section>
     </div>
   );
-};
+}
 
 export default ContactForm;
