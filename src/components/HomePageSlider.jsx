@@ -24,11 +24,14 @@ function HomePageSlider() {
   }
 
   const settings = {
-    dots: true,
     infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 4000,
+    autoplaySpeed: 1,
+    cssEase: "linear",
+    arrows: false
   }
 
   return (
