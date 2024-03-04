@@ -11,6 +11,7 @@ import PrivacyPage from "../pages/PrivacyPage.jsx"
 import IntegrityPage from "../pages/IntegrityPage.jsx"
 import SiteMapPage from "../pages/SiteMapPage.jsx"
 import Navbar from "../Navbar.jsx"
+import Footer from "../Footer.jsx"
 
 function OurRouter() {
 
@@ -30,6 +31,7 @@ function OurRouter() {
         <Route path="/legal/privacy" element={<IntegrityPage />}></Route>
         <Route path="/sitemap" element={<SiteMapPage />}></Route>
       </Routes>
+      <Footer />
     </BrowserRouter>
   )
 }
