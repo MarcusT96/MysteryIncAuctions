@@ -74,3 +74,16 @@
     }
   ]
 }
+
+{
+  "users": [
+  
+    {
+      "email": "pontus@example.com",
+      "password": "hej123",
+      "firstName": "Pontus",
+      "lastName": "Paulsson"
+    }
+  
+]
+}
