@@ -46,3 +46,78 @@ html {
   justify-content: space-around;
   align-items: center;
 }
+
+@media screen and (max-width: 319px) {
+
+  .nav-footer {
+    width: 100%;
+  }
+
+  .nav-footer p {
+    font-size: 0.5em;
+  }
+
+  .nav-footer a {
+    font-size: 0.8em;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+
+  .nav-footer {
+    width: 100%;
+  }
+
+  .nav-footer p {
+    font-size: 0.6em;
+  }
+
+  .nav-footer a {
+    font-size: 0.7em;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+
+  .nav-footer {
+    width: 100%;
+  }
+
+  .nav-footer p {
+    font-size: 0.8em;
+  }
+
+  .nav-footer a {
+    font-size: 0.8em;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+
+  .nav-footer {
+    width: 100%;
+  }
+
+  .nav-footer p {
+    font-size: 1em;
+  }
+
+  .nav-footer a {
+    font-size: 0.8em;
+  }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1200px) {
+
+  .nav-footer {
+    width: 100%;
+  }
+
+  .nav-footer p {
+    font-size: 1em;
+  }
+
+  .nav-footer a {
+    font-size: 0.8em;
+  }
+}
