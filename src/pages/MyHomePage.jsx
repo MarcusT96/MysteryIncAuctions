@@ -1,4 +1,5 @@
 import HomePageSlider from "../components/HomePageSlider.jsx"
+import HomePageReviews from "../components/HomePageReviews.jsx"
 
 function MyHomePage() {
 
@@ -8,16 +9,10 @@ function MyHomePage() {
 
       <div className="homepage-desc-and-revs">
         <div className="homepage-description">
-          <h1>Mystery Inc.</h1>
-          <p>MysteryInc är en auktionssida där du budar på mystery boxes med olika teman!</p>
+          <h2>Mystery Inc.</h2>
+          <p>MysteryInc är inte bara skapare av spännande mysterielådor utan fungerar också som en spännande auktionssida. Här kan du delta i budgivningar för olika mystery boxes med olika teman. Varje box är noggrant kuraterad och kan innehålla allt från senaste teknikprylar till exklusiva handplockade upplevelser. Genom att delta i budgivningen får du chansen att vinna en unik skatt full av överraskningar, och det är ett sätt för äventyrsentusiaster att uppleva det oväntade direkt från MysteryInc till din dörr.</p>
         </div>
-        <div className="homepage-reviews">
-          <div className="homepage-reviews-title-score">
-            <h1 className="homepage-reviews-title">Väldigt najs!!</h1>
-            <h1 className="homepage-reviews-score">★★★★☆</h1>
-          </div>
-          <p>Budade på en djurlåda och fick en hel häst!</p>
-        </div>
+        <HomePageReviews/>
       </div>
 
     </div>
