@@ -6,15 +6,15 @@ function Products({ searchQuery }) {
   const [filteredItems, setFilteredItems] = useState([]);
   const navigate = useNavigate();
   const [sortOrder, setSortOrder] = useState("asc");
-  
+
 
   useEffect(() => {
     async function load() {
-      const response = await fetch('Mysteryboxes.json');
+      const response = await fetch('../../db.json');
       const data = await response.json();
       setItems(data.mystery_boxes);
     }
-    load(); 
+    load();
   }, []);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ function Products({ searchQuery }) {
   }, [searchQuery, items, sortOrder]);
 
 
-  
+
   const navigateToObjectPage = (id) => {
     navigate(`/box/${id}`);
   };
