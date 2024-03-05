@@ -39,3 +39,11 @@
     line-height: 1.8;
     font-weight: 200;
 }
+
+@media screen and (min-width: 481px) and (max-width: 767px),
+screen and (min-width: 320px) and (max-width: 480px),
+screen and (max-width: 280px) {
+    .privacy-title {
+        font-size: 1.8em;
+    }
+}

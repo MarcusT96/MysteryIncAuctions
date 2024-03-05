@@ -50,3 +50,11 @@
     text-decoration-color: blue;
     cursor: pointer;
 }
+
+@media screen and (min-width: 481px) and (max-width: 767px),
+screen and (min-width: 320px) and (max-width: 480px),
+screen and (max-width: 280px) {
+    .integrity-title {
+        font-size: 1.8em;
+    }
+}
