@@ -9,7 +9,7 @@ function HomePageReviews() {
 
   useEffect(() => {
     async function load() {
-      const response = await fetch('reviews.json')
+      const response = await fetch('../../db.json')
       const data = await response.json()
       setReviews(data.reviews)
     }
@@ -17,7 +17,7 @@ function HomePageReviews() {
   }, [])
 
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
