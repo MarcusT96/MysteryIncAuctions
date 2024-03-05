@@ -1,7 +1,7 @@
 {
   "mystery_boxes": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Mystery Box A",
       "weight": 2.5,
       "price": 500,
@@ -10,16 +10,16 @@
       "image": "https://quickbutik.imgix.net/27187j/products/164806013962136aa23a9ed.jpeg"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Detective's Mystery Box",
-      "weight": 3.0,
-      "price": 2199,
+      "weight": 3,
+      "price": 2300,
       "time": "3",
       "description": "Unlock the secrets within Mystery Box B and unveil exciting surprises.",
       "image": "https://www.mynthuset.se/images/stories/sn/mysterybox-tillbehor-6015515091/Mystery_box.png"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Champion's Mystery Box",
       "weight": 1.8,
       "price": 756,
@@ -28,7 +28,7 @@
       "image": "https://www.nordicfighter.com/pub/media/catalog/product/cache/f3020b7489dcfc4d1d147cf4dad07b7f/image/7919a378/rea-mysterybox-3.png"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Pokemasters Mystery Box",
       "weight": 4.2,
       "price": 1300,
@@ -37,16 +37,16 @@
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlIzW051K4I_XPBDHY5qunsRWijfr1XxwNFw&usqp=CAU"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Indossa Mystery Box",
-      "weight": 2.0,
+      "weight": 2,
       "price": 799,
       "time": "5",
       "description": "Embark on an adventure with Mystery Box E, filled with surprises and delights.",
       "image": "https://indossa.se/cdn/shop/products/Skarmavbild2023-04-03kl.02.40.27_65c65c59-d8b6-4cc1-a6d8-3627d97e50e2_800x.png?v=1680482912"
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Red Mystery Box",
       "weight": 3.5,
       "price": 1599,
@@ -55,7 +55,7 @@
       "image": "https://thedetailingshack.co.uk/wp-content/uploads/2022/01/istockphoto-1138540348-170667a.jpg"
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "Top G Mystery Box",
       "weight": 2.8,
       "price": 899,
@@ -64,26 +64,22 @@
       "image": "https://03.cdn37.se/Ww/images/2.2118080/tengo-mystery-box-skor.jpeg"
     },
     {
-      "id": 8,
+      "id": "8",
       "name": "AmazonBoxen",
-      "weight": 4.0,
+      "weight": 4,
       "price": 1799,
       "time": "4",
       "description": "Dive deep into the unknown with Mystery Box H, an adventure in every box.",
       "image": "https://facts.net/wp-content/uploads/2023/10/14-mind-blowing-facts-about-amazon-mystery-box-1697546639.jpg"
     }
-  ]
-}
-
-{
+  ],
   "users": [
-  
     {
+      "id": "1",
       "email": "pontus@example.com",
       "password": "hej123",
       "firstName": "Pontus",
       "lastName": "Paulsson"
     }
-  
-]
+  ]
 }

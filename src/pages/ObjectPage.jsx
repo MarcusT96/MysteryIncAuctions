@@ -9,21 +9,34 @@ export default function ObjectPage() {
 
   useEffect(() => {
     async function load() {
-      const response = await fetch('/Mysteryboxes.json');
-      const data = await response.json();
-      const foundBox = data.mystery_boxes.find(box => box.id === parseInt(id, 10));
-      setBox(foundBox);
+      const response = await fetch(`http://localhost:3000/mystery_boxes/${id}`);
+      const box = await response.json();
+      setBox(box);
     }
     load();
   }, [id]);
 
-  const handleBidConfirm = (bidAmount) => {
+  const handleBidConfirm = async (bidAmount) => {
     if (box && bidAmount > box.price) {
-      // Update the price of the current box
-      setBox({ ...box, price: bidAmount });
+      try {
+        const response = await fetch(`http://localhost:3000/mystery_boxes/${box.id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ price: bidAmount }),
+        });
 
-      alert("Bid bekräftat! Nytt högsta bud: " + bidAmount + " SEK");
-      setIsModalVisible(false);
+        if (!response.ok) throw new Error('Network response was not ok.');
+
+        const updatedBox = await response.json();
+        setBox(updatedBox);
+        alert("Bud bekräftat! Nytt högsta bud: " + bidAmount + " SEK");
+        setIsModalVisible(false);
+      } catch (error) {
+        console.error('Failed to update the bid:', error);
+        alert("Ett fel inträffade när budet skulle uppdateras.");
+      }
     } else {
       alert("Budet måste vara högre än nuvarande högsta bud.");
     }
