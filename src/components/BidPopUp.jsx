@@ -1,7 +1,16 @@
 import { useState } from "react";
 
-export default function BidPopUp({ onClose, onConfirm }) {
+export default function BidPopUp({ box, onClose, onConfirm }) {
   const [bid, setBid] = useState('');
+
+  const submitBid = () => {
+    const bidAmount = parseFloat(bid);
+    if (bidAmount > box.price) {
+      onConfirm(bidAmount);
+    } else {
+      alert("Ditt bud måste vara högre än det nuvarande högsta budet.");
+    }
+  };
 
   return (
     <div className="bid--background">
@@ -18,7 +27,7 @@ export default function BidPopUp({ onClose, onConfirm }) {
         />
         <button
           className="bid--button"
-          onClick={() => onConfirm(bid)}
+          onClick={submitBid}
         >
           Bekräfta bud
         </button>
