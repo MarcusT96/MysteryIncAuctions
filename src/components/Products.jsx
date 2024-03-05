@@ -44,7 +44,7 @@ function Products({ searchQuery }) {
     <article className="Auction-list">
       {filteredItems.map(item => (
         <section key={item.id} className="auction-card">
-          <h2>{item.name}</h2>
+          <h2 className="auction-title">{item.name}</h2>
           <p>{item.description}</p>
           <img src={item.image} alt={item.name} />
           <p>{item.time} Dagar kvar</p>

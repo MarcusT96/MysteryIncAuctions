@@ -1,15 +1,15 @@
-
-
-
 .Auction-list img {
   max-width: 20vw;
+  max-height: 25vh;
 }
 
 
 .auctionpage {
+  color: black;
 
   background-color: #2D3E50;
 }
+
 
 .Auction-list {
   display: flex;
@@ -21,11 +21,15 @@
   padding-bottom: 5vh;
 }
 
+.auction-title {
+  color: black;
+}
+
 .auction-card {
   width: 300px;
   /* Set a fixed width for each card */
   background-color: #9EA5E4;
-  border: 1px solid #F4C430;
+  border: 2px solid #F4C430;
   border-radius: 8px;
   padding: 16px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -52,7 +56,7 @@
 
   button {
     background-color: #F4C430;
-    color: #fff;
+    color: black;
     padding: 8px 16px;
     border: none;
     border-radius: 4px;
@@ -68,7 +72,7 @@
 .searchdiv {
   display: flex;
   justify-content: center;
-  margin: 20px;
+  margin: 0vw 15vw;
   /* Add margin for better spacing */
 }
 
@@ -76,6 +80,15 @@
   height: 3vh;
   width: 50vw;
   background: #9EA5E4;
+  outline: none;
+
+}
+
+.auction-search::placeholder {
+  color: black;
+  /* Set the color of the placeholder text */
+  font-style: italic;
+  /* Optional: Add italic style to the placeholder */
 }
 
 .auctionbutton {
