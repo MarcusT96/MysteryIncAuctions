@@ -13,7 +13,7 @@
 .Auction-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 150px;
   /* Adjust the gap between cards as needed */
   justify-content: center;
   padding-top: 5vh;
