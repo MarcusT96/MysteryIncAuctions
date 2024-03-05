@@ -14,7 +14,7 @@ const SearchBar = ({ onSearch }) => {
       type="text"
       value={searchTerm}
       onChange={handleChange}
-      placeholder="Search products..."
+      placeholder="Sök bland våra MysteryBoxar"
     />
   );
 };
