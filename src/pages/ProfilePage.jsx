@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../style/profilePage.css';
 import userData from '../assets/users.json'
 
@@ -8,8 +9,10 @@ function ProfilePage() {
     firstName: '',
     lastName: '',
   });
-  const [activeSection, setActiveSection] = useState('profile'); // Lägg till detta om du vill ha en sektionsväxlare
 
+  const [activeSection, setActiveSection] = useState('profile');
+  const navigate = useNavigate();
+  
   useEffect(() => {
     // Antag att vi bara använder den första användaren från vår JSON-fil
     const user = userData[0];
@@ -35,9 +38,16 @@ function ProfilePage() {
     // Här skulle du lägga till logik för att spara uppdateringen till din JSON-fil eller en backend server.
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('isLoggedIn'); // Tar bort inloggningstillståndet
+    navigate('/'); // Ändra till önskad utloggningssida
+  };
+
   return (
     <div className="profile-page-container">
-      {/* Navigationsknappar och visning baserat på activeSection */}
+      <button onClick={() => setActiveSection('profile')} className={`profile-page-button ${activeSection === 'profile' ? 'active' : ''}`}>Mina Uppgifter</button>
+      <button onClick={() => setActiveSection('payment')} className={`profile-page-button ${activeSection === 'payment' ? 'active' : ''}`}>Betalningssätt</button>
+      <button onClick={() => setActiveSection('reviews')} className={`profile-page-button ${activeSection === 'reviews' ? 'active' : ''}`}>Omdömen</button>
 
       {activeSection === 'profile' && (
         <form onSubmit={handleSubmit} className="profile-page-form">
@@ -88,6 +98,7 @@ function ProfilePage() {
           {/* Framtida funktionalitet för omdömehantering */}
         </div>
       )}
+      <button onClick={handleLogout} className="profile-page-button logout-button">Logga ut</button>
     </div>
   );
 }

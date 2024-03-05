@@ -18,3 +18,9 @@
   width: 100%;
   max-width: 400px;
 }
+
+.profile-page-button.active {
+  background-color: #0056b3;
+  /* Mörkare blå för aktiv knapp */
+  color: white;
+}
