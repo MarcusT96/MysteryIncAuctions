@@ -1,34 +1,95 @@
-
-
 .Auction-list img {
   max-width: 20vw;
+  max-height: 25vh;
 }
 
+
 .auctionpage {
+  color: black;
+
   background-color: #2D3E50;
+}
+
+
+.Auction-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 150px;
+  /* Adjust the gap between cards as needed */
+  justify-content: center;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+}
+
+.auction-title {
+  color: black;
+}
+
+.auction-card {
+  width: 300px;
+  /* Set a fixed width for each card */
+  background-color: #9EA5E4;
+  border: 2px solid #F4C430;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+  }
+
+  p {
+    margin-bottom: 8px;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+
+  button {
+    background-color: #F4C430;
+    color: black;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+
+    &:hover {
+      background-color: #2D3E50;
+      color: #F4C430;
+    }
+  }
 }
 
 .searchdiv {
   display: flex;
   justify-content: center;
-  padding-top: 5vh;
-}
-
-.Auction-list {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
+  margin: 0vw 15vw;
+  /* Add margin for better spacing */
 }
 
 .auction-search {
   height: 3vh;
   width: 50vw;
   background: #9EA5E4;
-  margin-left: 25vw;
-  margin-right: 25vw;
+  outline: none;
+
+}
+
+.auction-search::placeholder {
+  color: black;
+  /* Set the color of the placeholder text */
+  font-style: italic;
+  /* Optional: Add italic style to the placeholder */
 }
 
 .auctionbutton {

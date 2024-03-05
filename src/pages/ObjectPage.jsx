@@ -18,7 +18,7 @@ export default function ObjectPage() {
   }, [id]);
 
   const handleBidConfirm = (bidAmount) => {
-    console.log("Bid confirmed: ", bidAmount);
+    alert("Bid bekräftat!: ", bidAmount);
     // Addera logik för att hantera bud bekräftelse
     // Skicka data till backend och databas.
     setIsModalVisible(false);
