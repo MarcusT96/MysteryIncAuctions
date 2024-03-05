@@ -11,7 +11,7 @@ function HomePageSlider() {
   // Load boxes
   useEffect(() => {
     async function load() {
-      const response = await fetch('Mysteryboxes.json')
+      const response = await fetch('../../db.json')
       const data = await response.json()
       setBoxes(data.mystery_boxes)
     }
