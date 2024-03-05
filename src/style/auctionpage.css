@@ -1,12 +1,13 @@
 
 
+
 .Auction-list img {
   max-width: 20vw;
 }
 
 
 .auctionpage {
-  
+
   background-color: #2D3E50;
 }
 
@@ -17,12 +18,14 @@
   /* Adjust the gap between cards as needed */
   justify-content: center;
   padding-top: 5vh;
+  padding-bottom: 5vh;
 }
 
 .auction-card {
   width: 300px;
   /* Set a fixed width for each card */
-  border: 1px solid #ddd;
+  background-color: #9EA5E4;
+  border: 1px solid #F4C430;
   border-radius: 8px;
   padding: 16px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -48,7 +51,7 @@
   }
 
   button {
-    background-color: #9EA5E4;
+    background-color: #F4C430;
     color: #fff;
     padding: 8px 16px;
     border: none;
