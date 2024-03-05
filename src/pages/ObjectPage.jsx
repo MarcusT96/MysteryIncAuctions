@@ -18,10 +18,15 @@ export default function ObjectPage() {
   }, [id]);
 
   const handleBidConfirm = (bidAmount) => {
-    alert("Bid bekräftat!: ", bidAmount);
-    // Addera logik för att hantera bud bekräftelse
-    // Skicka data till backend och databas.
-    setIsModalVisible(false);
+    if (box && bidAmount > box.price) {
+      // Update the price of the current box
+      setBox({ ...box, price: bidAmount });
+
+      alert("Bid bekräftat! Nytt högsta bud: " + bidAmount + " SEK");
+      setIsModalVisible(false);
+    } else {
+      alert("Budet måste vara högre än nuvarande högsta bud.");
+    }
   };
 
   if (!box) return <div>Loading...</div>;
@@ -42,6 +47,7 @@ export default function ObjectPage() {
         <button className="bid--button" onClick={() => setIsModalVisible(true)}>Lägg bud</button>
         {isModalVisible && (
           <BidPopUp
+            box={box}
             onClose={() => setIsModalVisible(false)}
             onConfirm={handleBidConfirm}
           />
