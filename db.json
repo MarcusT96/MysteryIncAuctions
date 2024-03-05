@@ -75,11 +75,18 @@
   ],
   "users": [
     {
-      "id": "1",
+      "id": 1,
       "email": "pontus@example.com",
       "password": "hej123",
       "firstName": "Pontus",
-      "lastName": "Paulsson"
+      "lastName": "Paulsson",
+      "address": "Gatan 123",
+      "city": "Staden",
+      "zipCode": "123 45",
+      "country": "Landet",
+      "phone": "070-123 45 67",
+      "emailNotifications": true,
+      "shareDataWithThirdParties": false
     }
   ],
   "reviews": [
