@@ -1,3 +1,10 @@
+
+
+.Auction-list img {
+  max-width: 20vw;
+}
+
+
 .auctionpage {
   padding-top: 25vh;
   background-color: #2D3E50;
@@ -9,6 +16,7 @@
   gap: 16px;
   /* Adjust the gap between cards as needed */
   justify-content: center;
+  padding-top: 5vh;
 }
 
 .auction-card {

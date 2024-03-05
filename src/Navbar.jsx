@@ -1,6 +1,6 @@
 import logo from './assets/mysteryInc-logo.png'
 
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 function useScrollDirection() {
   useEffect(() => {
@@ -32,7 +32,6 @@ function Navbar() {
   return (<>
     <div className='navbar'>
       <header className="nav-header">
-        <h1 className="nav-title">Mysterybox Auktionen!📦</h1>
         <nav className='nav'>
           <ul className='nav-menu'>
             <div className="nav-logo"><a href="/">
@@ -42,7 +41,7 @@ function Navbar() {
             <li><a href="/Auctionpage">Auktioner</a></li>
             <li><a href="/about">Om Oss</a></li>
             <li><a href="/contact">Kontakt</a></li>
-            <li className='login'><a href="/login">Logga In</a></li>
+            <li><a href="/login">Logga In</a></li>
           </ul>
         </nav>
       </header>

@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Products({ searchQuery }) {
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
+  const navigate = useNavigate();
   const [sortOrder, setSortOrder] = useState("asc");
   
 
@@ -12,11 +14,10 @@ function Products({ searchQuery }) {
       const data = await response.json();
       setItems(data.mystery_boxes);
     }
-    load();
+    load(); 
   }, []);
 
   useEffect(() => {
-    // Filter items based on search query
     const filtered = items.filter(item =>
       item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.description.toLowerCase().includes(searchQuery.toLowerCase())
@@ -35,6 +36,10 @@ function Products({ searchQuery }) {
 
 
   
+  const navigateToObjectPage = (id) => {
+    navigate(`/box/${id}`);
+  };
+
   return (
     <article className="Auction-list">
       {filteredItems.map(item => (
@@ -43,7 +48,7 @@ function Products({ searchQuery }) {
           <p>{item.description}</p>
           <img src={item.image} alt={item.name} />
           <p>{item.time} Dagar kvar</p>
-          <button className="auctionbutton">Köp för {item.price} kr.</button>
+          <button onClick={() => navigateToObjectPage(item.id)} className="auctionbutton">Köp för {item.price} kr.</button>
         </section>
       ))}
     </article>

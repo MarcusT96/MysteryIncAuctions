@@ -1,0 +1,59 @@
+.sitemap-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sitemap-title {
+    font-size: 2em;
+    text-shadow: none;
+    transition: none;
+    color: white;
+    cursor: default;
+}
+
+.sitemap-title:hover {
+    text-shadow: none;
+    transition: none;
+}
+
+.sitemap-sections {
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+    padding-top: 2vh;
+    border-top: 2px solid rgba(255, 255, 255, 0.253);
+}
+
+.inner-sitemap-sections {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.class-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.class-list-list {
+    margin: 0;
+}
+
+.site-inner-title {
+    margin-bottom: 10px;
+}
+
+.class-list-list a {
+    display: block;
+    margin-bottom: 5px;
+    text-decoration: none;
+    cursor: default;
+    color: rgba(0, 0, 255, 0.5);
+}
+
+.class-list-list a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}

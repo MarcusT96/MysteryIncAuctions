@@ -1,23 +1,49 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import Slider from "react-slick"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
 
 function HomePageSlider() {
-
   const [boxes, setBoxes] = useState([])
-  const [filteredBox, setFilteredBox] = useState()
+  const navigate = useNavigate()
 
+  // Load boxes
   useEffect(() => {
-    import('../assets/boxes.json')
-      .then((data) => setBoxes(data.default))
-      .catch((error) => console.error("Error loading box data: ", error))
+    async function load() {
+      const response = await fetch('Mysteryboxes.json')
+      const data = await response.json()
+      setBoxes(data.mystery_boxes)
+    }
+    load()
   }, [])
+
+  // Navigate to auction page
+  const navigateToObjectPage = (id) => {
+    navigate(`/box/${id}`);
+  }
+
+  const settings = {
+    infinite: true,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 4000,
+    autoplaySpeed: 1,
+    cssEase: "linear",
+    arrows: false
+  }
 
   return (
     <div className="homepage-slider">
-      <button class="homepage-slidebutton" onClick={""}>❮</button>
-      {boxes.map((box) => (
-        <img src={box.img} />
-      ))}
-      <button class="homepage-slidebutton" onClick={""}>❯</button>
+      <Slider {...settings}>
+        {boxes.map((box, index) => (
+          <div className="homepage-slider-display" key={index}>
+            <img src={box.image} onClick={() => navigateToObjectPage(box.id)} style={{ cursor: 'pointer' }} />
+            <h2>{box.name}</h2>
+          </div>
+        ))}
+      </Slider>
     </div>
   )
 }

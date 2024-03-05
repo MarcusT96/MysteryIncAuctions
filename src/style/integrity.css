@@ -1,0 +1,52 @@
+.integrity-container {
+    background-color: #2D3E50;
+    font-family: 'Poppins', sans-serif;
+    margin: 20px;
+    padding: 20px;
+    color: white;
+}
+
+.integrity-title {
+    font-size: 4em;
+    text-shadow: none;
+    transition: none;
+    color: white;
+    cursor: default;
+    background-color: #34475cd8;
+    border-radius: 5px;
+    border: 2px solid rgba(255, 255, 255, 0.253);
+    backdrop-filter: blur(50px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+}
+
+.integrity-title:hover {
+    text-shadow: none;
+    transition: none;
+}
+
+.integrity-sections {
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    padding: 1vh;
+    border-radius: 10px;
+}
+
+.integrity-headliners {
+    color: #9EA5E4;
+}
+
+.integrity-p {
+    margin: 10px 0;
+    line-height: 1.8;
+    font-weight: 200;
+}
+
+.integrity-a {
+    color: blue;
+    text-decoration: none;
+}
+
+.integrity-a:hover {
+    text-decoration: underline;
+    text-decoration-color: blue;
+    cursor: pointer;
+}

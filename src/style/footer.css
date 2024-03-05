@@ -21,6 +21,10 @@ html {
   font-size: 12px;
 }
 
+.copy-right-p {
+  color: #0000009a;
+}
+
 .nav-footer a {
   color: black;
   text-decoration: none;
