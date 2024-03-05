@@ -1,0 +1,26 @@
+.profile-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.profile-page-navigation {
+  margin-bottom: 20px;
+}
+
+.profile-page-button {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.profile-page-content {
+  width: 100%;
+  max-width: 400px;
+}
+
+.profile-page-button.active {
+  background-color: #0056b3;
+  /* Mörkare blå för aktiv knapp */
+  color: white;
+}
