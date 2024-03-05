@@ -64,7 +64,8 @@
     transition: background-color 0.3s ease-in-out;
 
     &:hover {
-      background-color: #7987c0;
+      background-color: #2D3E50;
+      color: #F4C430;
     }
   }
 }
