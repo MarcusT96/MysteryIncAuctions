@@ -57,3 +57,34 @@
     text-decoration: underline;
     cursor: pointer;
 }
+
+
+@media screen and (min-width: 481px) and (max-width: 767px),
+screen and (min-width: 320px) and (max-width: 480px),
+screen and (max-width: 280px) {
+    .sitemap-sections {
+        flex-direction: column;
+        align-items: center;
+        padding-top: 2vh;
+        width: 100%;
+        height: 100%;
+    }
+
+    .inner-sitemap-sections {
+        align-items: center;
+        width: 100%;
+    }
+
+    .class-list {
+        text-align: center;
+    }
+
+    .class-list-list a {
+        text-align: center;
+        margin: 5px auto;
+    }
+
+    .sitemap-title {
+        font-size: 1.8em;
+    }
+}

@@ -1,20 +1,27 @@
+/*
+IMPORTANT!
+npm install react-icons
+
+*/
+
 import logo from './assets/mysteryInc-logo.png'
 
-import { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+
+import { GiHamburgerMenu } from 'react-icons/gi';
+import { MdClose } from "react-icons/md";
 
 function useScrollDirection() {
   useEffect(() => {
-    let lastScrollY = window.pageYOffset;
+    let lastScrollY = window.scrollY;
 
     const updateScrollDirection = () => {
-      const scrollY = window.pageYOffset;
-      const header = document.querySelector('.navbar');
+      const scrollY = window.scrollY;
+      const header = document.querySelector('.app__navbar');
 
       if (scrollY > lastScrollY) {
-        // Scrolling down
         header.classList.add('hide');
       } else {
-        // Scrolling up
         header.classList.remove('hide');
       }
       lastScrollY = scrollY > 0 ? scrollY : 0;
@@ -29,23 +36,38 @@ function useScrollDirection() {
 function Navbar() {
   useScrollDirection();
 
+  const [toggleMenu, setToggleMenu] = useState(false);
+
   return (<>
-    <div className='navbar'>
-      <header className="nav-header">
-        <nav className='nav'>
-          <ul className='nav-menu'>
-            <div className="nav-logo"><a href="/">
-              <img src={logo} alt="Mystery Inc Logo" /></a>
-            </div>
-            <li><a href="/">Home</a></li>
-            <li><a href="/Auctionpage">Auktioner</a></li>
-            <li><a href="/about">Om Oss</a></li>
-            <li><a href="/contact">Kontakt</a></li>
-            <li><a href="/login">Logga In</a></li>
-          </ul>
-        </nav>
-      </header>
-    </div>
+    <nav className="app__navbar">
+      <div className="app__navbar-logo">
+        <a href="/"><img src={logo} alt="app__logo" /></a>
+      </div>
+      <ul className="app__navbar-links">
+        <li className="p__opensans"><a href="/">Home</a></li>
+        <li className="p__opensans"><a href="/Auctionpage">Auktioner</a></li>
+        <li className="p__opensans"><a href="/about">Om Oss</a></li>
+        <li className="p__opensans"><a href="/contact">Kontakt</a></li>
+      </ul>
+      <div className="app__navbar-login">
+        <a href="/login" className="p__opensans">Logga In / Registrera</a>
+      </div>
+      <div className="app__navbar-smallscreen">
+        <GiHamburgerMenu color="#fff" fontSize={27} onClick={() => setToggleMenu(true)} />
+        {toggleMenu && (
+          <div className="app__navbar-smallscreen_overlay flex__center slide-bottom">
+            <MdClose color="#ffd700" fontSize={27} className="overlay__close" onClick={() => setToggleMenu(false)} />
+            <ul className="app__navbar-smallscreen_links">
+              <li><a href="/" onClick={() => setToggleMenu(false)}>Home</a></li>
+              <li><a href="/Auctionpage" onClick={() => setToggleMenu(false)}>Auktioner</a></li>
+              <li><a href="/about" onClick={() => setToggleMenu(false)}>Om Oss</a></li>
+              <li><a href="/contact" onClick={() => setToggleMenu(false)}>Kontakt</a></li>
+              <li><a href="/login" onClick={() => setToggleMenu(false)}>Logga In / Registrera</a></li>
+            </ul>
+          </div>
+        )}
+      </div>
+    </nav>
   </>);
 }
 
