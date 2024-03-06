@@ -40,10 +40,36 @@
     border-radius: 10px;
 }
 
-@media screen and (min-width: 481px) and (max-width: 767px),
-screen and (min-width: 320px) and (max-width: 480px),
-screen and (max-width: 280px) {
+@media screen and (min-width: 481px) and (max-width: 767px) {
     .salespolicies-title {
-        font-size: 1.8em;
+        font-size: 1.8rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .salespolicies-title {
+        font-size: 1rem;
+    }
+
+    .salespolicies-headliners {
+        font-size: 1rem;
+    }
+
+    .salespolicies-p {
+        font-size: 0.7rem;
+    }
+}
+
+@media screen and (max-width: 250px) {
+    .salespolicies-title {
+        font-size: 0.8rem;
+    }
+
+    .salespolicies-headliners {
+        font-size: 0.7rem;
+    }
+
+    .salespolicies-p {
+        font-size: 0.5rem;
     }
 }

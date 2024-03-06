@@ -40,10 +40,36 @@
     font-weight: 200;
 }
 
-@media screen and (min-width: 481px) and (max-width: 767px),
-screen and (min-width: 320px) and (max-width: 480px),
-screen and (max-width: 280px) {
+@media screen and (min-width: 481px) and (max-width: 767px) {
     .privacy-title {
-        font-size: 1.8em;
+        font-size: 1.8rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .privacy-title {
+        font-size: 1rem;
+    }
+
+    .privacy-headliners {
+        font-size: 1rem;
+    }
+
+    .privacy-p {
+        font-size: 0.7rem;
+    }
+}
+
+@media screen and (max-width: 255px) {
+    .privacy-title {
+        font-size: 0.8rem;
+    }
+
+    .privacy-headliners {
+        font-size: 0.7rem;
+    }
+
+    .privacy-p {
+        font-size: 0.5rem;
     }
 }

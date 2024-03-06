@@ -51,10 +51,36 @@
     cursor: pointer;
 }
 
-@media screen and (min-width: 481px) and (max-width: 767px),
-screen and (min-width: 320px) and (max-width: 480px),
-screen and (max-width: 280px) {
+@media screen and (min-width: 481px) and (max-width: 767px) {
     .integrity-title {
-        font-size: 1.8em;
+        font-size: 1.8rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .integrity-title {
+        font-size: 1rem;
+    }
+
+    .integrity-headliners {
+        font-size: 1rem;
+    }
+
+    .integrity-p {
+        font-size: 0.7rem;
+    }
+}
+
+@media screen and (max-width: 255px) {
+    .integrity-title {
+        font-size: 0.8rem;
+    }
+
+    .integrity-headliners {
+        font-size: 0.7rem;
+    }
+
+    .integrity-p {
+        font-size: 0.5rem;
     }
 }
