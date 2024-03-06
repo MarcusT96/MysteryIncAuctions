@@ -34,7 +34,7 @@ function ProfilePage() {
 
     fetchUserData();
   }, []);
-  
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -74,7 +74,8 @@ function ProfilePage() {
 
   const handleLogout = () => {
     localStorage.removeItem('isLoggedIn');
-    navigate('/');
+    localStorage.removeItem('currentUserId');
+    window.location.href = '/';
   };
 
   return (
