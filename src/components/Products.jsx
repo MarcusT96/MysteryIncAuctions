@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-function Products({ searchQuery }) {
+function Products({ searchQuery, sortOrder, sortCriterion }) {
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
   const navigate = useNavigate();
-  const [sortOrder, setSortOrder] = useState("asc");
+  
 
 
   useEffect(() => {
     async function load() {
-      const response = await fetch('../../db.json');
+      const response = await fetch(`http://localhost:3000/mystery_boxes`)
       const data = await response.json();
-      setItems(data.mystery_boxes);
+      setItems(data);
     }
     load();
   }, []);
@@ -24,15 +24,20 @@ function Products({ searchQuery }) {
     );
 
     const sortedItems = [...filtered].sort((a, b) => {
-      if (sortOrder === "asc") {
-        return a.price - b.price; // Sort by price in ascending order
-      } else {
-        return b.price - a.price; // Sort by price in descending order
+      if (sortCriterion === 'price') {
+        return sortOrder === "asc" ? a.price - b.price : b.price - a.price;
+      } else if (sortCriterion === 'time') {
+        // Assuming time is stored in a comparable format, e.g., days left as integers
+        return sortOrder === "asc" ? a.time - b.time : b.time - a.time;
+      } else if (sortCriterion === 'name') {
+        // Compare names alphabetically
+        return sortOrder === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
       }
+      return 0; // Default case if no sortCriterion matches
     });
 
     setFilteredItems(sortedItems);
-  }, [searchQuery, items, sortOrder]);
+  }, [searchQuery, items, sortOrder, sortCriterion]);
 
 
 

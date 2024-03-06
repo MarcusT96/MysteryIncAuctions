@@ -95,3 +95,41 @@
 .auctionbutton {
   background-color: #9EA5E4;
 }
+
+.sorting{
+  background-color: #F4C430;
+    /* Green background */
+    border: none;
+    /* Remove borders */
+    color: rgb(0, 0, 0);
+    /* White text */
+    padding: 10px 30px;
+    /* Some padding */
+    text-align: center;
+    /* Center the text */
+    text-decoration: none;
+    /* Remove underline from links */
+    display: inline-block;
+    /* Arrange buttons inline */
+    font-size: 16px;
+    /* Text size */
+    margin: 4px 2px;
+    /* Add some space around the button */
+    cursor: pointer;
+    /* Change mouse cursor on hover */
+    border-radius: 4px;
+    /* Rounded corners */
+    transition: background-color 0.3s, transform 0.3s;
+    /* Smooth transition for hover effect */
+  }
+.sorting:hover {
+  background-color: #9EA5E4;
+  /* Darker shade of green */
+  transform: scale(1.05);
+  /* Slightly increase button size */
+}
+  .sortingbuttons{
+    display: flex;
+    
+    justify-content: center;
+  }
