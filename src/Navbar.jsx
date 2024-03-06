@@ -1,37 +1,11 @@
-/*
-IMPORTANT!
-npm install react-icons
-
-*/
+import React, { useState } from 'react';
+import useScrollDirection from './components/NavbarAnimation'
 
 import logo from './assets/mysteryInc-logo.png'
-
-import React, { useState, useEffect } from 'react';
 
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { MdClose } from "react-icons/md";
 
-function useScrollDirection() {
-  useEffect(() => {
-    let lastScrollY = window.scrollY;
-
-    const updateScrollDirection = () => {
-      const scrollY = window.scrollY;
-      const header = document.querySelector('.app__navbar');
-
-      if (scrollY > lastScrollY) {
-        header.classList.add('hide');
-      } else {
-        header.classList.remove('hide');
-      }
-      lastScrollY = scrollY > 0 ? scrollY : 0;
-    };
-
-    window.addEventListener('scroll', updateScrollDirection);
-
-    return () => window.removeEventListener('scroll', updateScrollDirection);
-  }, []);
-}
 
 function Navbar() {
   useScrollDirection();
