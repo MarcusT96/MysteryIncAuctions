@@ -21,9 +21,19 @@ body {
   margin-bottom: 2vw;
 }
 
+.homepage-slider-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .homepage-slider-display>img {
   max-width: 100%;
   height: 20vh;
+}
+
+.homepage-slider-display>h2 {
+  max-width: 100%;
 }
 
 .homepage-desc-and-revs {
