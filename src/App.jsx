@@ -1,6 +1,7 @@
 import OurRouter from './components/OurRouter.jsx'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './style/index.css'
 
 function App() {
   return (
