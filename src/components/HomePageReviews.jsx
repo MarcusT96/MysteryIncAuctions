@@ -16,13 +16,28 @@ function HomePageReviews() {
     load()
   }, [])
 
+  function pointsToStars(points) {
+    let stars = []
+    const pointsToFive = 5 - points
+
+    for (let i = 0; i < points; i++) {
+      stars.push("★")
+    }
+
+    for (let i = 0; i < pointsToFive; i++) {
+      stars.push("☆")
+    }
+
+    return stars
+  }
+
   const settings = {
     dots: false,
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 6000,
     pauseOnHover: true
   };
 
@@ -34,7 +49,7 @@ function HomePageReviews() {
             <div className="homepage-reviews" key={index}>
               <div className="homepage-reviews-title-score">
                 <h2 className="homepage-reviews-title">{review.title}</h2>
-                <h2 className="homepage-reviews-score">★★★★☆</h2>
+                <h2 className="homepage-reviews-score">{pointsToStars(review.score)}</h2>
               </div>
               <p>{review.description}</p>
             </div>
