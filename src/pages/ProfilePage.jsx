@@ -6,21 +6,36 @@ import userData from '../assets/users.json'
 function ProfilePage() {
   const [userInfo, setUserInfo] = useState({
     email: '',
+    password: '',
     firstName: '',
     lastName: '',
+    address: '',
+    city: '',
+    zipCode: '',
+    country: '',
+    phone: ''
   });
 
   const [activeSection, setActiveSection] = useState('profile');
   const navigate = useNavigate();
-  
+
   useEffect(() => {
-    // Antag att vi bara använder den första användaren från vår JSON-fil
-    const user = userData[0];
-    setUserInfo({
-      email: user.email,
-      firstName: user.firstName,
-      lastName: user.lastName,
-    });
+    fetch('http://localhost:3000/users/1')
+      .then(response => response.json())
+      .then(data => {
+        setUserInfo({
+          email: data.email,
+          password: data.password, // Observera: Det är ovanligt och osäkert att hantera lösenord på detta sätt i en klientapplikation
+          firstName: data.firstName,
+          lastName: data.lastName,
+          address: data.address,
+          city: data.city,
+          zipCode: data.zipCode,
+          country: data.country,
+          phone: data.phone
+        });
+      })
+      .catch(error => console.error('Error:', error));
   }, []);
 
   const handleInputChange = (e) => {
@@ -39,8 +54,8 @@ function ProfilePage() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('isLoggedIn'); // Tar bort inloggningstillståndet
-    navigate('/'); // Ändra till önskad utloggningssida
+    localStorage.removeItem('isLoggedIn');
+    navigate('/');
   };
 
   return (
@@ -59,6 +74,17 @@ function ProfilePage() {
               name="email"
               value={userInfo.email}
               onChange={handleInputChange}
+              placeholder="Din email"
+            />
+          </div>
+          <div className="profile-page-form-group">
+            <label>Lösenord</label>
+            <input
+              type="text"
+              name="password"
+              value={userInfo.password}
+              onChange={handleInputChange}
+              placeholder="Ditt lösenord"
             />
           </div>
           <div className="profile-page-form-group">
@@ -68,6 +94,7 @@ function ProfilePage() {
               name="firstName"
               value={userInfo.firstName}
               onChange={handleInputChange}
+              placeholder="Ditt förnamn"
             />
           </div>
           <div className="profile-page-form-group">
@@ -77,6 +104,47 @@ function ProfilePage() {
               name="lastName"
               value={userInfo.lastName}
               onChange={handleInputChange}
+              placeholder="Ditt efternamn"
+            />
+          </div>
+          <div className="profile-page-form-group">
+            <label>Adress</label>
+            <input
+              type="text"
+              name="address"
+              value={userInfo.address}
+              onChange={handleInputChange}
+              placeholder="Din adress"
+            />
+          </div>
+          <div className="profile-page-form-group">
+            <label>Stad</label>
+            <input
+              type="text"
+              name="city"
+              value={userInfo.city}
+              onChange={handleInputChange}
+              placeholder="Din stad"
+            />
+          </div>
+          <div className="profile-page-form-group">
+            <label>Postnummer</label>
+            <input
+              type="text"
+              name="zipCode"
+              value={userInfo.zipCode}
+              onChange={handleInputChange}
+              placeholder="Ditt postnummer"
+            />
+          </div>
+          <div className="profile-page-form-group">
+            <label>Telefonnummer</label>
+            <input
+              type="text"
+              name="phone"
+              value={userInfo.phone}
+              onChange={handleInputChange}
+              placeholder="Ditt telefonnummer"
             />
           </div>
           <button type="submit" className="profile-page-button">Spara Ändringar</button>
