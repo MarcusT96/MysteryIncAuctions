@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import BidPopUp from "../components/BidPopUp.jsx"
+import { toast } from 'react-toastify';
+
 
 export default function ObjectPage() {
   const [box, setBox] = useState(null);
@@ -31,14 +33,14 @@ export default function ObjectPage() {
 
         const updatedBox = await response.json();
         setBox(updatedBox);
-        alert("Bud bekräftat! Nytt högsta bud: " + bidAmount + " SEK");
+        toast.success(`Bud bekräftat! Nytt högsta bud: ${bidAmount} SEK`);
         setIsModalVisible(false);
       } catch (error) {
         console.error('Failed to update the bid:', error);
-        alert("Ett fel inträffade när budet skulle uppdateras.");
+        toast.error("Ett fel inträffade när budet skulle uppdateras.");
       }
     } else {
-      alert("Budet måste vara högre än nuvarande högsta bud.");
+      toast.warn("Budet måste vara högre än nuvarande högsta bud.");
     }
   };
 
