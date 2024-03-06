@@ -34,16 +34,42 @@
     font-weight: 200;
 }
 
-.juridiskt-sections {
+.juridisk-sections {
     border: 2px solid rgba(255, 255, 255, 0.1);
     padding: 1vh;
     border-radius: 10px;
 }
 
-@media screen and (min-width: 481px) and (max-width: 767px),
-screen and (min-width: 320px) and (max-width: 480px),
-screen and (max-width: 280px) {
+@media screen and (min-width: 481px) and (max-width: 767px) {
     .juridisk-title {
-        font-size: 1.8em;
+        font-size: 1.8rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .juridisk-title {
+        font-size: 1rem;
+    }
+
+    .juridisk-headliners {
+        font-size: 1rem;
+    }
+
+    .juridisk-p {
+        font-size: 0.7rem;
+    }
+}
+
+@media screen and (max-width: 255px) {
+    .juridisk-title {
+        font-size: 0.8rem;
+    }
+
+    .juridisk-headliners {
+        font-size: 0.7rem;
+    }
+
+    .juridisk-p {
+        font-size: 0.5rem;
     }
 }
