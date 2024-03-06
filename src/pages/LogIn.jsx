@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/login.css';
-import usersData from '../assets/users.json';
 
 const LogIn = () => {
   const [email, setEmail] = useState('');
@@ -16,51 +15,68 @@ const LogIn = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate('/profile');
-    }
-  }, [isLoggedIn, navigate]);
-
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const allUsers = [...usersData, ...JSON.parse(localStorage.getItem('users') || '[]')];
-    const user = allUsers.find(u => u.email === email && u.password === password);
 
-    if (user) {
-      localStorage.setItem('isLoggedIn', 'true');
-      setIsLoggedIn(true);
-      setShowModal(false);
-      setLoginError('');
-      navigate('/profile');
-    } else {
-      setIsLoggedIn(false);
-      setLoginError('Felaktig e-postadress eller lösenord.');
+    try {
+      const response = await fetch('http://localhost:3000/users');
+      const users = await response.json();
+      const user = users.find(u => u.email === email && u.password === password);
+
+      if (user) {
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('currentUserId', user.id);
+        setIsLoggedIn(true);
+        setShowModal(false);
+        setLoginError('');
+        navigate('/profile');
+      } else {
+        setIsLoggedIn(false);
+        setLoginError('Felaktig e-postadress eller lösenord.');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      setLoginError('Ett problem uppstod vid försök att logga in.');
     }
   };
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    localStorage.removeItem('isLoggedIn');
-    navigate('/');
-  };
-
-  const handleSignUp = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
-    let users = JSON.parse(localStorage.getItem('users') || '[]');
-    if (users.some(user => user.email === email)) {
-      setLoginError("E-postadressen är redan registrerad.");
-    } else {
-      users.push({ email, password, firstName, lastName });
-      localStorage.setItem('users', JSON.stringify(users));
+
+    // Kontrollera först om användaren redan finns för att undvika dubletter
+    try {
+      const response = await fetch('http://localhost:3000/users');
+      const users = await response.json();
+      const userExists = users.some(user => user.email === email);
+
+      if (userExists) {
+        setLoginError("E-postadressen är redan registrerad.");
+        return;
+      }
+
+      const newUser = { email, password, firstName, lastName };
+      const postResponse = await fetch('http://localhost:3000/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newUser),
+      });
+
+      if (!postResponse.ok) throw new Error('Något gick fel vid skapandet av användaren.');
+
       setIsRegistered(true);
       setEmail('');
       setPassword('');
       setFirstName('');
       setLastName('');
-      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('currentUserId', user.id); // överväg att hantera autentisering mer säkert
       setIsLoggedIn(true);
       navigate('/profile');
+
+    } catch (error) {
+      console.error('Fel vid registrering:', error);
+      setLoginError('Ett problem uppstod vid försök att registrera användaren.');
     }
   };
 
