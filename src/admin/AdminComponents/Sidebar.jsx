@@ -4,7 +4,7 @@ import './Sidebar.css';
 function Sidebar() {
 
     return (<>
-
+        <h1>Admin</h1>
     </>)
 }
 
