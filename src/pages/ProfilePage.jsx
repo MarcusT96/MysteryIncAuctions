@@ -64,7 +64,6 @@ function ProfilePage() {
       const updatedUser = await response.json();
       console.log('Uppdaterad användarinfo:', updatedUser);
       alert('Dina uppgifter har uppdaterats!');
-      // Här kan du göra ytterligare åtgärder, som att navigera användaren eller uppdatera UI
 
     } catch (error) {
       console.error('Fel vid uppdatering av användaruppgifter:', error);

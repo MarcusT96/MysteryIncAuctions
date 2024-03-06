@@ -8,17 +8,16 @@ const LogIn = ({ closeModal }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [isLoggingIn, setIsLoggingIn] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true');
   const [loginError, setLoginError] = useState('');
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (localStorage.getItem('isLoggedIn') === 'true') {
       navigate('/profile');
-      closeModal();
+      closeModal && closeModal();
     }
-  }, [isLoggedIn, navigate, closeModal]);
+  }, [navigate, closeModal]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -30,7 +29,7 @@ const LogIn = ({ closeModal }) => {
       if (user) {
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('currentUserId', user.id);
-        closeModal();
+        closeModal && closeModal();
         window.location.reload();
       } else {
         setLoginError('Felaktig e-postadress eller lösenord.');
@@ -62,12 +61,14 @@ const LogIn = ({ closeModal }) => {
         body: JSON.stringify(newUser),
       });
 
-      if (!postResponse.ok) throw new Error('Något gick fel vid skapandet av användaren.');
-
-      const createdUser = await postResponse.json();
-      localStorage.setItem('currentUserId', createdUser.id);
-      setIsLoggedIn(true);
-      setLoginError('');
+      if (postResponse.ok) {
+        const createdUser = await postResponse.json();
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('currentUserId', createdUser.id);
+        window.location.reload();
+      } else {
+        throw new Error('Något gick fel vid skapandet av användaren.');
+      }
     } catch (error) {
       console.error('Fel vid registrering:', error);
       setLoginError('Ett problem uppstod vid försök att registrera användaren.');
@@ -77,15 +78,15 @@ const LogIn = ({ closeModal }) => {
   const handleLogout = () => {
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('currentUserId');
-    setIsLoggedIn(false);
-    closeModal();
+    closeModal && closeModal();
+    window.location.reload();
   };
 
   return (
     <div className="modal" onClick={closeModal}>
       <div className="modal-content" onClick={e => e.stopPropagation()}>
         <span className="close" onClick={closeModal}>&times;</span>
-        {isLoggedIn ? (
+        {localStorage.getItem('isLoggedIn') === 'true' ? (
           <button className="profile-btn" onClick={handleLogout}>Logga ut</button>
         ) : (
           <>
