@@ -38,9 +38,11 @@ function HomePageSlider() {
     <div className="homepage-slider">
       <Slider {...settings}>
         {boxes.map((box, index) => (
-          <div className="homepage-slider-display" key={index}>
-            <img src={box.image} onClick={() => navigateToObjectPage(box.id)} style={{ cursor: 'pointer' }} />
-            <h2>{box.name}</h2>
+          <div>
+            <div className="homepage-slider-display" key={index}>
+              <img src={box.image} onClick={() => navigateToObjectPage(box.id)} style={{ cursor: 'pointer' }} />
+              <h2>{box.name}</h2>
+            </div>
           </div>
         ))}
       </Slider>
