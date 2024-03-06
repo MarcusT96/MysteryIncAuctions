@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from 'react-toastify';
 
 export default function BidPopUp({ box, onClose, onConfirm }) {
   const [bid, setBid] = useState('');
@@ -8,7 +9,7 @@ export default function BidPopUp({ box, onClose, onConfirm }) {
     if (bidAmount > box.price) {
       onConfirm(bidAmount);
     } else {
-      alert("Ditt bud måste vara högre än det nuvarande högsta budet.");
+      toast.warn("Ditt bud måste vara högre än det nuvarande högsta budet.");
     }
   };
 
@@ -18,6 +19,7 @@ export default function BidPopUp({ box, onClose, onConfirm }) {
         <p className="bid-disclaimer">
           Observera: Att lägga ett bud är juridiskt bindande. Genom att lägga ett bud förbinder du dig att köpa objektet till det budgivna priset om du vinner auktionen.
         </p>
+        <p className="bid-disclaimer"><b>Nuvarande högsta bud: {box.price} SEK</b></p>
         <input
           className="bid--input"
           type="number"
