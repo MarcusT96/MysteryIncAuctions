@@ -23,13 +23,13 @@ export default function Auctionpage() {
     <div className="searchdiv">
       <SearchBar onSearch={handleSearch} />
     </div>
-    <div className="sorting">
-      <select onChange={(e) => handleSortCriterionChange(e.target.value)} value={sortCriterion}>
-        <option value="price">Price</option>
-        <option value="time">Time Left</option>
-        <option value="name">Name</option>
+    <div className="sortingbuttons">
+      <select className="sorting" onChange={(e) => handleSortCriterionChange(e.target.value)} value={sortCriterion}>
+        <option value="price">Pris</option>
+        <option value="time">Tid kvar</option>
+        <option value="name">Namn</option>
       </select>
-      <button onClick={toggleSortOrder}>{sortOrder === "asc" ? "Sort Descending" : "Sort Ascending"}</button>
+      <button className="sorting" onClick={toggleSortOrder}>{sortOrder === "asc" ? "Sortera sjunkande" : "Sortera ökande"}</button>
       </div>
     <div className="auction-container">
       <Products searchQuery={searchQuery} sortOrder={sortOrder} sortCriterion={sortCriterion} />
