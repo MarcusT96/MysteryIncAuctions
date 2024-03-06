@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import BidPopUp from "../components/BidPopUp.jsx"
 import { toast } from 'react-toastify';
+import CountdownTimer from '../components/CountDownTimer.jsx';
 
 
 export default function ObjectPage() {
@@ -52,7 +53,7 @@ export default function ObjectPage() {
 
       <div className="left--cointainer">
         <img className="box--img" src={box.image} alt="" />
-        <p className="time--left--left">Tid kvar av autkion: <b className="time--left">2h 40min 29s</b> </p>
+        <p className="time--left--left"> Tid kvar av auktion: <b className="time--left">{<CountdownTimer endTime={box.time} />}</b></p>
       </div>
 
       <div className="right--container">

@@ -5,7 +5,7 @@
       "name": "Mystery Box A",
       "weight": 2.5,
       "price": 500,
-      "time": "2",
+      "time": "2024-03-10T15:00:00Z",
       "description": "A mysterious assortment of items waiting to be discovered.",
       "image": "https://quickbutik.imgix.net/27187j/products/164806013962136aa23a9ed.jpeg"
     },
@@ -14,7 +14,7 @@
       "name": "Detective's Mystery Box",
       "weight": 3,
       "price": 2300,
-      "time": "3",
+      "time": "2024-03-12T15:00:00Z",
       "description": "Unlock the secrets within Mystery Box B and unveil exciting surprises.",
       "image": "https://www.mynthuset.se/images/stories/sn/mysterybox-tillbehor-6015515091/Mystery_box.png"
     },
@@ -23,7 +23,7 @@
       "name": "Champion's Mystery Box",
       "weight": 1.8,
       "price": 756,
-      "time": "4",
+      "time": "2024-03-14T15:00:00Z",
       "description": "Curious about what's inside Mystery Box C? Dive in and find out!",
       "image": "https://www.nordicfighter.com/pub/media/catalog/product/cache/f3020b7489dcfc4d1d147cf4dad07b7f/image/7919a378/rea-mysterybox-3.png"
     },
@@ -32,7 +32,7 @@
       "name": "Pokemasters Mystery Box",
       "weight": 4.2,
       "price": 1300,
-      "time": "5",
+      "time": "2024-03-16T15:00:00Z",
       "description": "For those who crave the thrill of the unknown, Mystery Box D is the answer.",
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlIzW051K4I_XPBDHY5qunsRWijfr1XxwNFw&usqp=CAU"
     },
@@ -41,7 +41,7 @@
       "name": "Indossa Mystery Box",
       "weight": 2,
       "price": 799,
-      "time": "5",
+      "time": "2024-03-18T15:00:00Z",
       "description": "Embark on an adventure with Mystery Box E, filled with surprises and delights.",
       "image": "https://indossa.se/cdn/shop/products/Skarmavbild2023-04-03kl.02.40.27_65c65c59-d8b6-4cc1-a6d8-3627d97e50e2_800x.png?v=1680482912"
     },
@@ -50,7 +50,7 @@
       "name": "Red Mystery Box",
       "weight": 3.5,
       "price": 1599,
-      "time": "6",
+      "time": "2024-03-20T15:00:00Z",
       "description": "Experience the excitement of Mystery Box F, packed with intriguing items.",
       "image": "https://thedetailingshack.co.uk/wp-content/uploads/2022/01/istockphoto-1138540348-170667a.jpg"
     },
@@ -59,7 +59,7 @@
       "name": "Top G Mystery Box",
       "weight": 2.8,
       "price": 899,
-      "time": "7",
+      "time": "2024-03-22T15:00:00Z",
       "description": "Uncover the mysteries within Mystery Box G, a treasure trove of surprises.",
       "image": "https://03.cdn37.se/Ww/images/2.2118080/tengo-mystery-box-skor.jpeg"
     },
@@ -68,7 +68,7 @@
       "name": "AmazonBoxen",
       "weight": 4,
       "price": 1799,
-      "time": "4",
+      "time": "2024-03-24T15:00:00Z",
       "description": "Dive deep into the unknown with Mystery Box H, an adventure in every box.",
       "image": "https://facts.net/wp-content/uploads/2023/10/14-mind-blowing-facts-about-amazon-mystery-box-1697546639.jpg"
     }
