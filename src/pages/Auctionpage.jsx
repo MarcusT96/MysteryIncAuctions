@@ -6,23 +6,33 @@ import { useState } from "react";
 export default function Auctionpage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [sortOrder, setSortOrder] = useState("asc");
-
+  const [sortCriterion, setSortCriterion] = useState('price');
   const handleSearch = (query) => {
-    setSearchQuery(query)
-  }
+    setSearchQuery(query)}
+
+  const handleSortCriterionChange = (criterion) => {
+    setSortCriterion(criterion);}
+
   const toggleSortOrder = () => {
     setSortOrder(sortOrder === "asc" ? "desc" : "asc");
   };
+  
+  
 
   return <main className="auctionpage">
     <div className="searchdiv">
       <SearchBar onSearch={handleSearch} />
     </div>
     <div className="sorting">
+      <select onChange={(e) => handleSortCriterionChange(e.target.value)} value={sortCriterion}>
+        <option value="price">Price</option>
+        <option value="time">Time Left</option>
+        <option value="name">Name</option>
+      </select>
       <button onClick={toggleSortOrder}>{sortOrder === "asc" ? "Sort Descending" : "Sort Ascending"}</button>
       </div>
     <div className="auction-container">
-      <Products searchQuery={searchQuery} sortOrder={sortOrder} />
+      <Products searchQuery={searchQuery} sortOrder={sortOrder} sortCriterion={sortCriterion} />
     </div>
   </main>
 }
