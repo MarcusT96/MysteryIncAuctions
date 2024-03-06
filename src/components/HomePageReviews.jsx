@@ -9,9 +9,9 @@ function HomePageReviews() {
 
   useEffect(() => {
     async function load() {
-      const response = await fetch('../../db.json')
+      const response = await fetch(`http://localhost:3000/reviews`)
       const data = await response.json()
-      setReviews(data.reviews)
+      setReviews(data)
     }
     load()
   }, [])
