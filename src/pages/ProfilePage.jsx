@@ -8,11 +8,15 @@ function ProfilePage() {
     email: '',
     firstName: '',
     lastName: '',
+    address: '',
+    city: '',
+    zipCode: '',
+    phone: '',
   });
 
   const [activeSection, setActiveSection] = useState('profile');
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     // Antag att vi bara använder den första användaren från vår JSON-fil
     const user = userData[0];
@@ -59,6 +63,17 @@ function ProfilePage() {
               name="email"
               value={userInfo.email}
               onChange={handleInputChange}
+              placeholder="Din email"
+            />
+          </div>
+          <div className="profile-page-form-group">
+            <label>Lösenord</label>
+            <input
+              type="password"
+              name="password"
+              value={userInfo.email}
+              onChange={handleInputChange}
+              placeholder="Ditt lösenord"
             />
           </div>
           <div className="profile-page-form-group">
@@ -68,6 +83,7 @@ function ProfilePage() {
               name="firstName"
               value={userInfo.firstName}
               onChange={handleInputChange}
+              placeholder="Ditt förnamn"
             />
           </div>
           <div className="profile-page-form-group">
@@ -77,6 +93,47 @@ function ProfilePage() {
               name="lastName"
               value={userInfo.lastName}
               onChange={handleInputChange}
+              placeholder="Ditt efternamn"
+            />
+          </div>
+          <div className="profile-page-form-group">
+            <label>Adress</label>
+            <input
+              type="text"
+              name="address"
+              value={userInfo.address}
+              onChange={handleInputChange}
+              placeholder="Din adress"
+            />
+          </div>
+          <div className="profile-page-form-group">
+            <label>Stad</label>
+            <input
+              type="text"
+              name="city"
+              value={userInfo.city}
+              onChange={handleInputChange}
+              placeholder="Din stad"
+            />
+          </div>
+          <div className="profile-page-form-group">
+            <label>Postnummer</label>
+            <input
+              type="text"
+              name="zipCode"
+              value={userInfo.zipCode}
+              onChange={handleInputChange}
+              placeholder="Ditt postnummer"
+            />
+          </div>
+          <div className="profile-page-form-group">
+            <label>Telefonnummer</label>
+            <input
+              type="text"
+              name="phone"
+              value={userInfo.phone}
+              onChange={handleInputChange}
+              placeholder="Ditt telefonnummer"
             />
           </div>
           <button type="submit" className="profile-page-button">Spara Ändringar</button>
