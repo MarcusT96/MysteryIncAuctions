@@ -73,6 +73,18 @@
       "image": "https://facts.net/wp-content/uploads/2023/10/14-mind-blowing-facts-about-amazon-mystery-box-1697546639.jpg"
     }
   ],
+  "bought_boxes": [
+    {
+      "id": 1,
+      "name": "Köpt låda",
+      "weight": 2.5,
+      "price": 3000,
+      "time": "2024-02-24T15:00:00Z",
+      "description": "Köpt låda test",
+      "image": "https://www.ikea.com/se/sv/images/products/pappis-lada-med-lock-brun__0710998_pe727873_s5.jpg?f=s",
+      "buyer_id": "1"
+    }
+  ],
   "users": [
     {
       "id": "1",
