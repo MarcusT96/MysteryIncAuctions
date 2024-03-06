@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/profilePage.css';
-import userData from '../assets/users.json'
 
 function ProfilePage() {
   const [userInfo, setUserInfo] = useState({
@@ -20,23 +19,22 @@ function ProfilePage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:3000/users/1')
-      .then(response => response.json())
-      .then(data => {
-        setUserInfo({
-          email: data.email,
-          password: data.password, // Observera: Det är ovanligt och osäkert att hantera lösenord på detta sätt i en klientapplikation
-          firstName: data.firstName,
-          lastName: data.lastName,
-          address: data.address,
-          city: data.city,
-          zipCode: data.zipCode,
-          country: data.country,
-          phone: data.phone
-        });
-      })
-      .catch(error => console.error('Error:', error));
+    const fetchUserData = async () => {
+      const userId = localStorage.getItem('currentUserId');
+      if (userId) {
+        try {
+          const response = await fetch(`http://localhost:3000/users/${userId}`);
+          const userData = await response.json();
+          setUserInfo(userData); // Antag att detta uppdaterar alla fält korrekt
+        } catch (error) {
+          console.error('Fel vid hämtning av användardata:', error);
+        }
+      }
+    };
+
+    fetchUserData();
   }, []);
+  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
