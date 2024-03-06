@@ -53,7 +53,8 @@ function Products({ searchQuery, sortOrder, sortCriterion }) {
           <p>{item.description}</p>
           <img src={item.image} alt={item.name} />
           <p>{item.time} Dagar kvar</p>
-          <button onClick={() => navigateToObjectPage(item.id)} className="auctionbutton">Köp för {item.price} kr.</button>
+          <p>Nuvarande bud {item.price}kr</p>
+          <button onClick={() => navigateToObjectPage(item.id)} className="auctionbutton">Lägg bud!</button>
         </section>
       ))}
     </article>
