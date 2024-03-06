@@ -84,9 +84,7 @@
       "city": "Staden",
       "zipCode": "123 45",
       "country": "Landet",
-      "phone": "070-123 45 67",
-      "emailNotifications": true,
-      "shareDataWithThirdParties": false
+      "phone": "070-123 45 67"
     }
   ],
   "reviews": [
