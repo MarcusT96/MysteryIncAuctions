@@ -11,7 +11,6 @@ const LogIn = () => {
   const [showModal, setShowModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true');
   const [loginError, setLoginError] = useState('');
-  const [isRegistered, setIsRegistered] = useState(false);
 
   const navigate = useNavigate();
 
@@ -43,7 +42,6 @@ const LogIn = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
 
-    // Kontrollera först om användaren redan finns för att undvika dubletter
     try {
       const response = await fetch('http://localhost:3000/users');
       const users = await response.json();
@@ -65,15 +63,11 @@ const LogIn = () => {
 
       if (!postResponse.ok) throw new Error('Något gick fel vid skapandet av användaren.');
 
-      setIsRegistered(true);
-      setEmail('');
-      setPassword('');
-      setFirstName('');
-      setLastName('');
-      localStorage.setItem('currentUserId', user.id); // överväg att hantera autentisering mer säkert
+      const createdUser = await postResponse.json();
+      localStorage.setItem('currentUserId', createdUser.id);
       setIsLoggedIn(true);
+      setShowModal(false);
       navigate('/profile');
-
     } catch (error) {
       console.error('Fel vid registrering:', error);
       setLoginError('Ett problem uppstod vid försök att registrera användaren.');
@@ -83,6 +77,14 @@ const LogIn = () => {
   const closeModal = () => {
     setShowModal(false);
     setLoginError('');
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('currentUserId');
+    setIsLoggedIn(false);
+    setShowModal(false);
+    navigate('/');
   };
 
   return (
