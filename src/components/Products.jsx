@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import CountdownTimer from "./CountDownTimer.jsx";
 
 function Products({ searchQuery, sortOrder, sortCriterion }) {
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
   const navigate = useNavigate();
-  
+
 
 
   useEffect(() => {
@@ -52,8 +53,8 @@ function Products({ searchQuery, sortOrder, sortCriterion }) {
           <h2 className="auction-title">{item.name}</h2>
           <p>{item.description}</p>
           <img src={item.image} alt={item.name} />
-          <p>{item.time} Dagar kvar</p>
-          <p>Nuvarande bud {item.price}kr</p>
+          <p> Tid kvar: {<CountdownTimer endTime={item.time} />}  </p>
+          <p>Nuvarande högsta bud: {item.price}kr</p>
           <button onClick={() => navigateToObjectPage(item.id)} className="auctionbutton">Lägg bud!</button>
         </section>
       ))}

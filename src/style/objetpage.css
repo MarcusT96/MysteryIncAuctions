@@ -8,7 +8,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 20px;
+  padding: 1,4rem;
 }
 
 .right--container {
@@ -20,19 +20,21 @@ body {
 
 .left--container {
   width: 40%;
-  padding: 20px;
-  background-color: #9EA5E4;
   display: flex;
+  
 
 }
 
 .box--img {
   width: 20rem;
-  align-self: center;
+  background-color: #9EA5E4;
+  border: 2px solid #F4C430;
+  border-radius: 10px;
+  padding: 1rem;
 }
 
 .time--left {
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: #F4C430;
 
 }
@@ -40,6 +42,7 @@ body {
 .time--left--left {
   background-color: #9EA5E4;
   border-radius: 10px;
+  border: 2px solid #F4C430;
 }
 
 .bid--button {
