@@ -75,7 +75,7 @@
   ],
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "email": "pontus@example.com",
       "password": "hej123",
       "firstName": "Pontus",
@@ -85,29 +85,38 @@
       "zipCode": "123 45",
       "country": "Landet",
       "phone": "070-123 45 67"
+    },
+    {
+      "id": "7053",
+      "email": "kalle@anka.se",
+      "password": "disney",
+      "firstName": "kalle",
+      "lastName": "anka",
+      "address": "Storgatan 1",
+      "city": "Ankeborg"
     }
   ],
   "reviews": [
     {
-      "id": 1,
+      "id": "1",
       "score": 4,
       "title": "Väldigt najs!!",
       "description": "Budade på en djurlåda och fick en hel häst!"
     },
     {
-      "id": 2,
+      "id": "2",
       "score": 5,
       "title": "Överraskad av Mångfalden!",
       "description": "Jag deltog i en auktion för en kulturbox och blev helt överväldigad av mångfalden i innehållet. Från handgjorda konstverk till traditionella kläder och delikatesser, denna låda erbjöd en resa runt världen i varje objekt. En fantastisk upplevelse för den äventyrslystne!"
     },
     {
-      "id": 3,
+      "id": "3",
       "score": 4,
       "title": "High-Tech Överraskningar!",
       "description": "Budade på en teknikbox och blev imponerad av de senaste gadgetarna och elektroniska prylarna. Varje objekt var noga utvalt och visade på MysteryIncs engagemang för att leverera högkvalitativ teknik till sina användare. Lite förvånad och mycket nöjd med denna futuristiska upplevelse!"
     },
     {
-      "id": 4,
+      "id": "4",
       "score": 4,
       "title": "Nostalgisk Glädje!",
       "description": "Valde att delta i auktionen för en retrobox och fick verkligen min dos av nostalgi. Från gamla vinylskivor till vintage kläder, denna låda tog mig tillbaka i tiden och gav mig en känsla av retrocharm. Perfekt för dem som älskar att återuppleva det förgångna!"

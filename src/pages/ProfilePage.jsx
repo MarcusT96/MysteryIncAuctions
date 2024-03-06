@@ -25,7 +25,7 @@ function ProfilePage() {
         try {
           const response = await fetch(`http://localhost:3000/users/${userId}`);
           const userData = await response.json();
-          setUserInfo(userData); // Antag att detta uppdaterar alla fält korrekt
+          setUserInfo(userData);
         } catch (error) {
           console.error('Fel vid hämtning av användardata:', error);
         }
@@ -45,10 +45,31 @@ function ProfilePage() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Updated user info:', userInfo);
-    // Här skulle du lägga till logik för att spara uppdateringen till din JSON-fil eller en backend server.
+
+    const userId = localStorage.getItem('currentUserId');
+
+    try {
+      const response = await fetch(`http://localhost:3000/users/${userId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userInfo)
+      });
+
+      if (!response.ok) throw new Error('Något gick fel vid uppdatering av användaruppgifter.');
+
+      const updatedUser = await response.json();
+      console.log('Uppdaterad användarinfo:', updatedUser);
+      alert('Dina uppgifter har uppdaterats!');
+      // Här kan du göra ytterligare åtgärder, som att navigera användaren eller uppdatera UI
+
+    } catch (error) {
+      console.error('Fel vid uppdatering av användaruppgifter:', error);
+      alert('Det gick inte att uppdatera dina uppgifter. Försök igen.');
+    }
   };
 
   const handleLogout = () => {
