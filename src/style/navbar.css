@@ -212,4 +212,10 @@ body {
   .app__navbar-logo img {
     width: 80px;
   }
+
+  .app__navbar-smallscreen_links li {
+    display: flex;
+    justify-content: start;
+    text-align: start;
+  }
 }
