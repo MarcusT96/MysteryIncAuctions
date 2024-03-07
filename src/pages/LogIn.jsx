@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/login.css'; // Se till att sökvägen till din CSS-fil är korrekt
+import { useAuth } from '../admin/AdminComponents/auth/AuthContext';
+
 
 const LogIn = ({ closeModal }) => {
   const [email, setEmail] = useState('');
@@ -11,6 +13,7 @@ const LogIn = ({ closeModal }) => {
   const [loginError, setLoginError] = useState('');
 
   const navigate = useNavigate();
+  const { login } = useAuth(); // Destructure the login function from useAuth
 
   useEffect(() => {
     if (localStorage.getItem('isLoggedIn') === 'true') {
@@ -27,18 +30,21 @@ const LogIn = ({ closeModal }) => {
       const user = users.find(u => u.email === email && u.password === password);
 
       if (user) {
+        login({ id: user.id, isAdmin: user.isAdmin }); // Pass user data to login function
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('currentUserId', user.id);
+        localStorage.setItem('isAdmin', user.isAdmin ? 'true' : 'false');
         closeModal && closeModal();
-        window.location.reload();
+        navigate('/profile'); // Use navigate for SPA behavior
       } else {
-        setLoginError('Felaktig e-postadress eller lösenord.');
+        setLoginError('Incorrect email or password.');
       }
     } catch (error) {
       console.error('Login error:', error);
-      setLoginError('Ett problem uppstod vid försök att logga in.');
+      setLoginError('An error occurred while trying to log in.');
     }
   };
+
 
   const handleSignUp = async (e) => {
     e.preventDefault();
