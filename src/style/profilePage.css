@@ -1,25 +1,83 @@
+:root {
+  --primary-color: #F4C430;
+  --text-color: rgb(85, 85, 85);
+  --button-hover-color: #ffecb5;
+  --error-color: #FF4136;
+  --error-hover-color: #C2302D;
+  --input-border-color-focus: #2D3E50;
+}
+
 .profile-page-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 40px auto;
   padding: 20px;
+  background-color: #9EA5E4;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  width: 90%;
+  max-width: 800px;
 }
 
-.profile-page-navigation {
-  margin-bottom: 20px;
+.profile-page-container h2 {
+  margin-top: 20px;
+  text-align: center;
 }
 
-.profile-page-button {
-  margin-right: 10px;
-  margin-bottom: 10px;
+.profile-page-button,
+.logout-button {
+  width: 200px;
+  padding: 10px;
+  font-family: 'Poppins';
+  margin: 10px 0;
+  color: var(--text-color);
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.profile-page-content {
+.profile-page-button:hover,
+.logout-button:hover {
+  background-color: var(--primary-color);
+  color: var(--button-hover-color);
+  cursor: pointer;
+}
+
+.logout-button {
+  background-color: var(--error-color);
+}
+
+.logout-button:hover {
+  background-color: var(--error-hover-color);
+}
+
+.profile-page-form-group {
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  max-width: 400px;
 }
 
-.profile-page-button.active {
-  background-color: #0056b3;
-  color: white;
+.profile-page-form-group input[type="text"],
+.profile-page-form-group input[type="email"],
+.profile-page-form-group input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.profile-page-form-group input[type="text"]:hover,
+.profile-page-form-group input[type="email"]:hover,
+.profile-page-form-group input[type="password"]:hover,
+.profile-page-form-group input[type="text"]:focus,
+.profile-page-form-group input[type="email"]:focus,
+.profile-page-form-group input[type="password"]:focus {
+  border-color: var(--input-border-color-focus);
 }

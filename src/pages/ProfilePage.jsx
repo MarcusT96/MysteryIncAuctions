@@ -86,6 +86,7 @@ function ProfilePage() {
       <button onClick={() => setActiveSection('profile')} className={`profile-page-button ${activeSection === 'profile' ? 'active' : ''}`}>Mina Uppgifter</button>
       <button onClick={() => setActiveSection('payment')} className={`profile-page-button ${activeSection === 'payment' ? 'active' : ''}`}>Betalningssätt</button>
       <button onClick={() => setActiveSection('reviews')} className={`profile-page-button ${activeSection === 'reviews' ? 'active' : ''}`}>Omdömen</button>
+      <button onClick={handleLogout} className="profile-page-button logout-button">Logga ut</button>
 
       {user && user.isAdmin && (
         <button onClick={() => navigate('/dashboard')} className="profile-page-button">Admin Panel</button>
@@ -175,6 +176,7 @@ function ProfilePage() {
             />
           </div>
           <button type="submit" className="profile-page-button">Spara Ändringar</button>
+
         </form>
       )}
 
@@ -193,7 +195,6 @@ function ProfilePage() {
           {/* Framtida funktionalitet för omdömehantering */}
         </div>
       )}
-      <button onClick={handleLogout} className="profile-page-button logout-button">Logga ut</button>
 
     </div>
   );
