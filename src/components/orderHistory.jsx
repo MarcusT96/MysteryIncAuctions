@@ -13,13 +13,30 @@ function OrderHistory() {
     load()
   }, [])
 
+  function orderStatus(order) {
+    let status = ""
+    if (order.paid == false) {
+      status = "Ej betalad"
+    }
+    else if (order.delivered == false) {
+      status = "Betalad"
+    }
+    else {
+      status = "Levererad"
+    }
+    return status
+  }
+
   return (
     <div className="orderhistory-container">
       {orders.map((order, index) => (
         <div className="orderhistory-order" key={index}>
           <img src={order.image} />
-          <h3>{order.name}</h3>
-          <p>{order.price}kr</p>
+          <div className="orderhistory-details">
+            <h3>{order.name}</h3>
+            <p>{order.price}kr</p>
+            <p>Status: {orderStatus(order)}</p>
+          </div>
         </div>
       ))}
     </div>

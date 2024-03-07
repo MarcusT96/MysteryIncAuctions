@@ -1,0 +1,9 @@
+.orderhistory-order {
+  display: flex;
+  margin: 2vh;
+}
+
+.orderhistory-order>img {
+  max-width: 100%;
+  height: 20vh;
+}
