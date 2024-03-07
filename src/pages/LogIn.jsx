@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import '../style/login.css'; // Se till att sökvägen till din CSS-fil är korrekt
+import '../style/login.css';
 import { useAuth } from '../admin/AdminComponents/auth/AuthContext';
 
 
@@ -11,7 +11,7 @@ const LogIn = ({ closeModal }) => {
   const [isLoggingIn, setIsLoggingIn] = useState(true);
   const [loginError, setLoginError] = useState('');
 
-  const { login } = useAuth(); // Destructure the login function from useAuth
+  const { login } = useAuth();
 
   
 
@@ -23,7 +23,7 @@ const LogIn = ({ closeModal }) => {
       const user = users.find(u => u.email === email && u.password === password);
 
       if (user) {
-        login({ id: user.id, isAdmin: user.isAdmin }); // Pass user data to login function
+        login({ id: user.id, isAdmin: user.isAdmin });
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('currentUserId', user.id);
         localStorage.setItem('isAdmin', user.isAdmin ? 'true' : 'false');
