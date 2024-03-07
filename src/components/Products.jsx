@@ -61,8 +61,8 @@ function Products({ searchQuery, sortOrder, sortCriterion }) {
           <h2 className="auction-title">{item.name}</h2>
           <p>{item.description}</p>
           <img src={item.image} alt={item.name} />
-          <p> Tid kvar: {<CountdownTimer endTime={item.time} />}  </p>
-          <p>Nuvarande högsta bud: {item.price}kr</p>
+          <p> Tid kvar: <h2 className="tidtag">{<CountdownTimer endTime={item.time} />}</h2>  </p>
+          <p>Nuvarande högsta bud: <h2 className="pristag">{item.price}kr</h2></p>
           <button onClick={() => navigateToObjectPage(item.id)} className="auctionbutton">Lägg bud!</button>
         </section>
       ))}
