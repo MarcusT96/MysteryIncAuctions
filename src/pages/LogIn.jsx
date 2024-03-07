@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import '../style/login.css';
 import { useAuth } from '../admin/AdminComponents/auth/AuthContext';
+import { useModal } from '../contexts/LogInContext.jsx';
 
 
 const LogIn = ({ closeModal }) => {
