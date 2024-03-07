@@ -7,7 +7,7 @@
 .orderhistory-order {
   display: flex;
   margin: 2vh;
-  background-color: #9EA5E4;
+  border: 2px solid #F4C430;
   padding: 1vh;
   border-radius: 0.5vw;
 }
