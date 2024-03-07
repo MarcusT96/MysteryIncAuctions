@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/profilePage.css';
 import { useAuth } from '../admin/AdminComponents/auth/AuthContext';
+import OrderHistory from '../components/orderHistory.jsx';
 
 function ProfilePage() {
   const [userInfo, setUserInfo] = useState({
@@ -86,6 +87,7 @@ function ProfilePage() {
       <button onClick={() => setActiveSection('profile')} className={`profile-page-button ${activeSection === 'profile' ? 'active' : ''}`}>Mina Uppgifter</button>
       <button onClick={() => setActiveSection('payment')} className={`profile-page-button ${activeSection === 'payment' ? 'active' : ''}`}>Betalningssätt</button>
       <button onClick={() => setActiveSection('reviews')} className={`profile-page-button ${activeSection === 'reviews' ? 'active' : ''}`}>Omdömen</button>
+      <button onClick={() => setActiveSection('orderhistory')} className={`profile-page-button ${activeSection === 'orderhistory' ? 'active' : ''}`}>Beställningar</button>
       <button onClick={handleLogout} className="profile-page-button logout-button">Logga ut</button>
 
       {user && user.isAdmin && (
