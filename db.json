@@ -122,6 +122,13 @@
       "lastName": "anka",
       "address": "Storgatan 1",
       "city": "Ankeborg"
+    },
+    {
+      "id": "0c1f",
+      "email": "rasmus@test.com",
+      "password": "klezmer",
+      "firstName": "Rasmus",
+      "lastName": "Hellgren"
     }
   ],
   "reviews": [
