@@ -14,10 +14,12 @@ import LogIn from "../pages/LogIn.jsx"
 import Navbar from "../Navbar.jsx"
 import Footer from "../Footer.jsx"
 import ProfilePage from "../pages/ProfilePage.jsx"
+import Sidebar from "../admin/AdminComponents/Sidebar.jsx"
+import ProtectedRoute from "../admin/AdminComponents/auth/ProtectedRoute.jsx"
 
 function OurRouter() {
 
-  return (
+  return (<>
     <BrowserRouter>
       <Navbar />
       <Routes>
@@ -34,10 +36,20 @@ function OurRouter() {
         <Route path="/sitemap" element={<SiteMapPage />}></Route>
         <Route path="/login" element={<LogIn />}></Route>
         <Route path="/profile" element={<ProfilePage />}></Route>
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <div className="app__admin-layout">
+              <div className="app__admin-inner">
+                <Sidebar />
+              </div>
+            </div>
+          </ProtectedRoute>}>
+        </Route>
       </Routes>
       <Footer />
-    </BrowserRouter>
-  )
+    </BrowserRouter >
+  </>
+  );
 }
 
 export default OurRouter
