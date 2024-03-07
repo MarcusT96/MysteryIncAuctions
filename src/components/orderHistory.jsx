@@ -16,10 +16,10 @@ function OrderHistory() {
   function orderStatus(order) {
     let status = ""
     if (order.paid == false) {
-      status = "Ej betalad"
+      status = "Ej betald"
     }
     else if (order.delivered == false) {
-      status = "Betalad"
+      status = "Betald"
     }
     else {
       status = "Levererad"
@@ -35,6 +35,7 @@ function OrderHistory() {
           <div className="orderhistory-details">
             <h3>{order.name}</h3>
             <p>{order.price}kr</p>
+            <p>Vunnen: {order.time}</p>
             <p>Status: {orderStatus(order)}</p>
           </div>
         </div>

@@ -85,6 +85,42 @@
       "buyer_id": "1",
       "paid": false,
       "delivered": false
+    },
+    {
+      "id": 2,
+      "name": "Special Box",
+      "weight": 3.2,
+      "price": 5000,
+      "time": "2024-02-25T12:30:00Z",
+      "description": "A unique and special box",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSuJvXojP1hoUKPYUq4cWQDJAZPFoi-JJIt1Chey3cG0iHs1lBRz_Kgd_Ds7KH3C8I9vI&usqp=CAU",
+      "buyer_id": "2",
+      "paid": true,
+      "delivered": true
+    },
+    {
+      "id": 3,
+      "name": "Gift Box",
+      "weight": 1.5,
+      "price": 2500,
+      "time": "2024-02-26T10:45:00Z",
+      "description": "A beautifully wrapped gift box",
+      "image": "https://bonden.b-cdn.net/81669-thickbox_default/forvaringslada-plywood-20050.jpg",
+      "buyer_id": "3",
+      "paid": true,
+      "delivered": false
+    },
+    {
+      "id": 4,
+      "name": "Large Container",
+      "weight": 5.8,
+      "price": 7000,
+      "time": "2024-02-27T18:15:00Z",
+      "description": "A spacious and durable container",
+      "image": "https://shop.kvibergs.se/wp-content/uploads/2022/07/lada972.jpg",
+      "buyer_id": "4",
+      "paid": false,
+      "delivered": true
     }
   ],
   "users": [
