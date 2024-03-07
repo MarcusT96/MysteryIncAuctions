@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import '../style/login.css';
 import { useAuth } from '../admin/AdminComponents/auth/AuthContext';
+import { useModal } from '../contexts/LogInContext.jsx';
 
 
 const LogIn = ({ closeModal }) => {
@@ -11,9 +12,21 @@ const LogIn = ({ closeModal }) => {
   const [isLoggingIn, setIsLoggingIn] = useState(true);
   const [loginError, setLoginError] = useState('');
 
+<<<<<<< Updated upstream
   const { login } = useAuth();
 
   
+=======
+  const navigate = useNavigate()
+  const { login } = useAuth(); // Destructure the login function from useAuth
+  
+  useEffect(() => {
+    if (localStorage.getItem('isLoggedIn') === 'true') {
+      navigate('/profile');
+      closeModal && closeModal();
+    }
+  }, [navigate, closeModal]);
+>>>>>>> Stashed changes
 
   const handleLogin = async (e) => {
     e.preventDefault();
