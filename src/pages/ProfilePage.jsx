@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/profilePage.css';
+import { useAuth } from '../admin/AdminComponents/auth/AuthContext';
 
 function ProfilePage() {
   const [userInfo, setUserInfo] = useState({
@@ -17,24 +18,27 @@ function ProfilePage() {
 
   const [activeSection, setActiveSection] = useState('profile');
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   useEffect(() => {
     const fetchUserData = async () => {
       const userId = localStorage.getItem('currentUserId');
+      const isAdmin = localStorage.getItem('isAdmin') === 'true';
       if (userId) {
         try {
           const response = await fetch(`http://localhost:3000/users/${userId}`);
           const userData = await response.json();
           setUserInfo(userData);
+          setUser({ id: userId, isAdmin });
         } catch (error) {
-          console.error('Fel vid hämtning av användardata:', error);
+          console.error('Error fetching user data:', error);
         }
       }
     };
 
     fetchUserData();
   }, []);
-  
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -64,7 +68,6 @@ function ProfilePage() {
       const updatedUser = await response.json();
       console.log('Uppdaterad användarinfo:', updatedUser);
       alert('Dina uppgifter har uppdaterats!');
-      // Här kan du göra ytterligare åtgärder, som att navigera användaren eller uppdatera UI
 
     } catch (error) {
       console.error('Fel vid uppdatering av användaruppgifter:', error);
@@ -74,7 +77,8 @@ function ProfilePage() {
 
   const handleLogout = () => {
     localStorage.removeItem('isLoggedIn');
-    navigate('/');
+    localStorage.removeItem('currentUserId');
+    window.location.href = '/';
   };
 
   return (
@@ -82,6 +86,10 @@ function ProfilePage() {
       <button onClick={() => setActiveSection('profile')} className={`profile-page-button ${activeSection === 'profile' ? 'active' : ''}`}>Mina Uppgifter</button>
       <button onClick={() => setActiveSection('payment')} className={`profile-page-button ${activeSection === 'payment' ? 'active' : ''}`}>Betalningssätt</button>
       <button onClick={() => setActiveSection('reviews')} className={`profile-page-button ${activeSection === 'reviews' ? 'active' : ''}`}>Omdömen</button>
+
+      {user && user.isAdmin && (
+        <button onClick={() => navigate('/dashboard')} className="profile-page-button">Admin Panel</button>
+      )}
 
       {activeSection === 'profile' && (
         <form onSubmit={handleSubmit} className="profile-page-form">
@@ -186,6 +194,7 @@ function ProfilePage() {
         </div>
       )}
       <button onClick={handleLogout} className="profile-page-button logout-button">Logga ut</button>
+
     </div>
   );
 }

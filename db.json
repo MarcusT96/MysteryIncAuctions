@@ -96,7 +96,21 @@
       "city": "Staden",
       "zipCode": "123 45",
       "country": "Landet",
-      "phone": "070-123 45 67"
+      "phone": "070-123 45 67",
+      "isAdmin": true
+    },
+    {
+      "id": "2",
+      "email": "tommy@example.com",
+      "password": "hej123",
+      "firstName": "Tommy",
+      "lastName": "Wang",
+      "address": "Propellergatan 1",
+      "city": "Malmö",
+      "zipCode": "211 15",
+      "country": "Sverige",
+      "phone": "076-123 45 67",
+      "isAdmin": true
     },
     {
       "id": "7053",

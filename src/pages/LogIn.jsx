@@ -1,47 +1,53 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../style/login.css';
+import '../style/login.css'; // Se till att sökvägen till din CSS-fil är korrekt
+import { useAuth } from '../admin/AdminComponents/auth/AuthContext';
 
-const LogIn = () => {
+
+const LogIn = ({ closeModal }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [isLoggingIn, setIsLoggingIn] = useState(true);
-  const [showModal, setShowModal] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true');
   const [loginError, setLoginError] = useState('');
 
   const navigate = useNavigate();
+  const { login } = useAuth(); // Destructure the login function from useAuth
+
+  useEffect(() => {
+    if (localStorage.getItem('isLoggedIn') === 'true') {
+      navigate('/profile');
+      closeModal && closeModal();
+    }
+  }, [navigate, closeModal]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
     try {
       const response = await fetch('http://localhost:3000/users');
       const users = await response.json();
       const user = users.find(u => u.email === email && u.password === password);
 
       if (user) {
+        login({ id: user.id, isAdmin: user.isAdmin }); // Pass user data to login function
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('currentUserId', user.id);
-        setIsLoggedIn(true);
-        setShowModal(false);
-        setLoginError('');
-        navigate('/profile');
+        localStorage.setItem('isAdmin', user.isAdmin ? 'true' : 'false');
+        closeModal && closeModal();
+        navigate('/profile'); // Use navigate for SPA behavior
       } else {
-        setIsLoggedIn(false);
-        setLoginError('Felaktig e-postadress eller lösenord.');
+        setLoginError('Incorrect email or password.');
       }
     } catch (error) {
       console.error('Login error:', error);
-      setLoginError('Ett problem uppstod vid försök att logga in.');
+      setLoginError('An error occurred while trying to log in.');
     }
   };
 
+
   const handleSignUp = async (e) => {
     e.preventDefault();
-
     try {
       const response = await fetch('http://localhost:3000/users');
       const users = await response.json();
@@ -61,91 +67,79 @@ const LogIn = () => {
         body: JSON.stringify(newUser),
       });
 
-      if (!postResponse.ok) throw new Error('Något gick fel vid skapandet av användaren.');
-
-      const createdUser = await postResponse.json();
-      localStorage.setItem('currentUserId', createdUser.id);
-      setIsLoggedIn(true);
-      setShowModal(false);
-      navigate('/profile');
+      if (postResponse.ok) {
+        const createdUser = await postResponse.json();
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('currentUserId', createdUser.id);
+        window.location.reload();
+      } else {
+        throw new Error('Något gick fel vid skapandet av användaren.');
+      }
     } catch (error) {
       console.error('Fel vid registrering:', error);
       setLoginError('Ett problem uppstod vid försök att registrera användaren.');
     }
   };
 
-  const closeModal = () => {
-    setShowModal(false);
-    setLoginError('');
-  };
-
   const handleLogout = () => {
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('currentUserId');
-    setIsLoggedIn(false);
-    setShowModal(false);
-    navigate('/');
+    closeModal && closeModal();
+    window.location.reload();
   };
 
   return (
-    <>
-      {isLoggedIn ? (
-        <button className="profile-btn" onClick={handleLogout}>Logga ut</button>
-      ) : (
-        <button className="login-btn" onClick={() => setShowModal(true)}>Logga in / Registrera</button>
-      )}
-      {showModal && (
-        <div className="modal" onClick={closeModal}>
-          <div className="modal-content" onClick={e => e.stopPropagation()}>
-            <span className="close" onClick={closeModal}>&times;</span>
-            {!isLoggedIn && (
-              <>
-                {loginError && <p className="login-error">{loginError}</p>}
-                <form onSubmit={isLoggingIn ? handleLogin : handleSignUp}>
-                  <h2>{isLoggingIn ? 'Logga In' : 'Skapa Konto'}</h2>
-                  {!isLoggingIn && (
-                    <>
-                      <input
-                        type="text"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                        placeholder="Förnamn"
-                        required={!isLoggingIn}
-                      />
-                      <input
-                        type="text"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                        placeholder="Efternamn"
-                        required={!isLoggingIn}
-                      />
-                    </>
-                  )}
+    <div className="modal" onClick={closeModal}>
+      <div className="modal-content" onClick={e => e.stopPropagation()}>
+        <span className="close" onClick={closeModal}>&times;</span>
+        {localStorage.getItem('isLoggedIn') === 'true' ? (
+          <button className="profile-btn" onClick={handleLogout}>Logga ut</button>
+        ) : (
+          <>
+            {loginError && <p className="login-error">{loginError}</p>}
+            <form onSubmit={isLoggingIn ? handleLogin : handleSignUp}>
+              <h2>{isLoggingIn ? 'Logga In' : 'Skapa Konto'}</h2>
+              {!isLoggingIn && (
+                <>
                   <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="E-postadress"
-                    required
+                    type="text"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    placeholder="Förnamn"
+                    required={!isLoggingIn}
                   />
                   <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Lösenord"
-                    required
+                    type="text"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    placeholder="Efternamn"
+                    required={!isLoggingIn}
                   />
-                  <button type="submit">{isLoggingIn ? 'Logga In' : 'Skapa Konto'}</button>
-                  <button type="button" onClick={() => setIsLoggingIn(!isLoggingIn)}>
-                    {isLoggingIn ? 'Skapa ett konto' : 'Har redan ett konto? Logga in'}
-                  </button>
-                </form>
-              </>
-            )}
-          </div>
-        </div>
-      )}
-    </>
+                </>
+              )}
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="E-postadress"
+                required
+              />
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Lösenord"
+                required
+              />
+              <button type="submit">{isLoggingIn ? 'Logga In' : 'Skapa Konto'}</button>
+              <button type="button" onClick={() => setIsLoggingIn(!isLoggingIn)}>
+                {isLoggingIn ? 'Skapa ett konto' : 'Har redan ett konto? Logga in'}
+              </button>
+            </form>
+          </>
+        )}
+      </div>
+    </div>
   );
 };
 

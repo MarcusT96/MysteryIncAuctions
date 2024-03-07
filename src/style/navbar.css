@@ -92,18 +92,23 @@ body {
   color: #ffecb5;
 }
 
-.app__navbar-login {
+.app__navbar-login,
+.app__navbar-login>.p__opensans-profil {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  font-family: 'Poppins', sans-serif;
 }
 
-.app__navbar-login a {
+.app__navbar-login button,
+.app__navbar-login>.p__opensans-profil {
   margin: 0 1rem;
   font-size: 0.9rem;
+  font-weight: 500;
   text-decoration: none;
   transition: 0.5s ease;
-  color: #ffffff;
+  color: #2D3E50;
+  background-color: transparent;
   border: 2px solid #F4C430;
   border-radius: 5px;
   padding: 0.5vh;
@@ -119,13 +124,11 @@ body {
   }
 }
 
-.app__navbar-login a:hover {
+.app__navbar-login button:hover,
+.app__navbar-login>.p__opensans-profil:hover {
   animation: login__shine 0.7s ease-in-out infinite alternate;
   transition: ease 0.5s;
-}
-
-.app__navbar-login p {
-  color: #fff;
+  cursor: pointer;
 }
 
 .app__navbar-smallscreen {
@@ -211,5 +214,11 @@ body {
 
   .app__navbar-logo img {
     width: 80px;
+  }
+
+  .app__navbar-smallscreen_links li {
+    display: flex;
+    justify-content: start;
+    text-align: start;
   }
 }
