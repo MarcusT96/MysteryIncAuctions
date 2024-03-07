@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/profilePage.css';
 import { useAuth } from '../admin/AdminComponents/auth/AuthContext';
-import EdirProfile from '../components/EditProfile.jsx';
 import OrderHistory from '../components/orderHistory.jsx';
 import PaymentOptions from '../components/PaymentOptions.jsx';
 import Reviews from '../components/Reviews.jsx';
