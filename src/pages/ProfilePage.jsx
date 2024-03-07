@@ -84,6 +84,7 @@ function ProfilePage() {
 
   return (
     <div className="profile-page-container">
+      <div className='sidebar'>
       <button onClick={() => setActiveSection('profile')} className={`profile-page-button ${activeSection === 'profile' ? 'active' : ''}`}>Mina Uppgifter</button>
       <button onClick={() => setActiveSection('payment')} className={`profile-page-button ${activeSection === 'payment' ? 'active' : ''}`}>Betalningssätt</button>
       <button onClick={() => setActiveSection('reviews')} className={`profile-page-button ${activeSection === 'reviews' ? 'active' : ''}`}>Omdömen</button>
@@ -93,7 +94,8 @@ function ProfilePage() {
       {user && user.isAdmin && (
         <button onClick={() => navigate('/dashboard')} className="profile-page-button">Admin Panel</button>
       )}
-
+      </div>
+      <div className='content'>
       {activeSection === 'profile' && (
         <form onSubmit={handleSubmit} className="profile-page-form">
           <h2>Ändra Mina Uppgifter</h2>
@@ -202,7 +204,8 @@ function ProfilePage() {
           <OrderHistory />
         </div>
       )}
-    </div>
+      </div>
+      </div>
   );
 }
 
