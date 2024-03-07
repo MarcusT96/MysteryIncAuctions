@@ -1,6 +1,7 @@
 .orderhistory-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .orderhistory-order {
