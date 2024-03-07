@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../style/login.css'; // Se till att sökvägen till din CSS-fil är korrekt
+import '../style/login.css';
 import { useAuth } from '../admin/AdminComponents/auth/AuthContext';
+import { useModal } from '../contexts/LogInContext.jsx';
 
 
 const LogIn = ({ closeModal }) => {
@@ -12,15 +12,9 @@ const LogIn = ({ closeModal }) => {
   const [isLoggingIn, setIsLoggingIn] = useState(true);
   const [loginError, setLoginError] = useState('');
 
-  const navigate = useNavigate();
-  const { login } = useAuth(); // Destructure the login function from useAuth
+  const { login } = useAuth();
 
-  useEffect(() => {
-    if (localStorage.getItem('isLoggedIn') === 'true') {
-      navigate('/profile');
-      closeModal && closeModal();
-    }
-  }, [navigate, closeModal]);
+  
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -30,12 +24,11 @@ const LogIn = ({ closeModal }) => {
       const user = users.find(u => u.email === email && u.password === password);
 
       if (user) {
-        login({ id: user.id, isAdmin: user.isAdmin }); // Pass user data to login function
+        login({ id: user.id, isAdmin: user.isAdmin });
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('currentUserId', user.id);
         localStorage.setItem('isAdmin', user.isAdmin ? 'true' : 'false');
-        closeModal && closeModal();
-        navigate('/profile'); // Use navigate for SPA behavior
+        closeModal && closeModal(); window.location.reload();
       } else {
         setLoginError('Incorrect email or password.');
       }

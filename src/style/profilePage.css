@@ -1,25 +1,90 @@
+:root {
+  --primary-color: #F4C430;
+  --text-color: rgb(85, 85, 85);
+  --button-hover-color: #ffecb5;
+  --error-color: #FF4136;
+  --error-hover-color: #C2302D;
+  --input-border-color-focus: #2D3E50;
+}
+
 .profile-page-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  /* Behåll som row för att sidoplacera element */
+  align-items: flex-start;
+  gap: 20px;
+  /* Ger utrymme mellan sidebar och content */
+  margin: 40px auto;
   padding: 20px;
+  background-color: #9EA5E4;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  width: 90%;
+  max-width: 800px;
 }
 
-.profile-page-navigation {
-  margin-bottom: 20px;
+.sidebar {
+  flex-basis: 200px;
+  /* Ange bredd för sidebar */
+  display: flex;
+  flex-direction: column;
+  /* Organisera knappar vertikalt */
+  align-items: flex-start;
+  /* Justera knapparna till vänster */
 }
 
-.profile-page-button {
-  margin-right: 10px;
-  margin-bottom: 10px;
-}
-
-.profile-page-content {
+.content {
+  flex-grow: 1;
+  /* Låter innehållet ta upp resterande utrymme */
   width: 100%;
-  max-width: 400px;
+  /* Full bredd för att maximera utrymmet för innehållet */
 }
 
-.profile-page-button.active {
-  background-color: #0056b3;
-  color: white;
+.profile-page-button,
+.logout-button {
+  width: 200px;
+  padding: 10px;
+  font-family: 'Poppins';
+  margin: 10px 0;
+  color: var(--text-color);
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.profile-page-button:hover,
+.logout-button:hover {
+  color: var(--button-hover-color);
+}
+
+.logout-button {
+  background-color: var(--error-color);
+}
+
+.logout-button:hover {
+  background-color: var(--error-hover-color);
+}
+
+.profile-page-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-page-form-group input[type="text"],
+.profile-page-form-group input[type="email"],
+.profile-page-form-group input[type="password"] {
+  padding: 10px;
+  margin-bottom: 10px;
+  /* Skapar utrymme mellan fälten */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.profile-page-form-group input:focus {
+  border-color: var(--input-border-color-focus);
 }

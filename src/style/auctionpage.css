@@ -15,7 +15,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 150px;
-  /* Adjust the gap between cards as needed */
   justify-content: center;
   padding-top: 5vh;
   padding-bottom: 5vh;
@@ -27,7 +26,6 @@
 
 .auction-card {
   width: 300px;
-  /* Set a fixed width for each card */
   background-color: #9EA5E4;
   border: 2px solid #F4C430;
   border-radius: 8px;
@@ -39,15 +37,6 @@
     transform: scale(1.05);
   }
 
-  h2 {
-    font-size: 1.5rem;
-    margin-bottom: 8px;
-  }
-
-  p {
-    margin-bottom: 8px;
-  }
-
   img {
     max-width: 100%;
     height: auto;
@@ -55,6 +44,7 @@
   }
 
   button {
+    font-size: 15px;
     background-color: #F4C430;
     color: black;
     padding: 8px 16px;
@@ -74,7 +64,7 @@
   display: flex;
   justify-content: center;
   margin: 0vw 15vw;
-  /* Add margin for better spacing */
+  margin-top: 40px;
 }
 
 .auction-search {
@@ -87,49 +77,41 @@
 
 .auction-search::placeholder {
   color: black;
-  /* Set the color of the placeholder text */
   font-style: italic;
-  /* Optional: Add italic style to the placeholder */
 }
 
-.auctionbutton {
-  background-color: #9EA5E4;
-}
 
 .sorting{
   background-color: #F4C430;
-    /* Green background */
-    border: none;
-    /* Remove borders */
-    color: rgb(0, 0, 0);
-    /* White text */
-    padding: 10px 30px;
-    /* Some padding */
-    text-align: center;
-    /* Center the text */
-    text-decoration: none;
-    /* Remove underline from links */
-    display: inline-block;
-    /* Arrange buttons inline */
-    font-size: 16px;
-    /* Text size */
-    margin: 4px 2px;
-    /* Add some space around the button */
-    cursor: pointer;
-    /* Change mouse cursor on hover */
-    border-radius: 4px;
-    /* Rounded corners */
-    transition: background-color 0.3s, transform 0.3s;
-    /* Smooth transition for hover effect */
+  border: none;
+  color: rgb(0, 0, 0);
+  padding: 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s, transform 0.3s;
   }
 .sorting:hover {
   background-color: #9EA5E4;
-  /* Darker shade of green */
   transform: scale(1.05);
-  /* Slightly increase button size */
+  
 }
   .sortingbuttons{
     display: flex;
     
     justify-content: center;
+  }
+
+  .pristag{
+    font-size: 25px;
+    color: #F4C430;
+    text-decoration: underline;
+  }
+
+  .tidtag{
+    color: #F4C430;
   }

@@ -2,8 +2,13 @@ import OurRouter from './components/OurRouter.jsx'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './style/index.css'
+import { useModal } from './contexts/LogInContext.jsx';
+import LogIn from './pages/LogIn.jsx';
 
 function App() {
+  const { isLoginModalVisible, toggleLoginModal } = useModal();
+
+
   return (
     <>
       <ToastContainer
@@ -19,6 +24,10 @@ function App() {
         theme="colored"
         transition:Bounce />
       <OurRouter />
+      {isLoginModalVisible && <LogIn closeModal={() => toggleLoginModal()} />}
+
+
+
     </>
   )
 }

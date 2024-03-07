@@ -2,6 +2,7 @@
 @import url("/src/style/footer.css");
 @import url("/src/style/homePage.css");
 @import url("/src/style/objetpage.css");
+@import url("/src/style/OrderHistory.css");
 
 body {
   padding-top: 15vh;

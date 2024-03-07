@@ -1,0 +1,41 @@
+.orderhistory-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.orderhistory-order {
+  display: flex;
+  margin: 2vh;
+  border: 2px solid #F4C430;
+  padding: 1vh;
+  border-radius: 0.5vw;
+}
+
+.orderhistory-order>img {
+  max-width: 100%;
+  height: 20vh;
+  width: 20vh;
+  padding-right: 1vw;
+}
+
+.orderhistory-paybutton,
+.orderhistory-payedbutton,
+.orderhistory-deliveredbutton {
+  font-family: 'Poppins';
+  border-radius: 50px;
+  border: none;
+}
+
+.orderhistory-paybutton {
+  background-color: #F4C430;
+  cursor: pointer;
+}
+
+.orderhistory-payedbutton {
+  background-color: rgb(0, 211, 0);
+}
+
+.orderhistory-deliveredbutton {
+  background-color: rgb(0, 170, 255);
+}
