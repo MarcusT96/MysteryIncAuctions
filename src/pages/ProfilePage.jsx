@@ -3,6 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import '../style/profilePage.css';
 import { useAuth } from '../admin/AdminComponents/auth/AuthContext';
 import OrderHistory from '../components/orderHistory.jsx';
+import PaymentOptions from '../components/PaymentOptions.jsx';
+import Reviews from '../components/Reviews.jsx';
+
+
 
 function ProfilePage() {
   const [userInfo, setUserInfo] = useState({
@@ -186,17 +190,13 @@ function ProfilePage() {
 
       {activeSection === 'payment' && (
         <div>
-          <h2>Betalningsalternativ</h2>
-          <p>Här kan du hantera dina betalningsalternativ.</p>
-          {/* Framtida funktionalitet för betalningshantering */}
+          <PaymentOptions/>
         </div>
       )}
 
       {activeSection === 'reviews' && (
         <div>
-          <h2>Omdömen</h2>
-          <p>Här kan du se och hantera dina omdömen.</p>
-          {/* Framtida funktionalitet för omdömehantering */}
+          <Reviews/>
         </div>
       )}
       {activeSection === 'orderhistory' && (
