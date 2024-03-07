@@ -4,6 +4,7 @@ import logo from './assets/mysteryInc-logo.png';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { MdClose } from "react-icons/md";
 import LogIn from './pages/LogIn';
+import { useAuth } from '../src/admin/AdminComponents/auth/AuthContext.jsx';
 
 function Navbar() {
   useScrollDirection();
@@ -26,9 +27,12 @@ function Navbar() {
 
   const handleLoginModal = () => setShowLoginModal(!showLoginModal);
 
+  const { user } = useAuth();
+  const hiddenClass = user && user.isAdmin ? 'hidden' : '';
+
   return (
     <>
-      <nav className="app__navbar">
+      <nav className={`app__navbar ${hiddenClass}`}>
         <div className="app__navbar-logo">
           <a href="/"><img src={logo} alt="app__logo" /></a>
         </div>
@@ -40,7 +44,7 @@ function Navbar() {
         </ul>
         <div className="app__navbar-login">
           {isLoggedIn ? (
-            <a href="/profile" className="p__opensans">Min profil</a>
+            <a href="/profile" className="p__opensans-profil">Min Profil</a>
           ) : (
             <button className="app__navbar-login" onClick={handleLoginModal}>Logga In / Registrera</button>
           )}

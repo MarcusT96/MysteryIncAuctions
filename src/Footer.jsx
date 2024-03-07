@@ -1,7 +1,12 @@
+import { useAuth } from "./admin/AdminComponents/auth/AuthContext";
 
 function Footer() {
+
+  const { user } = useAuth();
+  const hiddenClass = user && user.isAdmin ? 'hidden' : '';
+
   return (
-    <footer className="nav-footer">
+    <footer className={`nav-footer ${hiddenClass}`}>
       <div className="footer-inc">
         <p className="copy-right-p">© 2024 Mystery Inc. Alla rättigheter förbehålls.</p>
       </div>
