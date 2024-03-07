@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import BidPopUp from "../components/BidPopUp.jsx"
 import { toast } from 'react-toastify';
 import CountdownTimer from '../components/CountDownTimer.jsx';
+import { handleBidConfirm } from '../utils/bidHandling.js';
 
 
 export default function ObjectPage() {
@@ -19,31 +20,10 @@ export default function ObjectPage() {
     load();
   }, [id]);
 
-  const handleBidConfirm = async (bidAmount) => {
-    if (box && bidAmount > box.price) {
-      try {
-        const response = await fetch(`http://localhost:3000/mystery_boxes/${box.id}`, {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ price: bidAmount }),
-        });
-
-        if (!response.ok) throw new Error('Network response was not ok.');
-
-        const updatedBox = await response.json();
-        setBox(updatedBox);
-        toast.success(`Bud bekräftat! Nytt högsta bud: ${bidAmount} SEK`);
-        setIsModalVisible(false);
-      } catch (error) {
-        console.error('Failed to update the bid:', error);
-        toast.error("Ett fel inträffade när budet skulle uppdateras.");
-      }
-    } else {
-      toast.warn("Budet måste vara högre än nuvarande högsta bud.");
-    }
+  const confirmBid = (bidAmount) => {
+    handleBidConfirm(box, bidAmount, setBox, setIsModalVisible, toast);
   };
+    
 
   if (!box) return <div>Loading...</div>;
 
@@ -65,7 +45,7 @@ export default function ObjectPage() {
           <BidPopUp
             box={box}
             onClose={() => setIsModalVisible(false)}
-            onConfirm={handleBidConfirm}
+            onConfirm={confirmBid}
           />
         )}
       </div>
