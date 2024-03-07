@@ -19,6 +19,7 @@ function Products({ searchQuery, sortOrder, sortCriterion }) {
   }, []);
 
   useEffect(() => {
+    const now = new Date()
     const filtered = items.filter(item =>
       item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.description.toLowerCase().includes(searchQuery.toLowerCase())
@@ -27,12 +28,19 @@ function Products({ searchQuery, sortOrder, sortCriterion }) {
     const sortedItems = [...filtered].sort((a, b) => {
       if (sortCriterion === 'price') {
         return sortOrder === "asc" ? a.price - b.price : b.price - a.price;
+      
       } else if (sortCriterion === 'time') {
-        // Assuming time is stored in a comparable format, e.g., days left as integers
-        return sortOrder === "asc" ? a.time - b.time : b.time - a.time;
+      
+        const endTimeA = new Date(a.time).getTime()
+        const endTimeB = new Date(b.time).getTime()
+
+        const timeLeftA = endTimeA - now;
+        const timeLeftB = endTimeB - now
+
+        return sortOrder === "asc" ? timeLeftA - timeLeftB : timeLeftB - timeLeftA
+     
       } else if (sortCriterion === 'name') {
-        // Compare names alphabetically
-        return sortOrder === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
+       return sortOrder === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
       }
       return 0; // Default case if no sortCriterion matches
     });
