@@ -197,7 +197,11 @@ function ProfilePage() {
           {/* Framtida funktionalitet för omdömehantering */}
         </div>
       )}
-
+      {activeSection === 'orderhistory' && (
+        <div>
+          <OrderHistory />
+        </div>
+      )}
     </div>
   );
 }
