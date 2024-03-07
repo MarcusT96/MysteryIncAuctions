@@ -18,3 +18,24 @@
   width: 20vh;
   padding-right: 1vw;
 }
+
+.orderhistory-paybutton,
+.orderhistory-payedbutton,
+.orderhistory-deliveredbutton {
+  font-family: 'Poppins';
+  border-radius: 50px;
+  border: none;
+}
+
+.orderhistory-paybutton {
+  background-color: #F4C430;
+  cursor: pointer;
+}
+
+.orderhistory-payedbutton {
+  background-color: rgb(0, 211, 0);
+}
+
+.orderhistory-deliveredbutton {
+  background-color: rgb(0, 170, 255);
+}
