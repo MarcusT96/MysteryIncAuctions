@@ -20,17 +20,15 @@ function OrderHistory() {
   }, [])
 
   function orderStatus(order) {
-    let status = ""
     if (order.paid == false) {
-      status = "Ej betald"
+      return <button className="orderhistory-paybutton">Betala nu</button>
     }
     else if (order.delivered == false) {
-      status = "Betald"
+      return <button className="orderhistory-payedbutton">Betald</button>
     }
     else {
-      status = "Levererad"
+      return <button className="orderhistory-deliveredbutton">Levererad</button>
     }
-    return status
   }
 
   return (
