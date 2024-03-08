@@ -22,7 +22,7 @@
       "id": "3",
       "name": "Champion's Mystery Box",
       "weight": 1.8,
-      "price": 756,
+      "price": 800,
       "time": "2024-03-14T15:00:00Z",
       "description": "Curious about what's inside Mystery Box C? Dive in and find out!",
       "image": "https://www.nordicfighter.com/pub/media/catalog/product/cache/f3020b7489dcfc4d1d147cf4dad07b7f/image/7919a378/rea-mysterybox-3.png"
@@ -204,5 +204,6 @@
       "title": "Nostalgisk Glädje!",
       "description": "Valde att delta i auktionen för en retrobox och fick verkligen min dos av nostalgi. Från gamla vinylskivor till vintage kläder, denna låda tog mig tillbaka i tiden och gav mig en känsla av retrocharm. Perfekt för dem som älskar att återuppleva det förgångna!"
     }
-  ]
+  ],
+  "bids":[]
 }

@@ -2,7 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/profilePage.css';
 import { useAuth } from '../admin/AdminComponents/auth/AuthContext';
+import EditProfile from '../components/EditProfile';
 import OrderHistory from '../components/orderHistory.jsx';
+import PaymentOptions from '../components/PaymentOptions.jsx';
+import Reviews from '../components/Reviews.jsx';
+
+
 
 function ProfilePage() {
   const [userInfo, setUserInfo] = useState({
@@ -19,7 +24,7 @@ function ProfilePage() {
 
   const [activeSection, setActiveSection] = useState('profile');
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, setUser } = useAuth();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -84,124 +89,43 @@ function ProfilePage() {
 
   return (
     <div className="profile-page-container">
-      <button onClick={() => setActiveSection('profile')} className={`profile-page-button ${activeSection === 'profile' ? 'active' : ''}`}>Mina Uppgifter</button>
-      <button onClick={() => setActiveSection('payment')} className={`profile-page-button ${activeSection === 'payment' ? 'active' : ''}`}>Betalningssätt</button>
-      <button onClick={() => setActiveSection('reviews')} className={`profile-page-button ${activeSection === 'reviews' ? 'active' : ''}`}>Omdömen</button>
-      <button onClick={() => setActiveSection('orderhistory')} className={`profile-page-button ${activeSection === 'orderhistory' ? 'active' : ''}`}>Beställningar</button>
-      <button onClick={handleLogout} className="profile-page-button logout-button">Logga ut</button>
+      <div className='sidebar'>
+        <button onClick={() => setActiveSection('profile')} className={`profile-page-button ${activeSection === 'profile' ? 'active' : ''}`}>Mina Uppgifter</button>
+        <button onClick={() => setActiveSection('payment')} className={`profile-page-button ${activeSection === 'payment' ? 'active' : ''}`}>Betalningssätt</button>
+        <button onClick={() => setActiveSection('reviews')} className={`profile-page-button ${activeSection === 'reviews' ? 'active' : ''}`}>Omdömen</button>
+        <button onClick={() => setActiveSection('orderhistory')} className={`profile-page-button ${activeSection === 'orderhistory' ? 'active' : ''}`}>Beställningar</button>
+        {user && user.isAdmin && (
+          <button onClick={() => navigate('/dashboard')} className="profile-page-button">Admin Panel</button>
+        )}
+        <button onClick={handleLogout} className="profile-page-button logout-button">Logga ut</button>
+      </div>
+      <div className='content'>
+        {activeSection === 'profile' && (
+          <div>
+            <EditProfile
+              userInfo={userInfo}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+            />
+          </div>
+        )}
+        {activeSection === 'payment' && (
+          <div>
+            <PaymentOptions />
+          </div>
+        )}
 
-      {user && user.isAdmin && (
-        <button onClick={() => navigate('/dashboard')} className="profile-page-button">Admin Panel</button>
-      )}
-
-      {activeSection === 'profile' && (
-        <form onSubmit={handleSubmit} className="profile-page-form">
-          <h2>Ändra Mina Uppgifter</h2>
-          <div className="profile-page-form-group">
-            <label>E-post</label>
-            <input
-              type="email"
-              name="email"
-              value={userInfo.email}
-              onChange={handleInputChange}
-              placeholder="Din email"
-            />
+        {activeSection === 'reviews' && (
+          <div>
+            <Reviews />
           </div>
-          <div className="profile-page-form-group">
-            <label>Lösenord</label>
-            <input
-              type="text"
-              name="password"
-              value={userInfo.password}
-              onChange={handleInputChange}
-              placeholder="Ditt lösenord"
-            />
+        )}
+        {activeSection === 'orderhistory' && (
+          <div>
+            <OrderHistory />
           </div>
-          <div className="profile-page-form-group">
-            <label>Förnamn</label>
-            <input
-              type="text"
-              name="firstName"
-              value={userInfo.firstName}
-              onChange={handleInputChange}
-              placeholder="Ditt förnamn"
-            />
-          </div>
-          <div className="profile-page-form-group">
-            <label>Efternamn</label>
-            <input
-              type="text"
-              name="lastName"
-              value={userInfo.lastName}
-              onChange={handleInputChange}
-              placeholder="Ditt efternamn"
-            />
-          </div>
-          <div className="profile-page-form-group">
-            <label>Adress</label>
-            <input
-              type="text"
-              name="address"
-              value={userInfo.address}
-              onChange={handleInputChange}
-              placeholder="Din adress"
-            />
-          </div>
-          <div className="profile-page-form-group">
-            <label>Stad</label>
-            <input
-              type="text"
-              name="city"
-              value={userInfo.city}
-              onChange={handleInputChange}
-              placeholder="Din stad"
-            />
-          </div>
-          <div className="profile-page-form-group">
-            <label>Postnummer</label>
-            <input
-              type="text"
-              name="zipCode"
-              value={userInfo.zipCode}
-              onChange={handleInputChange}
-              placeholder="Ditt postnummer"
-            />
-          </div>
-          <div className="profile-page-form-group">
-            <label>Telefonnummer</label>
-            <input
-              type="text"
-              name="phone"
-              value={userInfo.phone}
-              onChange={handleInputChange}
-              placeholder="Ditt telefonnummer"
-            />
-          </div>
-          <button type="submit" className="profile-page-button">Spara Ändringar</button>
-
-        </form>
-      )}
-
-      {activeSection === 'payment' && (
-        <div>
-          <h2>Betalningsalternativ</h2>
-          <p>Här kan du hantera dina betalningsalternativ.</p>
-          {/* Framtida funktionalitet för betalningshantering */}
-        </div>
-      )}
-
-      {activeSection === 'reviews' && (
-        <div>
-          <h2>Omdömen</h2>
-          <p>Här kan du se och hantera dina omdömen.</p>
-          {/* Framtida funktionalitet för omdömehantering */}
-        </div>
-      )}
-      {activeSection === 'orderhistory' && (
-        <div>
-          <OrderHistory />
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

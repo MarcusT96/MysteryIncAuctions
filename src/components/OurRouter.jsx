@@ -20,8 +20,7 @@ import ProtectedRoute from "../admin/AdminComponents/auth/ProtectedRoute.jsx"
 function OurRouter() {
 
   return (<>
-    <BrowserRouter>
-      <Navbar />
+        <Navbar />
       <Routes>
         <Route path="/" element={<MyHomePage />}></Route>
         <Route path="/box/:id" element={<ObjectPage />}></Route>
@@ -47,7 +46,7 @@ function OurRouter() {
         </Route>
       </Routes>
       <Footer />
-    </BrowserRouter >
+    
   </>
   );
 }

@@ -1,9 +1,13 @@
 import { useAuth } from "./admin/AdminComponents/auth/AuthContext";
+import { useLocation } from 'react-router-dom';
 
 function Footer() {
 
+  const location = useLocation();
+
   const { user } = useAuth();
-  const hiddenClass = user && user.isAdmin ? 'hidden' : '';
+  const shouldBeHidden = location.pathname === '/dashboard' && user && user.isAdmin;
+  const hiddenClass = shouldBeHidden ? 'hidden' : '';
 
   return (
     <footer className={`nav-footer ${hiddenClass}`}>
