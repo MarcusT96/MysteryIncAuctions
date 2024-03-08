@@ -16,6 +16,7 @@ body {
   padding: 20px;
   background-color: #9EA5E4;
   border-radius: 10px;
+  color: black;
 }
 
 .left--container {
@@ -34,8 +35,9 @@ body {
 }
 
 .time--left {
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: #F4C430;
+  text-decoration: underline;
 
 }
 
@@ -43,6 +45,10 @@ body {
   background-color: #9EA5E4;
   border-radius: 10px;
   border: 2px solid #F4C430;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .bid--button {
