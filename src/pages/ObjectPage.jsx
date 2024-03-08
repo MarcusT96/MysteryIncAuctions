@@ -33,13 +33,13 @@ export default function ObjectPage() {
 
       <div className="left--cointainer">
         <img className="box--img" src={box.image} alt="" />
-        <p className="time--left--left"> Tid kvar av auktion: <b className="time--left">{<CountdownTimer endTime={box.time} />}</b></p>
+        <p className="time--left--left"> Tid kvar av auktion: <h2 className="time--left">{<CountdownTimer endTime={box.time} />}</h2></p>
       </div>
 
       <div className="right--container">
         <h3 className="box--title">{box.name}</h3>
         <p className="product--description">{box.description}</p>
-        <p className="highest--bid">Nuvarande högsta bud: <b>{box.price} </b> SEK </p>
+        <p className="highest--bid">Nuvarande högsta bud: <b>{box.price}  SEK </b> </p>
         <button className="bid--button" onClick={() => setIsModalVisible(true)}>Lägg bud</button>
         {isModalVisible && (
           <BidPopUp

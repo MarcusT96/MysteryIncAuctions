@@ -6,7 +6,8 @@
       "weight": 2.5,
       "price": 500,
       "time": "2024-03-10T15:00:00Z",
-      "description": "A mysterious assortment of items waiting to be discovered.",
+      "description": "Utforska det okända med Mystery Box A, en omsorgsfullt kuraterad samling av äventyrsutrustning och exklusiva samlarobjekt. Varje föremål har valts ut för att inspirera och utmana din inre upptäcktsresande. Från tåliga utomhusverktyg till sällsynta kartor och guider, denna låda är din biljett till nästa stora äventyr. Vem vet vilka hemligheter som väntar på att avslöjas? Gör dig redo för en resa fylld med upptäckter och överraskningar som kommer att föra dig till platser du bara kunnat drömma om.",
+      "category": 1,
       "image": "https://quickbutik.imgix.net/27187j/products/164806013962136aa23a9ed.jpeg"
     },
     {
@@ -15,7 +16,8 @@
       "weight": 3,
       "price": 2300,
       "time": "2024-03-12T15:00:00Z",
-      "description": "Unlock the secrets within Mystery Box B and unveil exciting surprises.",
+      "description": "För den föddes detektiven erbjuder denna låda en fängslande samling av mysterier att lösas, komplett med allt en aspirerande Sherlock Holmes behöver. Från invecklade pussel och kryptiska ledtrådar till autentiska detektivverktyg, varje objekt har noggrant valts ut för att testa ditt snille och ditt tålamod. Denna låda är inte bara en utmaning; den är en inbjudan att dyka djupt in i detektivarbetets konst och vetenskap. Kliv in i en värld av mörka hemligheter och gåtfulla gåtor, där endast de mest uppmärksamma och skarpsinniga kan hoppas på att triumfera.",
+      "category": 2,
       "image": "https://www.mynthuset.se/images/stories/sn/mysterybox-tillbehor-6015515091/Mystery_box.png"
     },
     {
@@ -24,7 +26,8 @@
       "weight": 1.8,
       "price": 800,
       "time": "2024-03-14T15:00:00Z",
-      "description": "Curious about what's inside Mystery Box C? Dive in and find out!",
+      "description": "Skapad med den ultimata atleten i åtanke, Champion's Mystery Box innehåller en elitnivå av sportutrustning, träningsredskap och exklusiva fansprodukter. Från högteknologiska fitnessprylar till autograferade memorabilia från världskända idrottare, har varje föremål i denna låda potentialen att lyfta din träning och din ande till nya höjder. Det är en hyllning till segerandan, designad för att sporra dig till dina egna mästerskapsvinster. Upptäck verktygen och inspirationen för att övervinna dina gränser och skriva din egen historia av triumf och mästerskap.",
+      "category": 3,
       "image": "https://www.nordicfighter.com/pub/media/catalog/product/cache/f3020b7489dcfc4d1d147cf4dad07b7f/image/7919a378/rea-mysterybox-3.png"
     },
     {
@@ -33,7 +36,8 @@
       "weight": 4.2,
       "price": 1300,
       "time": "2024-03-16T15:00:00Z",
-      "description": "For those who crave the thrill of the unknown, Mystery Box D is the answer.",
+      "description": "Pokemasters Mystery Box är den ultimata skatten för varje Pokémon-fanatiker. Fylld till brädden med sällsynta kort, exklusiva figurer, och Pokémon-merchandise, denna låda erbjuder en oöverträffad möjlighet att utöka din samling med föremål du inte hittar någon annanstans. Upptäck limited edition art prints, pokéballs i fullskala, och kanske till och med några mytiska Pokémon som gömmer sig inuti. För samlaren som söker det extraordinära, är detta en resa in i hjärtat av Pokémon-världen, där varje upptäckt föremål bär på en historia och kraften hos vänskap och äventyr.",
+      "category": 4,
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlIzW051K4I_XPBDHY5qunsRWijfr1XxwNFw&usqp=CAU"
     },
     {
@@ -42,7 +46,8 @@
       "weight": 2,
       "price": 799,
       "time": "2024-03-18T15:00:00Z",
-      "description": "Embark on an adventure with Mystery Box E, filled with surprises and delights.",
+      "description": "Indossa Mystery Box är en exquisit utforskning av modevärlden, där eleganta accessoarer, trendiga designerplagg, och banbrytande skönhetsprodukter sammanflätas för att skapa en upplevelse utöver det vanliga. Denna låda är en odyssé genom de senaste modetrenderna, en chans att äga unika stycken som sätter tonen för din personliga stil. Från handplockade smycken som kompletterar varje outfit till limited edition parfymer som fångar essensen av lyx, erbjuder Indossa Mystery Box en oöverträffad skönhet och elegans som förgyller ditt liv och din garderob.",
+      "category": 5,
       "image": "https://indossa.se/cdn/shop/products/Skarmavbild2023-04-03kl.02.40.27_65c65c59-d8b6-4cc1-a6d8-3627d97e50e2_800x.png?v=1680482912"
     },
     {
@@ -51,7 +56,8 @@
       "weight": 3.5,
       "price": 1599,
       "time": "2024-03-20T15:00:00Z",
-      "description": "Experience the excitement of Mystery Box F, packed with intriguing items.",
+      "description": "Den Röda Mysterielådan erbjuder en fängslande blandning av spänning och nyfikenhet, fylld med handplockade föremål designade för att överraska och förtrolla. Denna låda är en hyllning till mysteriet självt, en samling av unika och intrigerande föremål som kommer att väcka din fantasi och leda dig på en resa av upptäckt. Från tekniska under till kulturella artefakter, varje objekt i Den Röda Mysterielådan har valts ut för att utmana din uppfattning och berika din världsbild. Är du redo att uppleva det oväntade och utforska gränserna för vad som är möjligt?",
+      "category": 6,
       "image": "https://thedetailingshack.co.uk/wp-content/uploads/2022/01/istockphoto-1138540348-170667a.jpg"
     },
     {
@@ -60,7 +66,8 @@
       "weight": 2.8,
       "price": 899,
       "time": "2024-03-22T15:00:00Z",
-      "description": "Uncover the mysteries within Mystery Box G, a treasure trove of surprises.",
+      "description": "Top G Mystery Box är en kuraterad samling av extraordinära produkter från några av världens mest eftertraktade märken. Denna låda är en oas av lyx och innovation, där varje objekt representerar toppen av kvalitet och design. Från banbrytande teknologiska prylar till exklusiva modeartiklar och livsstilsprodukter, erbjuder Top G en unik möjlighet att berika ditt liv med det allra bästa. Låt varje föremål inspirera och imponera, och upptäck en ny nivå av sofistikering och komfort som endast Top G kan erbjuda.",
+      "category": 7,
       "image": "https://03.cdn37.se/Ww/images/2.2118080/tengo-mystery-box-skor.jpeg"
     },
     {
@@ -69,7 +76,8 @@
       "weight": 4,
       "price": 1799,
       "time": "2024-03-24T15:00:00Z",
-      "description": "Dive deep into the unknown with Mystery Box H, an adventure in every box.",
+      "description": "AmazonBoxen bjuder in dig på en upptäcktsfärd genom Amazons oändliga utbud, med en unik blandning av produkter från alla tänkbara kategorier. Varje låda är en resa genom teknikens underverk, hushållens nödvändigheter, och kulturens skatter, noggrant utvalda för att överraska och glädja. Det är en chans att uppleva det oväntade, att stöta på föremål du aldrig visste att du behövde och att hitta nya favoriter som berikar din vardag. AmazonBoxen är din portal till en värld av upptäckt, där varje objekt är ett steg på vägen mot nya äventyr.",
+      "category": 8,
       "image": "https://facts.net/wp-content/uploads/2023/10/14-mind-blowing-facts-about-amazon-mystery-box-1697546639.jpg"
     }
   ],
@@ -205,5 +213,39 @@
       "description": "Valde att delta i auktionen för en retrobox och fick verkligen min dos av nostalgi. Från gamla vinylskivor till vintage kläder, denna låda tog mig tillbaka i tiden och gav mig en känsla av retrocharm. Perfekt för dem som älskar att återuppleva det förgångna!"
     }
   ],
-  "bids":[]
+  "bids": [],
+  "categories": [
+    {
+      "id": 1,
+      "categoryName": "Äventyr"
+    },
+    {
+      "id": 2,
+      "categoryName": "Detektiv"
+    },
+    {
+      "id": 3,
+      "categoryName": "Champion"
+    },
+    {
+      "id": 4,
+      "categoryName": "Pokémon"
+    },
+    {
+      "id": 5,
+      "categoryName": "Mode"
+    },
+    {
+      "id": 6,
+      "categoryName": "Mysterium"
+    },
+    {
+      "id": 7,
+      "categoryName": "Toppval"
+    },
+    {
+      "id": 8,
+      "categoryName": "Teknik"
+    }
+  ]
 }
