@@ -8,7 +8,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 1,4rem;
+  padding: 2rem;
 }
 
 .right--container {
@@ -22,6 +22,8 @@ body {
 .left--container {
   width: 40%;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   
 
 }
@@ -49,6 +51,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0rem 4rem;
 }
 
 .bid--button {
