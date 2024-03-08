@@ -205,5 +205,39 @@
       "description": "Valde att delta i auktionen för en retrobox och fick verkligen min dos av nostalgi. Från gamla vinylskivor till vintage kläder, denna låda tog mig tillbaka i tiden och gav mig en känsla av retrocharm. Perfekt för dem som älskar att återuppleva det förgångna!"
     }
   ],
-  "bids":[]
+  "bids":[],
+  "categories": [
+    {
+      "id": 1,
+      "categoryName": "Äventyr"
+    },
+    {
+      "id": 2,
+      "categoryName": "Detektiv"
+    },
+    {
+      "id": 3,
+      "categoryName": "Champion"
+    },
+    {
+      "id": 4,
+      "categoryName": "Pokémon"
+    },
+    {
+      "id": 5,
+      "categoryName": "Mode"
+    },
+    {
+      "id": 6,
+      "categoryName": "Mysterium"
+    },
+    {
+      "id": 7,
+      "categoryName": "Toppval"
+    },
+    {
+      "id": 8,
+      "categoryName": "Teknik"
+    }
+  ]
 }
