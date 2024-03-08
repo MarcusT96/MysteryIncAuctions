@@ -31,6 +31,19 @@ function OrderHistory() {
     }
   }
 
+  function formatTime(timestamp) {
+    const date = new Date(timestamp)
+
+    const year = date.getFullYear()
+    const month = (date.getMonth() + 1).toString().padStart(2, '0')
+    const day = date.getDate().toString().padStart(2, '0')
+    const hours = date.getHours().toString().padStart(2, '0')
+    const minutes = date.getMinutes().toString().padStart(2, '0')
+
+    return `${year}-${month}-${day} ${hours}:${minutes}`
+  }
+
+
   return (
     <div className="orderhistory-container">
       {orders.length > 0 ? (
@@ -40,7 +53,7 @@ function OrderHistory() {
             <div className="orderhistory-details">
               <h3>{order.name}</h3>
               <p>{order.price}kr</p>
-              <p>Vunnen: {order.time}</p>
+              <p>Vunnen: {formatTime(order.time)}</p>
               <p>Status: {orderStatus(order)}</p>
             </div>
           </div>
