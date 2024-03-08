@@ -24,7 +24,7 @@ function ProfilePage() {
 
   const [activeSection, setActiveSection] = useState('profile');
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, setUser } = useAuth();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -90,15 +90,14 @@ function ProfilePage() {
   return (
     <div className="profile-page-container">
       <div className='sidebar'>
-      <button onClick={() => setActiveSection('profile')} className={`profile-page-button ${activeSection === 'profile' ? 'active' : ''}`}>Mina Uppgifter</button>
-      <button onClick={() => setActiveSection('payment')} className={`profile-page-button ${activeSection === 'payment' ? 'active' : ''}`}>Betalningssätt</button>
-      <button onClick={() => setActiveSection('reviews')} className={`profile-page-button ${activeSection === 'reviews' ? 'active' : ''}`}>Omdömen</button>
-      <button onClick={() => setActiveSection('orderhistory')} className={`profile-page-button ${activeSection === 'orderhistory' ? 'active' : ''}`}>Beställningar</button>
-      <button onClick={handleLogout} className="profile-page-button logout-button">Logga ut</button>
-
-      {user && user.isAdmin && (
-        <button onClick={() => navigate('/dashboard')} className="profile-page-button">Admin Panel</button>
-      )}
+        <button onClick={() => setActiveSection('profile')} className={`profile-page-button ${activeSection === 'profile' ? 'active' : ''}`}>Mina Uppgifter</button>
+        <button onClick={() => setActiveSection('payment')} className={`profile-page-button ${activeSection === 'payment' ? 'active' : ''}`}>Betalningssätt</button>
+        <button onClick={() => setActiveSection('reviews')} className={`profile-page-button ${activeSection === 'reviews' ? 'active' : ''}`}>Omdömen</button>
+        <button onClick={() => setActiveSection('orderhistory')} className={`profile-page-button ${activeSection === 'orderhistory' ? 'active' : ''}`}>Beställningar</button>
+        {user && user.isAdmin && (
+          <button onClick={() => navigate('/dashboard')} className="profile-page-button">Admin Panel</button>
+        )}
+        <button onClick={handleLogout} className="profile-page-button logout-button">Logga ut</button>
       </div>
       <div className='content'>
         {activeSection === 'profile' && (
@@ -110,25 +109,24 @@ function ProfilePage() {
             />
           </div>
         )}
+        {activeSection === 'payment' && (
+          <div>
+            <PaymentOptions />
+          </div>
+        )}
 
-      {activeSection === 'payment' && (
-        <div>
-          <PaymentOptions/>
-        </div>
-      )}
-
-      {activeSection === 'reviews' && (
-        <div>
-          <Reviews/>
-        </div>
-      )}
-      {activeSection === 'orderhistory' && (
-        <div>
-          <OrderHistory />
-        </div>
-      )}
+        {activeSection === 'reviews' && (
+          <div>
+            <Reviews />
+          </div>
+        )}
+        {activeSection === 'orderhistory' && (
+          <div>
+            <OrderHistory />
+          </div>
+        )}
       </div>
-      </div>
+    </div>
   );
 }
 

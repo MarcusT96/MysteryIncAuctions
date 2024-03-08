@@ -59,6 +59,7 @@
 .profile-page-button:hover,
 .logout-button:hover {
   color: var(--button-hover-color);
+  cursor: pointer;
 }
 
 .logout-button {
