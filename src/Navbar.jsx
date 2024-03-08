@@ -5,6 +5,7 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { MdClose } from "react-icons/md";
 import LogIn from './pages/LogIn';
 import { useAuth } from '../src/admin/AdminComponents/auth/AuthContext.jsx';
+import { useLocation } from 'react-router-dom';
 
 function Navbar() {
   useScrollDirection();
@@ -12,6 +13,7 @@ function Navbar() {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true');
+  const location = useLocation();
 
   useEffect(() => {
     const handleStorageChange = () => {
@@ -28,7 +30,8 @@ function Navbar() {
   const handleLoginModal = () => setShowLoginModal(!showLoginModal);
 
   const { user } = useAuth();
-  const hiddenClass = user && user.isAdmin ? 'hidden' : '';
+  const shouldBeHidden = location.pathname === '/dashboard' && user && user.isAdmin;
+  const hiddenClass = shouldBeHidden ? 'hidden' : '';
 
   return (
     <>
