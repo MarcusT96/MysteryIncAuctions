@@ -249,5 +249,47 @@
       "id": 8,
       "categoryName": "Teknik"
     }
+  ],
+  "payment_options": [
+    {
+      "card_number": "1111-2222-3333-4444",
+      "expiration_date": "01-28",
+      "CVC": "123",
+      "type": "Debit card",
+      "cardholder_name": "John Doe",
+      "user_id": "0c1f"
+    },
+    {
+      "card_number": "5555-6666-7777-8888",
+      "expiration_date": "05-23",
+      "CVC": "456",
+      "type": "Credit card",
+      "cardholder_name": "Jane Smith",
+      "user_id": "1"
+    },
+    {
+      "card_number": "4656-2343-5436-6453",
+      "expiration_date": "05-23",
+      "CVC": "456",
+      "type": "Debit card",
+      "cardholder_name": "Johnny B. Good",
+      "user_id": "1"
+    },
+    {
+      "card_number": "9876-5432-1098-7654",
+      "expiration_date": "09-25",
+      "CVC": "789",
+      "type": "Debit card",
+      "cardholder_name": "Alex Johnson",
+      "user_id": "7053"
+    },
+    {
+      "card_number": "4321-8765-2109-5432",
+      "expiration_date": "12-30",
+      "CVC": "321",
+      "type": "Credit card",
+      "cardholder_name": "Emily White",
+      "user_id": "7053"
+    }
   ]
 }
