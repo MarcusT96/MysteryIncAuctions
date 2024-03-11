@@ -1,12 +1,16 @@
 import { useEffect } from "react";
 
-function useScrollDirection() {
+function useScrollDirection(isAdminDashboard = false) {
     useEffect(() => {
+        if (isAdminDashboard) return;
+
         let lastScrollY = window.scrollY;
 
         const updateScrollDirection = () => {
             const scrollY = window.scrollY;
             const header = document.querySelector('.app__navbar');
+
+            if (!header) return;
 
             if (scrollY > lastScrollY) {
                 header.classList.add('hide');
@@ -19,7 +23,7 @@ function useScrollDirection() {
         window.addEventListener('scroll', updateScrollDirection);
 
         return () => window.removeEventListener('scroll', updateScrollDirection);
-    }, []);
+    }, [isAdminDashboard]);
 }
 
-export default useScrollDirection
+export default useScrollDirection;
