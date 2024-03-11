@@ -31,6 +31,11 @@ function Navbar() {
 
   const { user } = useAuth();
   const shouldBeHidden = location.pathname === '/dashboard' && user && user.isAdmin;
+
+  if (location.pathname.startsWith('/dashboard')) {
+    return null;
+  }
+
   const hiddenClass = shouldBeHidden ? 'hidden' : '';
 
   return (

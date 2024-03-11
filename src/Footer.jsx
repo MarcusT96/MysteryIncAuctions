@@ -9,6 +9,10 @@ function Footer() {
   const shouldBeHidden = location.pathname === '/dashboard' && user && user.isAdmin;
   const hiddenClass = shouldBeHidden ? 'hidden' : '';
 
+  if (location.pathname.startsWith('/dashboard')) {
+    return null;
+  }
+
   return (
     <footer className={`nav-footer ${hiddenClass}`}>
       <div className="footer-inc">

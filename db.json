@@ -177,14 +177,16 @@
       "firstName": "kalle",
       "lastName": "anka",
       "address": "Storgatan 1",
-      "city": "Ankeborg"
+      "city": "Ankeborg",
+      "phone": "076-782 83 74"
     },
     {
       "id": "0c1f",
       "email": "rasmus@test.com",
       "password": "klezmer",
       "firstName": "Rasmus",
-      "lastName": "Hellgren"
+      "lastName": "Hellgren",
+      "phone": "076-827 35 43"
     }
   ],
   "reviews": [
