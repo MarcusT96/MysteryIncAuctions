@@ -1,0 +1,119 @@
+.app__users-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 8rem;
+    width: 100%;
+    padding-top: 3.5rem;
+}
+
+.app__users-title {
+    color: rgb(255, 238, 218);
+}
+
+.app__users-filters-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.5rem;
+}
+
+.app__users-search {
+    padding: 5px 15px;
+    border: 1px solid hsla(0, 0%, 65%, 0.6);
+    border-radius: 5px;
+    outline: none;
+    font-size: 14px;
+    color: #333;
+}
+
+.app__users-filters,
+.app__users-buttons {
+    padding: 5px 15px;
+    border: 1px solid hsla(0, 0%, 65%, 0.6);
+    border-radius: 5px;
+    outline: none;
+    font-size: 14px;
+    color: #333;
+    background-color: transparent;
+    backdrop-filter: blur(100%);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.app__users-filters:hover,
+.app__users-buttons:hover {
+    border-color: rgb(84, 121, 160);
+    transition: all 0.3s ease;
+    background-color: rgb(84, 121, 160, 0.2);
+}
+
+.app__users-buttons {
+    margin-left: 10px;
+}
+
+.app__users-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.app__users-thead {
+    background-color: hsla(211, 24%, 45%, 0.4);
+}
+
+.app__users-thead th:first-child {
+    border-top-left-radius: 5px;
+}
+
+.app__users-th,
+.app__users-td {
+    padding: 8px;
+    margin: 5px 0;
+    border-bottom: 1px solid rgb(77, 77, 77, 0.5);
+    border-top: 1px solid rgb(77, 77, 77, 0.5);
+}
+
+.app__users-admin,
+.app__users-customer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.app__users-admin {
+    color: rgb(62, 62, 202);
+}
+
+.app__users-customer {
+    color: rgb(50, 158, 77);
+}
+
+.app__user-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.app__user-pagination button {
+    padding: 5px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid hsl(0, 0%, 39%, 0.5);
+    border-radius: 5px;
+    font-size: 16px;
+    line-height: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app__user-pagination button:disabled {
+    color: #999;
+    cursor: not-allowed;
+}
