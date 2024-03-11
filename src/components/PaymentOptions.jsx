@@ -19,6 +19,12 @@ function PaymentOptions() {
     load()
   }, [])
 
+  function censorCard(cardNumber) {
+    let censored = cardNumber.slice(0, 4)
+    censored = censored + "-XXXX-XXXX-XXXX"
+    return censored
+  }
+
   return (
     <div>
       <h2>Betalningsalternativ</h2>
@@ -28,6 +34,8 @@ function PaymentOptions() {
         {paymentInfo.map((payment, index) => (
           <div className='paymentopt-method' key={index}>
             <h2 className='paymentopt-type'>{payment.type}</h2>
+            <p className='paymentopt-holder'>{payment.cardholder_name}</p>
+            <p>{censorCard(payment.card_number)}</p>
           </div>
         ))}
       </div>
