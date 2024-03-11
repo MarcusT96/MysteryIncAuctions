@@ -268,6 +268,14 @@
       "user_id": "1"
     },
     {
+      "card_number": "4656-2343-5436-6453",
+      "expiration_date": "05-23",
+      "CVC": "456",
+      "type": "Debit card",
+      "cardholder_name": "Johnny B. Good",
+      "user_id": "1"
+    },
+    {
       "card_number": "9876-5432-1098-7654",
       "expiration_date": "09-25",
       "CVC": "789",

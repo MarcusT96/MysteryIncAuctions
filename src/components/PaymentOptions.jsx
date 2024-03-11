@@ -34,8 +34,9 @@ function PaymentOptions() {
         {paymentInfo.map((payment, index) => (
           <div className='paymentopt-method' key={index}>
             <h2 className='paymentopt-type'>{payment.type}</h2>
-            <p className='paymentopt-holder'>{payment.cardholder_name}</p>
-            <p>{censorCard(payment.card_number)}</p>
+            <p className='paymentopt-holder'>Ägare: {payment.cardholder_name}</p>
+            <p className='paymentopt-number'>{censorCard(payment.card_number)}</p>
+            <button className='paymentopt-remove'>Ta bort</button>
           </div>
         ))}
       </div>

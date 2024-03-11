@@ -1,0 +1,32 @@
+.paymentopt-method-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 2vh;
+  width: 100%;
+}
+
+.paymentopt-method {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #F4C430;
+  padding: 1vh;
+  border-radius: 0.5vw;
+  margin-top: 2vh;
+  margin-right: 1vw;
+  width: 15vw;
+}
+
+.paymentopt-type,
+.paymentopt-holder,
+.paymentopt-number {
+  margin-bottom: 1vh;
+}
+
+.paymentopt-remove {
+  font-family: 'Poppins';
+  border-radius: 50px;
+  border: none;
+  background-color: #FF4136;
+  cursor: pointer;
+  max-width: 50%;
+}
