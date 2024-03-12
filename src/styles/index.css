@@ -3,6 +3,7 @@
 @import url("/src/style/homePage.css");
 @import url("/src/style/objetpage.css");
 @import url("/src/style/OrderHistory.css");
+@import url("/src/style/paymentoptions.css");
 
 body {
   padding-top: 15vh;

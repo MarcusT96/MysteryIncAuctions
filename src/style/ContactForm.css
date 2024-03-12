@@ -1,5 +1,5 @@
 .contact-container {
-  max-width: 800px;
+  width: 800px;
   margin: auto;
   padding: 20px;
   background-color: #2D3E50;
@@ -74,10 +74,12 @@ button[type="submit"]:hover {
   cursor: pointer;
 }
 
-
 @media (max-width: 768px) {
-  .about-us-container {
-    padding: 10px;
+
+  .contact-container,
+  #contact {
+    width: auto;
+    max-width: 100%;
   }
 
   input[type="text"],

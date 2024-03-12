@@ -1,0 +1,55 @@
+.review--image{
+  width: 30%;
+  height: auto;
+
+}
+
+.reviews--header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+}
+.review--container {
+  max-width: 600px;
+  margin: 1rem;
+  padding: 20px;
+  background-color: #2D3E50;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.review--container select,
+.review--container input[type="text"],
+.review--container textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+
+}
+
+.review--container textarea {
+  height: 9.375rem;
+  resize: vertical;
+
+}
+
+.review--container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #F4C430;
+  color: rgb(85, 85, 85);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.review--container button:hover {
+  background-color: #ffecb5;
+}
