@@ -121,6 +121,87 @@ const ProductsPanel = () => {
 
     if (loading) return <div>Loading...</div>;
 
+    return (
+        <div className='app__products-container'>
+            <h2 className='app__products-title'>Produkter</h2>
+            <input type="text" className="app__users-search" placeholder="Sök produkter..." value={searchQuery} onChange={handleSearchChange} />
+            <div className='app__users-filters-group'>
+                <select className='app__users-filters' value={sortField} onChange={handleSortChange}>
+                    <option value="id">ID</option>
+                    <option value="name">Namn</option>
+                    <option value="price">Pris</option>
+                    <option value="category">Kategori</option>
+                    <option value="time">Tid</option>
+                </select>
+                <button className='app__users-buttons' onClick={() => handleSortOrderChange('asc')}>↟</button>
+                <button className='app__users-buttons' onClick={() => handleSortOrderChange('desc')}>↡</button>
+            </div>
+            <button className='app__product-add-btn' onClick={() => setShowAddBoxModal(true)}>Lägg till 🪄📦</button>
+            <ProductList
+                mysteryBoxes={currentProducts}
+                deleteBox={deleteBox}
+                openUpdateModal={openUpdateModal}
+            />
+            {showAddBoxModal &&
+                <AddBoxForm onAdd={handleAddBox} onClose={() => setShowAddBoxModal(false)} />}
+            {showUpdateBoxModal && currentBox && (
+                <UpdateBoxModal box={currentBox} onUpdate={handleUpdateBox} onClose={() => setShowUpdateBoxModal(false)} />
+            )}
+            <Pagination
+                currentPage={currentPage}
+                productsPerPage={productsPerPage}
+                totalProducts={mysteryBoxes.length}
+                paginate={handlePageChange}
+            />
+        </div>
+    );
+};
+
+function ProductList({ mysteryBoxes, deleteBox, openUpdateModal }) {
+    return (
+        <div className='app__products-boxdetail'>
+            {mysteryBoxes.map(box => (
+                <ProductRow key={box.id} box={box} deleteBox={deleteBox} openUpdateModal={openUpdateModal} />
+            ))}
+        </div>
+    );
+}
+
+const Pagination = ({ currentPage, productsPerPage, totalProducts, paginate }) => {
+    const pageNumbers = [];
+
+    for (let i = 1; i <= Math.ceil(totalProducts / productsPerPage); i++) {
+        pageNumbers.push(i);
+    }
+
+    return (
+        <div className='app__user-pagination'>
+            <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>«</button>
+            {pageNumbers.map(number => (
+                <button key={number} onClick={() => paginate(number)} className={currentPage === number ? 'active' : ''}>
+                    {number}
+                </button>
+            ))}
+            <button onClick={() => paginate(currentPage + 1)} disabled={currentPage === pageNumbers.length}>»</button>
+        </div>
+    );
+};
+
+function ProductRow({ box, deleteBox, openUpdateModal }) {
+    return (
+        <div className='app__product-row'>
+            <div className='app__product-item'>{box.id}</div>
+            <div className='app__product-item'>{box.name}</div>
+            <div className='app__product-item'>{box.price}kr</div>
+            <div className='app__product-item'>Kategori nr: {box.category}</div>
+            <div className='app__product-item'><CountdownTimer endTime={box.time} /></div>
+            <div className='app__product-item'>
+                <button className='app__product-dt-btn' onClick={() => deleteBox(box.id)}>Ta Bort</button>
+                <button className='app__product-up-btn' onClick={() => openUpdateModal(box)}>Updatera</button>
+            </div>
+        </div>
+    );
+
 }
 
 export default ProductsPanel;
