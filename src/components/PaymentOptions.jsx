@@ -1,8 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
+import ReactDOM from 'react-dom'
+import Modal from 'react-modal'
+
 
 function PaymentOptions() {
 
   const [paymentInfo, setPaymentInfo] = useState([])
+  const [modalIsOpen, setIsOpen] = useState(false)
+
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  }
 
   useEffect(() => {
     async function load() {
@@ -35,11 +50,39 @@ function PaymentOptions() {
     )
   }
 
+  function openModal() {
+    setIsOpen(true)
+  }
+
+  function afterOpenModal() {
+    subtitle.style.color = '#f00'
+  }
+
+  function closeModal() {
+    setIsOpen(false)
+  }
+
   return (
     <div>
       <h2>Betalningsalternativ</h2>
       <p>Här kan du hantera dina betalningsalternativ.</p>
-      <button className='paymentopt-addpay'>Lägg till betalningsalternativ</button>
+      <button className='paymentopt-addpay' onClick={openModal}>Lägg till betalningsalternativ</button>
+      <Modal isOpen={modalIsOpen}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal">
+        <h2>Hello</h2>
+        <button onClick={closeModal}>close</button>
+        <div>I am a modal</div>
+        <form>
+          <input />
+          <button>tab navigation</button>
+          <button>stays</button>
+          <button>inside</button>
+          <button>the modal</button>
+        </form>
+      </Modal>
       <div className='paymentopt-method-container'>
         {paymentInfo.map((payment, index) => (
           <div className='paymentopt-method' key={index}>
