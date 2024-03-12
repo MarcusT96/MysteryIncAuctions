@@ -80,6 +80,32 @@ const ProductsPanel = () => {
         }
     };
 
+    const sortedAndFilteredProducts = mysteryBoxes
+        .filter(box => {
+            const categorySearchMatch = searchQuery.toLowerCase().match(/^kategori (\d+)$/);
+            if (categorySearchMatch) {
+                return box.category === parseInt(categorySearchMatch[1], 10);
+            } else {
+                return box.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    box.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    box.price.toString().includes(searchQuery) ||
+                    box.category.toString().includes(searchQuery);
+            }
+        })
+        .sort((a, b) => {
+            let valueA = sortField === 'time' ? new Date(a[sortField]) : a[sortField];
+            let valueB = sortField === 'time' ? new Date(b[sortField]) : b[sortField];
+
+            if (typeof valueA === 'string') valueA = valueA.toLowerCase();
+            if (typeof valueB === 'string') valueB = valueB.toLowerCase();
+
+            if (sortOrder === 'asc') {
+                return valueA < valueB ? -1 : valueA > valueB ? 1 : 0;
+            } else {
+                return valueA > valueB ? -1 : valueA < valueB ? 1 : 0;
+            }
+        });
+
 }
 
 export default ProductsPanel;
