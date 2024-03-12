@@ -14,18 +14,6 @@
   border-radius: 8px;
 }
 
-h1 {
-  font-size: 5vw;
-  text-align: center;
-  color: #FFFFFF;
-  transition: text-shadow 0.3s ease;
-  cursor: pointer;
-}
-
-h1:hover {
-  text-shadow: 0 0 10px #F4C430, 0 0 20px #F4C430, 0 0 30px #F4C430, 0 0 40px #9EA5E4, 0 0 70px #9EA5E4, 0 0 80px #9EA5E4, 0 0 100px #9EA5E4, 0 0 150px #9EA5E4;
-}
-
 h2,
 h3 {
   margin-top: 0px;
