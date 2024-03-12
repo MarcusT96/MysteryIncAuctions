@@ -33,6 +33,22 @@ const ProductsPanel = () => {
         fetchProducts();
     }, []);
 
+    const handleAddBox = async (box) => {
+        try {
+            await fetch('http://localhost:3000/mystery_boxes', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(box),
+            });
+            alert(`Mysterielådan "${box.name}" har skapats!`);
+            await fetchProducts();
+        } catch (error) {
+            console.error('Error adding box:', error);
+        } finally {
+            setShowAddBoxModal(false);
+        }
+    };
+
 }
 
 export default ProductsPanel;
