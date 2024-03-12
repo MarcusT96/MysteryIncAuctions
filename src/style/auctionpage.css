@@ -7,15 +7,15 @@ body {
 .Auction-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 32px;
-  justify-content: center;
+  gap: 2vh;
+  justify-content: space-evenly;
   padding-top: 5vh;
   padding-bottom: 5vh;
 }
 
 .auction-card {
   width: 100%;
-  max-width: 300px;
+  max-width: 16vw;
   background-color: #9EA5E4;
   border: 0px solid #F4C430;
   border-radius: 8px;
@@ -98,4 +98,11 @@ body {
   color: #F4C430;
   text-decoration: none;
   font-weight: bold;
+}
+
+.Headline{
+  display: flex;
+  justify-content: center;
+  padding-top: 2vh;
+  font-size: 40px;
 }
