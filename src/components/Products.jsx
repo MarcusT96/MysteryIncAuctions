@@ -76,10 +76,9 @@ function Products({ searchQuery, sortOrder, sortCriterion }) {
     <article className="Auction-list">
       {filteredItems.map(item => (
         <section key={item.id} className="auction-card">
-          <h2 className="auction-title">{item.name}</h2>
-          <p className="category-name">Kategori: {item.categoryName}</p>
-          <p>{truncateString(item.description, 100)}</p>
           <img src={item.image} alt={item.name} />
+          <h3 className="auction-title">{item.name}</h3>
+          <p className="category-name">Kategori: {item.categoryName}</p>          
           <p> Tid kvar: <h2 className="tidtag">{<CountdownTimer endTime={item.time} />}</h2>  </p>
           <p>Nuvarande högsta bud: <h2 className="pristag">{item.price}kr</h2></p>
           <button onClick={() => navigateToObjectPage(item.id)} className="auctionbutton">Läs mer</button>
