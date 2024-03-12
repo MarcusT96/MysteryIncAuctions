@@ -2,6 +2,7 @@ import SearchBar from "../components/Searchbar";
 import Products from "../components/Products";
 import '../style/auctionpage.css'
 import { useState } from "react";
+import EndedAuctions from "../components/EndedAuctions";
 
 export default function Auctionpage() {
   const [searchQuery, setSearchQuery] = useState('')
@@ -32,7 +33,12 @@ export default function Auctionpage() {
       <button className="sorting" onClick={toggleSortOrder}>{sortOrder === "asc" ? "Sortera sjunkande" : "Sortera ökande"}</button>
       </div>
     <div className="auction-container">
+      <h2 className="Headline">Aktiva Auctioner</h2>
       <Products searchQuery={searchQuery} sortOrder={sortOrder} sortCriterion={sortCriterion} />
+    </div>
+    <div className="auction-container">
+      <h2 className="Headline">Avslutade auctioner</h2>
+      <EndedAuctions/>
     </div>
   </main>
 }

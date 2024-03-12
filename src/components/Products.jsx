@@ -35,15 +35,23 @@ function Products({ searchQuery, sortOrder, sortCriterion }) {
 
   useEffect(() => {
     const now = new Date() // skapar en current time variabel
-    const filtered = items.map(item => ({
-      ...item,
-      categoryName: categories[item.category], // Adderar kategorinamn till varje box
-    })).filter(item =>
-      item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.description.toLowerCase().includes(searchQuery.toLowerCase()) // searchquery till lowercase som filtrerar det du skriver i searchbaren
-    );
+    let Filtered = items.filter(item => {
+      const endTime = new Date(item.time).getTime(); // skapar en endtime variabel för att kunna mäta
+      const isActive = endTime > now.getTime(); // kollar om auctionen är aktiv
+      return isActive && (
+        item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.description.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    });
 
-    const sortedItems = [...filtered].sort((a, b) => { // Sorteringsfunktion
+    // Filtrerar och lägger till kategori
+    Filtered = Filtered.map(item => ({
+      ...item,
+      categoryName: categories[item.category], // lägger till kategori
+    }));
+
+
+    const sortedItems = Filtered.sort((a, b) => { // Sorteringsfunktion
       if (sortCriterion === 'price') {
         return sortOrder === "asc" ? a.price - b.price : b.price - a.price; // jämför pris a - pris b eller tvärtom
 
