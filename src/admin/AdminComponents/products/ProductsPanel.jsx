@@ -49,6 +49,28 @@ const ProductsPanel = () => {
         }
     };
 
+    const handleUpdateBox = async (id, updatedBox) => {
+        try {
+            const response = await fetch(`http://localhost:3000/mystery_boxes/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updatedBox),
+            });
+            if (!response.ok) {
+                throw new Error(`Failed to update: ${response.statusText}`);
+            }
+            alert(`Mysterielådan "${updatedBox.name}" har uppdaterats!`);
+            await fetchProducts();
+        } catch (error) {
+            console.error('Error updating box:', error);
+        }
+    };
+
+    const openUpdateModal = (box) => {
+        setCurrentBox(box);
+        setShowUpdateBoxModal(true);
+    };
+
 }
 
 export default ProductsPanel;
