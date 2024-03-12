@@ -106,6 +106,21 @@ const ProductsPanel = () => {
             }
         });
 
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentProducts = sortedAndFilteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+
+    const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
+    const handleSearchChange = e => setSearchQuery(e.target.value);
+    const handleSortChange = (e) => {
+        setSortField(e.target.value);
+    };
+    const handleSortOrderChange = (order) => {
+        setSortOrder(order);
+    };
+
+    if (loading) return <div>Loading...</div>;
+
 }
 
 export default ProductsPanel;
