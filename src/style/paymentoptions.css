@@ -38,3 +38,15 @@
   cursor: pointer;
   max-width: 50%;
 }
+
+.paymentopt-modal-selector {
+  border-radius: 5px;
+  max-width: 100%;
+}
+
+.paymentopt-modal-button-cancel,
+.paymentopt-modal-button-finish {
+  border-radius: 5px;
+  background-color: #F4C430;
+  font-family: 'Poppins';
+}

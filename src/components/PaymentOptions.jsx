@@ -21,7 +21,14 @@ function PaymentOptions() {
       bottom: 'auto',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
+      background: "#9EA5E4",
+      width: "50vw",
+      border: "0vw",
+      borderRadius: "0.5vw"
     },
+    overlay: {
+      backgroundColor: "rgba(0, 0, 0, 0.4)"
+    }
   }
 
   useEffect(() => {
@@ -68,7 +75,7 @@ function PaymentOptions() {
   }
 
   return (
-    <div>
+    <div className='paymentopt-container'>
       <h2>Betalningsalternativ</h2>
       <p>Här kan du hantera dina betalningsalternativ.</p>
       <button className='paymentopt-addpay' onClick={openModal}>Lägg till betalningsalternativ</button>
@@ -82,37 +89,37 @@ function PaymentOptions() {
         <h2 className='paymentopt-modal-text'>Lägg till</h2>
 
         <p className='paymentopt-modal-text'>Typ</p>
-        <select name="cardtype" id="type">
+        <select className="paymentopt-modal-selector" name="cardtype" id="type">
           <option value="Credit card">Kredit kort</option>
           <option value="Debit card">Debit kort</option>
         </select>
-        
+
         <p className='paymentopt-modal-text'>Kort nummer</p>
         <input type="text"
           value={cardNumber}
           onChange={(e) => { setCardNumber(e.target.value) }}
           placeholder='Kort nummer' />
-        
+
         <p className='paymentopt-modal-text'>Utgångsdatum</p>
         <input type="text"
           value={expDate}
           onChange={(e) => { setExpDate(e.target.value) }}
           placeholder='Utgångs datum' />
-        
+
         <p className='paymentopt-modal-text'>CVC</p>
         <input type="text"
           value={cardCvc}
           onChange={(e) => { setCardCvc(e.target.value) }}
           placeholder='CVC' />
-        
+
         <p className='paymentopt-modal-text'>Kort ägare</p>
         <input type="text"
           value={cardHolder}
           onChange={(e) => { setCardHolder(e.target.value) }}
           placeholder='Kort ägare' />
 
-        <button onClick={closeModal}>Klar</button>
-        <button onClick={closeModal}>Avbryt</button>
+        <button className="paymentopt-modal-button-finish" onClick={closeModal}>Klar</button>
+        <button className="paymentopt-modal-button-cancel" onClick={closeModal}>Avbryt</button>
       </Modal>
 
       <div className='paymentopt-method-container'>
