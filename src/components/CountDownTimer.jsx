@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const CountdownTimer = ({ endTime }) => {
+const CountdownTimer = ({ endTime, onEnd }) => {
   const [timeLeft, setTimeLeft] = useState('');
 
   useEffect(() => {
@@ -18,8 +18,15 @@ const CountdownTimer = ({ endTime }) => {
         };
 
         return `${timeLeft.days}d ${timeLeft.hours}h ${timeLeft.minutes}m ${timeLeft.seconds}s`;
+      } else {
+        // Here, we check if there's an onEnd callback provided and if the timer just reached zero
+        // We only want to call onEnd if the countdown actually finished (difference <= 0)
+        // This condition prevents calling onEnd more than once
+        if (onEnd && timeLeft !== 'Auktionen har avslutats.') {
+          onEnd();
+        }
+        return 'Auktionen har avslutats.';
       }
-      return 'Auktionen har avslutats.';
     };
 
     const timer = setInterval(() => {
@@ -29,11 +36,12 @@ const CountdownTimer = ({ endTime }) => {
 
     // Cleanup on component unmount
     return () => clearInterval(timer);
-  }, [endTime]);
+  }, [endTime, timeLeft, onEnd]); // Added timeLeft and onEnd to the dependency array to ensure the effect is aware of their updates
 
-  return (<>
-    {timeLeft}
-  </>
+  return (
+    <>
+      {timeLeft}
+    </>
   );
 };
 

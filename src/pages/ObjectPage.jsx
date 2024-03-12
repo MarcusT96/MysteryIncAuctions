@@ -9,6 +9,7 @@ export default function ObjectPage() {
   const [box, setBox] = useState(null);
   const [category, setCategory] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [auctionEnded, setAuctionEnded] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
@@ -29,25 +30,36 @@ export default function ObjectPage() {
     handleBidConfirm(box, bidAmount, setBox, setIsModalVisible, toast);
   };
 
+  const onCountdownEnd = () => {
+    setAuctionEnded(true);
+  };
+
+  const showBidButton = () => !auctionEnded;
+
+
+  const getBidText = () => auctionEnded ? `Slutpris: ${box.price} SEK` : `Nuvarande högsta bud: ${box.price} SEK`;
+
   if (!box || !category) return <div>Loading...</div>;
 
   return (
     <div className="objectpage-container">
       <div className="left--container">
         <img className="box--img" src={box.image} alt={box.name} />
-        <p className="time--left--left">Tid kvar av auktion: <h2 className="time--left">{<CountdownTimer endTime={box.time} />}</h2></p>
+        <p className="time--left">Tid kvar av auktion: <CountdownTimer endTime={box.time} onEnd={() => setAuctionEnded(true)} /></p>
       </div>
       <div className="right--container">
         <h3 className="box--title">{box.name}</h3>
         <p className="product--description">{box.description}</p>
         <p className="category-name">Kategori: <b>{category.categoryName}</b></p>
-        <p className="highest--bid">Nuvarande högsta bud: <b>{box.price} SEK</b></p>
-        <button className="bid--button" onClick={() => setIsModalVisible(true)}>Lägg bud</button>
+        <p className="highest--bid">{getBidText()}</p>
+        {showBidButton() && (
+          <button className="bid--button" onClick={() => setIsModalVisible(true)}>Lägg bud</button>
+        )}
         {isModalVisible && (
           <BidPopUp
             box={box}
             onClose={() => setIsModalVisible(false)}
-            onConfirm={confirmBid}
+            onConfirm={(bidAmount) => confirmBid(bidAmount)}
           />
         )}
       </div>
