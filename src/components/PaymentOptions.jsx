@@ -25,6 +25,16 @@ function PaymentOptions() {
     return censored
   }
 
+  const removePaymentOption = async (paymentId) => {
+    await fetch(`http://localhost:3000/payment_options/${paymentId}`, {
+      method: 'DELETE',
+    })
+
+    setPaymentInfo((prevPaymentInfo) =>
+      prevPaymentInfo.filter((payment) => payment.id !== paymentId)
+    )
+  }
+
   return (
     <div>
       <h2>Betalningsalternativ</h2>
@@ -36,7 +46,7 @@ function PaymentOptions() {
             <h2 className='paymentopt-type'>{payment.type}</h2>
             <p className='paymentopt-holder'>Ägare: {payment.cardholder_name}</p>
             <p className='paymentopt-number'>{censorCard(payment.card_number)}</p>
-            <button className='paymentopt-remove'>Ta bort</button>
+            <button className='paymentopt-remove' onClick={() => removePaymentOption(payment.id)}>Ta bort</button>
           </div>
         ))}
       </div>
