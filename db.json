@@ -219,35 +219,47 @@
   "categories": [
     {
       "id": "1",
-      "categoryName": "Äventyr"
+      "categoryName": "Teknik & Gadgets"
     },
     {
       "id": "2",
-      "categoryName": "Detektiv"
+      "categoryName": "Spel & Hobby"
     },
     {
       "id": "3",
-      "categoryName": "Champion"
+      "categoryName": "Skönhet & Välbefinnande"
     },
     {
       "id": "4",
-      "categoryName": "Pokémon"
+      "categoryName": "Mode & Assessoarer"
     },
     {
       "id": "5",
-      "categoryName": "Mode"
+      "categoryName": "Mat & Godis"
     },
     {
       "id": "6",
-      "categoryName": "Mysterium"
+      "categoryName": "Böcker & Litteratur"
     },
     {
       "id": "7",
-      "categoryName": "Toppval"
+      "categoryName": "Film & Musik"
     },
     {
       "id": "8",
-      "categoryName": "Teknik"
+      "categoryName": "Hem & Trädgård"
+    },
+    {
+      "id": "9",
+      "categoryName": "Fitness & Sport"
+    },
+    {
+      "id": "10",
+      "categoryName": "Resor & Äventyr"
+    },
+    {
+      "id": "11",
+      "categoryName": "Annat"
     }
   ],
   "payment_options": [
