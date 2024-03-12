@@ -71,6 +71,15 @@ const ProductsPanel = () => {
         setShowUpdateBoxModal(true);
     };
 
+    const deleteBox = async (id) => {
+        try {
+            await fetch(`http://localhost:3000/mystery_boxes/${id}`, { method: 'DELETE' });
+            fetchProducts();
+        } catch (error) {
+            console.error('Error deleting box:', error);
+        }
+    };
+
 }
 
 export default ProductsPanel;
