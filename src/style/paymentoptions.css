@@ -5,6 +5,14 @@
   width: 100%;
 }
 
+.paymentopt-addpay {
+  font-family: 'Poppins';
+  border-radius: 50px;
+  border: none;
+  background-color: #F4C430;
+  cursor: pointer;
+}
+
 .paymentopt-method {
   display: flex;
   flex-direction: column;

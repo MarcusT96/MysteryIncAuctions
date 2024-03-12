@@ -8,6 +8,11 @@ function PaymentOptions() {
   const [paymentInfo, setPaymentInfo] = useState([])
   const [modalIsOpen, setIsOpen] = useState(false)
 
+  const [cardNumber, setCardNumber] = useState("")
+  const [expDate, setExpDate] = useState("")
+  const [cardCvc, setCardCvc] = useState("")
+  const [cardHolder, setCardHolder] = useState("")
+
   const customStyles = {
     content: {
       top: '50%',
@@ -67,22 +72,49 @@ function PaymentOptions() {
       <h2>Betalningsalternativ</h2>
       <p>Här kan du hantera dina betalningsalternativ.</p>
       <button className='paymentopt-addpay' onClick={openModal}>Lägg till betalningsalternativ</button>
+
       <Modal isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         style={customStyles}
-        contentLabel="Example Modal">
-        <h2>Hello</h2>
-        <button onClick={closeModal}>close</button>
-        <div>I am a modal</div>
-        <form>
-          <input />
-          <button>tab navigation</button>
-          <button>stays</button>
-          <button>inside</button>
-          <button>the modal</button>
-        </form>
+        contentLabel="paymentopt-add">
+
+        <h2 className='paymentopt-modal-text'>Lägg till</h2>
+
+        <p className='paymentopt-modal-text'>Typ</p>
+        <select name="cardtype" id="type">
+          <option value="Credit card">Kredit kort</option>
+          <option value="Debit card">Debit kort</option>
+        </select>
+        
+        <p className='paymentopt-modal-text'>Kort nummer</p>
+        <input type="text"
+          value={cardNumber}
+          onChange={(e) => { setCardNumber(e.target.value) }}
+          placeholder='Kort nummer' />
+        
+        <p className='paymentopt-modal-text'>Utgångsdatum</p>
+        <input type="text"
+          value={expDate}
+          onChange={(e) => { setExpDate(e.target.value) }}
+          placeholder='Utgångs datum' />
+        
+        <p className='paymentopt-modal-text'>CVC</p>
+        <input type="text"
+          value={cardCvc}
+          onChange={(e) => { setCardCvc(e.target.value) }}
+          placeholder='CVC' />
+        
+        <p className='paymentopt-modal-text'>Kort ägare</p>
+        <input type="text"
+          value={cardHolder}
+          onChange={(e) => { setCardHolder(e.target.value) }}
+          placeholder='Kort ägare' />
+
+        <button onClick={closeModal}>Klar</button>
+        <button onClick={closeModal}>Avbryt</button>
       </Modal>
+
       <div className='paymentopt-method-container'>
         {paymentInfo.map((payment, index) => (
           <div className='paymentopt-method' key={index}>
