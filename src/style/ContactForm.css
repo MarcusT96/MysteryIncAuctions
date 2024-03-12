@@ -2,16 +2,17 @@
   width: 800px;
   margin: auto;
   padding: 20px;
-  background-color: #2D3E50;
-  color: #FFFFFF;
+  background-color: #F5F5F5; /* Uppdaterad till mjukt grå */
+  color: #495057; /* Uppdaterad till mörkgrå */
 }
 
 h2 {
   margin-top: 0px;
+  color: #495057; /* Säkerställer att rubrikerna följer textfärgschemat */
 }
 
 #contact {
-  background-color: #9EA5E4;
+  background-color: #007BFF; /* Uppdaterad till ljusblå */
   padding: 20px;
   border-radius: 8px;
 }
@@ -23,6 +24,7 @@ h2 {
 label {
   display: block;
   margin-bottom: 5px;
+  color: #495057; /* Säkerställer att etiketterna är läsbara mot den ljusare bakgrunden */
 }
 
 input[type="text"],
@@ -31,13 +33,15 @@ textarea {
   width: calc(100% - 20px);
   padding: 8px;
   margin-bottom: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #ccc; /* Kan övervägas att ändras till en färg från schemat om nödvändigt */
   border-radius: 4px;
+  background-color: #FFFFFF; /* Säkerställer att inmatningsfälten är tydliga mot den mörkare bakgrunden */
+  color: #495057; /* Input text color for better readability */
 }
 
 button[type="submit"] {
-  background-color: #F4C430;
-  color: white;
+  background-color: #FFC107; /* Uppdaterad till gul */
+  color: #495057; /* Textfärgen ändrad till mörkgrå för kontrast */
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
@@ -46,7 +50,7 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background-color: #c59e28;
+  background-color: #E0A800; /* Mörkare nyans av gul för hover-effekt */
 }
 
 .popup-message {
@@ -54,7 +58,8 @@ button[type="submit"]:hover {
   top: 20%;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #3a5068;
+  background-color: #28A745; /* Uppdaterad till grön */
+  color: #FFFFFF; /* Vit text för kontrast mot den gröna bakgrunden */
   padding: 30px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -69,13 +74,12 @@ button[type="submit"]:hover {
   right: 5px;
   background: transparent;
   border: none;
-  color: #FFFFFF;
+  color: #FFFFFF; /* Säkerställer att stängknappen är synlig mot bakgrunden */
   font-size: 1.5em;
   cursor: pointer;
 }
 
 @media (max-width: 768px) {
-
   .contact-container,
   #contact {
     width: auto;
