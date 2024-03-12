@@ -1,10 +1,9 @@
-// EditProfile.jsx
 import React from 'react';
 
+// En funktionell komponent för att redigera användarens profilinformation.
 function EditProfile({ userInfo, handleInputChange, handleSubmit }) {
-  // Antag att userInfo, handleInputChange och handleSubmit
-  // skickas ner som props från ProfilePage
 
+  // Renderar ett formulär som tillåter användaren att uppdatera sina uppgifter.
   return (
     <form onSubmit={handleSubmit} className="profile-page-form">
       <h2>Ändra Mina Uppgifter</h2>
@@ -89,6 +88,7 @@ function EditProfile({ userInfo, handleInputChange, handleSubmit }) {
         />
       </div>
       <button type="submit" className="profile-page-button">Spara Ändringar</button>
+      {/* En knapp för att skicka formuläret. När den klickas på anropas handleSubmit-funktionen. */}
 
     </form>
   );
