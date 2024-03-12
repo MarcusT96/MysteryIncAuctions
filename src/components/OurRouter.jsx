@@ -19,35 +19,46 @@ import ProtectedRoute from "../admin/AdminComponents/auth/ProtectedRoute.jsx"
 import Users from "../admin/AdminComponents/users/Users.jsx"
 import DashboardLayout from "../admin/AdminComponents/DashboardLayout/DashboardLayout.jsx"
 import ProductsPanel from "../admin/AdminComponents/products/ProductsPanel.jsx"
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
 
 function OurRouter() {
+  useEffect(() => {
+    AOS.init({
+      duration: 700, 
+      once: true, 
+    });
+   
+  }, []);
 
   return (<>
     <Navbar />
-    <Routes>
-      <Route path="/" element={<MyHomePage />}></Route>
-      <Route path="/box/:id" element={<ObjectPage />}></Route>
-      <Route path="/Auctionpage" element={<Auctionpage />}></Route>
-      <Route path="/about" element={<AboutUs />}></Route>
-      <Route path="/contact" element={<ContactForm />}></Route>
-      <Route path="/legal" element={<LegalPage />}></Route>
-      <Route path="/salespolicies" element={<SalesPoliciesPage />}></Route>
-      <Route path="/legal/terms" element={<TermsPage />}></Route>
-      <Route path="/legal/privacy/cookies" element={<PrivacyPage />}></Route>
-      <Route path="/legal/privacy" element={<IntegrityPage />}></Route>
-      <Route path="/sitemap" element={<SiteMapPage />}></Route>
-      <Route path="/login" element={<LogIn />}></Route>
-      <Route path="/profile" element={<ProfilePage />}></Route>
+    <div data-aos="fade">
+      <Routes>
+        <Route path="/" element={<MyHomePage />}></Route>
+        <Route path="/box/:id" element={<ObjectPage />}></Route>
+        <Route path="/Auctionpage" element={<Auctionpage />}></Route>
+        <Route path="/about" element={<AboutUs />}></Route>
+        <Route path="/contact" element={<ContactForm />}></Route>
+        <Route path="/legal" element={<LegalPage />}></Route>
+        <Route path="/salespolicies" element={<SalesPoliciesPage />}></Route>
+        <Route path="/legal/terms" element={<TermsPage />}></Route>
+        <Route path="/legal/privacy/cookies" element={<PrivacyPage />}></Route>
+        <Route path="/legal/privacy" element={<IntegrityPage />}></Route>
+        <Route path="/sitemap" element={<SiteMapPage />}></Route>
+        <Route path="/login" element={<LogIn />}></Route>
+        <Route path="/profile" element={<ProfilePage />}></Route>
 
-      <Route path="/dashboard" element={
-        <ProtectedRoute>
-          <DashboardLayout />
-        </ProtectedRoute>}>
-        <Route path="/dashboard/users" element={<Users />} />
-        <Route path="/dashboard/products" element={<ProductsPanel />} />
-      </Route>
-    </Routes>
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <DashboardLayout />
+          </ProtectedRoute>}>
+          <Route path="/dashboard/users" element={<Users />} />
+          <Route path="/dashboard/products" element={<ProductsPanel />} />
+        </Route>
+      </Routes>
+    </div>
     <Footer />
   </>
   );
