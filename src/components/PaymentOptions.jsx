@@ -71,7 +71,40 @@ function PaymentOptions() {
   }
 
   function closeModal() {
+    console.log("Closing modal...")
     setIsOpen(false)
+  }
+
+  const addPaymentOption = async () => {
+    const data = {
+      user_id: localStorage.currentUserId,
+      type: document.getElementById('type').value,
+      card_number: cardNumber,
+      expiration_date: expDate,
+      cvc: cardCvc,
+      cardholder_name: cardHolder,
+    }
+
+    try {
+      const response = await fetch(`http://localhost:3000/payment_options/`, {
+        method: `POST`,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        closeModal(); // Close the modal
+        console.log("Modal closed successfully.");
+        const newPaymentOption = await response.json();
+        setPaymentInfo(prevPaymentInfo => [...prevPaymentInfo, newPaymentOption]);
+      } else {
+        console.error('Failed to add payment option');
+      }
+    } catch (error) {
+      console.error('Error adding payment option:', error);
+    }
   }
 
   return (
@@ -98,27 +131,27 @@ function PaymentOptions() {
         <input type="text"
           value={cardNumber}
           onChange={(e) => { setCardNumber(e.target.value) }}
-          placeholder='Kort nummer' />
+          placeholder='XXXX-XXXX-XXXX-XXXX' />
 
         <p className='paymentopt-modal-text'>Utgångsdatum</p>
         <input type="text"
           value={expDate}
           onChange={(e) => { setExpDate(e.target.value) }}
-          placeholder='Utgångs datum' />
+          placeholder='XX-XX' />
 
         <p className='paymentopt-modal-text'>CVC</p>
         <input type="text"
           value={cardCvc}
           onChange={(e) => { setCardCvc(e.target.value) }}
-          placeholder='CVC' />
+          placeholder='XXX' />
 
         <p className='paymentopt-modal-text'>Kort ägare</p>
         <input type="text"
           value={cardHolder}
           onChange={(e) => { setCardHolder(e.target.value) }}
-          placeholder='Kort ägare' />
+          placeholder='' />
 
-        <button className="paymentopt-modal-button-finish" onClick={closeModal}>Klar</button>
+        <button className="paymentopt-modal-button-finish" onClick={addPaymentOption}>Klar</button>
         <button className="paymentopt-modal-button-cancel" onClick={closeModal}>Avbryt</button>
       </Modal>
 
