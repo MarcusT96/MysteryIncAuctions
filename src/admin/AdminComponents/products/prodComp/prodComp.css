@@ -1,0 +1,66 @@
+.app_prodcomp-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 80%;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    border-radius: 20px;
+    margin-left: 17rem;
+    margin-top: 6rem;
+}
+
+.app_prodcomp-modal-content {
+    position: relative;
+    background-color: hsl(0, 0%, 60%, 0.4);
+    backdrop-filter: blur(20px);
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.app_prodcomp-modal-content label {
+    font-weight: bold;
+    font-size: 16px;
+    padding-top: 1rem;
+    color: #bdbdbd;
+}
+
+.app__products-container .app_prodcomp-add-btn,
+.app__products-container .app_prodcomp-close-btn,
+.app_prodcomp-modal-content .app_prodcomp-update-btn,
+.app_prodcomp-modal-content .app_prodcomp-cancel-btn {
+    width: 70%;
+    padding: 10px;
+    margin: 0.5rem;
+}
+
+.app__products-container .app_prodcomp-add-btn,
+.app_prodcomp-modal-content .app_prodcomp-update-btn {
+    background-color: darkgoldenrod;
+}
+
+.app__products-container .app_prodcomp-add-btn,
+.app__products-container .app_prodcomp-close-btn,
+.app_prodcomp-modal-content .app_prodcomp-update-btn,
+.app_prodcomp-modal-content .app_prodcomp-cancel-btn {
+    border-radius: 5px;
+    box-shadow: none;
+    border: none;
+}
+
+.app_prodcomp-add-btn:hover,
+.app_prodcomp-close-btn:hover,
+.app_prodcomp-update-btn:hover,
+.app_prodcomp-cancel-btn {
+    cursor: pointer;
+}
