@@ -51,6 +51,13 @@ function OrderHistory() {
     return `${year}-${month}-${day} ${hours}:${minutes}`
   }
 
+  const handlePaymentComplete = (updatedOrder) => {
+    const updatedOrders = orders.map((order) =>
+      order.id === updatedOrder.id ? updatedOrder : order
+    );
+    setOrders(updatedOrders);
+  };
+
   return (
     <div className="orderhistory-container">
       {orders.length > 0 ? (
@@ -65,7 +72,10 @@ function OrderHistory() {
             </div>
           </div>
         ))) : <p>Du har inga Beställningar</p>}
-      {isModalOpen && <Payment isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} order={selectedOrder} />}
+      {isModalOpen && <Payment isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        order={selectedOrder}
+        onPaymentComplete={handlePaymentComplete} />}
     </div>
   )
 }

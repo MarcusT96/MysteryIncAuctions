@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import Modal from 'react-modal'
 
-function Payment({ isOpen, onClose, order }) {
+function Payment({ isOpen, onClose, order, onPaymentComplete }) {
 
   const [cardType, setCardType] = useState("")
   const [cardNumber, setCardNumber] = useState("")
@@ -10,6 +10,7 @@ function Payment({ isOpen, onClose, order }) {
   const [cardHolder, setCardHolder] = useState("")
 
   const [paymentInfo, setPaymentInfo] = useState([])
+  const [paymentStatus, setPaymentStatus] = useState("")
 
   const customStyles = {
     content: {
@@ -69,6 +70,9 @@ function Payment({ isOpen, onClose, order }) {
       })
 
       if (response.ok) {
+        const updatedOrder = { ...order, paid: true }
+        setPaymentStatus("Payment successful")
+        onPaymentComplete(updatedOrder)
         onClose()
       } else {
         console.error('Failed to update payment status')
