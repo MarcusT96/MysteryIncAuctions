@@ -79,6 +79,46 @@
       "description": "AmazonBoxen bjuder in dig på en upptäcktsfärd genom Amazons oändliga utbud, med en unik blandning av produkter från alla tänkbara kategorier. Varje låda är en resa genom teknikens underverk, hushållens nödvändigheter, och kulturens skatter, noggrant utvalda för att överraska och glädja. Det är en chans att uppleva det oväntade, att stöta på föremål du aldrig visste att du behövde och att hitta nya favoriter som berikar din vardag. AmazonBoxen är din portal till en värld av upptäckt, där varje objekt är ett steg på vägen mot nya äventyr.",
       "category": 8,
       "image": "https://facts.net/wp-content/uploads/2023/10/14-mind-blowing-facts-about-amazon-mystery-box-1697546639.jpg"
+    },
+    {
+      "name": "Bergens Hemlighet",
+      "weight": "10",
+      "price": "4999",
+      "time": "2024-05-31T10:33:00.000Z",
+      "description": "Dyk in i det okända med vår exklusiva Mystery Box, ditt pass till ett hemligt äventyr i en legendarisk bergskedja! Kuraterad av experter för att väcka din äventyrslust, lovar denna låda en unik upplevelse fylld med spänning och upptäckter. Innehållet är en välbevarad hemlighet, utformad för att överraska och inspirera. Är du redo att ta steget in i en värld av mysterier? Lägg ditt bud nu och förbered dig för resan av ditt liv!",
+      "category": "10",
+      "image": "https://i.imgur.com/tUy85uO.jpg",
+      "id": "6c79"
+    },
+    {
+      "id": "89a9",
+      "name": "Smakernas Skatt",
+      "weight": "25",
+      "price": "599",
+      "time": "2024-04-01T14:38",
+      "description": "Utforska den kulinariska världens hemligheter med \"Smakernas Skatt\", en exklusiv auktion som erbjuder en gåtfull box fylld med oöverträffade matlagningsupplevelser. Sammansatt av världsberömda kockar, innehåller denna extraordinära låda allt från sällsynta ingredienser till privata matlagningskurser. Varje objekt är en pusselbit i din gastronomiska resa, skräddarsydd för att väcka din nyfikenhet och förädla dina matlagningsfärdigheter. Missa inte chansen att utforska matlagningens konst på en nivå du aldrig tidigare upplevt. Auktionen avslutas snart - lägg ditt bud och låt din kulinariska odyssey börja!",
+      "category": "5",
+      "image": "https://i.imgur.com/dwV46aS.jpeg"
+    },
+    {
+      "id": "26e3",
+      "name": "Destination Okänd",
+      "weight": "5",
+      "price": "9999",
+      "time": "2024-07-25T14:41",
+      "description": "Upptäck världen med \"Destination Okänd\", en unik mystery box som erbjuder en hemlig jordenruntresa. Vad boxen innehåller är en välbevarad hemlighet, utformad för att locka fram äventyraren i dig. Kanske väntar privatflyg till avlägsna öar, exklusiva middagar under norrskenet, eller kulturella upplevelser som ännu inte upptäckts av massorna? Varje element i denna mystery box är valt för att berika din resa med oväntade upplevelser och ovärderliga minnen. Ge dig själv chansen att utforska planeten på ett sätt som aldrig tidigare varit möjligt. Ditt nästa stora äventyr börjar med ett bud – missa inte denna möjlighet till en resa utöver det vanliga.",
+      "category": "10",
+      "image": "https://i.imgur.com/PTwVotF.jpeg"
+    },
+    {
+      "id": "a349",
+      "name": "Guldmedaljörens Gåva",
+      "weight": "10",
+      "price": "2000",
+      "time": "2024-04-30T14:44",
+      "description": "Välkommen till auktionen av \"Guldmedaljörens Gåva\", en mystery box med exklusivt sportinnehåll som överträffar alla förväntningar. Vad väntar inuti? Kanske signerade samlarföremål från olympiska legender, privatlektioner med världsmästare, eller VIP-biljetter till de mest eftertraktade sportevenemangen globalt. Denna låda är inte bara en samling av föremål; den är en biljett till en värld av passion, prestation och exklusivitet. Designad för den sanna sportentusiasten som söker det yttersta inom sportens värld. Vågar du missa chansen att äga något så unikt? Lägg ditt bud nu och upptäck vad som gömmer sig bakom denna extraordinära sportupplevelse.",
+      "category": "",
+      "image": "https://i.imgur.com/t3YWz7l.jpeg"
     }
   ],
   "bought_boxes": [
@@ -91,7 +131,7 @@
       "description": "Köpt låda test",
       "image": "https://www.ikea.com/se/sv/images/products/pappis-lada-med-lock-brun__0710998_pe727873_s5.jpg?f=s",
       "buyer_id": "1",
-      "paid": false,
+      "paid": true,
       "delivered": false
     },
     {
