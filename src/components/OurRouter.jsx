@@ -19,6 +19,7 @@ import ProtectedRoute from "../admin/AdminComponents/auth/ProtectedRoute.jsx"
 import Users from "../admin/AdminComponents/users/Users.jsx"
 import DashboardLayout from "../admin/AdminComponents/DashboardLayout/DashboardLayout.jsx"
 import ProductsPanel from "../admin/AdminComponents/products/ProductsPanel.jsx"
+import Orders from "../admin/AdminComponents/Orders/Orders.jsx"
 
 
 function OurRouter() {
@@ -46,6 +47,7 @@ function OurRouter() {
         </ProtectedRoute>}>
         <Route path="/dashboard/users" element={<Users />} />
         <Route path="/dashboard/products" element={<ProductsPanel />} />
+        <Route path="/dashboard/orders" element={<Orders />} />
       </Route>
     </Routes>
     <Footer />
