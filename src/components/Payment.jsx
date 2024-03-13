@@ -62,6 +62,19 @@ function Payment({ isOpen, onClose, order, onPaymentComplete }) {
   }
 
   const handlePaymentConfirmation = async () => {
+    if (!cardType || !cardNumber || !expDate || !cardCvc || !cardHolder) {
+      toast.error("Vänligen fyll i alla fält", {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      })
+      return
+    }
+
     try {
       const response = await fetch(`/api/bought_boxes/${order.id}`, {
         method: 'PATCH',
