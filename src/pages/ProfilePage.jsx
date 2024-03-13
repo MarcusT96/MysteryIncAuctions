@@ -37,7 +37,7 @@ function ProfilePage() {
       const isAdmin = localStorage.getItem('isAdmin') === 'true';
       if (userId) {
         try {
-          const response = await fetch(`http://localhost:3000/users/${userId}`);
+          const response = await fetch(`/api/users/${userId}`);
           const userData = await response.json();
           setUserInfo(userData);
           setUser({ id: userId, isAdmin });
@@ -67,7 +67,7 @@ function ProfilePage() {
     const userId = localStorage.getItem('currentUserId');
 
     try {
-      const response = await fetch(`http://localhost:3000/users/${userId}`, {
+      const response = await fetch(`/api/users/${userId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

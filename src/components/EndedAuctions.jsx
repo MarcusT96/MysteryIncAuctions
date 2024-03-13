@@ -7,7 +7,7 @@ function EndedAuctions() {
 
   useEffect(() => {
     async function loadEndedAuctions() {
-      const response = await fetch(`http://localhost:3000/mystery_boxes`);
+      const response = await fetch(`/api/mystery_boxes`);
       const data = await response.json();
       const now = new Date();
       const endedAuctions = data.filter(item => {

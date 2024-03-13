@@ -18,11 +18,11 @@ function Products({ searchQuery, sortOrder, sortCriterion }) {
 
   useEffect(() => {
     async function load() {
-      const response = await fetch(`http://localhost:3000/mystery_boxes`)
+      const response = await fetch(`/api/mystery_boxes`)
       const data = await response.json();
       setItems(data);
 
-      const categoriesResponse = await fetch(`http://localhost:3000/categories`);
+      const categoriesResponse = await fetch(`/api/categories`);
       const categoriesData = await categoriesResponse.json();
       const categoriesMap = categoriesData.reduce((acc, category) => {
         acc[category.id] = category.categoryName; // Map id to categoryName

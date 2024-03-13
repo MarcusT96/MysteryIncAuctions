@@ -14,12 +14,12 @@ export default function ObjectPage() {
 
   useEffect(() => {
     async function load() {
-      const response = await fetch(`http://localhost:3000/mystery_boxes/${id}`);
+      const response = await fetch(`/api/mystery_boxes/${id}`);
       const boxData = await response.json();
       setBox(boxData);
 
       // Assuming you have a separate endpoint for categories
-      const categoryResponse = await fetch(`http://localhost:3000/categories/${boxData.category}`);
+      const categoryResponse = await fetch(`/api/mystery_boxes/${boxData.category}`);
       const categoryData = await categoryResponse.json();
       setCategory(categoryData);
     }
