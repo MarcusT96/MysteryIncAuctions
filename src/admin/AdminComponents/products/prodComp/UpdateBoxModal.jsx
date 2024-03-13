@@ -13,11 +13,6 @@ function UpdateBoxModal({ box, onUpdate, onClose, categories }) {
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
-    const findCategoryIdByName = (categoryName) => {
-        const categoryObj = categories.find(cat => cat.categoryName === categoryName);
-        return categoryObj ? categoryObj.id : null;
-    };
-
     useEffect(() => {
         setName(box.name);
         setWeight(box.weight);

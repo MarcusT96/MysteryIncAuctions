@@ -11,11 +11,6 @@ function AddBoxForm({ onAdd, onClose, categories }) {
     const [imageUrl, setImageUrl] = useState('');
     const [formError, setFormError] = useState('');
 
-    const findCategoryIdByName = (categoryName) => {
-        const categoryObj = categories.find(cat => cat.categoryName === categoryName);
-        return categoryObj ? categoryObj.id : null;
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -30,7 +25,7 @@ function AddBoxForm({ onAdd, onClose, categories }) {
             price,
             time,
             description,
-            category: findCategoryIdByName(category),
+            category,
             image: imageUrl
         };
 
