@@ -23,6 +23,8 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from 'react';
 import NonAdminLayout from "./NonAdminLayout.jsx"
+import Orders from "../admin/AdminComponents/Orders/Orders.jsx"
+
 
 function OurRouter() {
   useEffect(() => {
@@ -58,6 +60,7 @@ function OurRouter() {
         </ProtectedRoute>}>
         <Route path="/dashboard/users" element={<Users />} />
         <Route path="/dashboard/products" element={<ProductsPanel />} />
+        <Route path="/dashboard/orders" element={<Orders />} />
       </Route>
     </Routes>
     <Footer />
