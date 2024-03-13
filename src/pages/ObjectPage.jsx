@@ -16,11 +16,13 @@ export default function ObjectPage() {
     async function load() {
       const response = await fetch(`/api/mystery_boxes/${id}`);
       const boxData = await response.json();
+      console.log(boxData)
       setBox(boxData);
 
       // Assuming you have a separate endpoint for categories
-      const categoryResponse = await fetch(`/api/mystery_boxes/${boxData.category}`);
+      const categoryResponse = await fetch(`/api/categories/${boxData.category}`);
       const categoryData = await categoryResponse.json();
+      console.log(categoryData)
       setCategory(categoryData);
     }
     load();
