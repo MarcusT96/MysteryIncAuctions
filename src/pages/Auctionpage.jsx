@@ -37,7 +37,7 @@ export default function Auctionpage() {
       <Products searchQuery={searchQuery} sortOrder={sortOrder} sortCriterion={sortCriterion} />
     </div>
     <div className="auction-container">
-      <h2 className="Headline">Avslutade auctioner</h2>
+      <h2 className="Headline">Avslutade auktioner</h2>
       <EndedAuctions/>
     </div>
   </main>

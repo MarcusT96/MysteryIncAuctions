@@ -7,7 +7,7 @@ function EndedAuctions() {
 
   useEffect(() => {
     async function loadEndedAuctions() {
-      const response = await fetch(`http://localhost:3000/mystery_boxes`);
+      const response = await fetch(`/api/mystery_boxes`);
       const data = await response.json();
       const now = new Date();
       const endedAuctions = data.filter(item => {
@@ -32,7 +32,7 @@ function EndedAuctions() {
             <img src={item.image} alt={item.name} />
             <div>
               <h3>{item.name}</h3>
-              <p>Avslutningspris: <h2 className="tidtag">{item.price}kr</h2></p>
+              <p>Slutpris: <h2 className="tidtag">{item.price}kr</h2></p>
               <p>Avslutades: {new Date(item.time).toLocaleString('default', {  hour12: false })}</p>
               <button onClick={() => navigateToObjectPage(item.id)} className="auctionbutton">Läs mer</button>
             </div>

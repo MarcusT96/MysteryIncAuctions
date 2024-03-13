@@ -12,7 +12,7 @@ const Users = () => {
     const usersPerPage = 10;
 
     useEffect(() => {
-        fetch('http://localhost:3000/users')
+        fetch('/api/users')
             .then(response => response.json())
             .then(data => setUsers(data))
             .catch(error => console.error('Error:', error));

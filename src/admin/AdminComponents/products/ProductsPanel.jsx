@@ -19,7 +19,7 @@ const ProductsPanel = () => {
     const fetchProducts = async () => {
         setLoading(true);
         try {
-            const response = await fetch('http://localhost:3000/mystery_boxes');
+            const response = await fetch('/api/mystery_boxes');
             const data = await response.json();
             setMysteryBoxes(data);
         } catch (error) {
@@ -35,7 +35,7 @@ const ProductsPanel = () => {
 
     const handleAddBox = async (box) => {
         try {
-            await fetch('http://localhost:3000/mystery_boxes', {
+            await fetch('/api/mystery_boxes', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(box),
@@ -51,7 +51,7 @@ const ProductsPanel = () => {
 
     const handleUpdateBox = async (id, updatedBox) => {
         try {
-            const response = await fetch(`http://localhost:3000/mystery_boxes/${id}`, {
+            const response = await fetch(`/api/mystery_boxes/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(updatedBox),
@@ -73,7 +73,7 @@ const ProductsPanel = () => {
 
     const deleteBox = async (id) => {
         try {
-            await fetch(`http://localhost:3000/mystery_boxes/${id}`, { method: 'DELETE' });
+            await fetch(`/api/mystery_boxes/${id}`, { method: 'DELETE' });
             fetchProducts();
         } catch (error) {
             console.error('Error deleting box:', error);

@@ -33,7 +33,7 @@ function PaymentOptions() {
 
   useEffect(() => {
     async function load() {
-      const response = await fetch(`http://localhost:3000/payment_options`)
+      const response = await fetch(`/api/payment_options`)
       const data = await response.json()
       let paymentData = []
       for (let method of data) {
@@ -53,7 +53,7 @@ function PaymentOptions() {
   }
 
   const removePaymentOption = async (paymentId) => {
-    await fetch(`http://localhost:3000/payment_options/${paymentId}`, {
+    await fetch(`/api/payment_options/${paymentId}`, {
       method: 'DELETE',
     })
 
@@ -86,7 +86,7 @@ function PaymentOptions() {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/payment_options/`, {
+      const response = await fetch(`/api/payment_options/`, {
         method: `POST`,
         headers: {
           'Content-Type': 'application/json',
