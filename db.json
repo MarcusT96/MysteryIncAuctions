@@ -111,14 +111,14 @@
       "image": "https://i.imgur.com/PTwVotF.jpeg"
     },
     {
-      "id": "a349",
       "name": "Guldmedaljörens Gåva",
       "weight": "10",
       "price": "2000",
-      "time": "2024-04-30T14:44",
+      "time": "2024-04-30T10:44:00.000Z",
       "description": "Välkommen till auktionen av \"Guldmedaljörens Gåva\", en mystery box med exklusivt sportinnehåll som överträffar alla förväntningar. Vad väntar inuti? Kanske signerade samlarföremål från olympiska legender, privatlektioner med världsmästare, eller VIP-biljetter till de mest eftertraktade sportevenemangen globalt. Denna låda är inte bara en samling av föremål; den är en biljett till en värld av passion, prestation och exklusivitet. Designad för den sanna sportentusiasten som söker det yttersta inom sportens värld. Vågar du missa chansen att äga något så unikt? Lägg ditt bud nu och upptäck vad som gömmer sig bakom denna extraordinära sportupplevelse.",
-      "category": "",
-      "image": "https://i.imgur.com/t3YWz7l.jpeg"
+      "category": "9",
+      "image": "https://i.imgur.com/t3YWz7l.jpeg",
+      "id": "a349"
     }
   ],
   "bought_boxes": [
