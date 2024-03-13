@@ -18,8 +18,8 @@ export default function ObjectPage() {
       const boxData = await response.json();
       console.log(boxData)
       setBox(boxData);
+      //Laddar in boxen man klickat på och kategorin tillhörande den boxen nedan
 
-      // Assuming you have a separate endpoint for categories
       const categoryResponse = await fetch(`/api/categories/${boxData.category}`);
       const categoryData = await categoryResponse.json();
       console.log(categoryData)
@@ -27,7 +27,7 @@ export default function ObjectPage() {
     }
     load();
   }, [id]);
-
+  //Funktion för att bekräfta budet och att den sedan tar bort modulen och skickar vidare datan.
   const confirmBid = (bidAmount) => {
     handleBidConfirm(box, bidAmount, setBox, setIsModalVisible, toast);
   };
@@ -35,13 +35,14 @@ export default function ObjectPage() {
   const onCountdownEnd = () => {
     setAuctionEnded(true);
   };
-
+  //Visar endast bud-knappen om auktionen inte har avslutats i tid
   const showBidButton = () => !auctionEnded;
 
-
+  //Ändrar texten beroende på om autkionen slutat eller ej
   const getBidText = () => auctionEnded ? `Slutpris: ${box.price} SEK` : `Nuvarande högsta bud: ${box.price} SEK`;
-
-  if (!box || !category) return <div>Loading...</div>;
+  
+  //Om ingen box hittas eller kategori så står det bara att något gick fel
+  if (!box || !category) return <div>Något gick fel vid inläsning av box</div>;
 
   return (
     <div className="objectpage-container">

@@ -1,17 +1,20 @@
 import { useState } from 'react';
 
+//Fick bryta ut formuläret till en egen component för att inte det ska bli för klyddigt i Reviews.jsx
 function ReviewForm({ boxId, onSubmit }) {
   const [reviewDetails, setReviewDetails] = useState({
     score: '',
     title: '',
     description: '',
   });
-
+  
+  //Eventhandler för när folk skriver i en recension i formuläret
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setReviewDetails((prevState) => ({ ...prevState, [name]: value }));
   };
 
+  //När man submittar sin review ska infon skickas vidare
   const handleSubmit = (e) => {
     e.preventDefault(); 
     onSubmit(boxId, reviewDetails);

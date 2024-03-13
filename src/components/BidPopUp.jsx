@@ -6,24 +6,25 @@ export default function BidPopUp({ box, onClose, onConfirm }) {
   const [bid, setBid] = useState('');
   const { toggleLoginModal } = useModal();
 
-  const submitBid = () => {
+  const submitBid = () => { //Bud skickas igenom om man är inloggad. 
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     if (!isLoggedIn) {
-      
-      onClose(); // Suggest closing any open UI elements first
+
+      onClose(); // Stänger öppna UI element först
       toast.warn("Du måste vara inloggad för att kunna lägga bud, vänligen logga in först!")
-      toggleLoginModal(); // This now shows the login modal
+      toggleLoginModal(); // Visa loginmodulen
       return;
     }
 
 
-    const bidAmount = parseFloat(bid);
-    if (bidAmount > box.price) {
+    const bidAmount = parseFloat(bid); //Gör om budet från string
+    if (bidAmount > box.price) { //Om budet är högre än nuvarande pris så går det igenom och skickas vidare
       onConfirm(bidAmount);
     } else {
-      toast.warn("Ditt bud måste vara högre än det nuvarande högsta budet.");
+      toast.warn("Ditt bud måste vara högre än det nuvarande högsta budet."); //Varnar om att budet måste vara högre än nuvarande
     }
   };
+
 
   return (
     <div className="bid--background">

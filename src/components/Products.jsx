@@ -8,13 +8,7 @@ function Products({ searchQuery, sortOrder, sortCriterion }) {
   const [categories, setCategories] = useState({})
   const navigate = useNavigate()
 
-  // Funktion för att korta ner varje box beskrivning på auctionpage men behåller full längd på objectpage
-  function truncateString(str, num) {
-    if (str.length <= num) {
-      return str;
-    }
-    return str.slice(0, num) + "..."
-  }
+
 
   useEffect(() => {
     async function load() {
