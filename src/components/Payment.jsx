@@ -1,6 +1,6 @@
 import Modal from 'react-modal'
 
-function Payment({ isOpen, onClose }) {
+function Payment({ isOpen, onClose, order }) {
 
   const customStyles = {
     content: {
@@ -25,9 +25,10 @@ function Payment({ isOpen, onClose }) {
     <Modal isOpen={isOpen}
       onRequestClose={onClose}
       style={customStyles}>
-      <h2>Payment Modal</h2>
-      {/* Add your payment form and logic here */}
-      <button onClick={onClose}>Close Modal</button>
+      <h2>Betalning</h2>
+      <p>{order.price}</p>
+      <button className="paymentopt-modal-button-finish" onClick={onClose}>Klar</button>
+      <button className="paymentopt-modal-button-cancel" onClick={onClose}>Avbryt</button>
     </Modal>
   )
 }
