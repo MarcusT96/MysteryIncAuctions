@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 import '../style/login.css';
-// Hämtar in vår auth-kontext för att hantera inloggning
+// Hämtar in auth-kontext för att hantera inloggning
 import { useAuth } from '../admin/AdminComponents/auth/AuthContext';
 
 // Komponenten LogIn, med en closeModal-prop för att stänga modalfönstret när vi är klara.

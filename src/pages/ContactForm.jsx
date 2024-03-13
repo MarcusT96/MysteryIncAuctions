@@ -47,7 +47,7 @@ function ContactForm() {
           </div>
           <button type="submit">Skicka Meddelande</button>
           {showPopup && (
-            // Liten popup för att säga 'tack'! Alltid trevligt med feedback.
+            // Popup som bekräftar att meddelandet har skickats
             <div className="popup-message" aria-live="polite">
               <button className="popup-close-btn" onClick={() => setShowPopup(false)}>&times;</button>
               Tack för att du hör av dig, vi återkommer så snart vi kan.
