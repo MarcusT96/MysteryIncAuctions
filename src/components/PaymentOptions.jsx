@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import ReactDOM from 'react-dom'
 import Modal from 'react-modal'
 
 
@@ -81,7 +80,7 @@ function PaymentOptions() {
       type: document.getElementById('type').value,
       card_number: cardNumber,
       expiration_date: expDate,
-      cvc: cardCvc,
+      CVC: cardCvc,
       cardholder_name: cardHolder,
     }
 

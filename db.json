@@ -307,6 +307,15 @@
       "type": "Credit card",
       "cardholder_name": "Emily White",
       "user_id": "7053"
+    },
+    {
+      "id": "ef43",
+      "user_id": "0c1f",
+      "type": "Credit card",
+      "card_number": "8345-3249-2345-7654",
+      "expiration_date": "04-28",
+      "CVC": "485",
+      "cardholder_name": "Pelle Jöns"
     }
   ]
 }
