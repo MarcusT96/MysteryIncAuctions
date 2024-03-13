@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import Modal from 'react-modal'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 function Payment({ isOpen, onClose, order, onPaymentComplete }) {
 
@@ -60,6 +62,19 @@ function Payment({ isOpen, onClose, order, onPaymentComplete }) {
   }
 
   const handlePaymentConfirmation = async () => {
+    if (!cardType || !cardNumber || !expDate || !cardCvc || !cardHolder) {
+      toast.error("Vänligen fyll i alla fält", {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      })
+      return
+    }
+
     try {
       const response = await fetch(`/api/bought_boxes/${order.id}`, {
         method: 'PATCH',
@@ -70,14 +85,41 @@ function Payment({ isOpen, onClose, order, onPaymentComplete }) {
       })
 
       if (response.ok) {
+        toast.success("Betalning gick igenom!", {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        })
         const updatedOrder = { ...order, paid: true }
         setPaymentStatus("Payment successful")
         onPaymentComplete(updatedOrder)
         onClose()
       } else {
         console.error('Failed to update payment status')
+        toast.error("Betalning misslyckad", {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        })
       }
     } catch (error) {
+      toast.error(`Betalning misslyckad, ${error}`, {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      })
       console.error('Error occurred while updating payment status:', error)
     }
   }
