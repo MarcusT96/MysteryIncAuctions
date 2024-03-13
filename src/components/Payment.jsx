@@ -50,6 +50,14 @@ function Payment({ isOpen, onClose, order }) {
     return censored
   }
 
+  const handlePaymentCardClick = (payment) => {
+    setCardType(payment.type)
+    setCardNumber(payment.card_number)
+    setExpDate(payment.expiration_date)
+    setCardCvc(payment.CVC)
+    setCardHolder(payment.cardholder_name)
+  }
+
   return (
     <Modal isOpen={isOpen}
       onRequestClose={onClose}
@@ -63,7 +71,7 @@ function Payment({ isOpen, onClose, order }) {
         </div>
         <div className='pay-options'>
           {paymentInfo.map((payment, index) => (
-            <div className='pay-card'>
+            <div className='pay-card' key={index} onClick={() => handlePaymentCardClick(payment)}>
               <p>{payment.type}</p>
               <p>{censorCard(payment.card_number)}</p>
             </div>
@@ -73,7 +81,8 @@ function Payment({ isOpen, onClose, order }) {
 
       <div className='pay-details'>
         <p className='paymentopt-modal-text'>Typ</p>
-        <select className="paymentopt-modal-selector" name="cardtype" id="type">
+        <select className="paymentopt-modal-selector" name="cardtype" id="type"
+          value={cardType} onChange={(e) => setCardType(e.target.value)}>
           <option value="Credit card">Kredit kort</option>
           <option value="Debit card">Debit kort</option>
         </select>
