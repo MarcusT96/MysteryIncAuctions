@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './prodComp.css';
 
-function UpdateBoxModal({ box, onUpdate, onClose }) {
+function UpdateBoxModal({ box, onUpdate, onClose, categories }) {
     const [name, setName] = useState('');
     const [weight, setWeight] = useState('');
     const [price, setPrice] = useState('');
@@ -88,7 +88,17 @@ function UpdateBoxModal({ box, onUpdate, onClose }) {
                     <input type="text" id="description" value={description} onChange={(e) => setDescription(e.target.value)} />
 
                     <label htmlFor="app_prodcomp-category">Kategori:</label>
-                    <input type="number" id="category" value={category} onChange={(e) => setCategory(e.target.value)} />
+                    <select
+                        id="category"
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                    >
+                        <option value="">Välj en kategori</option>
+                        {categories.map((cat) => (
+                            <option key={cat.id} value={cat.id}>{cat.categoryName}</option>
+                        ))}
+                    </select>
+
 
                     <label htmlFor="app_prodcomp-image">Updatera bild:</label>
                     <input type="file" id="image" ref={fileInputRef} accept="image/*" onChange={handleImageChange} />
