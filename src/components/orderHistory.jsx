@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
+import Payment from "./Payment.jsx"
 
 function OrderHistory() {
 
   const [orders, setOrders] = useState([])
+  const [isPaymentModalOpen, setPaymentModalOpen] = useState(false)
 
   useEffect(() => {
     async function load() {
@@ -19,9 +21,17 @@ function OrderHistory() {
     load()
   }, [])
 
+  const openPaymentModal = () => {
+    setPaymentModalOpen(true)
+  }
+
+  const closePaymentModal = () => {
+    setPaymentModalOpen(false)
+  }
+
   function orderStatus(order) {
     if (order.paid == false) {
-      return <button className="orderhistory-paybutton">Betala nu</button>
+      return <button className="orderhistory-paybutton" onClick={openPaymentModal}>Betala nu</button>
     }
     else if (order.delivered == false) {
       return <button className="orderhistory-payedbutton">Betald</button>
@@ -43,7 +53,6 @@ function OrderHistory() {
     return `${year}-${month}-${day} ${hours}:${minutes}`
   }
 
-
   return (
     <div className="orderhistory-container">
       {orders.length > 0 ? (
@@ -58,7 +67,7 @@ function OrderHistory() {
             </div>
           </div>
         ))) : <p>Du har inga Beställningar</p>}
-
+      <Payment isOpen={isPaymentModalOpen} onClose={closePaymentModal} />
     </div>
   )
 }
