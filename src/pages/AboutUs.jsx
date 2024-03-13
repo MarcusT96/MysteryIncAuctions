@@ -3,7 +3,6 @@ import '../style/AboutUs.css';
 function AboutUs(){
   return (
     <div className="about-us-container">
-      <h1>Mystery Inc.</h1>
       <section id="about-us">
         <h2>Om Oss</h2>
         <h3>Välkommen till Mystery Inc. - Din ingång till det okända!</h3>

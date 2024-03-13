@@ -24,7 +24,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+
 
 }
 
@@ -67,4 +67,19 @@ body {
   background-color: #ffe8a4;
   transition: ease 0.5s;
   cursor: pointer;
+}
+
+.highest--bid{
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .objectpage-container {
+    flex-direction: column;
+  }
+
+  .right--container,
+  .left--container {
+    width: 100%;
+  }
 }

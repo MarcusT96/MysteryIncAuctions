@@ -12,11 +12,11 @@ export default function Reviews() {
       if (user && user.id) {
         try {
     
-          const boxesResponse = await fetch(`http://localhost:3000/bought_boxes?buyer_id=${user.id}`);
+          const boxesResponse = await fetch(`/api/bought_boxes?buyer_id=${user.id}`);
           const boxesData = await boxesResponse.json();
 
      
-          const reviewsResponse = await fetch(`http://localhost:3000/reviews?userId=${user.id}`);
+          const reviewsResponse = await fetch(`/api/reviews?userId=${user.id}`);
           const reviewsData = await reviewsResponse.json();
 
           const reviewedIds = new Set(reviewsData.map(review => review.boxId));
@@ -36,7 +36,7 @@ export default function Reviews() {
   const submitReview = async (boxId, reviewDetails) => {
     const review = { ...reviewDetails, boxId, userId: user.id }; 
     try {
-      const response = await fetch('http://localhost:3000/reviews', {
+      const response = await fetch('/api/reviews', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
