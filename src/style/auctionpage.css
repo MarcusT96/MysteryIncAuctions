@@ -135,12 +135,16 @@ body {
     color: black;
     max-width: 70vw;
     padding: 1vw;  
+    
   }
 
 
   .auction-card img { 
+    display: block;
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 1vw;
     height: auto;
-    border-radius: 4px;
   }
 
   .Headline{
@@ -151,5 +155,8 @@ body {
     background-color: #F4C430;
     color: black;
     padding: 13px 50px;  
+  }
+  .Auction-list h2, h3, p {
+    font-size: 20px;
   }
 }
