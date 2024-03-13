@@ -14,6 +14,30 @@
     margin-bottom: 20px;
 }
 
+.app__products-search {
+    border: 1px solid hsla(0, 0%, 65%, 0.6);
+    outline: none;
+}
+
+.app__products-filters,
+.app__products-buttons {
+    padding: 0.3125rem 0.9375rem;
+    border: 1px solid hsla(0, 0%, 65%, 0.6);
+    border-radius: 0.3125rem;
+    outline: none;
+    font-size: 0.875rem;
+    color: #333;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.app__products-filters:hover,
+.app__products-buttons:hover {
+    border-color: rgb(84, 121, 160);
+    background-color: rgb(84, 121, 160, 0.2);
+}
+
 .app__products-boxdetail {
     display: flex;
     flex-direction: column;
@@ -116,7 +140,7 @@
         justify-content: center;
         z-index: 5;
         background: #ffe0e0;
-        width: 52%;
+        width: 50%;
         height: 89%;
         border-radius: 30px;
     }

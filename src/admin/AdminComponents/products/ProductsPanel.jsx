@@ -6,6 +6,7 @@ import UpdateBoxModal from './prodComp/UpdateBoxModal';
 
 const ProductsPanel = () => {
     const [mysteryBoxes, setMysteryBoxes] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showAddBoxModal, setShowAddBoxModal] = useState(false);
     const [showUpdateBoxModal, setShowUpdateBoxModal] = useState(false);
@@ -30,6 +31,17 @@ const ProductsPanel = () => {
     };
 
     useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const res = await fetch('http://localhost:3000/categories');
+                const data = await res.json();
+                setCategories(data);
+            } catch (error) {
+                console.error('Error fetching categories:', error);
+            }
+        };
+
+        fetchCategories();
         fetchProducts();
     }, []);
 
@@ -124,17 +136,17 @@ const ProductsPanel = () => {
     return (
         <div className='app__products-container'>
             <h2 className='app__products-title'>Produkter</h2>
-            <input type="text" className="app__users-search" placeholder="Sök produkter..." value={searchQuery} onChange={handleSearchChange} />
-            <div className='app__users-filters-group'>
-                <select className='app__users-filters' value={sortField} onChange={handleSortChange}>
+            <input type="text" className="app__products-search" placeholder="Sök produkter..." value={searchQuery} onChange={handleSearchChange} />
+            <div className='app__products-filters-group'>
+                <select className='app__products-filters' value={sortField} onChange={handleSortChange}>
                     <option value="id">ID</option>
                     <option value="name">Namn</option>
                     <option value="price">Pris</option>
                     <option value="category">Kategori</option>
                     <option value="time">Tid</option>
                 </select>
-                <button className='app__users-buttons' onClick={() => handleSortOrderChange('asc')}>↟</button>
-                <button className='app__users-buttons' onClick={() => handleSortOrderChange('desc')}>↡</button>
+                <button className='app__products-buttons' onClick={() => handleSortOrderChange('asc')}>↟</button>
+                <button className='app__products-buttons' onClick={() => handleSortOrderChange('desc')}>↡</button>
             </div>
             <button className='app__product-add-btn' onClick={() => setShowAddBoxModal(true)}>Lägg till 🪄📦</button>
             <ProductList
@@ -143,9 +155,9 @@ const ProductsPanel = () => {
                 openUpdateModal={openUpdateModal}
             />
             {showAddBoxModal &&
-                <AddBoxForm onAdd={handleAddBox} onClose={() => setShowAddBoxModal(false)} />}
+                <AddBoxForm onAdd={handleAddBox} categories={categories} onClose={() => setShowAddBoxModal(false)} />}
             {showUpdateBoxModal && currentBox && (
-                <UpdateBoxModal box={currentBox} onUpdate={handleUpdateBox} onClose={() => setShowUpdateBoxModal(false)} />
+                <UpdateBoxModal box={currentBox} onUpdate={handleUpdateBox} categories={categories} onClose={() => setShowUpdateBoxModal(false)} />
             )}
             <Pagination
                 currentPage={currentPage}
@@ -197,7 +209,7 @@ function ProductRow({ box, deleteBox, openUpdateModal }) {
             <div className='app__product-item'><CountdownTimer endTime={box.time} /></div>
             <div className='app__product-item'>
                 <button className='app__product-dt-btn' onClick={() => deleteBox(box.id)}>Ta Bort</button>
-                <button className='app__product-up-btn' onClick={() => openUpdateModal(box)}>Updatera</button>
+                <button className='app__product-up-btn' onClick={() => openUpdateModal(box)}>Redigera</button>
             </div>
         </div>
     );

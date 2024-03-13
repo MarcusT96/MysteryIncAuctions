@@ -1,19 +1,28 @@
 import React, { useState } from 'react';
 import './prodComp.css'
 
-function AddBoxForm({ onAdd, onClose }) {
+function AddBoxForm({ onAdd, onClose, categories }) {
     const [name, setName] = useState('');
     const [weight, setWeight] = useState('');
     const [price, setPrice] = useState('');
     const [time, setTime] = useState('');
     const [description, setDescription] = useState('');
     const [category, setCategory] = useState('');
-    const [image, setImage] = useState(null);
-    const [previewUrl, setPreviewUrl] = useState('');
+    const [imageUrl, setImageUrl] = useState('');
     const [formError, setFormError] = useState('');
+
+    const findCategoryIdByName = (categoryName) => {
+        const categoryObj = categories.find(cat => cat.categoryName === categoryName);
+        return categoryObj ? categoryObj.id : null;
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (!imageUrl) {
+            setFormError('Please provide an image URL.');
+            return;
+        }
 
         const newBoxData = {
             name,
@@ -21,24 +30,16 @@ function AddBoxForm({ onAdd, onClose }) {
             price,
             time,
             description,
-            category,
-            image
+            category: findCategoryIdByName(category),
+            image: imageUrl
         };
 
-        onAdd(newBoxData);
-        onClose();
-    };
-
-    const handleImageChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                const base64String = event.target.result;
-                setImage(base64String);
-                setPreviewUrl(base64String);
-            };
-            reader.readAsDataURL(file);
+        try {
+            await onAdd(newBoxData);
+            onClose();
+        } catch (error) {
+            console.error('Error adding box:', error);
+            setFormError('An error occurred while adding the box.');
         }
     };
 
@@ -47,9 +48,9 @@ function AddBoxForm({ onAdd, onClose }) {
             <div className="app_prodcomp-modal-content">
                 <form onSubmit={handleSubmit}>
                     <div>
-                        {previewUrl && (
+                        {imageUrl && (
                             <div style={{ display: "flex", justifyContent: "center", maxWidth: "100%" }}>
-                                <img src={previewUrl} alt="Preview" style={{ maxWidth: "30%", height: "auto" }} />
+                                <img src={imageUrl} alt="Preview" style={{ maxWidth: "30%", height: "auto" }} />
                             </div>
                         )}
                         {formError && <div className="error">{formError}</div>}
@@ -99,21 +100,24 @@ function AddBoxForm({ onAdd, onClose }) {
                     />
 
                     <label htmlFor="app_prodcomp-category">Kategori:</label>
-                    <input
-                        placeholder='Kategori nummer...'
-                        type="number"
+                    <select
                         id="category"
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
-                    />
+                    >
+                        <option value="">Välj en kategori</option>
+                        {categories.map((cat) => (
+                            <option key={cat.id} value={cat.id}>{cat.categoryName}</option>
+                        ))}
+                    </select>
 
                     <label htmlFor="app_prodcomp-image">Lägg till bild:</label>
                     <input
-                        type="file"
+                        placeholder='Lägg till bild URL...'
+                        type="text"
                         id="image"
-                        name="image"
-                        accept="image/*"
-                        onChange={handleImageChange}
+                        value={imageUrl}
+                        onChange={(e) => setImageUrl(e.target.value)}
                     />
 
                     <button className='app_prodcomp-add-btn' type="submit">Add Box</button>

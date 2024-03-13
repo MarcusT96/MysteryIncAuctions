@@ -15,29 +15,24 @@
 .app__users-filters-group {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 0.625rem;
     padding: 0.5rem;
 }
 
 .app__users-search {
-    padding: 5px 15px;
     border: 1px solid hsla(0, 0%, 65%, 0.6);
-    border-radius: 5px;
     outline: none;
-    font-size: 14px;
-    color: #333;
 }
 
 .app__users-filters,
 .app__users-buttons {
-    padding: 5px 15px;
+    padding: 0.3125rem 0.9375rem;
     border: 1px solid hsla(0, 0%, 65%, 0.6);
-    border-radius: 5px;
+    border-radius: 0.3125rem;
     outline: none;
-    font-size: 14px;
+    font-size: 0.875rem;
     color: #333;
     background-color: transparent;
-    backdrop-filter: blur(100%);
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -45,12 +40,11 @@
 .app__users-filters:hover,
 .app__users-buttons:hover {
     border-color: rgb(84, 121, 160);
-    transition: all 0.3s ease;
     background-color: rgb(84, 121, 160, 0.2);
 }
 
 .app__users-buttons {
-    margin-left: 10px;
+    margin-left: 0.625rem;
 }
 
 .app__users-table {
@@ -60,7 +54,7 @@
 }
 
 .app__users-thead {
-    background-color: hsla(211, 24%, 45%, 0.4);
+    background-color: antiquewhite;
 }
 
 .app__users-thead th:first-child {
@@ -69,8 +63,8 @@
 
 .app__users-th,
 .app__users-td {
-    padding: 8px;
-    margin: 5px 0;
+    padding: 0.5rem;
+    margin: 0.3125rem 0;
     border-bottom: 1px solid rgb(77, 77, 77, 0.5);
     border-top: 1px solid rgb(77, 77, 77, 0.5);
 }
@@ -100,20 +94,97 @@
 }
 
 .app__user-pagination button {
-    padding: 5px 20px;
-    margin: 0 5px;
-    cursor: pointer;
-    background-color: transparent;
-    border: 1px solid hsl(0, 0%, 39%, 0.5);
-    border-radius: 5px;
-    font-size: 16px;
-    line-height: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 0.3125rem 1.25rem;
+    margin: 0 0.3125rem;
+    font-size: 1rem;
 }
 
 .app__user-pagination button:disabled {
     color: #999;
     cursor: not-allowed;
+}
+
+@media screen and (max-width: 768px) {
+    .app__users-container {
+        display: block;
+        justify-content: center;
+        align-items: center;
+        margin-left: 10rem;
+    }
+
+    .app__users-th {
+        display: none;
+    }
+
+    .app__users-filters-group,
+    .app__users-search,
+    .app__users-table,
+    .app__users-td {
+        display: block;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .app__user-pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 16rem;
+    }
+
+    .app__user-pagination button {
+        display: block;
+        justify-content: center;
+        align-items: center;
+        margin-left: -15rem;
+    }
+
+    .app__users-buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .app__users-container {
+        display: block;
+        justify-content: center;
+        align-items: center;
+        margin-left: 5rem;
+    }
+
+    .app__users-th {
+        display: none;
+    }
+
+    .app__users-filters-group,
+    .app__users-search,
+    .app__users-table,
+    .app__users-td {
+        display: block;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .app__user-pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 6rem;
+    }
+
+    .app__user-pagination button {
+        display: block;
+        justify-content: center;
+        align-items: center;
+        margin-left: -5rem;
+    }
+
+    .app__users-buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
 }
