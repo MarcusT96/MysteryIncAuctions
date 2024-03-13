@@ -58,6 +58,8 @@ function Payment({ isOpen, onClose, order }) {
     setCardHolder(payment.cardholder_name)
   }
 
+  
+
   return (
     <Modal isOpen={isOpen}
       onRequestClose={onClose}

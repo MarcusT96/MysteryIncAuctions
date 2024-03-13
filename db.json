@@ -314,7 +314,7 @@
       "type": "Credit card",
       "card_number": "8345-3249-2345-7654",
       "expiration_date": "04-28",
-      "cvc": "485",
+      "CVC": "485",
       "cardholder_name": "Pelle Jöns"
     }
   ]
