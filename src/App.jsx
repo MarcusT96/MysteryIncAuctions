@@ -10,7 +10,7 @@ import LogIn from './pages/LogIn.jsx';
 function App() {
   const { isLoginModalVisible, toggleLoginModal } = useModal();
   
-
+//Lägger till ToastContainer runt hela applikationen för att kunna använda toast-funktionerna
   return (
     <>
         <ToastContainer

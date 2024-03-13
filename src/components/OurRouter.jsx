@@ -34,7 +34,7 @@ function OurRouter() {
     });
 
   }, []);
-
+  //Wrappar alla element manuellt med NonAdminLayout så de fadear in men inte adminsidan som är mer en dashboard och kraschar av AOS. 
   return (<>
     <Navbar />
     <Routes>
