@@ -11,10 +11,10 @@ export default function Auctionpage() {
   const handleSearch = (query) => {
     setSearchQuery(query)}
 
-  const handleChange = (criterion) => {
+  const handleChange = (criterion) => {  //Hanterar ändring av sorteringskriteria
     setSortCriterion(criterion);}
 
-  const toggleOrder = () => {
+  const toggleOrder = () => {  // Ändrar ordning på sortering
     setSortOrder(sortOrder === "asc" ? "desc" : "asc");
   };
   
@@ -22,7 +22,7 @@ export default function Auctionpage() {
 
   return <main className="auctionpage">
     <div className="searchdiv">
-      <SearchBar onSearch={handleSearch} />
+      <SearchBar onSearch={handleSearch} /> 
     </div>
     <div className="sortingbuttons">
       <select className="sorting" onChange={(e) => handleChange(e.target.value)} value={sortCriterion}>
