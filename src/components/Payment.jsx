@@ -58,7 +58,25 @@ function Payment({ isOpen, onClose, order }) {
     setCardHolder(payment.cardholder_name)
   }
 
-  
+  const handlePaymentConfirmation = async () => {
+    try {
+      const response = await fetch(`/api/bought_boxes/${order.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ paid: true })
+      })
+
+      if (response.ok) {
+        onClose()
+      } else {
+        console.error('Failed to update payment status')
+      }
+    } catch (error) {
+      console.error('Error occurred while updating payment status:', error)
+    }
+  }
 
   return (
     <Modal isOpen={isOpen}
@@ -113,7 +131,7 @@ function Payment({ isOpen, onClose, order }) {
           onChange={(e) => { setCardHolder(e.target.value) }}
           placeholder='' />
       </div>
-      <button className="paymentopt-modal-button-finish" onClick={onClose}>Klar</button>
+      <button className="paymentopt-modal-button-finish" onClick={handlePaymentConfirmation}>Klar</button>
       <button className="paymentopt-modal-button-cancel" onClick={onClose}>Avbryt</button>
     </Modal>
   )

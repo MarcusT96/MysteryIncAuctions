@@ -25,7 +25,7 @@ function OrderHistory() {
   const handleOrderClick = (order) => {
     setSelectedOrder(order);
     setIsModalOpen(true);
-  };
+  }
 
   function orderStatus(order) {
     if (order.paid == false) {
