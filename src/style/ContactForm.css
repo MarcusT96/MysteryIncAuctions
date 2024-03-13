@@ -74,7 +74,7 @@ button[type="submit"]:hover {
   cursor: pointer;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 800px) {
 
   .contact-container,
   #contact {

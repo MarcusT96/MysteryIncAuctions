@@ -10,10 +10,8 @@
 .profile-page-container {
   display: flex;
   flex-direction: row;
-  /* Behåll som row för att sidoplacera element */
   align-items: flex-start;
   gap: 20px;
-  /* Ger utrymme mellan sidebar och content */
   margin: 40px auto;
   padding: 20px;
   background-color: #9EA5E4;
@@ -25,19 +23,14 @@
 
 .sidebar {
   flex-basis: 200px;
-  /* Ange bredd för sidebar */
   display: flex;
   flex-direction: column;
-  /* Organisera knappar vertikalt */
   align-items: flex-start;
-  /* Justera knapparna till vänster */
 }
 
 .content {
   flex-grow: 1;
-  /* Låter innehållet ta upp resterande utrymme */
   width: 100%;
-  /* Full bredd för att maximera utrymmet för innehållet */
 }
 
 .profile-page-button,
@@ -80,7 +73,6 @@
 .profile-page-form-group input[type="password"] {
   padding: 10px;
   margin-bottom: 10px;
-  /* Skapar utrymme mellan fälten */
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
