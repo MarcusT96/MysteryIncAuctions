@@ -1,43 +1,43 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import CountdownTimer from "./CountDownTimer.jsx";
+import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+import CountdownTimer from "./CountDownTimer.jsx"
 
 function Products({ searchQuery, sortOrder, sortCriterion }) {
-  const [items, setItems] = useState([]);
-  const [filteredItems, setFilteredItems] = useState([]);
-  const [categories, setCategories] = useState({});
-  const navigate = useNavigate();
+  const [items, setItems] = useState([])
+  const [filteredItems, setFilteredItems] = useState([])
+  const [categories, setCategories] = useState({})
+  const navigate = useNavigate()
 
   // Funktion för att korta ner varje box beskrivning på auctionpage men behåller full längd på objectpage
   function truncateString(str, num) {
     if (str.length <= num) {
       return str;
     }
-    return str.slice(0, num) + "...";
+    return str.slice(0, num) + "..."
   }
 
   useEffect(() => {
     async function load() {
-      const response = await fetch(`http://localhost:3000/mystery_boxes`)
-      const data = await response.json();
+      const response = await fetch(`/api/mystery_boxes`)
+      const data = await response.json()
       setItems(data);
 
-      const categoriesResponse = await fetch(`http://localhost:3000/categories`);
-      const categoriesData = await categoriesResponse.json();
+      const categoriesResponse = await fetch(`/api/categories`)
+      const categoriesData = await categoriesResponse.json()
       const categoriesMap = categoriesData.reduce((acc, category) => {
-        acc[category.id] = category.categoryName; // Map id to categoryName
-        return acc;
-      }, {});
-      setCategories(categoriesMap);
+        acc[category.id] = category.categoryName // Map id to categoryName
+        return acc
+      }, {})
+      setCategories(categoriesMap)
     }
-    load();
-  }, []);
+    load()
+  }, [])
 
   useEffect(() => {
     const now = new Date() // skapar en current time variabel
     let Filtered = items.filter(item => {
-      const endTime = new Date(item.time).getTime(); // skapar en endtime variabel för att kunna mäta
-      const isActive = endTime > now.getTime(); // kollar om auctionen är aktiv
+      const endTime = new Date(item.time).getTime() // skapar en endtime variabel för att kunna mäta
+      const isActive = endTime > now.getTime() // kollar om auctionen är aktiv
       return isActive && (
         item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.description.toLowerCase().includes(searchQuery.toLowerCase())
@@ -71,13 +71,13 @@ function Products({ searchQuery, sortOrder, sortCriterion }) {
       return 0; // Default värde om inget matchar
     });
 
-    setFilteredItems(sortedItems); // updaterare state
-  }, [searchQuery, items, sortOrder, sortCriterion, categories]); // mina useffect värden, när dessa värden ändras så renderar den om
+    setFilteredItems(sortedItems) // updaterare state
+  }, [searchQuery, items, sortOrder, sortCriterion, categories]) // mina useffect värden, när dessa värden ändras så renderar den om
 
 
 
   const navigateToObjectPage = (id) => {
-    navigate(`/box/${id}`); // Navigation till objectpage
+    navigate(`/box/${id}`) // Navigation till objectpage
   };
 
   return ( // Hela auctions kortet renderas här, den kör så många den kan baserat på hur många idn där finns 

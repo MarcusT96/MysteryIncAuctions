@@ -6,7 +6,7 @@ function OrderHistory() {
 
   useEffect(() => {
     async function load() {
-      const response = await fetch(`http://localhost:3000/bought_boxes`)
+      const response = await fetch(`/api/bought_boxes`)
       const data = await response.json()
       let orderData = []
       for (let order of data) {

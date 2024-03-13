@@ -68,3 +68,7 @@ body {
   transition: ease 0.5s;
   cursor: pointer;
 }
+
+.highest--bid{
+  font-weight: bold;
+}

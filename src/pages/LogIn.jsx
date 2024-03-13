@@ -21,7 +21,7 @@ const LogIn = ({ closeModal }) => {
     e.preventDefault(); // Stoppa formuläret från att skickas traditionellt.
     try {
       // Kontrollerar om användaren finns i vår 'databas' (här simulerad med fetch mot en lokal fil).
-      const response = await fetch('http://localhost:3000/users');
+      const response = await fetch('/api/users');
       const users = await response.json();
       const user = users.find(u => u.email === email && u.password === password);
 
@@ -47,7 +47,7 @@ const LogIn = ({ closeModal }) => {
     e.preventDefault();
     try {
       // Kontrollerar först om användaren redan finns.
-      const response = await fetch('http://localhost:3000/users');
+      const response = await fetch('/api/users');
       const users = await response.json();
       const userExists = users.some(user => user.email === email);
 
@@ -58,7 +58,7 @@ const LogIn = ({ closeModal }) => {
 
       // Skapar en ny användare om e-posten inte finns sedan tidigare.
       const newUser = { email, password, firstName, lastName };
-      const postResponse = await fetch('http://localhost:3000/users', {
+      const postResponse = await fetch('/api/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

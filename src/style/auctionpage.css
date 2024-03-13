@@ -7,21 +7,25 @@ body {
 .Auction-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 2vh;
+  row-gap: 5vh;
   justify-content: space-evenly;
-  padding-top: 5vh;
+  padding-top: 1vh;
   padding-bottom: 5vh;
 }
 
 .auction-card {
   width: 100%;
+  color: black;
   max-width: 16vw;
   background-color: #9EA5E4;
-  border: 0px solid #F4C430;
+  border: 2px solid #F4C430;
   border-radius: 8px;
-  padding: 16px;
+  padding: 1vw;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease-in-out;
+  margin: 0 2vw 0 2vw
+
+  
 }
 
 .auction-card:hover {
@@ -34,9 +38,14 @@ body {
   border-radius: 4px;
 }
 
+.auction-title{
+  color: rgba(0, 0, 0, 0.815)
+}
+
 .auction-card button {
   background-color: #F4C430;
-  color: white;
+  font-weight: bold;
+  color: black;
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
@@ -45,7 +54,8 @@ body {
 }
 
 .auction-card button:hover {
-  background-color: #c59e28;
+  background-color: #1b242f;
+  color: #F4C430;
 }
 
 .searchdiv {
@@ -101,8 +111,45 @@ body {
 }
 
 .Headline{
+  color: #F4C430;
+  font-weight: bold;
   display: flex;
   justify-content: center;
   padding-top: 2vh;
   font-size: 40px;
+}
+
+@media (max-width:816px) {
+
+  .Auction-list{
+    flex-direction: column;
+    display: flex;
+    flex-wrap: wrap;
+    
+    align-items: center;
+    padding-top: 1vh;
+    padding-bottom: 5vh;
+  }
+
+  .auction-card {  
+    color: black;
+    max-width: 70vw;
+    padding: 1vw;  
+  }
+
+
+  .auction-card img { 
+    height: auto;
+    border-radius: 4px;
+  }
+
+  .Headline{
+    font-size: 30px;
+  }
+
+  .auction-card button {
+    background-color: #F4C430;
+    color: black;
+    padding: 13px 50px;  
+  }
 }

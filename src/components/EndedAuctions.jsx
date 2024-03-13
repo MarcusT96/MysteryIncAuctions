@@ -1,27 +1,27 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
 function EndedAuctions() {
-  const [endedItems, setEndedItems] = useState([]);
+  const [endedItems, setEndedItems] = useState([])
   const navigate = useNavigate()
 
   useEffect(() => {
     async function loadEndedAuctions() {
-      const response = await fetch(`http://localhost:3000/mystery_boxes`);
+      const response = await fetch(`/api/mystery_boxes`)
       const data = await response.json();
       const now = new Date();
       const endedAuctions = data.filter(item => {
-        const endTime = new Date(item.time).getTime();
+        const endTime = new Date(item.time).getTime()
         return endTime < now.getTime(); // Filter auctions that have ended
-      });
+      })
       setEndedItems(endedAuctions);
     }
-    loadEndedAuctions();
-  }, []);
+    loadEndedAuctions()
+  }, [])
 
   const navigateToObjectPage = (id) => {
-    navigate(`/box/${id}`); // Navigation till objectpage
-  };
+    navigate(`/box/${id}`) // Navigation till objectpage
+  }
 
   return (
     
@@ -32,17 +32,17 @@ function EndedAuctions() {
             <img src={item.image} alt={item.name} />
             <div>
               <h3>{item.name}</h3>
-              <p>Avslutningspris: <h2 className="tidtag">{item.price}kr</h2></p>
+              <p>Slutpris: <h2 className="tidtag">{item.price}kr</h2></p>
               <p>Avslutades: {new Date(item.time).toLocaleString('default', {  hour12: false })}</p>
               <button onClick={() => navigateToObjectPage(item.id)} className="auctionbutton">Läs mer</button>
             </div>
           </section>
         ))
       ) : (
-        <p>Inga avslutade auctioner tillgängliga.</p>
+        <p>Inga avslutade auctioner tillgängliga.</p>  // Visas om inga auctioner finns att rendera
       )}
     </article>
-  );
+  )
 }
 
-export default EndedAuctions;
+export default EndedAuctions

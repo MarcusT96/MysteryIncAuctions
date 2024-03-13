@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const CountdownTimer = ({ endTime }) => {
+const CountdownTimer = ({ endTime, onEnd }) => {
   const [timeLeft, setTimeLeft] = useState('');
 
   useEffect(() => {
@@ -18,8 +18,13 @@ const CountdownTimer = ({ endTime }) => {
         };
 
         return `${timeLeft.days}d ${timeLeft.hours}h ${timeLeft.minutes}m ${timeLeft.seconds}s`;
+      } else {
+        
+        if (onEnd && timeLeft !== 'Auktionen har avslutats.') {
+          onEnd();
+        }
+        return 'Auktionen har avslutats.';
       }
-      return 'Auktionen har avslutats.';
     };
 
     const timer = setInterval(() => {
@@ -27,13 +32,14 @@ const CountdownTimer = ({ endTime }) => {
       setTimeLeft(countdown);
     }, 1000);
 
-    // Cleanup on component unmount
-    return () => clearInterval(timer);
-  }, [endTime]);
 
-  return (<>
-    {timeLeft}
-  </>
+    return () => clearInterval(timer);
+  }, [endTime, timeLeft, onEnd]); 
+
+  return (
+    <>
+      {timeLeft}
+    </>
   );
 };
 

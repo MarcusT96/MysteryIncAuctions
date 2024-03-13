@@ -19,26 +19,38 @@ import ProtectedRoute from "../admin/AdminComponents/auth/ProtectedRoute.jsx"
 import Users from "../admin/AdminComponents/users/Users.jsx"
 import DashboardLayout from "../admin/AdminComponents/DashboardLayout/DashboardLayout.jsx"
 import ProductsPanel from "../admin/AdminComponents/products/ProductsPanel.jsx"
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
+import NonAdminLayout from "./NonAdminLayout.jsx"
 
 function OurRouter() {
+  useEffect(() => {
+    AOS.init({
+      duration: 700,
+      once: true,
+    });
+
+  }, []);
 
   return (<>
     <Navbar />
     <Routes>
-      <Route path="/" element={<MyHomePage />}></Route>
-      <Route path="/box/:id" element={<ObjectPage />}></Route>
-      <Route path="/Auctionpage" element={<Auctionpage />}></Route>
-      <Route path="/about" element={<AboutUs />}></Route>
-      <Route path="/contact" element={<ContactForm />}></Route>
-      <Route path="/legal" element={<LegalPage />}></Route>
-      <Route path="/salespolicies" element={<SalesPoliciesPage />}></Route>
-      <Route path="/legal/terms" element={<TermsPage />}></Route>
-      <Route path="/legal/privacy/cookies" element={<PrivacyPage />}></Route>
-      <Route path="/legal/privacy" element={<IntegrityPage />}></Route>
-      <Route path="/sitemap" element={<SiteMapPage />}></Route>
-      <Route path="/login" element={<LogIn />}></Route>
-      <Route path="/profile" element={<ProfilePage />}></Route>
+
+      <Route path="/" element={<NonAdminLayout><MyHomePage /></NonAdminLayout>} />
+      <Route path="/box/:id" element={<NonAdminLayout><ObjectPage /></NonAdminLayout>} />
+      <Route path="/Auctionpage" element={<NonAdminLayout><Auctionpage /></NonAdminLayout>} />
+      <Route path="/about" element={<NonAdminLayout><AboutUs /></NonAdminLayout>} />
+      <Route path="/contact" element={<NonAdminLayout><ContactForm /></NonAdminLayout>} />
+      <Route path="/legal" element={<NonAdminLayout><LegalPage /></NonAdminLayout>} />
+      <Route path="/salespolicies" element={<NonAdminLayout><SalesPoliciesPage /></NonAdminLayout>} />
+      <Route path="/legal/terms" element={<NonAdminLayout><TermsPage /></NonAdminLayout>} />
+      <Route path="/legal/privacy/cookies" element={<NonAdminLayout><PrivacyPage /></NonAdminLayout>} />
+      <Route path="/legal/privacy" element={<NonAdminLayout><IntegrityPage /></NonAdminLayout>} />
+      <Route path="/sitemap" element={<NonAdminLayout><SiteMapPage /></NonAdminLayout>} />
+      <Route path="/login" element={<NonAdminLayout><LogIn /></NonAdminLayout>} />
+      <Route path="/profile" element={<NonAdminLayout><ProfilePage /></NonAdminLayout>} />
+
 
       <Route path="/dashboard" element={
         <ProtectedRoute>

@@ -9,7 +9,7 @@ function HomePageReviews() {
 
   useEffect(() => {
     async function load() {
-      const response = await fetch(`http://localhost:3000/reviews`)
+      const response = await fetch(`/api/reviews`)
       const data = await response.json()
       setReviews(data)
     }
