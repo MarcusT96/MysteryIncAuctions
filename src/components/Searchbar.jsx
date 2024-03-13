@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
 const SearchBar = ({ onSearch }) => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState('')
 
   const handleChange = (e) => {
     const query = e.target.value;
-    setSearchTerm(query);
-    onSearch(query);
+    setSearchTerm(query)
+    onSearch(query)
   };
 
   return (
@@ -19,4 +19,4 @@ const SearchBar = ({ onSearch }) => {
   );
 };
 
-export default SearchBar;
+export default SearchBar
