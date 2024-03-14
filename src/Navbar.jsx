@@ -46,7 +46,7 @@ function Navbar() {
         </div>
         <ul className="app__navbar-links">
           <li className="p__opensans"><a href="/">Home</a></li>
-          <li className="p__opensans"><a href="/Auctionpage">Auktioner</a></li>
+          <li className="p__opensans"><a href="/auctions">Auktioner</a></li>
           <li className="p__opensans"><a href="/about">Om Oss</a></li>
           <li className="p__opensans"><a href="/contact">Kontakt</a></li>
         </ul>
@@ -64,7 +64,7 @@ function Navbar() {
               <MdClose color="#ffd700" fontSize={27} className="overlay__close" onClick={() => setToggleMenu(false)} />
               <ul className="app__navbar-smallscreen_links">
                 <li><a href="/" onClick={() => setToggleMenu(false)}>Home</a></li>
-                <li><a href="/Auctionpage" onClick={() => setToggleMenu(false)}>Auktioner</a></li>
+                <li><a href="/auctions" onClick={() => setToggleMenu(false)}>Auktioner</a></li>
                 <li><a href="/about" onClick={() => setToggleMenu(false)}>Om Oss</a></li>
                 <li><a href="/contact" onClick={() => setToggleMenu(false)}>Kontakt</a></li>
               </ul>
