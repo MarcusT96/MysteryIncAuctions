@@ -41,7 +41,7 @@ function OurRouter() {
 
       <Route path="/" element={<NonAdminLayout><MyHomePage /></NonAdminLayout>} />
       <Route path="/box/:id" element={<NonAdminLayout><ObjectPage /></NonAdminLayout>} />
-      <Route path="/Auctionpage" element={<NonAdminLayout><Auctionpage /></NonAdminLayout>} />
+      <Route path="/auctions" element={<NonAdminLayout><Auctionpage /></NonAdminLayout>} />
       <Route path="/about" element={<NonAdminLayout><AboutUs /></NonAdminLayout>} />
       <Route path="/contact" element={<NonAdminLayout><ContactForm /></NonAdminLayout>} />
       <Route path="/legal" element={<NonAdminLayout><LegalPage /></NonAdminLayout>} />
