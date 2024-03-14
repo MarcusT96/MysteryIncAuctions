@@ -135,6 +135,18 @@
       "delivered": false
     },
     {
+      "id": "1",
+      "name": "Cool låda",
+      "weight": 4,
+      "price": 4605,
+      "time": "2024-03-12T15:00:00Z",
+      "description": "Coola låda me coola grejer",
+      "image": "https://rukminim2.flixcart.com/image/850/1000/kmccosw0/party-gift-bag/b/b/c/1-tituprint-gift-box-pink-gift-box-with-ribbon-empty-boxes-for-original-imagf9z4tcthhgpy.jpeg?q=90&crop=false",
+      "buyer_id": "1",
+      "paid": false,
+      "delivered": false
+    },
+    {
       "id": "2",
       "name": "Special Box",
       "weight": 3.2,
