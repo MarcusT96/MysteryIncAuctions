@@ -5,3 +5,9 @@
 @import url("objetpage.css");
 @import url("bidpoup.css");
 @import url("reviews.css");
+@import url("footer.css");
+@import url("navbar.css");
+
+body {
+  padding-top: 15vh;
+}
