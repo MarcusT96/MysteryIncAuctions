@@ -4,36 +4,24 @@ using MySql.Data.MySqlClient;
 
 public class Bid
 {
-  public record BoxBids(int BoxId, int Value, int UserId);
+  public record BoxBids(int id, int Value, int UserId);
 
   public static List<BoxBids> GetBids()
   {
+    List<BoxBids> bids = new List<BoxBids>();
+    using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc"))
+    {
+      conn.Open();
+      MySqlCommand cmd = new MySqlCommand("SELECT id, value, userId FROM bids", conn);
 
-    List<BoxBids> result = new()
-            {
-                new(1, 100, 101),
-                new(2, 150, 102),
-                new(3, 200, 103),
-                new(4, 250, 104),
-                new(5, 300, 105),
-                new(6, 350, 106),
-                new(7, 400, 107),
-                new(8, 450, 108)
-            };
-
-    return result;
-    //MySqlCommand cmd = new("select BoxId, value from bids where BoxId = @BoxId", state.DB);
-    //cmd.Parameters.AddWithValue("@BoxId", BoxId);
-    //using var reader = cmd.ExecuteReader();
-    //bool found = reader.Read();
-    //if (found)
-    //{
-    //  return new(reader.GetInt("BoxId", "value"));
-    //}
-    //else{
-    //return null;
-
-
-
+      using (MySqlDataReader reader = cmd.ExecuteReader())
+      {
+        while (reader.Read())
+        {
+          bids.Add(new BoxBids(reader.GetInt32("id"), reader.GetInt32("value"), reader.GetInt32("userId")));
+        }
+      }
+    }
+    return bids;
   }
 }
