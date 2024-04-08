@@ -1,50 +1,65 @@
-namespace Server;
-using System.Data;
+using Microsoft.AspNetCore.Http;
 using MySql.Data.MySqlClient;
+using System.Text.Json;
+using System.IO;
+
+namespace Server;
 
 public class Bid
 {
-  public record BoxBids(int id, int Value, int UserId);
+  public record BidData(int Value, int UserId, int BoxId);
 
-  public static List<BoxBids> GetBids()
+  public static async Task<IResult> AddBid(HttpContext context)
   {
-    List<BoxBids> bids = new List<BoxBids>();
-    using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc"))
+    try
     {
-      conn.Open();
-      MySqlCommand cmd = new MySqlCommand("SELECT id, value, userId FROM bids", conn);
 
-      using (MySqlDataReader reader = cmd.ExecuteReader())
+      var requestBody = await new StreamReader(context.Request.Body).ReadToEndAsync();
+      var bidData = JsonSerializer.Deserialize<BidData>(requestBody);
+
+      if (bidData == null)
       {
-        while (reader.Read())
+        return Results.BadRequest("Invalid bid data");
+      }
+
+      using (var conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc"))
+      {
+        await conn.OpenAsync();
+
+
+        using (var transaction = conn.BeginTransaction())
         {
-          bids.Add(new BoxBids(reader.GetInt32("id"), reader.GetInt32("value"), reader.GetInt32("userId")));
+
+          var insertCmd = new MySqlCommand("INSERT INTO bids (value, userId, boxId) VALUES (@value, @userId, @boxId)", conn, transaction);
+          insertCmd.Parameters.AddWithValue("@value", bidData.Value);
+          insertCmd.Parameters.AddWithValue("@userId", bidData.UserId);
+          insertCmd.Parameters.AddWithValue("@boxId", bidData.BoxId);
+          await insertCmd.ExecuteNonQueryAsync();
+
+          
+          var updateCmd = new MySqlCommand("UPDATE boxes SET price = @price WHERE id = @boxId", conn, transaction);
+          updateCmd.Parameters.AddWithValue("@price", bidData.Value);
+          updateCmd.Parameters.AddWithValue("@boxId", bidData.BoxId);
+          var updateResult = await updateCmd.ExecuteNonQueryAsync();
+
+     
+          if (updateResult == 0)
+          {
+            transaction.Rollback();
+            return Results.NotFound("Box not found.");
+          }
+
+          transaction.Commit();
         }
       }
-    }
-    return bids;
-  }
 
-  // New method to fetch a specific bid by id
-  public static async Task<IResult> GetBidById(int id)
-  {
-    BoxBids? bid = null;
-    using (var conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc"))
+      return Results.Ok(new { Message = "Bid added and box price updated successfully" });
+    }
+    catch (Exception ex)
     {
-      await conn.OpenAsync();
-      var cmd = new MySqlCommand("SELECT id, value, userId FROM bids WHERE id = @id", conn);
-      cmd.Parameters.AddWithValue("@id", id);
 
-      using (var reader = await cmd.ExecuteReaderAsync())
-      {
-        if (await reader.ReadAsync())
-        {
-          bid = new BoxBids(reader.GetInt32("id"), reader.GetInt32("value"), reader.GetInt32("userId"));
-          return Results.Ok(bid);
-        }
-      }
+      Console.WriteLine(ex.ToString());
+      return Results.Problem("An error occurred while processing the request.");
     }
-    return Results.NotFound();
   }
-
 }
