@@ -25,5 +25,6 @@ app.MapGet("/categories", CategoryOptions.GetCategories);
 app.MapGet("/bids", Bid.GetBids);
 app.MapGet("/bids/{id:int}", async (int id) => await Bid.GetBidById(id));
 app.MapGet("/payment_options", PaymentOptions.PaymentOpts);
+app.MapGet("/boxes", async () => await Boxes.All());
 
 app.Run();
