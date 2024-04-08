@@ -21,9 +21,9 @@ catch (MySql.Data.MySqlClient.MySqlException ex)
 }
 
 app.MapGet("/", () => "Hello World!");
-app.MapGet("/api/categories", CategoryOptions.GetCategories);
-app.MapGet("/api/bids", Bid.GetBids);
-app.MapGet("/api/bids/{id:int}", async (int id) => await Bid.GetBidById(id));
-app.MapGet("/api/payment_options", PaymentOptions.PaymentOpts);
+app.MapGet("/categories", CategoryOptions.GetCategories);
+app.MapGet("/bids", Bid.GetBids);
+app.MapGet("/bids/{id:int}", async (int id) => await Bid.GetBidById(id));
+app.MapGet("/payment_options", PaymentOptions.PaymentOpts);
 
 app.Run();
