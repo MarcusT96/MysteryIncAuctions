@@ -1,62 +1,81 @@
+namespace Server;
+using System.Data;
 using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
 
-namespace Server
+public class User
 {
-  public class User
+  public record UserRecord(
+      int Id,
+      string Email,
+      string Password, // Notera: Detta bör vara en hashad representation
+      string FirstName,
+      string LastName,
+      string Address,
+      string City,
+      string ZipCode,
+      string Country,
+      string Phone,
+      bool IsAdmin);
+
+  public static List<UserRecord> GetUsers()
   {
-    public int Id { get; set; }
-    public string Email { get; set; }
-    public string Password { get; set; } // Notera: Lösenord bör hashas
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string Address { get; set; }
-    public string City { get; set; }
-    public string ZipCode { get; set; }
-    public string Country { get; set; }
-    public string Phone { get; set; }
-    public bool IsAdmin { get; set; }
-
-    // Metoder för databashantering skulle placeras här.
-  }
-
-  public class UsersDatabaseHandler
-  {
-    private MySqlConnection connection;
-
-    public UsersDatabaseHandler(MySqlConnection connection)
+    List<UserRecord> users = new List<UserRecord>();
+    using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc"))
     {
-      this.connection = connection;
-    }
+      conn.Open();
+      MySqlCommand cmd = new MySqlCommand("SELECT id, email, password, firstName, lastName, address, city, zipCode, country, phone, isAdmin FROM users", conn);
 
-    public List<User> GetAllUsers()
-    {
-      var users = new List<User>();
-      var cmd = new MySqlCommand("SELECT * FROM users", connection);
-      using (var reader = cmd.ExecuteReader())
+      using (MySqlDataReader reader = cmd.ExecuteReader())
       {
         while (reader.Read())
         {
-          users.Add(new User
-          {
-            Id = reader.GetInt32("id"),
-            Email = reader.GetString("email"),
-            Password = reader.GetString("password"), // Kom ihåg att hashningen bör ske innan lagring
-            FirstName = reader.GetString("firstName"),
-            LastName = reader.GetString("lastName"),
-            Address = reader.GetString("address"),
-            City = reader.GetString("city"),
-            ZipCode = reader.GetString("zipCode"),
-            Country = reader.GetString("country"),
-            Phone = reader.GetString("phone"),
-            IsAdmin = reader.GetBoolean("isAdmin")
-          });
+          users.Add(new UserRecord(
+              reader.GetInt32("id"),
+              reader.GetString("email"),
+              reader.GetString("password"), // Kom ihåg: detta bör vara hashat
+              reader.GetString("firstName"),
+              reader.GetString("lastName"),
+              reader.GetString("address"),
+              reader.GetString("city"),
+              reader.GetString("zipCode"),
+              reader.GetString("country"),
+              reader.GetString("phone"),
+              reader.GetBoolean("isAdmin")));
         }
       }
-      return users;
     }
+    return users;
+  }
 
-    // Metoder för att lägga till, uppdatera och ta bort användare ska också definieras här?
+  public static async Task<IResult> GetUserById(int id)
+  {
+    UserRecord? user = null;
+    using (var conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc"))
+    {
+      await conn.OpenAsync();
+      var cmd = new MySqlCommand("SELECT id, email, password, firstName, lastName, address, city, zipCode, country, phone, isAdmin FROM users WHERE id = @id", conn);
+      cmd.Parameters.AddWithValue("@id", id);
+
+      using (var reader = await cmd.ExecuteReaderAsync())
+      {
+        if (await reader.ReadAsync())
+        {
+          user = new UserRecord(
+              reader.GetInt32("id"),
+              reader.GetString("email"),
+              reader.GetString("password"), // Kom ihåg: detta bör vara hashat
+              reader.GetString("firstName"),
+              reader.GetString("lastName"),
+              reader.GetString("address"),
+              reader.GetString("city"),
+              reader.GetString("zipCode"),
+              reader.GetString("country"),
+              reader.GetString("phone"),
+              reader.GetBoolean("isAdmin"));
+          return Results.Ok(user);
+        }
+      }
+    }
+    return Results.NotFound();
   }
 }

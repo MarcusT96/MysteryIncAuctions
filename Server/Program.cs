@@ -6,14 +6,14 @@ var app = builder.Build();
 MySql.Data.MySqlClient.MySqlConnection conn;
 string myConnectionString;
 
-myConnectionString = "server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc";
+myConnectionString = "server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc";
 
 
 try
 {
   conn = new MySql.Data.MySqlClient.MySqlConnection(myConnectionString);
   conn.Open();
-  Console.WriteLine("Sucess!");
+  Console.WriteLine("Success!");
 }
 catch (MySql.Data.MySqlClient.MySqlException ex)
 {
@@ -26,5 +26,8 @@ app.MapPost("/bids", async (HttpContext context) => await Bid.AddBid(context));
 
 
 app.MapGet("/payment_options", PaymentOptions.PaymentOpts);
+app.MapGet("/users/{id:int}", async (int id) => await User.GetUserById(id));
+
+
 
 app.Run();
