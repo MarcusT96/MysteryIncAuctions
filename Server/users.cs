@@ -57,6 +57,6 @@ namespace Server
       return users;
     }
 
-    // Metoder för att lägga till, uppdatera och ta bort användare skulle också definieras här.
+    // Metoder för att lägga till, uppdatera och ta bort användare ska också definieras här?
   }
 }
