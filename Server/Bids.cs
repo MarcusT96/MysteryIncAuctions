@@ -13,7 +13,7 @@ public class Bid
   {
     try
     {
-      // Läser in och "deserializerar" datan
+      // Read and deserialize the request body to BidData
       var requestBody = await new StreamReader(context.Request.Body).ReadToEndAsync();
       var bidData = JsonSerializer.Deserialize<BidData>(requestBody);
 
@@ -25,24 +25,39 @@ public class Bid
       using (var conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc"))
       {
         await conn.OpenAsync();
-        var cmd = new MySqlCommand("INSERT INTO bids (value, userId, boxId) VALUES (@value, @userId, @boxId)", conn);
-        cmd.Parameters.AddWithValue("@value", bidData.Value);
-        cmd.Parameters.AddWithValue("@userId", bidData.UserId);
-        cmd.Parameters.AddWithValue("@boxId", bidData.BoxId);
 
-        int result = await cmd.ExecuteNonQueryAsync();
-        if (result > 0)
+        // Start a transaction
+        using (var transaction = conn.BeginTransaction())
         {
-          return Results.Ok(new { Message = "Bid added successfully" });
-        }
-        else
-        {
-          return Results.BadRequest(new { Message = "Failed to add bid" });
+          // Insert the new bid into the bids table
+          var insertCmd = new MySqlCommand("INSERT INTO bids (value, userId, boxId) VALUES (@value, @userId, @boxId)", conn, transaction);
+          insertCmd.Parameters.AddWithValue("@value", bidData.Value);
+          insertCmd.Parameters.AddWithValue("@userId", bidData.UserId);
+          insertCmd.Parameters.AddWithValue("@boxId", bidData.BoxId);
+          await insertCmd.ExecuteNonQueryAsync();
+
+          
+          var updateCmd = new MySqlCommand("UPDATE boxes SET price = @price WHERE id = @boxId", conn, transaction);
+          updateCmd.Parameters.AddWithValue("@price", bidData.Value);
+          updateCmd.Parameters.AddWithValue("@boxId", bidData.BoxId);
+          var updateResult = await updateCmd.ExecuteNonQueryAsync();
+
+     
+          if (updateResult == 0)
+          {
+            transaction.Rollback();
+            return Results.NotFound("Box not found.");
+          }
+
+          transaction.Commit();
         }
       }
+
+      return Results.Ok(new { Message = "Bid added and box price updated successfully" });
     }
     catch (Exception ex)
     {
+
       Console.WriteLine(ex.ToString());
       return Results.Problem("An error occurred while processing the request.");
     }
