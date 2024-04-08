@@ -13,7 +13,7 @@ public class Bid
   {
     try
     {
-      // Read and deserialize the request body to BidData
+
       var requestBody = await new StreamReader(context.Request.Body).ReadToEndAsync();
       var bidData = JsonSerializer.Deserialize<BidData>(requestBody);
 
@@ -26,10 +26,10 @@ public class Bid
       {
         await conn.OpenAsync();
 
-        // Start a transaction
+
         using (var transaction = conn.BeginTransaction())
         {
-          // Insert the new bid into the bids table
+
           var insertCmd = new MySqlCommand("INSERT INTO bids (value, userId, boxId) VALUES (@value, @userId, @boxId)", conn, transaction);
           insertCmd.Parameters.AddWithValue("@value", bidData.Value);
           insertCmd.Parameters.AddWithValue("@userId", bidData.UserId);
