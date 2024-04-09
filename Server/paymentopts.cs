@@ -24,7 +24,7 @@ public class PaymentOptions
           result.Add(new Cards(
             reader.GetString("id"),
             reader.GetString("card_number"),
-            reader.GetString("expiration date"),
+            reader.GetString("expiration_date"),
             reader.GetString("CVC"),
             reader.GetString("type"),
             reader.GetString("cardholder_name"),
