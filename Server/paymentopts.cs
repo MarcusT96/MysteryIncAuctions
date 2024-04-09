@@ -1,6 +1,8 @@
 using System;
 using System.Data;
+using System.Runtime.InteropServices;
 using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI.Common;
 
 namespace Server;
 
@@ -36,11 +38,11 @@ public class PaymentOptions
     return result;
   }
 
-  public static void AddPaymentOpt(Cards paymentData)
+  public static async Task<IResult> AddPaymentOpt(Cards paymentData)
   {
     using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc"))
     {
-      conn.Open();
+      await conn.OpenAsync();
 
       string query = "INSERT INTO payment_options (card_number, expiration_date, CVC, type, cardholder_name, user_id)" +
       "VALUES (@cardNumber, @expirationDate, @cvc, @type, @cardholderName, @userId)";
@@ -54,8 +56,8 @@ public class PaymentOptions
       cmd.Parameters.AddWithValue("@cardholderName", paymentData.cardholder_name);
       cmd.Parameters.AddWithValue("@userId", paymentData.user_id);
 
-      cmd.ExecuteNonQuery();
-      
+      var result = cmd.ExecuteNonQuery();
+      return result > 0 ? Results.Ok(new { Message = "Added new payment method" }) : Results.Problem("Couldn't add new payment method");
     }
   }
 
