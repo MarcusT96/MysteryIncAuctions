@@ -2,6 +2,7 @@ using System;
 using System.Data;
 using System.Runtime.InteropServices;
 using MySql.Data.MySqlClient;
+using System.Text.Json;
 using MySqlX.XDevAPI.Common;
 
 namespace Server;
@@ -38,8 +39,17 @@ public class PaymentOptions
     return result;
   }
 
-  public static async Task<IResult> AddPaymentOpt(Cards paymentData)
+  public static async Task<IResult> AddPaymentOpt(HttpContext context)
   {
+
+    var requestBody = await new StreamReader(context.Request.Body).ReadToEndAsync();
+    var paymentData = JsonSerializer.Deserialize<Cards>(requestBody);
+
+    if (paymentData == null)
+    {
+      return Results.BadRequest("Invalid payment data");
+    }
+
     using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc"))
     {
       await conn.OpenAsync();
