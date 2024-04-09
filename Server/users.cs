@@ -91,12 +91,73 @@ public class User
       cmd.Parameters.AddWithValue("@Password", newUser.Password); // Observera: Lösenord bör hashas
       cmd.Parameters.AddWithValue("@FirstName", newUser.FirstName);
       cmd.Parameters.AddWithValue("@LastName", newUser.LastName);
-      // Fortsätt att lägga till parametrar för resten av fälten
 
       var result = await cmd.ExecuteNonQueryAsync();
       return result > 0 ? Results.Ok(new { Message = "Användaren skapades framgångsrikt." }) : Results.Problem("Kunde inte skapa användaren.");
     }
   }
+
+  public static async Task<IResult> UpdateUser(int id, UserRecord updatedUser)
+  {
+    using (var conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc"))
+    {
+      await conn.OpenAsync();
+      using (var transaction = await conn.BeginTransactionAsync())
+      {
+        try
+        {
+          var cmd = new MySqlCommand("", conn);
+          cmd.Transaction = transaction;
+
+          // En lista för att samla ihop alla delar av vår UPDATE-sats.
+          var updates = new List<string>();
+          if (!string.IsNullOrWhiteSpace(updatedUser.Email)) updates.Add("email = @Email");
+          // Antag att vi inte vill uppdatera lösenordet om ett nytt inte tillhandahålls.
+          if (!string.IsNullOrWhiteSpace(updatedUser.Password)) updates.Add("password = @Password");
+          if (!string.IsNullOrWhiteSpace(updatedUser.FirstName)) updates.Add("firstName = @FirstName");
+          if (!string.IsNullOrWhiteSpace(updatedUser.LastName)) updates.Add("lastName = @LastName");
+          if (!string.IsNullOrWhiteSpace(updatedUser.Address)) updates.Add("address = @Address");
+          if (!string.IsNullOrWhiteSpace(updatedUser.City)) updates.Add("city = @City");
+          if (!string.IsNullOrWhiteSpace(updatedUser.ZipCode)) updates.Add("zipCode = @Zipcode");
+          if (!string.IsNullOrWhiteSpace(updatedUser.Country)) updates.Add("country = @Country");
+          if (!string.IsNullOrWhiteSpace(updatedUser.Phone)) updates.Add("phone = @Phone");
+
+          // Bygg vår SQL-sats dynamiskt baserat på vilka fält som ska uppdateras.
+          cmd.CommandText = $"UPDATE users SET {string.Join(", ", updates)} WHERE id = @Id";
+
+          // Bind parametrar
+          cmd.Parameters.AddWithValue("@Id", id);
+          if (!string.IsNullOrWhiteSpace(updatedUser.Email)) cmd.Parameters.AddWithValue("@Email", updatedUser.Email);
+          if (!string.IsNullOrWhiteSpace(updatedUser.Password)) cmd.Parameters.AddWithValue("@Password", updatedUser.Password);
+          if (!string.IsNullOrWhiteSpace(updatedUser.FirstName)) cmd.Parameters.AddWithValue("@FirstName", updatedUser.FirstName);
+          if (!string.IsNullOrWhiteSpace(updatedUser.LastName)) cmd.Parameters.AddWithValue("@LastName", updatedUser.LastName);
+          if (!string.IsNullOrWhiteSpace(updatedUser.Address)) cmd.Parameters.AddWithValue("@Address", updatedUser.Address);
+          if (!string.IsNullOrWhiteSpace(updatedUser.City)) cmd.Parameters.AddWithValue("@City", updatedUser.City);
+          if (!string.IsNullOrWhiteSpace(updatedUser.ZipCode)) cmd.Parameters.AddWithValue("@ZipCode", updatedUser.ZipCode);
+          if (!string.IsNullOrWhiteSpace(updatedUser.Country)) cmd.Parameters.AddWithValue("@Country", updatedUser.Country);
+          if (!string.IsNullOrWhiteSpace(updatedUser.Phone)) cmd.Parameters.AddWithValue("@Phone", updatedUser.Phone);
+
+          var result = await cmd.ExecuteNonQueryAsync();
+          if (result > 0)
+          {
+            await transaction.CommitAsync();
+            return Results.Ok(new { Message = "Användaren uppdaterades framgångsrikt." });
+          }
+          else
+          {
+            return Results.Problem("Ingen användare uppdaterades, kontrollera att användar-ID:et är korrekt.");
+          }
+        }
+        catch (MySqlException ex)
+        {
+          await transaction.RollbackAsync();
+          Console.WriteLine(ex.Message);
+          return Results.Problem("Ett fel uppstod vid uppdatering av användaren.");
+        }
+      }
+    }
+  }
+
 
 
 }
