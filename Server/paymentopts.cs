@@ -36,6 +36,29 @@ public class PaymentOptions
     return result;
   }
 
+  public static void AddPaymentOpt(Cards paymentData)
+  {
+    using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc"))
+    {
+      conn.Open();
+
+      string query = "INSERT INTO payment_options (card_number, expiration_date, CVC, type, cardholder_name, user_id)" +
+      "VALUES (@cardNumber, @expirationDate, @cvc, @type, @cardholderName, @userId)";
+
+      MySqlCommand cmd = new MySqlCommand(query, conn);
+
+      cmd.Parameters.AddWithValue("@cardNumber", paymentData.card_number);
+      cmd.Parameters.AddWithValue("@expirationDate", paymentData.expiration_date);
+      cmd.Parameters.AddWithValue("@cvc", paymentData.CVC);
+      cmd.Parameters.AddWithValue("@type", paymentData.type);
+      cmd.Parameters.AddWithValue("@cardholderName", paymentData.cardholder_name);
+      cmd.Parameters.AddWithValue("@userId", paymentData.user_id);
+
+      cmd.ExecuteNonQuery();
+      
+    }
+  }
+
 
 }
 
