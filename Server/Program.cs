@@ -24,6 +24,7 @@ app.MapGet("/", () => "Hello World!");
 app.MapGet("/categories", CategoryOptions.GetCategories);
 app.MapPost("/bids", async (HttpContext context) => await Bid.AddBid(context));
 app.MapGet("/payment_options", PaymentOptions.PaymentOpts);
+app.MapPost("/payment_options/", async (HttpContext context) => await PaymentOptions.AddPaymentOpt(context));
 app.MapGet("/users/{id:int}", async (int id) => await User.GetUserById(id));
 app.MapGet("/boxes", async () => await Boxes.All());app.MapGet("/users", User.GetUsers);
 app.MapPost("/users", async (User.UserRecord newUser) => await User.CreateUser(newUser));

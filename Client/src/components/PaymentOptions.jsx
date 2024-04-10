@@ -76,12 +76,12 @@ function PaymentOptions() {
 
   const addPaymentOption = async () => {
     const data = {
-      user_id: localStorage.currentUserId,
-      type: document.getElementById('type').value,
-      card_number: cardNumber,
-      expiration_date: expDate,
+      CardNumber: cardNumber,
+      ExpirationDate: expDate,
       CVC: cardCvc,
-      cardholder_name: cardHolder,
+      Type: document.getElementById('type').value,
+      CardholderName: cardHolder,
+      UserId: localStorage.currentUserId
     }
 
     try {
