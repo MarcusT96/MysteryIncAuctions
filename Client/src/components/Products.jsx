@@ -12,7 +12,7 @@ function Products({ searchQuery, sortOrder, sortCriterion }) {
 
   useEffect(() => {
     async function load() {
-      const response = await fetch(`/api/mystery_boxes`)
+      const response = await fetch(`/api/boxes`)
       const data = await response.json()
       setItems(data);
 
