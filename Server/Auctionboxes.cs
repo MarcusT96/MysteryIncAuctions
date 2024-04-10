@@ -12,7 +12,7 @@ public class Boxes
         await using (var conn = new MySqlConnection(connectionString))
         {
             await conn.OpenAsync();
-            var query = "SELECT id, name, image, category, price FROM auction_boxes";
+            var query = "SELECT id, name, image, category_id, price, weight, time, description FROM mystery_boxes";
             await using (var cmd = new MySqlCommand(query, conn))
             await using (var reader = await cmd.ExecuteReaderAsync())
             {
@@ -22,8 +22,11 @@ public class Boxes
                         reader.GetInt32("id"),
                         reader.GetString("name"),
                         reader.GetString("image"),
-                        reader.GetString("category"),
-                        reader.GetDouble("price")
+                        reader.GetInt32("category_id"),
+                        reader.GetDouble("price"),
+                        reader.GetDouble("weight"),
+                        reader.GetDateTime("time"),
+                        reader.GetString("description")
                     ));
                 }
             }
@@ -31,7 +34,7 @@ public class Boxes
         return boxes;
     }
 }
-public record AuctionList(int ID, string Name, string Image, string Category, double Price);
+public record AuctionList(int ID, string Name, string Image, int Category, Double Price, Double Weight, DateTime Time, string Description);
 
 
 
