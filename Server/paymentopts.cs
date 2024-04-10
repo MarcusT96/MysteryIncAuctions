@@ -9,7 +9,7 @@ namespace Server;
 
 public class PaymentOptions
 {
-  public record Cards(string id, string card_number, string expiration_date, string CVC, string type, string cardholder_name, string user_id);
+  public record Cards(string Id, string CardNumber, string ExpirationDate, string CVC, string Type, string CardholderName, string UserId);
 
   public static List<Cards> PaymentOpts()
   {
@@ -59,12 +59,12 @@ public class PaymentOptions
 
       MySqlCommand cmd = new MySqlCommand(query, conn);
 
-      cmd.Parameters.AddWithValue("@cardNumber", paymentData.card_number);
-      cmd.Parameters.AddWithValue("@expirationDate", paymentData.expiration_date);
+      cmd.Parameters.AddWithValue("@cardNumber", paymentData.CardNumber);
+      cmd.Parameters.AddWithValue("@expirationDate", paymentData.ExpirationDate);
       cmd.Parameters.AddWithValue("@cvc", paymentData.CVC);
-      cmd.Parameters.AddWithValue("@type", paymentData.type);
-      cmd.Parameters.AddWithValue("@cardholderName", paymentData.cardholder_name);
-      cmd.Parameters.AddWithValue("@userId", paymentData.user_id);
+      cmd.Parameters.AddWithValue("@type", paymentData.Type);
+      cmd.Parameters.AddWithValue("@cardholderName", paymentData.CardholderName);
+      cmd.Parameters.AddWithValue("@userId", paymentData.UserId);
 
       var result = cmd.ExecuteNonQuery();
       return result > 0 ? Results.Ok(new { Message = "Added new payment method" }) : Results.Problem("Couldn't add new payment method");
