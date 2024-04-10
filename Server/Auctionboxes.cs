@@ -7,12 +7,12 @@ public class Boxes
 {
     public static async Task<List<AuctionList>> All()
     {
-        var connectionString = "server=localhost;port=3306;uid=root;pwd=mypassword;database=Auctionboxes";
+        var connectionString = "server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc";
         List<AuctionList> boxes = new List<AuctionList>();
         await using (var conn = new MySqlConnection(connectionString))
         {
             await conn.OpenAsync();
-            var query = "SELECT id, name, image, category_id, price, weight, time, description FROM mystery_boxes";
+            var query = "SELECT id, name, image, category, price, weight, time, description FROM mystery_boxes";
             await using (var cmd = new MySqlCommand(query, conn))
             await using (var reader = await cmd.ExecuteReaderAsync())
             {
@@ -22,9 +22,9 @@ public class Boxes
                         reader.GetInt32("id"),
                         reader.GetString("name"),
                         reader.GetString("image"),
-                        reader.GetInt32("category_id"),
-                        reader.GetDouble("price"),
-                        reader.GetDouble("weight"),
+                        reader.GetInt32("category"),
+                        reader.GetInt32("price"), 
+                        reader.GetDecimal("weight"),
                         reader.GetDateTime("time"),
                         reader.GetString("description")
                     ));
@@ -34,7 +34,7 @@ public class Boxes
         return boxes;
     }
 }
-public record AuctionList(int ID, string Name, string Image, int Category, Double Price, Double Weight, DateTime Time, string Description);
+public record AuctionList(int ID, string Name, string Image, int Category, int Price, Decimal Weight, DateTime Time, string Description);
 
 
 

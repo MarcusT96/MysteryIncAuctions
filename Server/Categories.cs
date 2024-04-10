@@ -11,12 +11,12 @@ public class CategoryOptions
   {
     List<Category> result = new();
 
-    string connectionString = "server=localhost;port=3306;database=mystery_practice;user=root;password=mypassword";
+    string connectionString = "server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc";
 
     using (var connection = new MySqlConnection(connectionString))
     {
       connection.Open();
-      var command = new MySqlCommand("SELECT Id, CategoryName FROM Categories;", connection);
+      var command = new MySqlCommand("SELECT Id, category_name FROM Categories;", connection);
 
       using (var reader = command.ExecuteReader())
       {

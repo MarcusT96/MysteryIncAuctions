@@ -20,7 +20,7 @@ public class User
   public static List<UserRecord> GetUsers()
   {
     List<UserRecord> users = new List<UserRecord>();
-    using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc"))
+    using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc"))
     {
       conn.Open();
       MySqlCommand cmd = new MySqlCommand("SELECT id, email, password, firstName, lastName, address, city, zipCode, country, phone, isAdmin FROM users", conn);
@@ -51,7 +51,7 @@ public class User
   public static async Task<IResult> GetUserById(int id)
   {
     UserRecord? user = null;
-    using (var conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc"))
+    using (var conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc"))
     {
       await conn.OpenAsync();
       var cmd = new MySqlCommand("SELECT id, email, password, firstName, lastName, address, city, zipCode, country, phone, isAdmin FROM users WHERE id = @id", conn);
@@ -82,7 +82,7 @@ public class User
 
   public static async Task<IResult> CreateUser(UserRecord newUser)
   {
-    using (var conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc"))
+    using (var conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc"))
     {
       await conn.OpenAsync();
       var cmd = new MySqlCommand("INSERT INTO users (email, password, firstName, lastName) VALUES (@Email, @Password, @FirstName, @LastName)", conn);
@@ -99,7 +99,7 @@ public class User
 
   public static async Task<IResult> UpdateUser(int id, UserRecord updatedUser)
   {
-    using (var conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc"))
+    using (var conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc"))
     {
       await conn.OpenAsync();
       using (var transaction = await conn.BeginTransactionAsync())

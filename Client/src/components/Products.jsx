@@ -12,14 +12,14 @@ function Products({ searchQuery, sortOrder, sortCriterion }) {
 
   useEffect(() => {
     async function load() {
-      const response = await fetch(`/api/boxes`)
+      const response = await fetch(`/api/mystery_boxes`)
       const data = await response.json()
       setItems(data);
 
       const categoriesResponse = await fetch(`/api/categories`)
       const categoriesData = await categoriesResponse.json()
       const categoriesMap = categoriesData.reduce((acc, category) => {
-        acc[category.id] = category.categoryName // Map id to categoryName
+        acc[category.id] = category.category_name // Map id to categoryName
         return acc
       }, {})
       setCategories(categoriesMap)
