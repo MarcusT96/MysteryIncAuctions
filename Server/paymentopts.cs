@@ -9,7 +9,7 @@ namespace Server;
 
 public class PaymentOptions
 {
-  public record Cards(string Id, string CardNumber, string ExpirationDate, string CVC, string Type, string CardholderName, string UserId);
+  public record Cards(int Id, string CardNumber, string ExpirationDate, string CVC, string Type, string CardholderName, int UserId);
 
   public static List<Cards> PaymentOpts()
   {
@@ -25,13 +25,42 @@ public class PaymentOptions
         while (reader.Read())
         {
           result.Add(new Cards(
-            reader.GetString("id"),
+            reader.GetInt32("id"),
             reader.GetString("card_number"),
             reader.GetString("expiration_date"),
             reader.GetString("CVC"),
             reader.GetString("type"),
             reader.GetString("cardholder_name"),
-            reader.GetString("user_id")
+            reader.GetInt32("user_id")
+          ));
+        }
+      }
+    }
+    return result;
+  }
+
+  public static List<Cards> GetPaymentOptsByUserId(int UserId)
+  {
+    List<Cards> result = new List<Cards>();
+
+    using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc"))
+    {
+      conn.Open();
+      MySqlCommand cmd = new MySqlCommand("SELECT * from payment_options WHERE user_id = @user_id", conn);
+      cmd.Parameters.AddWithValue("@user_id", UserId);
+
+      using (MySqlDataReader reader = cmd.ExecuteReader())
+      {
+        while (reader.Read())
+        {
+          result.Add(new Cards(
+            reader.GetInt32("id"),
+            reader.GetString("card_number"),
+            reader.GetString("expiration_date"),
+            reader.GetString("CVC"),
+            reader.GetString("type"),
+            reader.GetString("cardholder_name"),
+            reader.GetInt32("user_id")
           ));
         }
       }

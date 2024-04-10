@@ -32,16 +32,12 @@ function PaymentOptions() {
 
   useEffect(() => {
     async function load() {
-      const response = await fetch(`/api/payment_options`)
+      let userId = localStorage.currentUserId
+      const response = await fetch(`/api/payment_options/${userId}`)
       const data = await response.json()
-      let paymentData = []
-      for (let method of data) {
-        if (method.user_id == localStorage.currentUserId) {
-          paymentData.push(method)
-        }
-      }
-      setPaymentInfo(paymentData)
+      setPaymentInfo(data)
     }
+    console.log(localStorage.currentUserId)
     load()
   }, [])
 
