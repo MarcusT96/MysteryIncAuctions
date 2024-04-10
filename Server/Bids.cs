@@ -2,19 +2,24 @@ using Microsoft.AspNetCore.Http;
 using MySql.Data.MySqlClient;
 using System.Text.Json;
 using System.IO;
+using System.Text.Json.Serialization;
 
 namespace Server;
 
 public class Bid
 {
-  public record BidData(int Value, int UserId, int BoxId);
+  public record BidData(
+      [property: JsonPropertyName("Value")] int Value,
+      [property: JsonPropertyName("UserId")] int UserId,
+      [property: JsonPropertyName("BoxId")] int BoxId
+  );
 
   public static async Task<IResult> AddBid(HttpContext context)
   {
     try
     {
-
       var requestBody = await new StreamReader(context.Request.Body).ReadToEndAsync();
+     
       var bidData = JsonSerializer.Deserialize<BidData>(requestBody);
 
       if (bidData == null)
@@ -26,23 +31,19 @@ public class Bid
       {
         await conn.OpenAsync();
 
-
         using (var transaction = conn.BeginTransaction())
         {
-
           var insertCmd = new MySqlCommand("INSERT INTO bids (value, userId, boxId) VALUES (@value, @userId, @boxId)", conn, transaction);
           insertCmd.Parameters.AddWithValue("@value", bidData.Value);
           insertCmd.Parameters.AddWithValue("@userId", bidData.UserId);
           insertCmd.Parameters.AddWithValue("@boxId", bidData.BoxId);
           await insertCmd.ExecuteNonQueryAsync();
 
-          
-          var updateCmd = new MySqlCommand("UPDATE boxes SET price = @price WHERE id = @boxId", conn, transaction);
+          var updateCmd = new MySqlCommand("UPDATE mystery_boxes SET price = @price WHERE id = @boxId", conn, transaction);
           updateCmd.Parameters.AddWithValue("@price", bidData.Value);
           updateCmd.Parameters.AddWithValue("@boxId", bidData.BoxId);
           var updateResult = await updateCmd.ExecuteNonQueryAsync();
 
-     
           if (updateResult == 0)
           {
             transaction.Rollback();
@@ -57,7 +58,6 @@ public class Bid
     }
     catch (Exception ex)
     {
-
       Console.WriteLine(ex.ToString());
       return Results.Problem("An error occurred while processing the request.");
     }
