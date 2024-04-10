@@ -19,7 +19,7 @@ function Products({ searchQuery, sortOrder, sortCriterion }) {
       const categoriesResponse = await fetch(`/api/categories`)
       const categoriesData = await categoriesResponse.json()
       const categoriesMap = categoriesData.reduce((acc, category) => {
-        acc[category.id] = category.category_name // Map id to categoryName
+        acc[category.id] = category.categoryName // Map id to categoryName
         return acc
       }, {})
       setCategories(categoriesMap)
@@ -80,7 +80,7 @@ function Products({ searchQuery, sortOrder, sortCriterion }) {
         <section key={item.id} className="auction-card">
           <img src={item.image} alt={item.name} />
           <h3 className="auction-title">{item.name}</h3>
-          <p className="category-name">Kategori: {item.categoryName}</p>          
+          <p className="category-name">Kategori: {item.categoryName}</p>
           <p> Tid kvar: <h2 className="tidtag">{<CountdownTimer endTime={item.time} />}</h2>  </p>
           <p>Nuvarande högsta bud: <h2 className="pristag">{item.price}kr</h2></p>
           <button onClick={() => navigateToObjectPage(item.id)} className="auctionbutton">Läs mer</button>

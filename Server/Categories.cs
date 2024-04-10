@@ -16,13 +16,13 @@ public class CategoryOptions
     using (var connection = new MySqlConnection(connectionString))
     {
       connection.Open();
-      var command = new MySqlCommand("SELECT Id, category_name FROM Categories;", connection);
+      var command = new MySqlCommand("SELECT id, category_name FROM categories;", connection);
 
       using (var reader = command.ExecuteReader())
       {
         while (reader.Read())
         {
-          var category = new Category(reader.GetInt32("Id"), reader.GetString("CategoryName"));
+          var category = new Category(reader.GetInt32("id"), reader.GetString("category_name"));
           result.Add(category);
         }
       }
