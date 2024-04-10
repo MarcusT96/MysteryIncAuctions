@@ -12,7 +12,7 @@ function Products({ searchQuery, sortOrder, sortCriterion }) {
 
   useEffect(() => {
     async function load() {
-      const response = await fetch(`/api/boxes`)
+      const response = await fetch(`/api/mystery_boxes`)
       const data = await response.json()
       setItems(data);
 
@@ -80,7 +80,7 @@ function Products({ searchQuery, sortOrder, sortCriterion }) {
         <section key={item.id} className="auction-card">
           <img src={item.image} alt={item.name} />
           <h3 className="auction-title">{item.name}</h3>
-          <p className="category-name">Kategori: {item.categoryName}</p>          
+          <p className="category-name">Kategori: {item.categoryName}</p>
           <p> Tid kvar: <h2 className="tidtag">{<CountdownTimer endTime={item.time} />}</h2>  </p>
           <p>Nuvarande högsta bud: <h2 className="pristag">{item.price}kr</h2></p>
           <button onClick={() => navigateToObjectPage(item.id)} className="auctionbutton">Läs mer</button>

@@ -7,19 +7,21 @@ public class CategoryOptions
 
   public static List<Category> GetCategories()
   {
-    List<Category> result = new List<Category>();
-    string connectionString = "server=localhost;port=3306;database=mystery_practice;user=root;password=mypassword";
+
+    List<Category> result = new();
+
+    string connectionString = "server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc";
 
     using (var connection = new MySqlConnection(connectionString))
     {
       connection.Open();
-      var command = new MySqlCommand("SELECT Id, CategoryName FROM Categories;", connection);
+      var command = new MySqlCommand("SELECT id, category_name FROM categories;", connection);
 
       using (var reader = command.ExecuteReader())
       {
         while (reader.Read())
         {
-          var category = new Category(reader.GetInt32("Id"), reader.GetString("CategoryName"));
+          var category = new Category(reader.GetInt32("id"), reader.GetString("category_name"));
           result.Add(category);
         }
       }
