@@ -13,7 +13,7 @@ public class Bid
       [property: JsonPropertyName("UserId")] int UserId,
       [property: JsonPropertyName("BoxId")] int BoxId
   );
-
+  //testkommentar
   public static async Task<IResult> AddBid(HttpContext context)
   {
     try
