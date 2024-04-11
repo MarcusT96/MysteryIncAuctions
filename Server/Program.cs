@@ -33,8 +33,8 @@ app.MapGet("/mystery_boxes/{id:int}", async (int id) => await Boxes.GetById(id))
 app.MapGet("/users", User.GetUsers);
 app.MapPost("/users", async (User.UserRecord newUser) => await User.CreateUser(newUser));
 app.MapPut("/users/{id:int}", async (int id, User.UserRecord updatedUser) => await User.UpdateUser(id, updatedUser));
-
-
-
+app.MapGet("/boughtboxes", BoughtBoxesOptions.GetBoughtBoxes);
+app.MapPost("/boughtboxes", BoughtBoxesOptions.CreateBoughtBox);
+app.MapPut("/boughtboxes/{id:int}", BoughtBoxesOptions.UpdateBoughtBox);
 
 app.Run();
