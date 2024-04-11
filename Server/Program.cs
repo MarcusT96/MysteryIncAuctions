@@ -36,5 +36,6 @@ app.MapPut("/users/{id:int}", async (int id, User.UserRecord updatedUser) => awa
 app.MapGet("/boughtboxes", BoughtBoxesOptions.GetBoughtBoxes);
 app.MapPost("/boughtboxes", BoughtBoxesOptions.CreateBoughtBox);
 app.MapPut("/boughtboxes/{id:int}", BoughtBoxesOptions.UpdateBoughtBox);
+app.MapGet("/api/reviews", () => Results.Ok(Reviews.GetAllReviews()));
 
 app.Run();
