@@ -40,4 +40,30 @@ public class BoughtBoxesOptions
     }
     return result;
   }
+
+  public static async Task<bool> CreateBoughtBox(BoughtBox box)
+  {
+    string connectionString = "server=localhost;port=3306;database=mystery_practice;user=root;password=mypassword";
+    await using (var connection = new MySqlConnection(connectionString))
+    {
+      var query = "INSERT INTO BoughtBoxes (Name, Weight, Price, Time, Description, Image, buyer_id, Paid, Delivered) VALUES (@Name, @Weight, @Price, @Time, @Description, @Image, @buyer_id, @Paid, @Delivered);";
+      await using (var command = new MySqlCommand(query, connection))
+      {
+        command.Parameters.AddWithValue("@Name", box.Name);
+        command.Parameters.AddWithValue("@Weight", box.Weight);
+        command.Parameters.AddWithValue("@Price", box.Price);
+        command.Parameters.AddWithValue("@Time", box.Time);
+        command.Parameters.AddWithValue("@Description", box.Description);
+        command.Parameters.AddWithValue("@Image", box.Image);
+        command.Parameters.AddWithValue("@buyer_id", box.BuyerId);
+        command.Parameters.AddWithValue("@Paid", box.Paid);
+        command.Parameters.AddWithValue("@Delivered", box.Delivered);
+
+        await connection.OpenAsync();
+        var result = await command.ExecuteNonQueryAsync();
+        return result > 0;
+      }
+    }
+  }
+
 }
