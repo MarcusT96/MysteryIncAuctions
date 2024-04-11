@@ -15,7 +15,7 @@ public class PaymentOptions
   {
     List<Cards> result = new List<Cards>();
 
-    using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc"))
+    using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc"))
     {
       conn.Open();
       MySqlCommand cmd = new MySqlCommand("SELECT * from payment_options", conn);
@@ -79,7 +79,7 @@ public class PaymentOptions
       return Results.BadRequest("Invalid payment data");
     }
 
-    using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc"))
+    using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc"))
     {
       await conn.OpenAsync();
 
