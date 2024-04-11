@@ -37,15 +37,18 @@ function PaymentOptions() {
       const data = await response.json()
       setPaymentInfo(data)
     }
-    console.log(localStorage.currentUserId)
     load()
-  }, [])
+  },)
 
   function censorCard(cardNumber) {
-    let censored = cardNumber.slice(0, 4)
-    censored = censored + "-XXXX-XXXX-XXXX"
-    return censored
+    if (cardNumber) {
+      let censored = cardNumber.slice(0, 4)
+      censored = censored + "-XXXX-XXXX-XXXX"
+      return censored
+    }
+    return ""
   }
+
 
   const removePaymentOption = async (paymentId) => {
     await fetch(`/api/payment_options/${paymentId}`, {
@@ -154,8 +157,8 @@ function PaymentOptions() {
         {paymentInfo.map((payment, index) => (
           <div className='paymentopt-method' key={index}>
             <h2 className='paymentopt-type'>{payment.type}</h2>
-            <p className='paymentopt-holder'>Ägare: {payment.cardholder_name}</p>
-            <p className='paymentopt-number'>{censorCard(payment.card_number)}</p>
+            <p className='paymentopt-holder'>Ägare: {payment.cardholderName}</p>
+            <p className='paymentopt-number'>{censorCard(payment.cardNumber)}</p>
             <button className='paymentopt-remove' onClick={() => removePaymentOption(payment.id)}>Ta bort</button>
           </div>
         ))}
