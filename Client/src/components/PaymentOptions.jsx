@@ -32,24 +32,23 @@ function PaymentOptions() {
 
   useEffect(() => {
     async function load() {
-      const response = await fetch(`/api/payment_options`)
+      let userId = localStorage.currentUserId
+      const response = await fetch(`/api/payment_options/${userId}`)
       const data = await response.json()
-      let paymentData = []
-      for (let method of data) {
-        if (method.user_id == localStorage.currentUserId) {
-          paymentData.push(method)
-        }
-      }
-      setPaymentInfo(paymentData)
+      setPaymentInfo(data)
     }
     load()
-  }, [])
+  },)
 
   function censorCard(cardNumber) {
-    let censored = cardNumber.slice(0, 4)
-    censored = censored + "-XXXX-XXXX-XXXX"
-    return censored
+    if (cardNumber) {
+      let censored = cardNumber.slice(0, 4)
+      censored = censored + "-XXXX-XXXX-XXXX"
+      return censored
+    }
+    return ""
   }
+
 
   const removePaymentOption = async (paymentId) => {
     await fetch(`/api/payment_options/${paymentId}`, {
@@ -81,7 +80,7 @@ function PaymentOptions() {
       CVC: cardCvc,
       Type: document.getElementById('type').value,
       CardholderName: cardHolder,
-      UserId: localStorage.currentUserId
+      UserId: parseInt(localStorage.currentUserId)
     }
 
     try {
@@ -158,8 +157,8 @@ function PaymentOptions() {
         {paymentInfo.map((payment, index) => (
           <div className='paymentopt-method' key={index}>
             <h2 className='paymentopt-type'>{payment.type}</h2>
-            <p className='paymentopt-holder'>Ägare: {payment.cardholder_name}</p>
-            <p className='paymentopt-number'>{censorCard(payment.card_number)}</p>
+            <p className='paymentopt-holder'>Ägare: {payment.cardholderName}</p>
+            <p className='paymentopt-number'>{censorCard(payment.cardNumber)}</p>
             <button className='paymentopt-remove' onClick={() => removePaymentOption(payment.id)}>Ta bort</button>
           </div>
         ))}
