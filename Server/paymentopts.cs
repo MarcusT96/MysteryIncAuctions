@@ -9,7 +9,7 @@ namespace Server;
 
 public class PaymentOptions
 {
-  public record Cards(int Id, string CardNumber, string ExpirationDate, string CVC, string Type, string CardholderName, int UserId);
+  public record Cards(int? Id, string CardNumber, string ExpirationDate, string CVC, string Type, string CardholderName, int UserId);
 
   public static List<Cards> PaymentOpts()
   {
