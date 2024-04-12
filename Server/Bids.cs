@@ -19,7 +19,7 @@ public class Bid
     try
     {
       var requestBody = await new StreamReader(context.Request.Body).ReadToEndAsync();
-     
+
       var bidData = JsonSerializer.Deserialize<BidData>(requestBody);
 
       if (bidData == null)
@@ -27,7 +27,7 @@ public class Bid
         return Results.BadRequest("Invalid bid data");
       }
 
-      using (var conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc"))
+      using (var conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc"))
       {
         await conn.OpenAsync();
 

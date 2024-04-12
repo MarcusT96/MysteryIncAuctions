@@ -7,7 +7,7 @@ public class Boxes
 {
     public static async Task<List<AuctionList>> All()
     {
-        var connectionString = "server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc";
+        var connectionString = "server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc";
         List<AuctionList> boxes = new List<AuctionList>();
         await using (var conn = new MySqlConnection(connectionString))
         {
@@ -35,8 +35,8 @@ public class Boxes
     }
     public static async Task<AuctionList> GetById(int id)
     {
-       
-        var connectionString = "server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc";
+
+        var connectionString = "server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc";
         AuctionList box = null;
         try
         {
@@ -44,7 +44,7 @@ public class Boxes
             {
                 await conn.OpenAsync();
                 var query = "SELECT id, name, image, category, price, weight, time, description FROM mystery_boxes WHERE id = @id";
-    
+
                 await using (var cmd = new MySqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@id", id);
