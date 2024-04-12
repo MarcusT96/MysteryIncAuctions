@@ -80,7 +80,7 @@ function PaymentOptions() {
       CVC: cardCvc,
       Type: document.getElementById('type').value,
       CardholderName: cardHolder,
-      UserId: localStorage.currentUserId
+      UserId: parseInt(localStorage.currentUserId)
     }
 
     try {
