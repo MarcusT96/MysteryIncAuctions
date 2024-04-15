@@ -11,6 +11,7 @@ function HomePageReviews() {
     async function load() {
       const response = await fetch(`/api/reviews`)
       const data = await response.json()
+      console.log(data)
       setReviews(data)
     }
     load()

@@ -8,11 +8,12 @@ public record Review(int Id, int Score, string Title, string Description);
 
 public class Reviews
 {
-  private const string ConnectionString = "server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc";
 
   public static List<Review> GetAllReviews()
   {
-    List<Review> reviews = new List<Review>();
+    List<Review> reviews = new();
+
+    string ConnectionString = "server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc";
 
     using (var conn = new MySqlConnection(ConnectionString))
     {
