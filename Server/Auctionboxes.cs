@@ -33,11 +33,11 @@ public class Boxes
         }
         return boxes;
     }
-    public static async Task<AuctionList> GetById(int id)
+    public static async Task<AuctionList?> GetById(int id)
     {
 
         var connectionString = "server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc";
-        AuctionList box = null;
+        AuctionList? box = null;
         try
         {
             await using (var conn = new MySqlConnection(connectionString))
