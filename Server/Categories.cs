@@ -10,7 +10,7 @@ public class CategoryOptions
 
     List<Category> result = new();
 
-    string connectionString = "server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc";
+    string connectionString = "server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc";
 
     using (var connection = new MySqlConnection(connectionString))
     {
@@ -30,7 +30,7 @@ public class CategoryOptions
   }
   public static async Task<bool> CreateCategory(Category category)
   {
-    string connectionString = "server=localhost;port=3306;database=mystery_practice;user=root;password=mypassword";
+    string connectionString = "server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc";
     await using (var connection = new MySqlConnection(connectionString))
     {
       var query = "INSERT INTO Categories (CategoryName) VALUES (@CategoryName);";
@@ -46,7 +46,7 @@ public class CategoryOptions
 
   public static async Task<bool> UpdateCategory(int id, Category category)
   {
-    string connectionString = "server=localhost;port=3306;database=mystery_practice;user=root;password=mypassword";
+    string connectionString = "server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc";
     await using (var connection = new MySqlConnection(connectionString))
     {
       var query = "UPDATE Categories SET CategoryName = @CategoryName WHERE Id = @Id;";
