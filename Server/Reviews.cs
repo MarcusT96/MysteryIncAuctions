@@ -8,7 +8,7 @@ public record Review(int Id, int Score, string Title, string Description);
 
 public class Reviews
 {
-
+  //Get reviews from database
   public static List<Review> GetAllReviews()
   {
     List<Review> reviews = new();
@@ -35,4 +35,36 @@ public class Reviews
     }
     return reviews;
   }
+
+  //Post Reviews to database
+
+  public static bool PostReview(Review newReview)
+  {
+    string connectionString = "server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc";
+
+    using (var connection = new MySqlConnection(connectionString))
+    {
+      connection.Open();
+      var query = "INSERT INTO reviews (score, title, description) VALUES (@score, @title, @description)";
+      using (var command = new MySqlCommand(query, connection))
+      {
+        command.Parameters.AddWithValue("@score", newReview.Score);
+        command.Parameters.AddWithValue("@title", newReview.Title);
+        command.Parameters.AddWithValue("@description", newReview.Description);
+
+        try
+        {
+          command.ExecuteNonQuery();
+          return true; 
+        }
+        catch (Exception ex)
+        {
+          Console.WriteLine("Failed to post review to the database. Error: " + ex.Message);
+          return false; 
+        }
+      }
+    }
+  }
+
 }
+

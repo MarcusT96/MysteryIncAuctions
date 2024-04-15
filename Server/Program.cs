@@ -6,7 +6,7 @@ var app = builder.Build();
 MySql.Data.MySqlClient.MySqlConnection conn;
 string myConnectionString;
 
-myConnectionString = "server=localhost;port=3306;uid=root;pwd=mypassword;database=Auctionboxes";
+myConnectionString = "server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc";
 
 
 try
@@ -35,9 +35,10 @@ app.MapGet("/mystery_boxes/{id:int}", async (int id) => await Boxes.GetById(id))
 app.MapGet("/users", User.GetUsers);
 app.MapPost("/users", async (User.UserRecord newUser) => await User.CreateUser(newUser));
 app.MapPut("/users/{id:int}", async (int id, User.UserRecord updatedUser) => await User.UpdateUser(id, updatedUser));
-app.MapGet("/boughtboxes", BoughtBoxesOptions.GetBoughtBoxes);
-app.MapPost("/boughtboxes", BoughtBoxesOptions.CreateBoughtBox);
-app.MapPut("/boughtboxes/{id:int}", BoughtBoxesOptions.UpdateBoughtBox);
+app.MapGet("/bought_boxes", BoughtBoxesOptions.GetBoughtBoxes);
+app.MapPost("/bought_boxes", BoughtBoxesOptions.CreateBoughtBox);
+app.MapPut("/bought_boxes/{id:int}", BoughtBoxesOptions.UpdateBoughtBox);
 app.MapGet("/reviews", () => Results.Ok(Reviews.GetAllReviews()));
-app.MapPost("/postbox", Addbox.Add);
+app.MapPost("/mystery_boxes", Addbox.Add);
+app.MapPost("/reviews", Reviews.PostReview);
 app.Run();

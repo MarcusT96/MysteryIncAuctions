@@ -12,12 +12,12 @@ public class BoughtBoxesOptions
   {
     List<BoughtBox> result = new List<BoughtBox>();
 
-    string connectionString = "server=localhost;port=3306;database=mystery_practice;user=root;password=mypassword";
+    string Connectionsstring = "server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc";
 
-    using (var connection = new MySqlConnection(connectionString))
+    using (var connection = new MySqlConnection(Connectionsstring))
     {
       connection.Open();
-      var command = new MySqlCommand("SELECT id, name, weight, price, time, description, image, buyer_id, paid, delivered FROM BoughtBoxes;", connection);
+      var command = new MySqlCommand("SELECT id, name, weight, price, time, description, image, buyer_id, paid, delivered FROM bought_boxes;", connection);
 
       using (var reader = command.ExecuteReader())
       {
@@ -43,10 +43,10 @@ public class BoughtBoxesOptions
 
   public static async Task<bool> CreateBoughtBox(BoughtBox box)
   {
-    string connectionString = "server=localhost;port=3306;database=mystery_practice;user=root;password=mypassword";
-    await using (var connection = new MySqlConnection(connectionString))
+    string Connectionsstring = "server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc";
+    await using (var connection = new MySqlConnection(Connectionsstring))
     {
-      var query = "INSERT INTO BoughtBoxes (Name, Weight, Price, Time, Description, Image, buyer_id, Paid, Delivered) VALUES (@Name, @Weight, @Price, @Time, @Description, @Image, @buyer_id, @Paid, @Delivered);";
+      var query = "INSERT INTO bought_boxes (Name, Weight, Price, Time, Description, Image, buyer_id, Paid, Delivered) VALUES (@Name, @Weight, @Price, @Time, @Description, @Image, @buyer_id, @Paid, @Delivered);";
       await using (var command = new MySqlCommand(query, connection))
       {
         command.Parameters.AddWithValue("@Name", box.Name);
@@ -68,10 +68,10 @@ public class BoughtBoxesOptions
 
   public static async Task<bool> UpdateBoughtBox(int id, BoughtBox box)
   {
-    string connectionString = "server=localhost;port=3306;database=mystery_practice;user=root;password=mypassword";
-    await using (var connection = new MySqlConnection(connectionString))
+    string Connectionsstring = "server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc";
+    await using (var connection = new MySqlConnection(Connectionsstring))
     {
-      var query = "UPDATE BoughtBoxes SET Name = @Name, Weight = @Weight, Price = @Price, Time = @Time, Description = @Description, Image = @Image, buyer_id = @buyer_id, Paid = @Paid, Delivered = @Delivered WHERE Id = @Id;";
+      var query = "UPDATE bought_boxes SET Name = @Name, Weight = @Weight, Price = @Price, Time = @Time, Description = @Description, Image = @Image, buyer_id = @buyer_id, Paid = @Paid, Delivered = @Delivered WHERE Id = @Id;";
       await using (var command = new MySqlCommand(query, connection))
       {
         command.Parameters.AddWithValue("@Id", id);
