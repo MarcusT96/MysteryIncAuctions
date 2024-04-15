@@ -100,6 +100,22 @@ public class PaymentOptions
     }
   }
 
+  public static async Task<IResult> DeletePaymentOpt(int OptId)
+  {
+    using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc"))
+    {
+      await conn.OpenAsync();
+
+      string query = "DELETE FROM payment_options WHERE id = @OptId";
+
+      MySqlCommand cmd = new MySqlCommand(query, conn);
+
+      cmd.Parameters.AddWithValue("@OptId", OptId);
+
+      var result = await cmd.ExecuteNonQueryAsync();
+      return result > 0 ? Results.Ok(new { Message = "Successfully removed payment method" }) : Results.Problem("Couldn't remove payment method");
+    }
+  }
 
 }
 
