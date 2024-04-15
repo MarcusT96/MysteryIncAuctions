@@ -4,7 +4,7 @@ namespace Server
     public class OperationResult
     {
         public bool Success { get; set; }
-        public string ErrorMessage { get; set; }
+        public string? ErrorMessage { get; set; }
     }
 
     public static class Addbox
@@ -52,12 +52,12 @@ namespace Server
 
     public class Postbox
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public double Weight { get; set; }
         public double Price { get; set; }
         public DateTime Time { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
         public int CategoryId { get; set; }
-        public string Image { get; set; }
+        public string? Image { get; set; }
     }
 }
