@@ -17,13 +17,13 @@ namespace Server
                 await using (var conn = new MySqlConnection(connectionString))
                 {
                     await conn.OpenAsync();
-                    var query = "INSERT INTO mystery_boxes (name, image, category_id, price, weight, time, description) VALUES (@name, @image, @category_id, @price, @weight, @time, @description)";
+                    var query = "INSERT INTO mystery_boxes (name, image, category, price, weight, time, description) VALUES (@name, @image, @category, @price, @weight, @time, @description)";
 
                     await using (var cmd = new MySqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@name", postbox.Name);
                         cmd.Parameters.AddWithValue("@image", postbox.Image);
-                        cmd.Parameters.AddWithValue("@category_id", postbox.CategoryId);
+                        cmd.Parameters.AddWithValue("@category", postbox.Category);
                         cmd.Parameters.AddWithValue("@price", postbox.Price);
                         cmd.Parameters.AddWithValue("@weight", postbox.Weight);
                         cmd.Parameters.AddWithValue("@time", postbox.Time);
@@ -57,7 +57,7 @@ namespace Server
         public double Price { get; set; }
         public DateTime Time { get; set; }
         public string? Description { get; set; }
-        public int CategoryId { get; set; }
+        public int Category { get; set; }
         public string? Image { get; set; }
     }
 }
