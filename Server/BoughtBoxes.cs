@@ -2,6 +2,7 @@ namespace Server;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Threading.Tasks;
 
 public class BoughtBoxesOptions
@@ -12,7 +13,7 @@ public class BoughtBoxesOptions
   {
     List<BoughtBox> result = new List<BoughtBox>();
 
-    string Connectionsstring = "server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc";
+    string Connectionsstring = "server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_practice";
 
     using (var connection = new MySqlConnection(Connectionsstring))
     {
@@ -40,10 +41,50 @@ public class BoughtBoxesOptions
     }
     return result;
   }
+  public static async Task<List<BoughtBox>> GetBoughtBoxesById(int buyer_id)
+  {
+    var connectionString = "server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_practice";
+    var boxes = new List<BoughtBox>();
+    try
+    {
+      await using (var conn = new MySqlConnection(connectionString))
+      {
+        await conn.OpenAsync();
+        var query = "SELECT id, name, weight, price, time, description, image, buyer_id, paid, delivered FROM bought_boxes WHERE buyer_id = @id";
+        await using (var cmd = new MySqlCommand(query, conn))
+        {
+          cmd.Parameters.AddWithValue("@id", buyer_id);
+          await using (var reader = await cmd.ExecuteReaderAsync())
+          {
+            while (await reader.ReadAsync())
+            {
+              var box = new BoughtBox(
+                  reader.GetInt32("id"),
+                  reader.GetString("name"),
+                  reader.GetDecimal("weight"),
+                  reader.GetDecimal("price"),
+                  reader.GetDateTime("time"),
+                  reader.GetString("description"),
+                  reader.GetString("image"),
+                  reader.GetInt32("buyer_id"),
+                  reader.GetBoolean("paid"),
+                  reader.GetBoolean("delivered"));
+              boxes.Add(box);
+            }
+          }
+        }
+      }
+    }
+    catch (Exception ex)
+    {
+      Console.WriteLine($"Error fetching boxes by ID: {ex.Message}");
+    }
+    return boxes;
+  }
 
   public static async Task<bool> CreateBoughtBox(BoughtBox box)
   {
-    string Connectionsstring = "server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc";
+    string Connectionsstring = "server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_practice";
     await using (var connection = new MySqlConnection(Connectionsstring))
     {
       var query = "INSERT INTO bought_boxes (Name, Weight, Price, Time, Description, Image, buyer_id, Paid, Delivered) VALUES (@Name, @Weight, @Price, @Time, @Description, @Image, @buyer_id, @Paid, @Delivered);";
@@ -68,7 +109,7 @@ public class BoughtBoxesOptions
 
   public static async Task<bool> UpdateBoughtBox(int id, BoughtBox box)
   {
-    string Connectionsstring = "server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc";
+    string Connectionsstring = "server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_practice";
     await using (var connection = new MySqlConnection(Connectionsstring))
     {
       var query = "UPDATE bought_boxes SET Name = @Name, Weight = @Weight, Price = @Price, Time = @Time, Description = @Description, Image = @Image, buyer_id = @buyer_id, Paid = @Paid, Delivered = @Delivered WHERE Id = @Id;";
