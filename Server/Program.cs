@@ -6,7 +6,7 @@ var app = builder.Build();
 MySql.Data.MySqlClient.MySqlConnection conn;
 string myConnectionString;
 
-myConnectionString = "server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc";
+myConnectionString = "server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc";
 
 
 try
@@ -41,4 +41,6 @@ app.MapPut("/bought_boxes/{id:int}", BoughtBoxesOptions.UpdateBoughtBox);
 app.MapGet("/reviews", () => Results.Ok(Reviews.GetAllReviews()));
 app.MapPost("/mystery_boxes", Addbox.Add);
 app.MapPost("/reviews", Reviews.PostReview);
+app.MapDelete("/mystery_boxes/{id:int}", async (int id) => await Boxes.DeleteBox(id));
+
 app.Run();
