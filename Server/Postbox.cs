@@ -12,7 +12,7 @@ namespace Server
             _dbConnect = dbConnect;
         }
 
-        public async Task<OperationResult> Add(Postbox postbox)
+        public async Task<IResult> Add(Postbox postbox)
         {
             const string query = "INSERT INTO mystery_boxes (name, image, category, price, weight, time, description) " +
                                  "VALUES (@name, @image, @category, @price, @weight, @time, @description)";
@@ -32,22 +32,24 @@ namespace Server
                 cmd.Parameters.AddWithValue("@description", postbox.Description);
 
                 int result = await cmd.ExecuteNonQueryAsync();
-                return new OperationResult
+                if (result > 0)
                 {
-                    Success = result > 0,
-                    ErrorMessage = result > 0 ? null : "No rows were affected."
-                };
+                    Console.WriteLine("Insert successful.");
+                    return Results.Ok(new { Message = "Mystery box added successfully." });
+                }
+                else
+                {
+                    Console.WriteLine("Insert failed. No rows affected.");
+                    return Results.Problem("No rows were affected.");
+                }
             }
             catch (Exception ex)
             {
-                return new OperationResult
-                {
-                    Success = false,
-                    ErrorMessage = $"A database error occurred: {ex.Message}"
-                };
+                Console.WriteLine($"Error: {ex.Message}");
+                return Results.Problem($"A database error occurred: {ex.Message}");
             }
-            
         }
+
     }
 
 

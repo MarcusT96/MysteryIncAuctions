@@ -1,10 +1,9 @@
 using System.Data;
-
 using System.Text.Json;
 using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.VisualBasic;
+using Microsoft.AspNetCore.Http;
 
 namespace Server
 {
@@ -16,29 +15,26 @@ namespace Server
         {
             _dbConnect = dbConnect;
         }
+
         public async Task<List<AuctionList>> All()
         {
-            List<AuctionList> boxes = new List<AuctionList>();
+            var boxes = new List<AuctionList>();
             await using (var conn = await _dbConnect.GetConnectionAsync())
             {
-                await conn.OpenAsync();
                 var query = "SELECT id, name, image, category, price, weight, time, description FROM mystery_boxes";
-                await using (var cmd = new MySqlCommand(query, conn))
-                await using (var reader = await cmd.ExecuteReaderAsync())
+                await using var cmd = new MySqlCommand(query, conn);
+                await using var reader = await cmd.ExecuteReaderAsync();
+                while (await reader.ReadAsync())
                 {
-                    while (await reader.ReadAsync())
-                    {
-                        boxes.Add(new AuctionList(
-                            reader.GetInt32("id"),
-                            reader.GetString("name"),
-                            reader.GetString("image"),
-                            reader.GetInt32("category"),
-                            reader.GetInt32("price"),
-                            reader.GetDecimal("weight"),
-                            reader.GetDateTime("time"),
-                            reader.GetString("description")
-                        ));
-                    }
+                    boxes.Add(new AuctionList(
+                        reader.GetInt32("id"),
+                        reader.GetString("name"),
+                        reader.GetString("image"),
+                        reader.GetInt32("category"),
+                        reader.GetInt32("price"),
+                        reader.GetDecimal("weight"),
+                        reader.GetDateTime("time"),
+                        reader.GetString("description")));
                 }
             }
             return boxes;
@@ -46,92 +42,63 @@ namespace Server
 
         public async Task<AuctionList?> GetById(int id)
         {
-            AuctionList? box = null;
-            await using (var conn = await _dbConnect.GetConnectionAsync())
+            await using var conn = await _dbConnect.GetConnectionAsync();
+            var query = "SELECT id, name, image, category, price, weight, time, description FROM mystery_boxes WHERE id = @id";
+            await using var cmd = new MySqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@id", id);
+            await using var reader = await cmd.ExecuteReaderAsync();
+            if (await reader.ReadAsync())
             {
-                await conn.OpenAsync();
-                var query = "SELECT id, name, image, category, price, weight, time, description FROM mystery_boxes WHERE id = @id";
-
-                await using (var cmd = new MySqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@id", id);
-                    await using (var reader = await cmd.ExecuteReaderAsync())
-                    {
-                        if (await reader.ReadAsync())
-                        {
-                            box = new AuctionList(
-                                reader.GetInt32("id"),
-                                reader.GetString("name"),
-                                reader.GetString("image"),
-                                reader.GetInt32("category"),
-                                reader.GetInt32("price"),
-                                reader.GetDecimal("weight"),
-                                reader.GetDateTime("time"),
-                                reader.GetString("description")
-                            );
-                        }
-                    }
-                }
+                return new AuctionList(
+                    reader.GetInt32("id"),
+                    reader.GetString("name"),
+                    reader.GetString("image"),
+                    reader.GetInt32("category"),
+                    reader.GetInt32("price"),
+                    reader.GetDecimal("weight"),
+                    reader.GetDateTime("time"),
+                    reader.GetString("description"));
             }
-            return box;
+            return null;
         }
 
         public async Task<IResult> DeleteBox(int id)
         {
-            try
+            await using var conn = await _dbConnect.GetConnectionAsync();
+            var query = "DELETE FROM mystery_boxes WHERE id = @id";
+            await using var cmd = new MySqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@id", id);
+            var result = await cmd.ExecuteNonQueryAsync();
+            if (result > 0)
             {
-                await using (var conn = await _dbConnect.GetConnectionAsync())
-                {
-                    await conn.OpenAsync();
-                    var query = "DELETE FROM mystery_boxes WHERE id = @id";
-
-                    await using (var cmd = new MySqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@id", id);
-                        var result = await cmd.ExecuteNonQueryAsync();
-                        if (result > 0)
-                        {
-                            return Results.Ok($"Box with ID {id} has been successfully deleted.");
-                        }
-                        else
-                        {
-                            return Results.NotFound($"No box found with ID {id}.");
-                        }
-                    }
-                }
+                return Results.Ok($"Box with ID {id} has been successfully deleted.");
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error deleting box: {ex.Message}");
-                return Results.Problem("Error occurred while trying to delete the box.");
-            }
+            return Results.NotFound($"No box found with ID {id}.");
         }
-        public static async Task<IResult> UpdateBoxes(int Id, HttpContext context)
+
+        public async Task<IResult> UpdateBoxes(int id, HttpContext context)
         {
             var requestBody = await new StreamReader(context.Request.Body).ReadToEndAsync();
             var boxData = JsonSerializer.Deserialize<AuctionList>(requestBody);
+            await using var conn = await _dbConnect.GetConnectionAsync();
+            var query = "UPDATE mystery_boxes SET name = @name, image = @image, category = @category, price = @price, weight = @weight, time = @time, description = @description WHERE id = @id";
 
-            using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc"))
+            await using var cmd = new MySqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@name", boxData.Name);
+            cmd.Parameters.AddWithValue("@image", boxData.Image);
+            cmd.Parameters.AddWithValue("@category", boxData.Category);
+            cmd.Parameters.AddWithValue("@price", boxData.Price);
+            cmd.Parameters.AddWithValue("@weight", boxData.Weight);
+            cmd.Parameters.AddWithValue("@time", boxData.Time);
+            cmd.Parameters.AddWithValue("@description", boxData.Description);
+
+            var result = await cmd.ExecuteNonQueryAsync();
+            if (result > 0)
             {
-                await conn.OpenAsync();
-
-                string query = "UPDATE mystery_boxes SET name = @boxName, weight = @boxWeight, price = @boxPrice, time = @boxTime, description = @boxDescription, category = @boxCategory, image = @boxImage WHERE id = @boxId";
-
-
-                MySqlCommand cmd = new MySqlCommand(query, conn);
-
-                cmd.Parameters.AddWithValue("@boxId", Id);
-                cmd.Parameters.AddWithValue("@boxName", boxData.Name);
-                cmd.Parameters.AddWithValue("@boxWeight", boxData.Weight);
-                cmd.Parameters.AddWithValue("@boxPrice", boxData.Price);
-                cmd.Parameters.AddWithValue("@boxTime", boxData.Time);
-                cmd.Parameters.AddWithValue("@boxDescription", boxData.Description);
-                cmd.Parameters.AddWithValue("@boxCategory", boxData.Category);
-                cmd.Parameters.AddWithValue("@boxImage", boxData.Image);
-
-                var result = cmd.ExecuteNonQuery();
-                return result > 0 ? Results.Ok(new { Message = "Updated box" }) : Results.Problem("Couldn't update box");
+                return Results.Ok(new { Message = "Box updated successfully" });
             }
+            return Results.Problem("Failed to update box");
         }
     }
 

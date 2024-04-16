@@ -24,7 +24,6 @@ app.MapGet("/users", async (User users) => await users.GetUsers());
 app.MapPost("/users", async (HttpContext context, User userService, UserRecord newUser) => await userService.CreateUser(newUser));
 app.MapPut("/users/{id:int}", async (int id, User userService, UserRecord updatedUser) => await userService.UpdateUser(id, updatedUser));
 app.MapGet("/bought_boxes", BoughtBoxesOptions.GetBoughtBoxes);
-// app.MapGet("/bought_boxes", BoughtBoxesOptions.GetBoughtBoxes);
 app.MapGet("/bought_boxes/{id:int}", async (int id) => await BoughtBoxesOptions.GetBoughtBoxesById(id));
 app.MapPost("/bought_boxes", BoughtBoxesOptions.CreateBoughtBox);
 app.MapPut("/bought_boxes/{id:int}", BoughtBoxesOptions.UpdateBoughtBox);
@@ -32,5 +31,7 @@ app.MapGet("/reviews", async (Reviews reviews) => Results.Ok(await reviews.GetAl
 app.MapPost("/postbox", async (Postbox postbox, PostboxService postboxService) => await postboxService.Add(postbox));
 app.MapPost("/reviews", async (Review review, Reviews reviews) => await reviews.PostReview(review));
 app.MapDelete("/mystery_boxes/{id:int}", async (int id, Boxes boxes) => await boxes.DeleteBox(id));
+app.MapPut("/mystery_boxes/{id:int}", async (int id, HttpContext context, Boxes boxService) => await boxService.UpdateBoxes(id, context));
+
 
 app.Run();
