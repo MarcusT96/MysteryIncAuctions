@@ -33,7 +33,7 @@ const ProductsPanel = () => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const res = await fetch('http://localhost:3000/categories');
+                const res = await fetch('/api/categories');
                 const data = await res.json();
                 setCategories(data);
             } catch (error) {
