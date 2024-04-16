@@ -1,54 +1,57 @@
 ﻿using MySql.Data.MySqlClient;
+
 namespace Server
 {
-    public class OperationResult
-    {
-        public bool Success { get; set; }
-        public string? ErrorMessage { get; set; }
-    }
 
-    public static class Addbox
+    public class PostboxService
     {
-        public static async Task<OperationResult> Add(Postbox postbox)
+        private readonly DbConnect _dbConnect;
+
+        public PostboxService(DbConnect dbConnect)
         {
-            var connectionString = "server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc";
+            _dbConnect = dbConnect;
+        }
+
+        public async Task<OperationResult> Add(Postbox postbox)
+        {
+            const string query = "INSERT INTO mystery_boxes (name, image, category, price, weight, time, description) " +
+                                 "VALUES (@name, @image, @category, @price, @weight, @time, @description)";
+
             try
             {
-                await using (var conn = new MySqlConnection(connectionString))
+                await using var conn = await _dbConnect.GetConnectionAsync();
+                await conn.OpenAsync();
+
+                await using var cmd = new MySqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@name", postbox.Name);
+                cmd.Parameters.AddWithValue("@image", postbox.Image);
+                cmd.Parameters.AddWithValue("@category", postbox.Category);
+                cmd.Parameters.AddWithValue("@price", postbox.Price);
+                cmd.Parameters.AddWithValue("@weight", postbox.Weight);
+                cmd.Parameters.AddWithValue("@time", postbox.Time);
+                cmd.Parameters.AddWithValue("@description", postbox.Description);
+
+                int result = await cmd.ExecuteNonQueryAsync();
+                return new OperationResult
                 {
-                    await conn.OpenAsync();
-                    var query = "INSERT INTO mystery_boxes (name, image, category, price, weight, time, description) VALUES (@name, @image, @category, @price, @weight, @time, @description)";
-
-                    await using (var cmd = new MySqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@name", postbox.Name);
-                        cmd.Parameters.AddWithValue("@image", postbox.Image);
-                        cmd.Parameters.AddWithValue("@category", postbox.Category);
-                        cmd.Parameters.AddWithValue("@price", postbox.Price);
-                        cmd.Parameters.AddWithValue("@weight", postbox.Weight);
-                        cmd.Parameters.AddWithValue("@time", postbox.Time);
-                        cmd.Parameters.AddWithValue("@description", postbox.Description);
-
-                        var result = await cmd.ExecuteNonQueryAsync();
-                        return new OperationResult
-                        {
-                            Success = result > 0,
-                            ErrorMessage = result > 0 ? null : "No rows were affected."
-                        };
-                    }
-                }
+                    Success = result > 0,
+                    ErrorMessage = result > 0 ? null : "No rows were affected."
+                };
             }
             catch (Exception ex)
             {
-                // Catchar errors
                 return new OperationResult
                 {
                     Success = false,
-                    ErrorMessage = $"An error occurred: {ex.Message}"
+                    ErrorMessage = $"A database error occurred: {ex.Message}"
                 };
             }
+            
         }
     }
+
+
+
 
     public class Postbox
     {
