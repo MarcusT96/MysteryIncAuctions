@@ -27,5 +27,6 @@ app.MapGet("/reviews", () => Results.Ok(Reviews.GetAllReviews()));
 app.MapPost("/postbox", async (Postbox postbox, PostboxService postboxService) => await postboxService.Add(postbox));
 app.MapPost("/reviews", Reviews.PostReview);
 app.MapDelete("/mystery_boxes/{id:int}", async (int id) => await Boxes.DeleteBox(id));
+app.MapPut("/mystery_boxes/{id:int}", (int id, HttpContext context) => Boxes.UpdateBoxes(id, context));
 
 app.Run();

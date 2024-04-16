@@ -1,7 +1,10 @@
 using System.Data;
+
+using System.Text.Json;
 using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.VisualBasic;
 
 namespace Server
 {
@@ -98,6 +101,33 @@ namespace Server
             {
                 Console.WriteLine($"Error deleting box: {ex.Message}");
                 return Results.Problem("Error occurred while trying to delete the box.");
+            }
+        }
+        public static async Task<IResult> UpdateBoxes(int Id, HttpContext context)
+        {
+            var requestBody = await new StreamReader(context.Request.Body).ReadToEndAsync();
+            var boxData = JsonSerializer.Deserialize<AuctionList>(requestBody);
+
+            using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc"))
+            {
+                await conn.OpenAsync();
+
+                string query = "UPDATE mystery_boxes SET name = @boxName, weight = @boxWeight, price = @boxPrice, time = @boxTime, description = @boxDescription, category = @boxCategory, image = @boxImage WHERE id = @boxId";
+
+
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+
+                cmd.Parameters.AddWithValue("@boxId", Id);
+                cmd.Parameters.AddWithValue("@boxName", boxData.Name);
+                cmd.Parameters.AddWithValue("@boxWeight", boxData.Weight);
+                cmd.Parameters.AddWithValue("@boxPrice", boxData.Price);
+                cmd.Parameters.AddWithValue("@boxTime", boxData.Time);
+                cmd.Parameters.AddWithValue("@boxDescription", boxData.Description);
+                cmd.Parameters.AddWithValue("@boxCategory", boxData.Category);
+                cmd.Parameters.AddWithValue("@boxImage", boxData.Image);
+
+                var result = cmd.ExecuteNonQuery();
+                return result > 0 ? Results.Ok(new { Message = "Updated box" }) : Results.Problem("Couldn't update box");
             }
         }
     }
