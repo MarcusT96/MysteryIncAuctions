@@ -123,6 +123,8 @@ namespace Server
                 cmd.Parameters.AddWithValue("@boxDescription", boxData.Description);
                 cmd.Parameters.AddWithValue("@boxCategory", boxData.Category);
                 cmd.Parameters.AddWithValue("@boxImage", boxData.Image);
+
+                cmd.ExecuteNonQuery();
             }
         }
     }
