@@ -10,7 +10,7 @@ function Orders() {
     useEffect(() => {
         const fetchBoughtBoxes = async () => {
             try {
-                const response = await fetch('http://localhost:3000/bought_boxes');
+                const response = await fetch('/api//bought_boxes');
                 const data = await response.json();
                 setBoughtBoxes(data.map(box => ({
                     ...box,

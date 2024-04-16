@@ -11,7 +11,7 @@ namespace Server
     {
         public static async Task<OperationResult> Add(Postbox postbox)
         {
-            var connectionString = "server=localhost;port=3306;uid=root;pwd=mypassword;database=Auctionboxes";
+            var connectionString = "server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc";
             try
             {
                 await using (var conn = new MySqlConnection(connectionString))

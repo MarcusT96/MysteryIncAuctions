@@ -35,9 +35,7 @@ function Sidebar() {
         if (item.heading === "Produkter") {
             navigate('/dashboard/products');
         }
-        if (item.heading === "Rapporter") {
-            navigate('/dashboard/revenue');
-        }
+
     };
 
     const handleLogout = () => {
