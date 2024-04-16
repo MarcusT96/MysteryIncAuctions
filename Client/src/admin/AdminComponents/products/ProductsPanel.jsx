@@ -47,19 +47,27 @@ const ProductsPanel = () => {
 
     const handleAddBox = async (box) => {
         try {
-            await fetch('/api/mystery_boxes', {
+            const response = await fetch('/api/mystery_boxes', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(box),
             });
-            alert(`Mysterielådan "${box.name}" har skapats!`);
+
+            if (!response.ok) {
+                throw new Error(`Failed to add box: ${response.statusText}`);
+            }
+
+            const addedBox = await response.json();
+            alert(`Mysterielådan "${addedBox.name}" har skapats!`);
             await fetchProducts();
         } catch (error) {
             console.error('Error adding box:', error);
+            alert('Failed to add box. Please try again.');
         } finally {
             setShowAddBoxModal(false);
         }
     };
+
 
     const handleUpdateBox = async (id, updatedBox) => {
         console.log(updatedBox)
