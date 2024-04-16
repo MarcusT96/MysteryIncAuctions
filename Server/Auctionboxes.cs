@@ -103,19 +103,21 @@ namespace Server
                 return Results.Problem("Error occurred while trying to delete the box.");
             }
         }
-        public static async void UpdateBoxes(HttpContext context)
+        public static async Task<IResult> UpdateBoxes(int Id, HttpContext context)
         {
             var requestBody = await new StreamReader(context.Request.Body).ReadToEndAsync();
             var boxData = JsonSerializer.Deserialize<AuctionList>(requestBody);
 
             using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc"))
             {
-                conn.OpenAsync();
+                await conn.OpenAsync();
 
-                string query = "UPDATE mystery_boxes WHERE id = @boxId SET name = @boxName, weight = @boxWeight, price = @boxPrice, time = @boxTime, description = @boxDescription, category = @boxCategory, image = @boxImage";
+                string query = "UPDATE mystery_boxes SET name = @boxName, weight = @boxWeight, price = @boxPrice, time = @boxTime, description = @boxDescription, category = @boxCategory, image = @boxImage WHERE id = @boxId";
+
 
                 MySqlCommand cmd = new MySqlCommand(query, conn);
 
+                cmd.Parameters.AddWithValue("@boxId", Id);
                 cmd.Parameters.AddWithValue("@boxName", boxData.Name);
                 cmd.Parameters.AddWithValue("@boxWeight", boxData.Weight);
                 cmd.Parameters.AddWithValue("@boxPrice", boxData.Price);
@@ -124,7 +126,8 @@ namespace Server
                 cmd.Parameters.AddWithValue("@boxCategory", boxData.Category);
                 cmd.Parameters.AddWithValue("@boxImage", boxData.Image);
 
-                cmd.ExecuteNonQuery();
+                var result = cmd.ExecuteNonQuery();
+                return result > 0 ? Results.Ok(new { Message = "Updated box" }) : Results.Problem("Couldn't update box");
             }
         }
     }
