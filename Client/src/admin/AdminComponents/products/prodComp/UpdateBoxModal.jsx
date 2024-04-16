@@ -2,12 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import './prodComp.css';
 
 function UpdateBoxModal({ box, onUpdate, onClose, categories }) {
-    const [name, setName] = useState('');
-    const [weight, setWeight] = useState('');
-    const [price, setPrice] = useState('');
-    const [time, setTime] = useState('');
-    const [description, setDescription] = useState('');
-    const [category, setCategory] = useState('');
+    const [Name, setName] = useState('');
+    const [Weight, setWeight] = useState('');
+    const [Price, setPrice] = useState('');
+    const [Time, setTime] = useState('');
+    const [Description, setDescription] = useState('');
+    const [Category, setCategory] = useState('');
     const [imagePreview, setImagePreview] = useState(null);
     const fileInputRef = useRef(null);
     const [error, setError] = useState('');
@@ -31,7 +31,7 @@ function UpdateBoxModal({ box, onUpdate, onClose, categories }) {
     };
 
     const validateForm = () => {
-        if (!name || !weight || !price || !time || !description || !category) {
+        if (!Name || !Weight || !Price || !Time || !Description || !Category) {
             setError('All fields must be filled.');
             return false;
         }
@@ -46,13 +46,13 @@ function UpdateBoxModal({ box, onUpdate, onClose, categories }) {
         setIsLoading(true);
 
         const updatedBoxData = {
-            name,
-            weight,
-            price,
-            time: new Date(time).toISOString(),
-            description,
-            category,
-            image: fileInputRef.current && fileInputRef.current.files.length > 0 ? imagePreview : box.image,
+            Name,
+            Weight,
+            Price,
+            Time: new Date(Time).toISOString(),
+            Description,
+            Category,
+            Image: fileInputRef.current && fileInputRef.current.files.length > 0 ? imagePreview : box.image,
         };
 
         try {
@@ -73,24 +73,24 @@ function UpdateBoxModal({ box, onUpdate, onClose, categories }) {
                 {error && <p className="errorMessage">{error}</p>}
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="app_prodcomp-name">Namn:</label>
-                    <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
+                    <input type="text" id="name" value={Name} onChange={(e) => setName(e.target.value)} />
 
                     <label htmlFor="app_prodcomp-weight">Vikt (kg):</label>
-                    <input type="number" id="weight" value={weight} onChange={(e) => setWeight(e.target.value)} />
+                    <input type="number" id="weight" value={Weight} onChange={(e) => setWeight(e.target.value)} />
 
                     <label htmlFor="app_prodcomp-price">Pris:</label>
-                    <input type="number" id="price" value={price} onChange={(e) => setPrice(e.target.value)} />
+                    <input type="number" id="price" value={Price} onChange={(e) => setPrice(e.target.value)} />
 
                     <label htmlFor="app_prodcomp-time">Utgångs Datum:</label>
-                    <input type="datetime-local" id="time" value={time} onChange={(e) => setTime(e.target.value)} />
+                    <input type="datetime-local" id="time" value={Time} onChange={(e) => setTime(e.target.value)} />
 
                     <label htmlFor="app_prodcomp-description">Beskrivning:</label>
-                    <input type="text" id="description" value={description} onChange={(e) => setDescription(e.target.value)} />
+                    <input type="text" id="description" value={Description} onChange={(e) => setDescription(e.target.value)} />
 
                     <label htmlFor="app_prodcomp-category">Kategori:</label>
                     <select
                         id="category"
-                        value={category}
+                        value={Category}
                         onChange={(e) => setCategory(e.target.value)}
                     >
                         <option value="">Välj en kategori</option>
