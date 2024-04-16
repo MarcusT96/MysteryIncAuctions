@@ -8,7 +8,7 @@ builder.Services.AddScoped<Reviews>();
 builder.Services.AddScoped<User>();
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello World!");
+
 app.MapGet("/categories", CategoryOptions.GetCategories);
 app.MapPost("/categories", CategoryOptions.CreateCategory);
 app.MapPut("/categories/{id:int}", CategoryOptions.UpdateCategory);

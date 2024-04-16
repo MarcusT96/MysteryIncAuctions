@@ -8,7 +8,6 @@ namespace Server;
 public record Review(int Id, int Score, string Title, string Description);
 
 
-  //Get reviews from database
 public class Reviews
   {
     private readonly DbConnect _dbConnect;

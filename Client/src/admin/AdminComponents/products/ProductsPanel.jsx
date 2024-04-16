@@ -58,7 +58,7 @@ const ProductsPanel = () => {
             }
 
             const addedBox = await response.json();
-            alert(`Mysterielådan "${addedBox.name}" har skapats!`);
+            alert(`Auktionen har skapats!!`);
             await fetchProducts();
         } catch (error) {
             console.error('Error adding box:', error);
@@ -80,7 +80,7 @@ const ProductsPanel = () => {
             if (!response.ok) {
                 throw new Error(`Failed to update: ${response.statusText}`);
             }
-            alert(`Mysterielådan "${updatedBox.name}" har uppdaterats!`);
+            alert(`Uppdatering klar!!`);
             await fetchProducts();
         } catch (error) {
             console.error('Error updating box:', error);
