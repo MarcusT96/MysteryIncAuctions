@@ -5,6 +5,7 @@ builder.Services.AddSingleton<DbConnect>(new DbConnect(builder.Configuration.Get
 builder.Services.AddScoped<PostboxService>();
 builder.Services.AddScoped<Boxes>();
 builder.Services.AddScoped<Reviews>();
+builder.Services.AddScoped<User>();
 var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
@@ -16,12 +17,13 @@ app.MapGet("/payment_options", PaymentOptions.PaymentOpts);
 app.MapGet("/payment_options/{id:int}", (int id) => PaymentOptions.GetPaymentOptsByUserId(id));
 app.MapPost("/payment_options/", async (HttpContext context) => await PaymentOptions.AddPaymentOpt(context));
 app.MapDelete("/payment_options/{id:int}", async (int id) => await PaymentOptions.DeletePaymentOpt(id));
-app.MapGet("/users/{id:int}", async (int id) => await User.GetUserById(id));
+app.MapGet("/users/{id:int}", async (int id, User userService) => await userService.GetUserById(id));
 app.MapGet("/mystery_boxes", async (Boxes boxes) => await boxes.All());
 app.MapGet("/mystery_boxes/{id:int}", async (int id, Boxes boxes) => await boxes.GetById(id));
-app.MapGet("/users", User.GetUsers);
-app.MapPost("/users", async (User.UserRecord newUser) => await User.CreateUser(newUser));
-app.MapPut("/users/{id:int}", async (int id, User.UserRecord updatedUser) => await User.UpdateUser(id, updatedUser));
+app.MapGet("/users", async (User users) => await users.GetUsers());
+app.MapPost("/users", async (HttpContext context, User userService, UserRecord newUser) => await userService.CreateUser(newUser));
+app.MapPut("/users/{id:int}", async (int id, User userService, UserRecord updatedUser) => await userService.UpdateUser(id, updatedUser));
+app.MapGet("/bought_boxes", BoughtBoxesOptions.GetBoughtBoxes);
 // app.MapGet("/bought_boxes", BoughtBoxesOptions.GetBoughtBoxes);
 app.MapGet("/bought_boxes/{id:int}", async (int id) => await BoughtBoxesOptions.GetBoughtBoxesById(id));
 app.MapPost("/bought_boxes", BoughtBoxesOptions.CreateBoughtBox);

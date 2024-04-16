@@ -2,32 +2,38 @@ namespace Server;
 using System.Data;
 using MySql.Data.MySqlClient;
 
+public record UserRecord(
+  int Id,
+  string Email,
+  string Password, // Notera: Detta bör vara en hashad representation
+  string FirstName,
+  string LastName,
+  string Address,
+  string City,
+  string ZipCode,
+  string Country,
+  string Phone,
+  bool IsAdmin);
 public class User
 {
-  public record UserRecord(
-      int Id,
-      string Email,
-      string Password, // Notera: Detta bör vara en hashad representation
-      string FirstName,
-      string LastName,
-      string Address,
-      string City,
-      string ZipCode,
-      string Country,
-      string Phone,
-      bool IsAdmin);
+  private readonly DbConnect _dbConnect;
 
-  public static List<UserRecord> GetUsers()
+  public User(DbConnect dbConnect)
+  {
+      _dbConnect = dbConnect;
+  }
+
+  public async Task<List<UserRecord>> GetUsers()
   {
     List<UserRecord> users = new List<UserRecord>();
-    using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc"))
+    await using (var conn = await _dbConnect.GetConnectionAsync())
     {
-      conn.Open();
-      MySqlCommand cmd = new MySqlCommand("SELECT id, email, password, firstName, lastName, address, city, zipCode, country, phone, isAdmin FROM users", conn);
-
-      using (MySqlDataReader reader = cmd.ExecuteReader())
+      
+      var cmd = new MySqlCommand("SELECT id, email, password, firstName, lastName, address, city, zipCode, country, phone, isAdmin FROM users", conn);
+      await using (var reader = await cmd.ExecuteReaderAsync()) 
+        
       {
-        while (reader.Read())
+        while ( await reader.ReadAsync())
         {
           int id = reader.GetInt32("id");
           string email = reader.IsDBNull(reader.GetOrdinal("email")) ? string.Empty : reader.GetString("email");
@@ -40,7 +46,7 @@ public class User
           string country = reader.IsDBNull(reader.GetOrdinal("country")) ? string.Empty : reader.GetString("country");
           string phone = reader.IsDBNull(reader.GetOrdinal("phone")) ? string.Empty : reader.GetString("phone");
           bool isAdmin = reader.IsDBNull(reader.GetOrdinal("isAdmin")) ? false : reader.GetBoolean("isAdmin");
-
+          
           users.Add(new UserRecord(id, email, password, firstName, lastName, address, city, zipCode, country, phone, isAdmin));
         }
       }
@@ -48,16 +54,15 @@ public class User
     return users;
   }
 
-  public static async Task<IResult> GetUserById(int id)
+  public async Task<IResult> GetUserById(int id)
   {
     UserRecord? user = null;
-    using (var conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc"))
+    await using (var conn = await _dbConnect.GetConnectionAsync())   
     {
-      await conn.OpenAsync();
+      
       var cmd = new MySqlCommand("SELECT id, email, password, firstName, lastName, address, city, zipCode, country, phone, isAdmin FROM users WHERE id = @id", conn);
       cmd.Parameters.AddWithValue("@id", id);
-
-      using (var reader = await cmd.ExecuteReaderAsync())
+      await using (var reader = await cmd.ExecuteReaderAsync())
       {
         if (await reader.ReadAsync())
         {
@@ -80,13 +85,13 @@ public class User
     return Results.NotFound();
   }
 
-  public static async Task<IResult> CreateUser(UserRecord newUser)
+  public async Task<IResult> CreateUser(UserRecord newUser)
   {
-    using (var conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc"))
+    await using (var conn = await _dbConnect.GetConnectionAsync())
     {
-      await conn.OpenAsync();
+      
       var cmd = new MySqlCommand("INSERT INTO users (email, password, firstName, lastName) VALUES (@Email, @Password, @FirstName, @LastName)", conn);
-
+      
       cmd.Parameters.AddWithValue("@Email", newUser.Email);
       cmd.Parameters.AddWithValue("@Password", newUser.Password); // Observera: Lösenord bör hashas
       cmd.Parameters.AddWithValue("@FirstName", newUser.FirstName);
@@ -97,17 +102,16 @@ public class User
     }
   }
 
-  public static async Task<IResult> UpdateUser(int id, UserRecord updatedUser)
+  public async Task<IResult> UpdateUser(int id, UserRecord updatedUser)
   {
-    using (var conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc"))
+    await using (var conn = await _dbConnect.GetConnectionAsync())
     {
-      await conn.OpenAsync();
-      using (var transaction = await conn.BeginTransactionAsync())
+      
+      await using (var transaction = await conn.BeginTransactionAsync())
       {
         try
         {
-          var cmd = new MySqlCommand("", conn);
-          cmd.Transaction = transaction;
+          var cmd = new MySqlCommand("", conn) { Transaction = transaction };
 
           // En lista för att samla ihop alla delar av vår UPDATE-sats.
           var updates = new List<string>();
