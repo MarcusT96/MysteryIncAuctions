@@ -24,6 +24,8 @@ app.MapGet("/users", async (User users) => await users.GetUsers());
 app.MapPost("/users", async (HttpContext context, User userService, UserRecord newUser) => await userService.CreateUser(newUser));
 app.MapPut("/users/{id:int}", async (int id, User userService, UserRecord updatedUser) => await userService.UpdateUser(id, updatedUser));
 app.MapGet("/bought_boxes", BoughtBoxesOptions.GetBoughtBoxes);
+// app.MapGet("/bought_boxes", BoughtBoxesOptions.GetBoughtBoxes);
+app.MapGet("/bought_boxes/{id:int}", async (int id) => await BoughtBoxesOptions.GetBoughtBoxesById(id));
 app.MapPost("/bought_boxes", BoughtBoxesOptions.CreateBoughtBox);
 app.MapPut("/bought_boxes/{id:int}", BoughtBoxesOptions.UpdateBoughtBox);
 app.MapGet("/reviews", async (Reviews reviews) => Results.Ok(await reviews.GetAllReviews()));
