@@ -13,7 +13,7 @@ public class BoughtBoxesOptions
   {
     List<BoughtBox> result = new List<BoughtBox>();
 
-    string Connectionsstring = "server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_practice";
+    string Connectionsstring = "server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc";
 
     using (var connection = new MySqlConnection(Connectionsstring))
     {
@@ -84,7 +84,7 @@ public class BoughtBoxesOptions
 
   public static async Task<bool> CreateBoughtBox(BoughtBox box)
   {
-    string Connectionsstring = "server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_practice";
+    string Connectionsstring = "server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc";
     await using (var connection = new MySqlConnection(Connectionsstring))
     {
       var query = "INSERT INTO bought_boxes (Name, Weight, Price, Time, Description, Image, buyer_id, Paid, Delivered) VALUES (@Name, @Weight, @Price, @Time, @Description, @Image, @buyer_id, @Paid, @Delivered);";
@@ -109,7 +109,7 @@ public class BoughtBoxesOptions
 
   public static async Task<bool> UpdateBoughtBox(int id, BoughtBox box)
   {
-    string Connectionsstring = "server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_practice";
+    string Connectionsstring = "server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc";
     await using (var connection = new MySqlConnection(Connectionsstring))
     {
       var query = "UPDATE bought_boxes SET Name = @Name, Weight = @Weight, Price = @Price, Time = @Time, Description = @Description, Image = @Image, buyer_id = @buyer_id, Paid = @Paid, Delivered = @Delivered WHERE Id = @Id;";
