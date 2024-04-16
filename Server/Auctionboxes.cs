@@ -1,6 +1,8 @@
 using System.Data;
 
 namespace Server;
+
+using System.Text.Json;
 using MySql.Data.MySqlClient;
 
 public class Boxes
@@ -72,6 +74,18 @@ public class Boxes
             Console.WriteLine($"Error fetching box by ID: {ex.Message}");
         }
         return box;
+    }
+
+    public static async void UpdateBoxes(HttpContext context)
+    {
+        var requestBody = await new StreamReader(context.Request.Body).ReadToEndAsync();
+        var boxData = JsonSerializer.Deserialize<AuctionList>(requestBody);
+
+        using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc"))
+        {
+            conn.Open();
+
+        }
     }
 }
 
