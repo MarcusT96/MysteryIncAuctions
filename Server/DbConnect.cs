@@ -13,8 +13,10 @@
             _connectionString = connectionString;
         }
 
-        public Task<MySqlConnection> GetConnectionAsync()
+        public async Task<MySqlConnection> GetConnectionAsync()
         {
-            return Task.FromResult(new MySqlConnection(_connectionString));
+            var connection = new MySqlConnection(_connectionString);
+            await connection.OpenAsync();  // Open the connection before returning it
+            return connection;
         }
     }

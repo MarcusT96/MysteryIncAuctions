@@ -4,6 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<DbConnect>(new DbConnect(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<PostboxService>();
 builder.Services.AddScoped<Boxes>();
+builder.Services.AddScoped<Reviews>();
 var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
@@ -24,9 +25,9 @@ app.MapPut("/users/{id:int}", async (int id, User.UserRecord updatedUser) => awa
 app.MapGet("/bought_boxes", BoughtBoxesOptions.GetBoughtBoxes);
 app.MapPost("/bought_boxes", BoughtBoxesOptions.CreateBoughtBox);
 app.MapPut("/bought_boxes/{id:int}", BoughtBoxesOptions.UpdateBoughtBox);
-app.MapGet("/reviews", () => Results.Ok(Reviews.GetAllReviews()));
+app.MapGet("/reviews", async (Reviews reviews) => Results.Ok(await reviews.GetAllReviews()));
 app.MapPost("/postbox", async (Postbox postbox, PostboxService postboxService) => await postboxService.Add(postbox));
-app.MapPost("/reviews", Reviews.PostReview);
+app.MapPost("/reviews", async (Review review, Reviews reviews) => await reviews.PostReview(review));
 app.MapDelete("/mystery_boxes/{id:int}", async (int id, Boxes boxes) => await boxes.DeleteBox(id));
 
 app.Run();
