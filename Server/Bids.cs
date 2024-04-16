@@ -27,7 +27,7 @@ public class Bid
         return Results.BadRequest("Invalid bid data");
       }
 
-      using (var conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=pwd=batman01;database=mystery_inc"))
+      using (var conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=pwd=mypassword;database=mystery_inc"))
       {
         await conn.OpenAsync();
 

@@ -13,7 +13,7 @@ public class Reviews
   {
     List<Review> reviews = new();
 
-    string ConnectionString = "server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc";
+    string ConnectionString = "server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc";
 
     using (var conn = new MySqlConnection(ConnectionString))
     {
@@ -40,7 +40,7 @@ public class Reviews
 
   public static bool PostReview(Review newReview)
   {
-    string connectionString = "server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc";
+    string connectionString = "server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc";
 
     using (var connection = new MySqlConnection(connectionString))
     {
