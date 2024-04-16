@@ -76,10 +76,10 @@ function UpdateBoxModal({ box, onUpdate, onClose, categories }) {
                     <input type="text" id="name" value={Name} onChange={(e) => setName(e.target.value)} />
 
                     <label htmlFor="app_prodcomp-weight">Vikt (kg):</label>
-                    <input type="number" id="weight" value={Weight} onChange={(e) => setWeight(e.target.value)} />
+                    <input type="number" id="weight" value={Weight} onChange={(e) => setWeight(parseFloat(e.target.value))} />
 
                     <label htmlFor="app_prodcomp-price">Pris:</label>
-                    <input type="number" id="price" value={Price} onChange={(e) => setPrice(e.target.value)} />
+                    <input type="number" id="price" value={Price} onChange={(e) => setPrice(parseInt(e.target.value))} />
 
                     <label htmlFor="app_prodcomp-time">Utgångs Datum:</label>
                     <input type="datetime-local" id="time" value={Time} onChange={(e) => setTime(e.target.value)} />
