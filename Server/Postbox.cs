@@ -1,8 +1,10 @@
 ﻿using MySql.Data.MySqlClient;
+using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Server
 {
-
     public class PostboxService
     {
         private readonly DbConnect _dbConnect;
@@ -20,7 +22,11 @@ namespace Server
             try
             {
                 await using var conn = await _dbConnect.GetConnectionAsync();
-                await conn.OpenAsync();
+                // Kontrollera att anslutningen inte redan är öppen
+                if (conn.State != System.Data.ConnectionState.Open)
+                {
+                    await conn.OpenAsync();
+                }
 
                 await using var cmd = new MySqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@name", postbox.Name);
@@ -49,11 +55,7 @@ namespace Server
                 return Results.Problem($"A database error occurred: {ex.Message}");
             }
         }
-
     }
-
-
-
 
     public class Postbox
     {

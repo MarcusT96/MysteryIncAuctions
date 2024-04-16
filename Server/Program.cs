@@ -28,7 +28,7 @@ app.MapGet("/bought_boxes/{id:int}", async (int id) => await BoughtBoxesOptions.
 app.MapPost("/bought_boxes", BoughtBoxesOptions.CreateBoughtBox);
 app.MapPut("/bought_boxes/{id:int}", BoughtBoxesOptions.UpdateBoughtBox);
 app.MapGet("/reviews", async (Reviews reviews) => Results.Ok(await reviews.GetAllReviews()));
-app.MapPost("/postbox", async (Postbox postbox, PostboxService postboxService) => await postboxService.Add(postbox));
+app.MapPost("/mystery_boxes", async (Postbox postbox, PostboxService postboxService) => await postboxService.Add(postbox));
 app.MapPost("/reviews", async (Review review, Reviews reviews) => await reviews.PostReview(review));
 app.MapDelete("/mystery_boxes/{id:int}", async (int id, Boxes boxes) => await boxes.DeleteBox(id));
 app.MapPut("/mystery_boxes/{id:int}", async (int id, HttpContext context, Boxes boxService) => await boxService.UpdateBoxes(id, context));

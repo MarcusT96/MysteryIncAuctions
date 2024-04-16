@@ -14,15 +14,15 @@ function AddBoxForm({ onAdd, onClose, categories }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!imageUrl) {
-            setFormError('Please provide an image URL.');
+        if (!name || !price || category === '' || !time || !weight) {
+            setFormError('Please fill all required fields.');
             return;
         }
 
         const newBoxData = {
             name,
-            weight,
-            price,
+            weight: Number(weight),
+            price: Number(price),
             time,
             description,
             category,
@@ -31,12 +31,15 @@ function AddBoxForm({ onAdd, onClose, categories }) {
 
         try {
             await onAdd(newBoxData);
+            toast.success('Box added successfully!');
             onClose();
         } catch (error) {
             console.error('Error adding box:', error);
+            toast.error('Failed to add box: ' + error.message);
             setFormError('An error occurred while adding the box.');
         }
     };
+
 
     return (
         <div className="app_prodcomp-modal">
