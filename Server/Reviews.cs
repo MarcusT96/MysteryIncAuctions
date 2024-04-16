@@ -55,12 +55,12 @@ public class Reviews
         try
         {
           command.ExecuteNonQuery();
-          return true; 
+          return true;
         }
         catch (Exception ex)
         {
           Console.WriteLine("Failed to post review to the database. Error: " + ex.Message);
-          return false; 
+          return false;
         }
       }
     }

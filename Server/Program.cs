@@ -41,4 +41,6 @@ app.MapPut("/bought_boxes/{id:int}", BoughtBoxesOptions.UpdateBoughtBox);
 app.MapGet("/reviews", () => Results.Ok(Reviews.GetAllReviews()));
 app.MapPost("/mystery_boxes", Addbox.Add);
 app.MapPost("/reviews", Reviews.PostReview);
+app.MapDelete("/mystery_boxes/{id:int}", async (int id) => await Boxes.DeleteBox(id));
+
 app.Run();

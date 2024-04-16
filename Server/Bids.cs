@@ -19,7 +19,7 @@ public class Bid
     try
     {
       var requestBody = await new StreamReader(context.Request.Body).ReadToEndAsync();
-     
+
       var bidData = JsonSerializer.Deserialize<BidData>(requestBody);
 
       if (bidData == null)
