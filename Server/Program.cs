@@ -1,24 +1,9 @@
 using Server;
-using System.Windows;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddSingleton<DbConnect>(new DbConnect(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<PostboxService>();
 var app = builder.Build();
-
-MySql.Data.MySqlClient.MySqlConnection conn;
-string myConnectionString;
-
-myConnectionString = "server=localhost;port=3306;uid=root;pwd=mypassword;database=Auctionboxes";
-
-
-try
-{
-  conn = new MySql.Data.MySqlClient.MySqlConnection(myConnectionString);
-  conn.Open();
-  Console.WriteLine("Success!");
-}
-catch (MySql.Data.MySqlClient.MySqlException ex)
-{
-  Console.WriteLine(ex);
-}
 
 app.MapGet("/", () => "Hello World!");
 app.MapGet("/categories", CategoryOptions.GetCategories);
@@ -39,5 +24,5 @@ app.MapGet("/boughtboxes", BoughtBoxesOptions.GetBoughtBoxes);
 app.MapPost("/boughtboxes", BoughtBoxesOptions.CreateBoughtBox);
 app.MapPut("/boughtboxes/{id:int}", BoughtBoxesOptions.UpdateBoughtBox);
 app.MapGet("/reviews", () => Results.Ok(Reviews.GetAllReviews()));
-app.MapPost("/postbox", Addbox.Add);
+app.MapPost("/postbox", async (Postbox postbox, PostboxService postboxService) => await postboxService.Add(postbox));
 app.Run();
