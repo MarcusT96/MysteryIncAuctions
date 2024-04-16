@@ -62,6 +62,7 @@ const ProductsPanel = () => {
     };
 
     const handleUpdateBox = async (id, updatedBox) => {
+        console.log(updatedBox)
         try {
             const response = await fetch(`/api/mystery_boxes/${id}`, {
                 method: 'PUT',
