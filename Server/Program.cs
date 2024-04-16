@@ -21,7 +21,8 @@ app.MapGet("/mystery_boxes/{id:int}", async (int id, Boxes boxes) => await boxes
 app.MapGet("/users", User.GetUsers);
 app.MapPost("/users", async (User.UserRecord newUser) => await User.CreateUser(newUser));
 app.MapPut("/users/{id:int}", async (int id, User.UserRecord updatedUser) => await User.UpdateUser(id, updatedUser));
-app.MapGet("/bought_boxes", BoughtBoxesOptions.GetBoughtBoxes);
+// app.MapGet("/bought_boxes", BoughtBoxesOptions.GetBoughtBoxes);
+app.MapGet("/bought_boxes/{id:int}", async (int id) => await BoughtBoxesOptions.GetBoughtBoxesById(id));
 app.MapPost("/bought_boxes", BoughtBoxesOptions.CreateBoughtBox);
 app.MapPut("/bought_boxes/{id:int}", BoughtBoxesOptions.UpdateBoughtBox);
 app.MapGet("/reviews", () => Results.Ok(Reviews.GetAllReviews()));
