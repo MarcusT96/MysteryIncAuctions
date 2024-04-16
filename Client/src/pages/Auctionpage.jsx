@@ -33,11 +33,11 @@ export default function Auctionpage() {
       <button className="sorting" onClick={toggleOrder}>{sortOrder === "asc" ? "Sortera sjunkande" : "Sortera ökande"}</button>
       </div>
     <div className="auction-container">
-      <h2 className="Headline">Aktiva Auctioner</h2>
+      <h2 className="Headline">Aktiva Auktioner</h2>
       <Products searchQuery={searchQuery} sortOrder={sortOrder} sortCriterion={sortCriterion} />
     </div>
     <div className="auction-container">
-      <h2 className="Headline">Avslutade auktioner</h2>
+      <h2 className="Headline">Avslutade Auktioner</h2>
       <EndedAuctions/>
     </div>
   </main>
