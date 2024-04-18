@@ -5,6 +5,7 @@ En handelsplats med mystery boxes där MysteryInc köpt produkter billigt från 
 SQL query för att skapa databasen vi kört: 
 
 """
+
 create table categories
 (
     id            int auto_increment
