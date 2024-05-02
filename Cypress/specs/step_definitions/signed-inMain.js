@@ -24,3 +24,17 @@ Then('I click on the {string} on the sidebar', (a) => {
   cy.get('.sidebar > :nth-child(5)').should('be.visible').click()
   cy.url().should('include', '/dashboard');
 });
+
+Then('I navigate to the {string} overview', (a) => {
+  cy.get('.app__sidebar-menu > :nth-child(2)').click()
+  cy.wait(3000);
+});
+
+Then('I also navigate to the {string} overview page', (a) => {
+  cy.get('.app__sidebar-menu > :nth-child(3)').click()
+  cy.wait(3000);
+});
+
+Then('lastly I navigates to the {string} overview page', (a) => {
+  cy.get('.app__sidebar-menu > :nth-child(4)').click()
+});
