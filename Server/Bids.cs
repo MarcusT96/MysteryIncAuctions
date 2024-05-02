@@ -8,6 +8,13 @@ namespace Server;
 
 public class Bid
 {
+
+  private readonly DbConnect _dbConnect;
+
+  public Bid(DbConnect dbConnect)
+  {
+    _dbConnect = dbConnect;
+  }
   public record BidData(
       [property: JsonPropertyName("Value")] int Value,
       [property: JsonPropertyName("UserId")] int UserId,
@@ -27,7 +34,7 @@ public class Bid
         return Results.BadRequest("Invalid bid data");
       }
 
-      using (var conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc"))
+      using (var conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_practice"))
       {
         await conn.OpenAsync();
 

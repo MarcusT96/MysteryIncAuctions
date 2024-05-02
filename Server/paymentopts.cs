@@ -15,7 +15,7 @@ public class PaymentOptions
   {
     List<Cards> result = new List<Cards>();
 
-    using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc"))
+    using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_practice"))
     {
       conn.Open();
       MySqlCommand cmd = new MySqlCommand("SELECT * from payment_options", conn);
@@ -43,7 +43,7 @@ public class PaymentOptions
   {
     List<Cards> result = new List<Cards>();
 
-    using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc"))
+    using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_practice"))
     {
       conn.Open();
       MySqlCommand cmd = new MySqlCommand("SELECT * from payment_options WHERE user_id = @user_id", conn);
@@ -79,7 +79,7 @@ public class PaymentOptions
       return Results.BadRequest("Invalid payment data");
     }
 
-    using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc"))
+    using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_practice"))
     {
       await conn.OpenAsync();
 
@@ -102,7 +102,7 @@ public class PaymentOptions
 
   public static async Task<IResult> DeletePaymentOpt(int OptId)
   {
-    using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc"))
+    using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_practice"))
     {
       await conn.OpenAsync();
 
