@@ -22,3 +22,12 @@ Feature: Product Management
     And I choose a category for the product
     And I add an image URL for the product
     And I click the "Submit" button to add the product
+
+  Scenario: Checking if the cypress test worked
+    Given that I am on the products overview page
+    When I click on the next slide button
+    Then I should be able to see the newly added product
+    And I then exit the admin dashboard
+    And I navigate to the auctions page
+    And the new product should be visible
+    And I press the "read-more" button, in order to view the details on the new product
