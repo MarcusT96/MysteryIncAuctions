@@ -27,14 +27,17 @@ Then('I click on the {string} on the sidebar', (a) => {
 
 Then('I navigate to the {string} overview', (a) => {
   cy.get('.app__sidebar-menu > :nth-child(2)').click()
+  cy.url().should('include', '/dashboard/orders');
   cy.wait(3000);
 });
 
 Then('I also navigate to the {string} overview page', (a) => {
   cy.get('.app__sidebar-menu > :nth-child(3)').click()
+  cy.url().should('include', '/dashboard/users');
   cy.wait(3000);
 });
 
 Then('lastly I navigates to the {string} overview page', (a) => {
   cy.get('.app__sidebar-menu > :nth-child(4)').click()
+  cy.url().should('include', '/dashboard/products');
 });
