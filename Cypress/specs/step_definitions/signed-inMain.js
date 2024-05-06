@@ -1,6 +1,6 @@
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
-Then('I click the {string} in the navbar', (a) => {
+When('I click the {string} in the navbar', (a) => {
   cy.get('div.app__navbar-login > .app__navbar-login').should('be.visible').click()
 });
 
