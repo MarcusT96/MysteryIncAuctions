@@ -1,0 +1,17 @@
+{
+  "name": "mysteryincauctions",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "cd Client && vite",
+    "dev:backend": "cd Server && dotnet run",
+    "build": "cd Client && vite build",
+    "lint": "cd Client && eslint . --exit js, jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "cd Client && vite preview"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
