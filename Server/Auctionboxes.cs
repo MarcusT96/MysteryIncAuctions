@@ -79,26 +79,39 @@ namespace Server
         public async Task<IResult> UpdateBoxes(int id, HttpContext context)
         {
             var requestBody = await new StreamReader(context.Request.Body).ReadToEndAsync();
-            var boxData = JsonSerializer.Deserialize<AuctionList>(requestBody);
-            await using var conn = await _dbConnect.GetConnectionAsync();
-            var query = "UPDATE mystery_boxes SET name = @name, image = @image, category = @category, price = @price, weight = @weight, time = @time, description = @description WHERE id = @id";
-
-            await using var cmd = new MySqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@id", id);
-            cmd.Parameters.AddWithValue("@name", boxData.Name);
-            cmd.Parameters.AddWithValue("@image", boxData.Image);
-            cmd.Parameters.AddWithValue("@category", boxData.Category);
-            cmd.Parameters.AddWithValue("@price", boxData.Price);
-            cmd.Parameters.AddWithValue("@weight", boxData.Weight);
-            cmd.Parameters.AddWithValue("@time", boxData.Time);
-            cmd.Parameters.AddWithValue("@description", boxData.Description);
-
-            var result = await cmd.ExecuteNonQueryAsync();
-            if (result > 0)
+            try
             {
-                return Results.Ok(new { Message = "Box updated successfully" });
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true,
+                    NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowReadingFromString | System.Text.Json.Serialization.JsonNumberHandling.WriteAsString
+                };
+                var boxData = JsonSerializer.Deserialize<AuctionList>(requestBody, options);
+
+                await using var conn = await _dbConnect.GetConnectionAsync();
+                var query = "UPDATE mystery_boxes SET name = @name, image = @image, category = @category, price = @price, weight = @weight, time = @time, description = @description WHERE id = @id";
+
+                await using var cmd = new MySqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@name", boxData.Name);
+                cmd.Parameters.AddWithValue("@image", boxData.Image);
+                cmd.Parameters.AddWithValue("@category", boxData.Category);
+                cmd.Parameters.AddWithValue("@price", boxData.Price);
+                cmd.Parameters.AddWithValue("@weight", boxData.Weight);
+                cmd.Parameters.AddWithValue("@time", boxData.Time);
+                cmd.Parameters.AddWithValue("@description", boxData.Description);
+
+                var result = await cmd.ExecuteNonQueryAsync();
+                if (result > 0)
+                {
+                    return Results.Ok(new { Message = "Box updated successfully" });
+                }
+                return Results.Problem("Failed to update box");
             }
-            return Results.Problem("Failed to update box");
+            catch (JsonException ex)
+            {
+                return Results.Problem($"JSON Deserialization error: {ex.Message}");
+            }
         }
     }
 
