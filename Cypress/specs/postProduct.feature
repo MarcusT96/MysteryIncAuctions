@@ -1,6 +1,8 @@
 Feature: Product Management
 
-  As an admin, I want to add new products to the inventory so that I can expand our product offerings.
+  As an admin,
+  I want to add new products to the inventory
+  so that I can expand our product offerings.
 
   Scenario: Navigate to admins products management page
     Given that I am on the "/" page
