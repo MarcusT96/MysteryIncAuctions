@@ -13,13 +13,13 @@ builder.Services.AddScoped<Reviews>();
 builder.Services.AddScoped<User>();
 var app = builder.Build();
 
-// Categories
+// Categories FIX STATE
 app.MapGet("/categories", CategoryOptions.GetCategories);
 app.MapPost("/categories", CategoryOptions.CreateCategory);
 app.MapPut("/categories/{id:int}", CategoryOptions.UpdateCategory);
 
 // Bids
-app.MapPost("/bids", async (HttpContext context) => await Bid.AddBid(context));
+app.MapPost("/bids", async (HttpContext context, State state) => await Bid.AddBid(context, state.DB));
 
 // Payment options
 app.MapGet("/payment_options", (State state) => PaymentOptions.PaymentOpts(state.DB));
@@ -27,19 +27,19 @@ app.MapGet("/payment_options/{id:int}", (State state, int id) => PaymentOptions.
 app.MapPost("/payment_options/", async (HttpContext context, State state) => await PaymentOptions.AddPaymentOpt(context, state.DB));
 app.MapDelete("/payment_options/{id:int}", async (State state, int id) => await PaymentOptions.DeletePaymentOpt(id, state.DB));
 
-// Users
+// Users FIX STATE
 app.MapGet("/users/{id:int}", async (int id, User userService) => await userService.GetUserById(id));
 app.MapGet("/users", async (User users) => await users.GetUsers());
 app.MapPost("/users", async (HttpContext context, User userService, UserRecord newUser) => await userService.CreateUser(newUser));
 app.MapPut("/users/{id:int}", async (int id, User userService, UserRecord updatedUser) => await userService.UpdateUser(id, updatedUser));
 
-// Bought boxes
+// Bought boxes FIX STATE
 app.MapGet("/bought_boxes", BoughtBoxesOptions.GetBoughtBoxes);
 app.MapGet("/bought_boxes/{id:int}", async (int id) => await BoughtBoxesOptions.GetBoughtBoxesById(id));
 app.MapPost("/bought_boxes", BoughtBoxesOptions.CreateBoughtBox);
 app.MapPut("/bought_boxes/{id:int}", BoughtBoxesOptions.UpdateBoughtBox);
 
-// Mystery boxes
+// Mystery boxes FIX STATE
 app.MapPost("/mystery_boxes", async (Postbox postbox, PostboxService postboxService) => await postboxService.Add(postbox));
 app.MapDelete("/mystery_boxes/{id:int}", async (int id, Boxes boxes) => await boxes.DeleteBox(id));
 app.MapPut("/mystery_boxes/{id:int}", async (int id, HttpContext context, Boxes boxService) => await boxService.UpdateBoxes(id, context));
