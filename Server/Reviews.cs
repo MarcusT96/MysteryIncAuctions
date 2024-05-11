@@ -1,46 +1,53 @@
 using Microsoft.AspNetCore.Http;
 using MySql.Data.MySqlClient;
-using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Data;
 
 namespace Server;
 
 public record Review(int Id, int Score, string Title, string Description);
 
+
 public class Reviews
-{
-  public static List<Review> GetAllReviews(State state)
   {
-    List<Review> reviews = new List<Review>();
-    using (var conn = new MySqlConnection(state.DB))
+    private readonly DbConnect _dbConnect;
+
+    public Reviews(DbConnect dbConnect)
     {
-      conn.Open();
-      var query = "SELECT id, score, title, description FROM reviews";
-      using (var cmd = new MySqlCommand(query, conn))
-      using (var reader = cmd.ExecuteReader())
+      _dbConnect = dbConnect;
+    }
+
+    public async Task<List<Review>> GetAllReviews()
+    {
+      List<Review> reviews = new();
+      await using (var conn = await _dbConnect.GetConnectionAsync())
       {
-        while (reader.Read())
+        var query = "SELECT id, score, title, description FROM reviews";
+        await using (var cmd = new MySqlCommand(query, conn))
+        await using (var reader = await cmd.ExecuteReaderAsync())
         {
-          reviews.Add(new Review(
-              reader.GetInt32("id"),
-              reader.GetInt32("score"),
-              reader.GetString("title"),
-              reader.GetString("description")
-          ));
+          while (await reader.ReadAsync())
+          {
+            reviews.Add(new Review(
+                reader.GetInt32("id"),
+                reader.GetInt32("score"),
+                reader.GetString("title"),
+                reader.GetString("description")
+            ));
+          }
         }
       }
-    }
-    return reviews;
+      return reviews;
   }
 
-  public static async Task<bool> PostReview(State state, Review newReview)
+  //Post Reviews to database
+
+  public async Task<bool> PostReview(Review newReview)
   {
-    using (var conn = new MySqlConnection(state.DB))
+    await using (var conn = await _dbConnect.GetConnectionAsync())
     {
-      await conn.OpenAsync();
       var query = "INSERT INTO reviews (score, title, description) VALUES (@score, @title, @description)";
-      using (var command = new MySqlCommand(query, conn))
+      await using (var command = new MySqlCommand(query, conn))
       {
         command.Parameters.AddWithValue("@score", newReview.Score);
         command.Parameters.AddWithValue("@title", newReview.Title);
@@ -59,5 +66,6 @@ public class Reviews
       }
     }
   }
+
 }
 
