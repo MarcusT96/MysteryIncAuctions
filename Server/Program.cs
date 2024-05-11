@@ -13,10 +13,10 @@ builder.Services.AddScoped<Reviews>();
 builder.Services.AddScoped<User>();
 var app = builder.Build();
 
-// Categories FIX STATE
-app.MapGet("/categories", CategoryOptions.GetCategories);
-app.MapPost("/categories", CategoryOptions.CreateCategory);
-app.MapPut("/categories/{id:int}", CategoryOptions.UpdateCategory);
+// Categories
+app.MapGet("/categories", (State state) => CategoryOptions.GetCategories(state.DB));
+app.MapPost("/categories", (HttpContext context, State state) => CategoryOptions.CreateCategory(context, state.DB));
+app.MapPut("/categories/{id:int}", (HttpContext context, State state, int id) => CategoryOptions.UpdateCategory(id, context, state.DB));
 
 // Bids
 app.MapPost("/bids", async (HttpContext context, State state) => await Bid.AddBid(context, state.DB));
