@@ -46,8 +46,8 @@ app.MapGet("/mystery_boxes", async (Boxes boxes) => await boxes.All());
 app.MapGet("/mystery_boxes/{id:int}", async (int id, Boxes boxes) => await boxes.GetById(id));
 
 // Reviews
-app.MapGet("/reviews", async (Reviews reviews) => Results.Ok(await reviews.GetAllReviews()));
-app.MapPost("/reviews", async (Review review, Reviews reviews) => await reviews.PostReview(review));
+app.MapGet("/reviews", async (State state) => Results.Ok(await Reviews.GetAllReviews()));
+app.MapPost("/reviews", async (State state, Review review) => await Reviews.PostReview(review));
 
 app.Run();
 
