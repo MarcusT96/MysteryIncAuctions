@@ -6,7 +6,6 @@ State state = new("server=localhost;port=3306;uid=root;pwd=mypassword;database=m
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton(state);
-builder.Services.AddSingleton<DbConnect>(new DbConnect(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<PostboxService>();
 builder.Services.AddScoped<Boxes>();
 builder.Services.AddScoped<Reviews>();
