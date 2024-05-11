@@ -17,11 +17,12 @@ public record UserRecord(
 public class User
 {
 
-  public static async Task<List<UserRecord>> GetUsers()
+  public static async Task<List<UserRecord>> GetUsers(string connectionString)
   {
     List<UserRecord> users = new List<UserRecord>();
-    await using (var conn = await _dbConnect.GetConnectionAsync())
+    await using (MySqlConnection conn = new MySqlConnection(connectionString))
     {
+      await conn.OpenAsync();
       
       var cmd = new MySqlCommand("SELECT id, email, password, firstName, lastName, address, city, zipCode, country, phone, isAdmin FROM users", conn);
       await using (var reader = await cmd.ExecuteReaderAsync()) 
@@ -48,12 +49,13 @@ public class User
     return users;
   }
 
-  public static async Task<IResult> GetUserById(int id)
+  public static async Task<IResult> GetUserById(int id, string connectionString)
   {
     UserRecord? user = null;
-    await using (var conn = await _dbConnect.GetConnectionAsync())   
+    await using (MySqlConnection conn = new MySqlConnection(connectionString))
     {
-      
+      await conn.OpenAsync();
+
       var cmd = new MySqlCommand("SELECT id, email, password, firstName, lastName, address, city, zipCode, country, phone, isAdmin FROM users WHERE id = @id", conn);
       cmd.Parameters.AddWithValue("@id", id);
       await using (var reader = await cmd.ExecuteReaderAsync())
@@ -79,11 +81,12 @@ public class User
     return Results.NotFound();
   }
 
-  public static async Task<IResult> CreateUser(UserRecord newUser)
+  public static async Task<IResult> CreateUser(UserRecord newUser, string connectionString)
   {
-    await using (var conn = await _dbConnect.GetConnectionAsync())
+    await using (MySqlConnection conn = new MySqlConnection(connectionString))
     {
-      
+      await conn.OpenAsync();
+
       var cmd = new MySqlCommand("INSERT INTO users (email, password, firstName, lastName) VALUES (@Email, @Password, @FirstName, @LastName)", conn);
       
       cmd.Parameters.AddWithValue("@Email", newUser.Email);
@@ -96,11 +99,12 @@ public class User
     }
   }
 
-  public static async Task<IResult> UpdateUser(int id, UserRecord updatedUser)
+  public static async Task<IResult> UpdateUser(int id, UserRecord updatedUser, string connectionString)
   {
-    await using (var conn = await _dbConnect.GetConnectionAsync())
+    await using (MySqlConnection conn = new MySqlConnection(connectionString))
     {
-      
+      await conn.OpenAsync();
+
       await using (var transaction = await conn.BeginTransactionAsync())
       {
         try
