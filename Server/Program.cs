@@ -2,15 +2,15 @@ using Server;
 using MySql.Data.MySqlClient;
 using System.Data;
 
+State state = new("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc");
+
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddSingleton<DbConnect>(new DbConnect(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddSingleton(state);
 builder.Services.AddScoped<PostboxService>();
 builder.Services.AddScoped<Boxes>();
 builder.Services.AddScoped<Reviews>();
 builder.Services.AddScoped<User>();
 var app = builder.Build();
-
-State state = new("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc");
 
 // Categories
 app.MapGet("/categories", CategoryOptions.GetCategories);
