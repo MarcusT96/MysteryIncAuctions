@@ -6,6 +6,7 @@ State state = new("server=localhost;port=3306;uid=root;pwd=mypassword;database=m
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton(state);
+builder.Services.AddSingleton<DbConnect>(new DbConnect(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<PostboxService>();
 builder.Services.AddScoped<Boxes>();
 builder.Services.AddScoped<Reviews>();
@@ -21,10 +22,10 @@ app.MapPut("/categories/{id:int}", CategoryOptions.UpdateCategory);
 app.MapPost("/bids", async (HttpContext context) => await Bid.AddBid(context));
 
 // Payment options
-app.MapGet("/payment_options", PaymentOptions.PaymentOpts);
-app.MapGet("/payment_options/{id:int}", (int id) => PaymentOptions.GetPaymentOptsByUserId(id));
-app.MapPost("/payment_options/", async (HttpContext context) => await PaymentOptions.AddPaymentOpt(context));
-app.MapDelete("/payment_options/{id:int}", async (int id) => await PaymentOptions.DeletePaymentOpt(id));
+app.MapGet("/payment_options", (State state) => PaymentOptions.PaymentOpts(state.DB));
+// app.MapGet("/payment_options/{id:int}", (State state, int id) => PaymentOptions.GetPaymentOptsByUserId(state.DB, id));
+// app.MapPost("/payment_options/", async (HttpContext context) => await PaymentOptions.AddPaymentOpt(context));
+// app.MapDelete("/payment_options/{id:int}", async (int id) => await PaymentOptions.DeletePaymentOpt(id));
 
 // Users
 app.MapGet("/users/{id:int}", async (int id, User userService) => await userService.GetUserById(id));
