@@ -23,9 +23,9 @@ app.MapPost("/bids", async (HttpContext context) => await Bid.AddBid(context));
 
 // Payment options
 app.MapGet("/payment_options", (State state) => PaymentOptions.PaymentOpts(state.DB));
-// app.MapGet("/payment_options/{id:int}", (State state, int id) => PaymentOptions.GetPaymentOptsByUserId(state.DB, id));
-// app.MapPost("/payment_options/", async (HttpContext context) => await PaymentOptions.AddPaymentOpt(context));
-// app.MapDelete("/payment_options/{id:int}", async (int id) => await PaymentOptions.DeletePaymentOpt(id));
+app.MapGet("/payment_options/{id:int}", (State state, int id) => PaymentOptions.GetPaymentOptsByUserId(id, state.DB));
+app.MapPost("/payment_options/", async (HttpContext context, State state) => await PaymentOptions.AddPaymentOpt(context, state.DB));
+app.MapDelete("/payment_options/{id:int}", async (State state, int id) => await PaymentOptions.DeletePaymentOpt(id, state.DB));
 
 // Users
 app.MapGet("/users/{id:int}", async (int id, User userService) => await userService.GetUserById(id));
