@@ -16,14 +16,8 @@ public record UserRecord(
   bool IsAdmin);
 public class User
 {
-  private readonly DbConnect _dbConnect;
 
-  public User(DbConnect dbConnect)
-  {
-      _dbConnect = dbConnect;
-  }
-
-  public async Task<List<UserRecord>> GetUsers()
+  public static async Task<List<UserRecord>> GetUsers()
   {
     List<UserRecord> users = new List<UserRecord>();
     await using (var conn = await _dbConnect.GetConnectionAsync())
@@ -54,7 +48,7 @@ public class User
     return users;
   }
 
-  public async Task<IResult> GetUserById(int id)
+  public static async Task<IResult> GetUserById(int id)
   {
     UserRecord? user = null;
     await using (var conn = await _dbConnect.GetConnectionAsync())   
@@ -85,7 +79,7 @@ public class User
     return Results.NotFound();
   }
 
-  public async Task<IResult> CreateUser(UserRecord newUser)
+  public static async Task<IResult> CreateUser(UserRecord newUser)
   {
     await using (var conn = await _dbConnect.GetConnectionAsync())
     {
@@ -102,7 +96,7 @@ public class User
     }
   }
 
-  public async Task<IResult> UpdateUser(int id, UserRecord updatedUser)
+  public static async Task<IResult> UpdateUser(int id, UserRecord updatedUser)
   {
     await using (var conn = await _dbConnect.GetConnectionAsync())
     {

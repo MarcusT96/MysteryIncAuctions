@@ -28,10 +28,10 @@ app.MapPost("/payment_options/", async (HttpContext context, State state) => awa
 app.MapDelete("/payment_options/{id:int}", async (State state, int id) => await PaymentOptions.DeletePaymentOpt(id, state.DB));
 
 // Users FIX STATE
-app.MapGet("/users/{id:int}", async (int id, User userService) => await userService.GetUserById(id));
-app.MapGet("/users", async (User users) => await users.GetUsers());
-app.MapPost("/users", async (HttpContext context, User userService, UserRecord newUser) => await userService.CreateUser(newUser));
-app.MapPut("/users/{id:int}", async (int id, User userService, UserRecord updatedUser) => await userService.UpdateUser(id, updatedUser));
+app.MapGet("/users/{id:int}", async (int id) => await User.GetUserById(id));
+app.MapGet("/users", async () => await User.GetUsers());
+app.MapPost("/users", async (HttpContext context, UserRecord newUser) => await User.CreateUser(newUser));
+app.MapPut("/users/{id:int}", async (int id, UserRecord updatedUser) => await User.UpdateUser(id, updatedUser));
 
 // Bought boxes
 app.MapGet("/bought_boxes", (State state) => BoughtBoxesOptions.GetBoughtBoxes(state.DB));
