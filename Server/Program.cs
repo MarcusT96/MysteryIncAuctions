@@ -41,10 +41,10 @@ app.MapPut("/bought_boxes/{id:int}", (int id, HttpContext context, State state) 
 
 // Mystery boxes FIX STATE
 app.MapPost("/mystery_boxes", async (State state, Postbox postbox) => await PostboxService.Add(postbox, state.DB));
-app.MapDelete("/mystery_boxes/{id:int}", async (int id, Boxes boxes) => await boxes.DeleteBox(id));
-app.MapPut("/mystery_boxes/{id:int}", async (int id, HttpContext context, Boxes boxService) => await boxService.UpdateBoxes(id, context));
-app.MapGet("/mystery_boxes", async (Boxes boxes) => await boxes.All());
-app.MapGet("/mystery_boxes/{id:int}", async (int id, Boxes boxes) => await boxes.GetById(id));
+app.MapDelete("/mystery_boxes/{id:int}", async (int id) => await Boxes.DeleteBox(id));
+app.MapPut("/mystery_boxes/{id:int}", async (int id, HttpContext context) => await Boxes.UpdateBoxes(id, context));
+app.MapGet("/mystery_boxes", async () => await Boxes.All());
+app.MapGet("/mystery_boxes/{id:int}", async (int id) => await Boxes.GetById(id));
 
 // Reviews
 app.MapGet("/reviews", (State state) => Results.Ok(Reviews.GetAllReviews(state.DB)));

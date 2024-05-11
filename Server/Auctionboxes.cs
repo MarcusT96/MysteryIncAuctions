@@ -16,7 +16,7 @@ namespace Server
             _dbConnect = dbConnect;
         }
 
-        public async Task<List<AuctionList>> All()
+        public static async Task<List<AuctionList>> All()
         {
             var boxes = new List<AuctionList>();
             await using (var conn = await _dbConnect.GetConnectionAsync())
@@ -40,7 +40,7 @@ namespace Server
             return boxes;
         }
 
-        public async Task<AuctionList?> GetById(int id)
+        public static async Task<AuctionList?> GetById(int id)
         {
             await using var conn = await _dbConnect.GetConnectionAsync();
             var query = "SELECT id, name, image, category, price, weight, time, description FROM mystery_boxes WHERE id = @id";
@@ -62,7 +62,7 @@ namespace Server
             return null;
         }
 
-        public async Task<IResult> DeleteBox(int id)
+        public static async Task<IResult> DeleteBox(int id)
         {
             await using var conn = await _dbConnect.GetConnectionAsync();
             var query = "DELETE FROM mystery_boxes WHERE id = @id";
@@ -76,7 +76,7 @@ namespace Server
             return Results.NotFound($"No box found with ID {id}.");
         }
 
-        public async Task<IResult> UpdateBoxes(int id, HttpContext context)
+        public static async Task<IResult> UpdateBoxes(int id, HttpContext context)
         {
             var requestBody = await new StreamReader(context.Request.Body).ReadToEndAsync();
             var boxData = JsonSerializer.Deserialize<AuctionList>(requestBody);
