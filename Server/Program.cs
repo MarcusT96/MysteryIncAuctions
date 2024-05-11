@@ -33,11 +33,11 @@ app.MapGet("/users", async (User users) => await users.GetUsers());
 app.MapPost("/users", async (HttpContext context, User userService, UserRecord newUser) => await userService.CreateUser(newUser));
 app.MapPut("/users/{id:int}", async (int id, User userService, UserRecord updatedUser) => await userService.UpdateUser(id, updatedUser));
 
-// Bought boxes FIX STATE
-app.MapGet("/bought_boxes", BoughtBoxesOptions.GetBoughtBoxes);
-app.MapGet("/bought_boxes/{id:int}", async (int id) => await BoughtBoxesOptions.GetBoughtBoxesById(id));
-app.MapPost("/bought_boxes", BoughtBoxesOptions.CreateBoughtBox);
-app.MapPut("/bought_boxes/{id:int}", BoughtBoxesOptions.UpdateBoughtBox);
+// Bought boxes
+app.MapGet("/bought_boxes", (State state) => BoughtBoxesOptions.GetBoughtBoxes(state.DB));
+app.MapGet("/bought_boxes/{id:int}", async (State state, int id) => await BoughtBoxesOptions.GetBoughtBoxesById(id, state.DB));
+app.MapPost("/bought_boxes", (HttpContext context, State state) => BoughtBoxesOptions.CreateBoughtBox(context, state.DB));
+app.MapPut("/bought_boxes/{id:int}", (int id, HttpContext context, State state) => BoughtBoxesOptions.UpdateBoughtBox(id, context, state.DB));
 
 // Mystery boxes FIX STATE
 app.MapPost("/mystery_boxes", async (Postbox postbox, PostboxService postboxService) => await postboxService.Add(postbox));
