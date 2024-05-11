@@ -39,7 +39,7 @@ app.MapGet("/bought_boxes/{id:int}", async (State state, int id) => await Bought
 app.MapPost("/bought_boxes", (HttpContext context, State state) => BoughtBoxesOptions.CreateBoughtBox(context, state.DB));
 app.MapPut("/bought_boxes/{id:int}", (int id, HttpContext context, State state) => BoughtBoxesOptions.UpdateBoughtBox(id, context, state.DB));
 
-// Mystery boxes FIX STATE
+// Mystery boxes
 app.MapPost("/mystery_boxes", async (State state, Postbox postbox) => await PostboxService.Add(postbox, state.DB));
 app.MapDelete("/mystery_boxes/{id:int}", async (State state, int id) => await Boxes.DeleteBox(id, state.DB));
 app.MapPut("/mystery_boxes/{id:int}", async (int id, HttpContext context, State state) => await Boxes.UpdateBoxes(id, context, state.DB));
