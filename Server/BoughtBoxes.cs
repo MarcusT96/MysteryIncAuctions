@@ -3,19 +3,18 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 public class BoughtBoxesOptions
 {
   public record BoughtBox(int Id, string Name, decimal Weight, decimal Price, DateTime Time, string Description, string Image, int BuyerId, bool Paid, bool Delivered);
 
-  public static List<BoughtBox> GetBoughtBoxes()
+  public static List<BoughtBox> GetBoughtBoxes(string connectionString)
   {
     List<BoughtBox> result = new List<BoughtBox>();
 
-    string Connectionsstring = "server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc";
-
-    using (var connection = new MySqlConnection(Connectionsstring))
+    using (var connection = new MySqlConnection(connectionString))
     {
       connection.Open();
       var command = new MySqlCommand("SELECT id, name, weight, price, time, description, image, buyer_id, paid, delivered FROM bought_boxes;", connection);
@@ -41,9 +40,8 @@ public class BoughtBoxesOptions
     }
     return result;
   }
-  public static async Task<List<BoughtBox>> GetBoughtBoxesById(int buyer_id)
+  public static async Task<List<BoughtBox>> GetBoughtBoxesById(int buyer_id, string connectionString)
   {
-    var connectionString = "server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc";
     var boxes = new List<BoughtBox>();
     try
     {
@@ -82,10 +80,12 @@ public class BoughtBoxesOptions
     return boxes;
   }
 
-  public static async Task<bool> CreateBoughtBox(BoughtBox box)
+  public static async Task<bool> CreateBoughtBox(HttpContext context, string connectionString)
   {
-    string Connectionsstring = "server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc";
-    await using (var connection = new MySqlConnection(Connectionsstring))
+    var requestBody = await new StreamReader(context.Request.Body).ReadToEndAsync();
+    var box = JsonSerializer.Deserialize<BoughtBox>(requestBody);
+
+    await using (var connection = new MySqlConnection(connectionString))
     {
       var query = "INSERT INTO bought_boxes (Name, Weight, Price, Time, Description, Image, buyer_id, Paid, Delivered) VALUES (@Name, @Weight, @Price, @Time, @Description, @Image, @buyer_id, @Paid, @Delivered);";
       await using (var command = new MySqlCommand(query, connection))
@@ -107,10 +107,12 @@ public class BoughtBoxesOptions
     }
   }
 
-  public static async Task<bool> UpdateBoughtBox(int id, BoughtBox box)
+  public static async Task<bool> UpdateBoughtBox(int id, HttpContext context, string connectionString)
   {
-    string Connectionsstring = "server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc";
-    await using (var connection = new MySqlConnection(Connectionsstring))
+    var requestBody = await new StreamReader(context.Request.Body).ReadToEndAsync();
+    var box = JsonSerializer.Deserialize<BoughtBox>(requestBody);
+
+    await using (var connection = new MySqlConnection(connectionString))
     {
       var query = "UPDATE bought_boxes SET Name = @Name, Weight = @Weight, Price = @Price, Time = @Time, Description = @Description, Image = @Image, buyer_id = @buyer_id, Paid = @Paid, Delivered = @Delivered WHERE Id = @Id;";
       await using (var command = new MySqlCommand(query, connection))
