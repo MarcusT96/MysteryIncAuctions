@@ -1,6 +1,6 @@
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
-Given('I am on the {string} page', (url) => {
+Given('I am on the {string} page and like the box', (url) => {
   cy.visit(url)
 });
 
@@ -13,13 +13,13 @@ Then('I should see a form to place a bid', () => {
 });
 
 Then('I type in my bid amount', () => {
-  // TODO: implement step
+  cy.get('.bid--input').type('1000')
 });
 
 Then('I click on the submit button', () => {
-  // TODO: implement step
+  cy.get('.bid--content > .bid--button').click()
 });
 
-Then('I should see a confirmation message', () => {
-  // TODO: implement step
+Then('I should see an error message if I am not logged in', () => {
+  cy.get('.Toastify__toast-body > :nth-child(2)').should('contain', 'Du måste vara inloggad för att kunna lägga bud, vänligen logga in först!')
 });

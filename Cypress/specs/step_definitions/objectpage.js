@@ -1,10 +1,10 @@
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
-Given('that I am on the homepage', (url) => {
+Given('I am on the {string} page', (url) => {
   cy.visit(url)
 });
 
-Then('I click on Auktioner', (a) => {
+Then('I click on Auktioner', () => {
   cy.get(':nth-child(2) > a').click()
 });
 
