@@ -18,6 +18,8 @@ Then('I click the {string} button', (a) => {
 
 Then('then I click the {string} button', (a) => {
   cy.get('.p__opensans-profil').click()
+  cy.url().should('include', '/profile');
+  cy.wait(3000);
 });
 
 Then('I click on the {string} on the sidebar', (a) => {
