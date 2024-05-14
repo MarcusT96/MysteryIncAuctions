@@ -21,7 +21,7 @@ public class Bid
       [property: JsonPropertyName("BoxId")] int BoxId
   );
   //testkommentar
-  public static async Task<IResult> AddBid(HttpContext context)
+  public static async Task<IResult> AddBid(HttpContext context, string connectionString)
   {
     try
     {
@@ -34,7 +34,7 @@ public class Bid
         return Results.BadRequest("Invalid bid data");
       }
 
-      using (var conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_practice"))
+      using (MySqlConnection conn = new MySqlConnection(connectionString))
       {
         await conn.OpenAsync();
 
