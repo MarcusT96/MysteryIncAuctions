@@ -46,7 +46,7 @@ Then('I click the {string} button to add the product', (a) => {
 /*.....Checking if the new product is visible.....*/
 
 When('I click on the next slide button', () => {
-  cy.get('.app__user-pagination > :nth-child(3)')
+  cy.get('.app__user-pagination > :nth-child(4)')
 });
 
 Then('I should be able to see the newly added product', () => {
@@ -70,7 +70,7 @@ Then('the new product should be visible', () => {
 });
 
 When('I press the {string} button, in order to view the details on the new product', () => {
-  cy.get('.auction-card > .auctionbutton').click()
+  cy.get(':nth-child(1) > .auctionbutton').click()
 
   cy.get('.box--img').should('be.visible')
   cy.get('.right--container').should('be.visible')
