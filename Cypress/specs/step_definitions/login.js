@@ -1,7 +1,7 @@
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
 Given('I am on the homepage', () => {
-  cy.visit('http://localhost:5173');
+  cy.visit("/", { headers: { "Accept-Encoding": 'gzip, deflate' } });
 });
 
 When('I click on the "Login" button in the navigation bar', () => {
@@ -10,7 +10,7 @@ When('I click on the "Login" button in the navigation bar', () => {
 
 When('I fill in my email and password with valid credentials', () => {
   cy.get('[type="email"]').type('pontus@example.com');
-  cy.get('[type="password"]').type('qweasdzxc');
+  cy.get('[type="password"]').type('hej123');
 });
 
 When('I click the submit button', () => {
@@ -18,6 +18,6 @@ When('I click the submit button', () => {
 });
 
 Then('I should be back on the homepage', () => {
-  cy.url().should('eq', 'http://localhost:5173/');
+  cy.url().should('eq', 'https://team4.nodehill.se/');
 });
 
