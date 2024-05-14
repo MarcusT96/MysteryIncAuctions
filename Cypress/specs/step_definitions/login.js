@@ -1,7 +1,7 @@
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
 Given('I am on the homepage', () => {
-  cy.visit("/", { headers: { "Accept-Encoding": 'gzip, deflate' } });
+  cy.visit("https://team4.nodehill.se/", { headers: { "Accept-Encoding": 'gzip, deflate' } });
 });
 
 When('I click on the "Login" button in the navigation bar', () => {
@@ -20,4 +20,3 @@ When('I click the submit button', () => {
 Then('I should be back on the homepage', () => {
   cy.url().should('eq', 'https://team4.nodehill.se/');
 });
-
