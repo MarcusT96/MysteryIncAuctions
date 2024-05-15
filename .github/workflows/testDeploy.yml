@@ -1,9 +1,11 @@
 name: Test Deploy
 
-# This workflow will run on every push to the repository in the dev branch.
+# This workflow will run on every push to the repository in the dev and main branch.
 on:
   push:
-    branches: [ "dev" ]
+    branches:
+      - main
+      - dev
 
 # The jobs to run in this workflow are defined here.
 jobs:
