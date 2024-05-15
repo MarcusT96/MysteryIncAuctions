@@ -9,4 +9,7 @@ Feature: Login with admin details
     And I also enter my "password"
     And I click the "login" button
     And then I click the "profile" button
-    And I click on the "betalningssätt" on the sidebar
+    And I click on the "adminpanel" on the sidebar
+    And I navigate to the "order" overview
+    And I also navigate to the "user" overview page
+    And lastly I navigates to the "products" overview page

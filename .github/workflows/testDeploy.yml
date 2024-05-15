@@ -1,47 +1,51 @@
-name: Test and Deploy
+name: Test Deploy
 
-on: 
+# This workflow will run on every push to the repository in the dev and main branch.
+on:
   push:
-    branches: 
+    branches:
       - main
       - dev
 
+# The jobs to run in this workflow are defined here.
 jobs:
+
+  # The cypress_tests job will run on the ubuntu-latest runner and will have the following steps.
   cypress_tests:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+    # Checkout the code using the actions/checkout@v2 action.
+      - name: Checkout code
+        uses: actions/checkout@v2
+    # Setup Node.js using the actions/setup-node@v2 action.
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
         with:
-          node-version: "20"
-
+          node-version: '20'
+    # Install dependencies, build and start the server.
       - name: Install dependencies
-        run: npm ci
+        run: cd ./Client && npm install
+      - name: Build
+        run: npm run build
+      - name: Start server
+        run: nohup node index.js &
+    # Install Cypress dependencies and run the tests.
+      - name: Install Cypress Dependencies
+      # Change the directory to the cypress folder.
+        run: cd ./Cypress && npm install
 
-      - name: Start the server
-        run: nohup npm run start &
+      - name: Run Cypress tests
+      # Change the directory to the cypress folder.
+        run: cd ./Cypress && npm run test
 
-      - name: Wait for server to be ready
-        run: sleep 30 # Adjust the sleep time as needed
-
-      - name: Install Cypress dependencies
-        run: npm install cypress
-
-      - name: Run Cypress
-        uses: cypress-io/github-action@v4
-        with:
-          build: npm run build # If you have a build step
-          start: npm start # Your start command
-          wait-on: http://localhost:3000 # Adjust to your server URL
-
+  # The deploy job will run on the ubuntu-latest runner and will have the following steps.
   deploy:
+  # This job will run only when the cypress_tests job is successful.
     needs: cypress_tests
-    runs-on: ubuntu-latest
+    runs-on:
+      ubuntu-latest
+  # The steps to deploy the application to the server using SSH action.
     steps:
-      - uses: actions/checkout@v3
-      
       - name: Doing a deploy
         uses: appleboy/ssh-action@v0.1.10
         with:
@@ -49,6 +53,37 @@ jobs:
           username: ${{ secrets.USER }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
+        # The commands to run on the server.
+
+        # We are using the nvm.sh script to use the correct Node.js version
+        # Because this ssh action is a non-interactive shell, we need to source the nvm.sh script to be able         # to use "NPM" and "Node" commands.
+
+        # We are checking the node and npm versions to make sure we are using the correct versions.
+
+        # We are installing the dependencies, building the application, moving the dist folder, we first delete the pm2 application running our C# backend, and then starting the server with pm2 again.
+
+        # We are deleting the cypress folder to make sure we are not running the tests on the server. And we do not need to have the cypress folder on the server.
+
+        # We are deleting the pm2 application before starting it again to make sure we are using the correct data from the frontend.
+
+        # This is because C# does not have a hot reload feature like Node.js, so it will be stuck in a restart-loop with incorrect data if we don't delete the application first.
+
+        # Script is the multiline string that contains the commands to run on the server in decending order.
+
           script: |
-            cd /var/www/MystyrIncAuctions
+            echo "Deploying to the server"
+            source /root/.nvm/nvm.sh
+            nvm use v20.12.2
+            echo "Checking node and npm versions"
+            node -v
+            npm -v
+            cd /var/www/MysteryIncAuctions
             git pull
+            rm -r cypress
+            cd /var/www/MysteryIncAuctions/Client
+            npm install
+            rm -r dist
+            npm run build
+            cd /var/www/MysteryIncAuctions/Server
+            pm2 delete dotnetMysteryInc
+            pm2 start --name dotnetMysteryInc "dotnet run"
