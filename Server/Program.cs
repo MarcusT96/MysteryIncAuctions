@@ -10,6 +10,7 @@ builder.Services.AddScoped<PostboxService>();
 builder.Services.AddScoped<Boxes>();
 builder.Services.AddScoped<Reviews>();
 builder.Services.AddScoped<User>();
+
 var app = builder.Build();
 
 // Categories
