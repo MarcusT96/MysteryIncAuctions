@@ -1,16 +1,15 @@
 namespace Server;
 using MySql.Data.MySqlClient;
+using System.Text.Json;
 
 public class CategoryOptions
 {
   public record Category(int Id, string CategoryName);
 
-  public static List<Category> GetCategories()
+  public static List<Category> GetCategories(string connectionString)
   {
 
     List<Category> result = new();
-
-    string connectionString = "server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc";
 
     using (var connection = new MySqlConnection(connectionString))
     {
@@ -28,9 +27,11 @@ public class CategoryOptions
     }
     return result;
   }
-  public static async Task<bool> CreateCategory(Category category)
+  public static async Task<bool> CreateCategory(HttpContext context, string connectionString)
   {
-    string connectionString = "server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc";
+    var requestBody = await new StreamReader(context.Request.Body).ReadToEndAsync();
+    var category = JsonSerializer.Deserialize<Category>(requestBody);
+
     await using (var connection = new MySqlConnection(connectionString))
     {
       var query = "INSERT INTO Categories (CategoryName) VALUES (@CategoryName);";
@@ -44,9 +45,11 @@ public class CategoryOptions
     }
   }
 
-  public static async Task<bool> UpdateCategory(int id, Category category)
+  public static async Task<bool> UpdateCategory(int id, HttpContext context, string connectionString)
   {
-    string connectionString = "server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc";
+    var requestBody = await new StreamReader(context.Request.Body).ReadToEndAsync();
+    var category = JsonSerializer.Deserialize<Category>(requestBody);
+
     await using (var connection = new MySqlConnection(connectionString))
     {
       var query = "UPDATE Categories SET CategoryName = @CategoryName WHERE Id = @Id;";

@@ -11,11 +11,11 @@ public class PaymentOptions
 {
   public record Cards(int? Id, string CardNumber, string ExpirationDate, string CVC, string Type, string CardholderName, int UserId);
 
-  public static List<Cards> PaymentOpts()
+  public static List<Cards> PaymentOpts(string connectionString)
   {
     List<Cards> result = new List<Cards>();
 
-    using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc"))
+    using (MySqlConnection conn = new MySqlConnection(connectionString))
     {
       conn.Open();
       MySqlCommand cmd = new MySqlCommand("SELECT * from payment_options", conn);
@@ -25,13 +25,13 @@ public class PaymentOptions
         while (reader.Read())
         {
           result.Add(new Cards(
-            reader.GetInt32("id"),
-            reader.GetString("card_number"),
-            reader.GetString("expiration_date"),
-            reader.GetString("CVC"),
-            reader.GetString("type"),
-            reader.GetString("cardholder_name"),
-            reader.GetInt32("user_id")
+              reader.GetInt32("id"),
+              reader.GetString("card_number"),
+              reader.GetString("expiration_date"),
+              reader.GetString("CVC"),
+              reader.GetString("type"),
+              reader.GetString("cardholder_name"),
+              reader.GetInt32("user_id")
           ));
         }
       }
@@ -39,11 +39,11 @@ public class PaymentOptions
     return result;
   }
 
-  public static List<Cards> GetPaymentOptsByUserId(int UserId)
+  public static List<Cards> GetPaymentOptsByUserId(int UserId, string connectionString)
   {
     List<Cards> result = new List<Cards>();
 
-    using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc"))
+    using (MySqlConnection conn = new MySqlConnection(connectionString))
     {
       conn.Open();
       MySqlCommand cmd = new MySqlCommand("SELECT * from payment_options WHERE user_id = @user_id", conn);
@@ -54,13 +54,13 @@ public class PaymentOptions
         while (reader.Read())
         {
           result.Add(new Cards(
-            reader.GetInt32("id"),
-            reader.GetString("card_number"),
-            reader.GetString("expiration_date"),
-            reader.GetString("CVC"),
-            reader.GetString("type"),
-            reader.GetString("cardholder_name"),
-            reader.GetInt32("user_id")
+              reader.GetInt32("id"),
+              reader.GetString("card_number"),
+              reader.GetString("expiration_date"),
+              reader.GetString("CVC"),
+              reader.GetString("type"),
+              reader.GetString("cardholder_name"),
+              reader.GetInt32("user_id")
           ));
         }
       }
@@ -68,9 +68,8 @@ public class PaymentOptions
     return result;
   }
 
-  public static async Task<IResult> AddPaymentOpt(HttpContext context)
+  public static async Task<IResult> AddPaymentOpt(HttpContext context, string connectionString)
   {
-
     var requestBody = await new StreamReader(context.Request.Body).ReadToEndAsync();
     var paymentData = JsonSerializer.Deserialize<Cards>(requestBody);
 
@@ -79,7 +78,7 @@ public class PaymentOptions
       return Results.BadRequest("Invalid payment data");
     }
 
-    using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc"))
+    using (MySqlConnection conn = new MySqlConnection(connectionString))
     {
       await conn.OpenAsync();
 
@@ -100,9 +99,9 @@ public class PaymentOptions
     }
   }
 
-  public static async Task<IResult> DeletePaymentOpt(int OptId)
+  public static async Task<IResult> DeletePaymentOpt(int OptId, string connectionString)
   {
-    using (MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc"))
+    using (MySqlConnection conn = new MySqlConnection(connectionString))
     {
       await conn.OpenAsync();
 
@@ -116,6 +115,4 @@ public class PaymentOptions
       return result > 0 ? Results.Ok(new { Message = "Successfully removed payment method" }) : Results.Problem("Couldn't remove payment method");
     }
   }
-
 }
-
