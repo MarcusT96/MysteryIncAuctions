@@ -1,0 +1,54 @@
+name: Test and Deploy
+
+on: 
+  push:
+    branches: 
+      - main
+      - dev
+
+jobs:
+  cypress_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Start the server
+        run: nohup npm run start &
+
+      - name: Wait for server to be ready
+        run: sleep 30 # Adjust the sleep time as needed
+
+      - name: Install Cypress dependencies
+        run: npm install cypress
+
+      - name: Run Cypress
+        uses: cypress-io/github-action@v4
+        with:
+          build: npm run build # If you have a build step
+          start: npm start # Your start command
+          wait-on: http://localhost:3000 # Adjust to your server URL
+
+  deploy:
+    needs: cypress_tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Doing a deploy
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd /var/www/MystyrIncAuctions
+            git pull
