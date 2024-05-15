@@ -24,7 +24,7 @@ jobs:
           node-version: '20'
     # Install dependencies, build and start the server.
       - name: Install dependencies
-        run: npm ci
+        run: npm i
       - name: Build
         run: npm run build
       - name: Start server
@@ -32,7 +32,7 @@ jobs:
     # Install Cypress dependencies and run the tests.
       - name: Install Cypress Dependencies
       # Change the directory to the cypress folder.
-        run: cd ./cypress && npm ci
+        run: cd ./cypress && npm i
 
       - name: Run Cypress tests
       # Change the directory to the cypress folder.
