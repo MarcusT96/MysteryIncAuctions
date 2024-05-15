@@ -24,7 +24,7 @@ jobs:
           node-version: '20'
     # Install dependencies, build and start the server.
       - name: Install dependencies
-        run: npm install
+        run: cd ./Client && npm install
       - name: Build
         run: npm run build
       - name: Start server
@@ -32,11 +32,11 @@ jobs:
     # Install Cypress dependencies and run the tests.
       - name: Install Cypress Dependencies
       # Change the directory to the cypress folder.
-        run: cd ./cypress && npm install
+        run: cd ./Cypress && npm install
 
       - name: Run Cypress tests
       # Change the directory to the cypress folder.
-        run: cd ./cypress && npm run test
+        run: cd ./Cypress && npm run test
 
   # The deploy job will run on the ubuntu-latest runner and will have the following steps.
   deploy:
