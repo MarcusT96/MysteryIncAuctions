@@ -81,7 +81,7 @@ jobs:
             git pull
             rm -r cypress
             cd /var/www/MysteryIncAuctions/Client
-            npm ci
+            npm i
             rm -r dist
             npm run build
             cd /var/www/MysteryIncAuctions/Server
