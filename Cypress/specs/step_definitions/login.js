@@ -19,4 +19,5 @@ When('I click the submit button', () => {
 
 Then('I should be back on the homepage', () => {
   cy.url().should('eq', 'https://team4.nodehill.se/');
-});
+}); 
+
