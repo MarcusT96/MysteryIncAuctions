@@ -8,6 +8,9 @@ namespace Server;
 
 public class Bid
 {
+
+
+
   public record BidData(
       [property: JsonPropertyName("Value")] int Value,
       [property: JsonPropertyName("UserId")] int UserId,
