@@ -9,12 +9,8 @@ namespace Server;
 public class Bid
 {
 
-  private readonly DbConnect _dbConnect;
 
-  public Bid(DbConnect dbConnect)
-  {
-    _dbConnect = dbConnect;
-  }
+
   public record BidData(
       [property: JsonPropertyName("Value")] int Value,
       [property: JsonPropertyName("UserId")] int UserId,
