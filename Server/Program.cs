@@ -2,7 +2,7 @@ using Server;
 using MySql.Data.MySqlClient;
 using System.Data;
 
-State state = new("server=localhost;port=3306;uid=root;pwd=batman01;database=mystery_inc");
+State state = new("server=localhost;port=3306;uid=root;pwd=mypassword;database=mystery_inc");
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton(state);
