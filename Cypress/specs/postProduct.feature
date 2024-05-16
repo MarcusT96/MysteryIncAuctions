@@ -5,20 +5,19 @@ Feature: Product Management
   so that I can expand our product offerings.
 
   Scenario: Navigate to admins products management page
-    Given that I am on the "/" page
-    When I click the "signin" in the navbar
-    Then I enter my admin "email"
-    And I also enter my "password"
-    And I click the "login" button
+    Given I am on the homepage
+    When I click on the "Login" button in the navigation bar
+    And I fill in my email and password with valid credentials
+    And I click the submit button
+    Then I should be back on the homepage
     And then I click the "profile" button
     And I click on the "adminpanel" on the sidebar
     And lastly I navigates to the "products" overview page
 
   Scenario: Adding a new product
-    Given that I am on the products overview page
-    When I click the "Add Product" button in order to create a new product
-    Then I am taken to the "Add New Product" form
-    And I enter the name, weight, and starting price of the product
+    Given I click the "Add Product" button in order to create a new product
+    When I am taken to the "Add New Product" form
+    Then I enter the name, weight, and starting price of the product
     And I select the expiration date for the product
     And I write a description for the product
     And I choose a category for the product

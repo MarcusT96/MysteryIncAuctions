@@ -5,11 +5,11 @@ Feature: Product Modification
   so that I can modify our product status.
 
   Scenario: Navigate to admins products management page
-    Given that I am on the "/" page
-    When I click the "signin" in the navbar
-    Then I enter my admin "email"
-    And I also enter my "password"
-    And I click the "login" button
+    Given I am on the homepage
+    When I click on the "Login" button in the navigation bar
+    And I fill in my email and password with valid credentials
+    And I click the submit button
+    Then I should be back on the homepage
     And then I click the "profile" button
     And I click on the "adminpanel" on the sidebar
     And lastly I navigates to the "products" overview page
