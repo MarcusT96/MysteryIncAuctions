@@ -22,7 +22,7 @@ jobs:
       - name: Install Cypress dependencies
         run: cd ./Cypress && npm ci
       - name: Run Cypress
-        run: npm run test
+        run: cd ./Cypress && npm run test
 
   # The deploy job will run on the ubuntu-latest runner and will have the following steps.
   deploy:
