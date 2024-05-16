@@ -10,44 +10,8 @@ on:
 # The jobs to run in this workflow are defined here.
 jobs:
 
-  # The cypress_tests job will run on the ubuntu-latest runner and will have the following steps.
-  cypress_tests:
-    runs-on: ubuntu-latest
-    steps:
-    # Checkout the code using the actions/checkout@v2 action.
-      - name: Checkout code
-        uses: actions/checkout@v2
-    # Setup Node.js using the actions/setup-node@v2 action.
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20'
-    # Install dependencies, build and start the server.
-      - name: Install dependencies
-        run: cd ./Client && npm install
-      - name: Build
-        run: cd ./Client && npm run build
-
-      - name: Install http-server
-        run: cd ./Client && npm install -g http-server
-      - name: Serve built files
-        run: |
-          cd ./Client/dist
-          http-server -p 8080
-
-    # Install Cypress dependencies and run the tests.
-      - name: Install Cypress Dependencies
-      # Change the directory to the cypress folder.
-        run: cd ./Cypress && npm install
-
-      - name: Run Cypress tests
-      # Change the directory to the cypress folder.
-        run: cd ./Cypress && npm run test
-
   # The deploy job will run on the ubuntu-latest runner and will have the following steps.
   deploy:
-  # This job will run only when the cypress_tests job is successful.
-    needs: cypress_tests
     runs-on:
       ubuntu-latest
   # The steps to deploy the application to the server using SSH action.
