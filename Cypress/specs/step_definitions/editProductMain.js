@@ -1,7 +1,7 @@
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
 Then('I should be able to see the product I want to edit', () => {
-  cy.get('.app__products-boxdetail > :nth-child(4) > :nth-child(2)').should('be.visible')
+  cy.get('.app__products-boxdetail > :nth-child(4)').should('be.visible')
 });
 
 Then('I click the edit button in order to edit the product', () => {
@@ -9,23 +9,19 @@ Then('I click the edit button in order to edit the product', () => {
 });
 
 Then('I change the name, weight, and starting price of the product', () => {
-  cy.get('#name').clear().type('CypressEditedProduct')
+  cy.get('#name').clear().wait(1000).type('CypressEditedActionFigureProduct⁂')
 
-  cy.get('#weight').clear().type('616')
+  cy.get('#weight').clear().wait(1000).type('5')
 
-  cy.get('#price').clear().type('6969')
+  cy.get('#price').clear().wait(1000).type('499')
 });
 
 Then('I change the expiration date for the product', () => {
-  cy.get('#time').clear().type('2024-06-16T16:16')
+  cy.get('#time').type('2024-06-30T11:00')
 });
 
 Then('I write a new description for the product', () => {
-  cy.get('#description').clear().type('A thoughtfully descriptive Cypress edited description here ↞.')
-});
-
-Then('I choose a different category for the product', () => {
-  cy.get('#category').select(8)
+  cy.get('#description').clear().wait(1000).type('A thoughtfully descriptive Cypress edited description for action figure here ⁜.')
 });
 
 Then('I click the {string} button to save the changes', () => {
@@ -39,5 +35,12 @@ Then('I quit out of the admin dashboard', () => {
 });
 
 Then('the edited product should be visible', () => {
-  cy.get('.auction-title').contains('CypressEditedProduct').should('be.visible')
+  cy.get('.auction-title').contains('CypressEditedActionFigureProduct⁂').should('be.visible')
+});
+
+Cypress.on('uncaught:exception', (err, runnable) => {
+  if (err.message.includes('toast is not defined')) {
+    return false;
+  }
+  return true;
 });

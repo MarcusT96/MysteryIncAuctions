@@ -13,3 +13,13 @@ Feature: Product Deletion
     And then I click the "profile" button
     And I click on the "adminpanel" on the sidebar
     And lastly I navigates to the "products" overview page
+
+  Scenario: Deleting a product
+    Given I click the next button
+    When I should be able to see the product I want to delete
+    Then I click the delete button to remove the product
+
+  Scenario: Verifying deletion in the auction page
+    Given I exit the admin dashboard
+    When I navigate to the public auctions page
+    Then the deleted product should not be visible

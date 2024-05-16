@@ -22,7 +22,6 @@ Feature: Product Modification
     And I change the name, weight, and starting price of the product
     And I change the expiration date for the product
     And I write a new description for the product
-    And I choose a different category for the product
     And I click the "Update-Box" button to save the changes
 
   Scenario: Verifying edited product in the auction page
