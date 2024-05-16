@@ -30,7 +30,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
-          password: ${{ secrets.PASSWORD }}
+          password: "ZBUKL42335"
           port: ${{ secrets.PORT }}
         # The commands to run on the server.
 
