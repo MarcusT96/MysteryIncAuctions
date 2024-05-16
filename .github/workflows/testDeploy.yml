@@ -27,8 +27,14 @@ jobs:
         run: cd ./Client && npm install
       - name: Build
         run: cd ./Client && npm run build
-      - name: Start server
-        run: nohup node index.js &
+
+      - name: Install http-server
+        run: cd ./Client && npm install -g http-server
+      - name: Serve built files
+        run: |
+          cd ./Client/dist
+          http-server -p 8080
+
     # Install Cypress dependencies and run the tests.
       - name: Install Cypress Dependencies
       # Change the directory to the cypress folder.
