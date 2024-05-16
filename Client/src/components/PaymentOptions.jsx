@@ -64,10 +64,6 @@ function PaymentOptions() {
     setIsOpen(true)
   }
 
-  function afterOpenModal() {
-    subtitle.style.color = '#f00'
-  }
-
   function closeModal() {
     console.log("Closing modal...")
     setIsOpen(false)
@@ -112,7 +108,6 @@ function PaymentOptions() {
       <button className='paymentopt-addpay' onClick={openModal}>Lägg till betalningsalternativ</button>
 
       <Modal isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="paymentopt-add">
