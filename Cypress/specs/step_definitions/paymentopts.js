@@ -15,18 +15,17 @@ When('I click on lägg till betalningsalternativ', () => {
   cy.get('.paymentopt-addpay').click()
 });
 
-When('I select the type', () => {
-  cy.get('#type').click()
-});
-
 When('I add my information', () => {
-  cy.get('[placeholder="XXXX-XXXX-XXXX-XXXX"]')
+  cy.get('[placeholder="XXXX-XXXX-XXXX-XXXX"]').type("1234-1234-1234-1234")
+  cy.get('[placeholder="XX-XX"]').type("12-12")
+  cy.get('[placeholder="XXX"]').type("123")
+  cy.get('[placeholder=""]').type("Test")
 });
 
 When('I click Klar', () => {
-  // TODO: implement step
+  cy.get('.paymentopt-modal-button-finish').click()
 });
 
-Then('I should see a new payment option', () => {
-  // TODO: implement step
+Then('I should be back to betalningsalternativ', () => {
+  cy.get('.paymentopt-container > :nth-child(1)').should("contain", "Betalningsalternativ")
 });
