@@ -39,10 +39,14 @@ When('I click on min profile', () => {});*/
 /* No duplicate steps, this one already above
 When('I go to betalningsalternativ', () => {});*/
 
+When('the last child contains ägare: test', () => {
+  cy.get(':last-child > .paymentopt-holder').should("contain", "Ägare: Test")
+});
+
 When('I delete the new test payment option', () => {
-  cy.get(':nth-child(2) > .paymentopt-remove').click()
+  cy.get(':last-child > .paymentopt-remove').click()
 });
 
 Then('It should be gone', () => {
-  cy.get(':nth-child(2) > .paymentopt-remove').should("not.exist")
+  cy.get('.paymentopt-holder').should('not.contain', 'Ägare: Test');
 });
