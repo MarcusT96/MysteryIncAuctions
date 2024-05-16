@@ -42,9 +42,9 @@ public class BoughtBoxesOptions
   }
   public static async Task<List<BoughtBox>> GetBoughtBoxesById(int buyer_id, string connectionString)
   {
-    
+
     var boxes = new List<BoughtBox>();
-    
+
     try
     {
       await using (var conn = new MySqlConnection(connectionString))
