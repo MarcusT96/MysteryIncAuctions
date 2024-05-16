@@ -38,7 +38,7 @@ function PaymentOptions() {
       setPaymentInfo(data)
     }
     load()
-  },)
+  }, [])
 
   function censorCard(cardNumber) {
     if (cardNumber) {
