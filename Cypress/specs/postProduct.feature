@@ -25,10 +25,9 @@ Feature: Product Management
     And I click the "Submit" button to add the product
 
   Scenario: Checking if the cypress test worked
-    Given that I am on the products overview page
-    When I click on the next slide button
-    Then I should be able to see the newly added product
-    And I then exit the admin dashboard
+    Given I click on the next slide button
+    When I should be able to see the newly added product
+    Then I then exit the admin dashboard
     And I navigate to the auctions page
     And the new product should be visible
     And I press the "read-more" button, in order to view the details on the new product
