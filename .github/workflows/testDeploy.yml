@@ -15,7 +15,16 @@ jobs:
     runs-on:
       ubuntu-latest
   # The steps to deploy the application to the server using SSH action.
+    
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+
       - name: Doing a deploy
         uses: appleboy/ssh-action@v0.1.10
         with:
