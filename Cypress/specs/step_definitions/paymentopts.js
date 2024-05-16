@@ -29,3 +29,20 @@ When('I click Klar', () => {
 Then('I should be back to betalningsalternativ', () => {
   cy.get('.paymentopt-container > :nth-child(1)').should("contain", "Betalningsalternativ")
 });
+
+/* No duplicate steps, this one already in bid.js
+Given('I am logged in', () => {});*/
+
+/* No duplicate steps, this one already above
+When('I click on min profile', () => {});*/
+
+/* No duplicate steps, this one already above
+When('I go to betalningsalternativ', () => {});*/
+
+When('I delete the new test payment option', () => {
+  cy.get(':nth-child(2) > .paymentopt-remove').click()
+});
+
+Then('It should be gone', () => {
+  cy.get(':nth-child(2) > .paymentopt-remove').should("not.exist")
+});
