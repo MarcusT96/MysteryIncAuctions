@@ -20,7 +20,7 @@ When('I select the type', () => {
 });
 
 When('I add my information', () => {
-  // TODO: implement step
+  cy.get('[placeholder="XXXX-XXXX-XXXX-XXXX"]')
 });
 
 When('I click Klar', () => {
