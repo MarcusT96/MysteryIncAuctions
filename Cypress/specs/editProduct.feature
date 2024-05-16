@@ -15,7 +15,6 @@ Feature: Product Modification
     And lastly I navigates to the "products" overview page
 
   Scenario: Editing a product
-    Given I am on the products overview page
     When I click the next button
     Then I should be able to see the product I want to edit
     And I click the edit button in order to edit the product
@@ -25,7 +24,6 @@ Feature: Product Modification
     And I click the "Update-Box" button to save the changes
 
   Scenario: Verifying edited product in the auction page
-    Given I am on the products overview page
     When I quit out of the admin dashboard
     And I navigate to the public auctions page
     Then the edited product should be visible
