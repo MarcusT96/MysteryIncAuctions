@@ -9,9 +9,24 @@ on:
 
 # The jobs to run in this workflow are defined here.
 jobs:
+  cypress_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install dependencies
+        run: cd ./Client && npm ci
+      - name: Install Cypress dependencies
+        run: cd ./Cypress && npm ci
+      - name: Run Cypress
+        run: npm run test
 
   # The deploy job will run on the ubuntu-latest runner and will have the following steps.
   deploy:
+    needs: cypress_tests
     runs-on:
       ubuntu-latest
   # The steps to deploy the application to the server using SSH action.
