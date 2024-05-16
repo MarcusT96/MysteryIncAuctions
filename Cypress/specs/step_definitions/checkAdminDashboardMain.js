@@ -1,12 +1,12 @@
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
-Then('then I click the {string} button', (a) => {
+Then('then I click the profile page button', (a) => {
   cy.get('.p__opensans-profil').click()
   cy.url().should('include', 'https://team4.nodehill.se/profile');
   cy.wait(3000);
 });
 
-Then('I click on the {string} on the sidebar', (a) => {
+Then('I click on the adminpanel on the sidebar to navigate to the admin panel', (a) => {
   cy.get('.sidebar > :nth-child(5)').should('be.visible').click()
   cy.url().should('include', 'https://team4.nodehill.se/dashboard');
 });

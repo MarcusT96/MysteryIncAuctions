@@ -10,8 +10,8 @@ Feature: Product Modification
     And I fill in my email and password with valid credentials
     And I click the submit button
     Then I should be back on the homepage
-    And then I click the "profile" button
-    And I click on the "adminpanel" on the sidebar
+    And then I click the profile page button
+    And I click on the adminpanel on the sidebar to navigate to the admin panel
     And lastly I navigates to the "products" overview page
 
   Scenario: Editing a product
