@@ -58,7 +58,7 @@ jobs:
             npm -v
             cd /var/www/MysteryIncAuctions
             git pull
-            rm -r cypress
+            rm -r Cypress
             cd /var/www/MysteryIncAuctions/Client
             npm install
             rm -r dist
