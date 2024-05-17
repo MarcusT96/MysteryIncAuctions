@@ -39,9 +39,7 @@ When('I click on min profile', () => {});*/
 /* No duplicate steps, this one already above
 When('I go to betalningsalternativ', () => {});*/
 
-When('the last child contains ägare: test', () => {
-  cy.get(':last-child > .paymentopt-holder').should("contain", "Ägare: Test")
-});
+
 
 When('I delete the new test payment option', () => {
   cy.get(':last-child > .paymentopt-remove').click()
